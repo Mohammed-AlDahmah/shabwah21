@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Cairo:wght@400;700&display=swap');
 
 /* Root CSS variables (Hadramout21 palette) */
 :root {
@@ -57,7 +58,7 @@
 
 /* خطوط مخصصة */
 .font-arabic {
-    font-family: 'Noto Sans Arabic', 'Tahoma', sans-serif;
+    font-family: 'Tajawal', 'Cairo', 'Noto Sans Arabic', 'Tahoma', sans-serif;
 }
 
 /* تأثيرات النص */

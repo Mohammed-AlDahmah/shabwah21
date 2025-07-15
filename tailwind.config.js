@@ -16,6 +16,16 @@ module.exports = {
         light: "#F8F9FA",
         gray: "#6C757D",
       },
+      fontFamily: {
+        arabic: [
+          'Tajawal',
+          'Cairo',
+          'Noto Sans Arabic',
+          'ui-sans-serif',
+          'system-ui',
+          'sans-serif',
+        ],
+      },
     },
   },
   plugins: [],
