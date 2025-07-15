@@ -43,5 +43,8 @@ Route::post('/login', Login::class); // This handles the form submission
 
 Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
-    // Other admin routes
+    Route::get('/admin/news', NewsManager::class)->name('admin.news');
+    Route::get('/admin/categories', \App\Livewire\Admin\CategoriesManager::class)->name('admin.categories');
+    Route::get('/admin/users', \App\Livewire\Admin\UsersManager::class)->name('admin.users');
+    Route::get('/admin/settings', \App\Livewire\Admin\Settings::class)->name('admin.settings');
 });
