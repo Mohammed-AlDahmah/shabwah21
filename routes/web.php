@@ -9,6 +9,9 @@ use App\Livewire\Admin\NewsManager;
 Route::get('/', function () {
     return view('livewire.homepage');
 })->name('home');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('home');
 
 // News routes
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
