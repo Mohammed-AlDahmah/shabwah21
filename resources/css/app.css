@@ -10,9 +10,9 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
     
     /* حضرموت21 الألوان المخصصة */
-    --color-primary: #C08B2D;
-    --color-secondary: #B22B2B;
-    --color-accent: #F4A261;
+    --color-primary: #D72835;
+    --color-secondary: #0C1B2A;
+    --color-accent: #F4B905;
     --color-dark: #2C3E50;
     --color-light: #F8F9FA;
     --color-gray: #6C757D;
@@ -42,7 +42,7 @@
 
 /* تأثيرات إضافية */
 .shadow-custom {
-    box-shadow: 0 4px 6px -1px rgba(192, 139, 45, 0.1), 0 2px 4px -1px rgba(192, 139, 45, 0.06);
+    box-shadow: 0 4px 6px -1px rgba(215, 40, 53, 0.1), 0 2px 4px -1px rgba(215, 40, 53, 0.06);
 }
 
 /* خطوط مخصصة */
@@ -105,7 +105,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, rgba(192, 139, 45, 0.3), rgba(178, 43, 43, 0.3));
+    background: linear-gradient(45deg, rgba(215, 40, 53, 0.3), rgba(12, 27, 42, 0.3));
     opacity: 0;
     transition: opacity 0.3s ease;
 }

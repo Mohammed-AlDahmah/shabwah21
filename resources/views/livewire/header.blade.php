@@ -32,9 +32,9 @@
             <!-- الشعار -->
             <div class="flex items-center">
                 <a href="{{ route('home') }}" class="flex items-center space-x-3 space-x-reverse">
-                    <img src="/images/logo.png" alt="شبوة21" class="h-12 w-auto">
+                    <img src="/images/logo.png" alt="حضرموت21" class="h-12 w-auto">
                     <div class="hidden md:block">
-                        <h1 class="text-2xl font-bold text-gray-900">شبوة21</h1>
+                        <h1 class="text-2xl font-bold text-gray-900">حضرموت21</h1>
                         <p class="text-sm text-gray-600">موقع إخباري شامل</p>
                     </div>
                 </a>
