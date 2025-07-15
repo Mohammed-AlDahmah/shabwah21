@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             ArticleSeeder::class,
             VideoSeeder::class,
+            NewsSeeder::class,
         ]);
 
         // إضافة صور افتراضية للأقسام الرئيسية

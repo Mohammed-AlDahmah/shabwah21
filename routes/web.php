@@ -2,13 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\HomeController;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\Auth\Login;
 use App\Livewire\Admin\NewsManager;
 
-Route::get('/', function () {
-    return view('livewire.homepage');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // News routes
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
