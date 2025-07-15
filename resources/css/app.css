@@ -9,13 +9,13 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
     
-    /* لوحة ألوان حضرموت21 الجديدة */
-    --color-primary: #0A4C93; /* أزرق أساسي */
-    --color-secondary: #E63946; /* أحمر ثانوي للتأكيد */
-    --color-accent: #F4B400;   /* أصفر للتظليل */
-    --color-dark: #1A1A1A;     /* خلفيات داكنة */
-    --color-light: #F7F9FC;    /* خلفية فاتحة */
-    --color-gray: #6C6C6C;     /* رمادي عام */
+    /* حضرموت21 الألوان المخصصة */
+    --color-primary: #D72835;
+    --color-secondary: #0C1B2A;
+    --color-accent: #F4B905;
+    --color-dark: #2C3E50;
+    --color-light: #F8F9FA;
+    --color-gray: #6C757D;
 }
 
 /* الألوان المخصصة */
@@ -42,7 +42,7 @@
 
 /* تأثيرات إضافية */
 .shadow-custom {
-    box-shadow: 0 4px 6px -1px rgba(192, 139, 45, 0.1), 0 2px 4px -1px rgba(192, 139, 45, 0.06);
+    box-shadow: 0 4px 6px -1px rgba(215, 40, 53, 0.1), 0 2px 4px -1px rgba(215, 40, 53, 0.06);
 }
 
 /* خطوط مخصصة */
@@ -105,7 +105,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, rgba(192, 139, 45, 0.3), rgba(178, 43, 43, 0.3));
+    background: linear-gradient(45deg, rgba(215, 40, 53, 0.3), rgba(12, 27, 42, 0.3));
     opacity: 0;
     transition: opacity 0.3s ease;
 }

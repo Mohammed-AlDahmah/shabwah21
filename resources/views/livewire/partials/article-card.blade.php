@@ -5,7 +5,7 @@
             @if($article->image)
                 <img src="{{ $article->image }}" alt="{{ $article->title }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
             @else
-                <div class="w-full h-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);">
+                <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary to-secondary">
                     <span class="text-white text-2xl font-bold">حضرموت21</span>
                 </div>
             @endif
@@ -13,7 +13,7 @@
             @if($article->image)
                 <img src="{{ $article->image }}" alt="{{ $article->title }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
             @else
-                <div class="w-full h-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);">
+                <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary to-secondary">
                     <span class="text-white text-2xl font-bold">حضرموت21</span>
                 </div>
             @endif

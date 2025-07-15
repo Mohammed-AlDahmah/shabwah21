@@ -42,6 +42,7 @@
         .nav-link.active, .nav-link:hover { background: #C08B2D !important; color: #fff !important; }
         .nav-link { transition: background 0.2s, color 0.2s; }
     </style>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="bg-gray-50 font-arabic">
     @livewire('breaking-news')
