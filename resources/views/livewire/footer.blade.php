@@ -50,13 +50,17 @@
                 </div>
                 
                 <!-- النشرة البريدية -->
-                <div class="bg-gray-800 rounded-lg p-4">
-                    <h4 class="text-white font-bold mb-2">اشترك في النشرة البريدية</h4>
-                    <div class="flex space-x-2 space-x-reverse">
-                        <input type="email" placeholder="أدخل بريدك الإلكتروني" 
-                               class="flex-1 px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                        <button class="btn-primary px-6 py-2 text-sm">اشترك</button>
+                <div class="bg-light rounded-lg p-6 border-l-4 border-primary shadow-md">
+                    <div class="flex items-center gap-3 mb-3 text-dark">
+                        <i class="bi bi-envelope-fill text-2xl text-primary"></i>
+                        <h4 class="font-bold text-lg">اشترك في نشرتنا البريدية</h4>
                     </div>
+                    <p class="text-gray-600 text-sm mb-4">احصل على أهم الأخبار والمقالات في بريدك أسبوعياً.</p>
+                    <form class="flex gap-2" action="#" method="POST">
+                        <input type="email" placeholder="أدخل بريدك الإلكتروني" required
+                               class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-sm">
+                        <button class="bg-primary hover:bg-dark text-white px-5 py-2 rounded-md text-sm font-semibold transition-colors">اشتراك</button>
+                    </form>
                 </div>
             </div>
             
