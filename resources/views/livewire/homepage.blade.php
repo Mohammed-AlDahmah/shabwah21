@@ -1,347 +1,401 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Hero Section with Breaking News -->
-<div class="hero-section relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white overflow-hidden">
-    <!-- Background Pattern -->
-    <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
-    
-    <div class="container mx-auto px-4 py-8 relative z-10">
-        <!-- Breaking News Ticker -->
-        <div class="mb-6">
-            @livewire('breaking-news')
-        </div>
-        
-        <!-- Hero Content -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-12">
-            <div class="hero-content">
-                <div class="mb-4">
-                    <span class="inline-block bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-4">
-                        <i class="bi bi-broadcast me-2"></i>أحدث الأخبار
-                    </span>
+<!-- Hero Section with Featured News -->
+<div class="hero-section bg-white">
+    <div class="container mx-auto px-4 py-6">
+        <!-- Main featured news and sidebar -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Main Featured News (3 columns) -->
+            <div class="lg:col-span-3">
+                <!-- Breaking News Banner -->
+                <div class="bg-red-600 text-white px-4 py-2 rounded-lg mb-6 flex items-center">
+                    <span class="bg-white text-red-600 px-3 py-1 rounded-md text-sm font-bold me-3">عاجل</span>
+                    <marquee class="text-white">آخر الأخبار العاجلة من محافظة شبوة واليمن</marquee>
                 </div>
-                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                    شبوة<span class="text-blue-400">21</span>
-                    <span class="block text-2xl md:text-3xl font-light text-blue-200 mt-2">منبرك الأول والخبر</span>
-                </h1>
-                <p class="text-xl mb-8 text-blue-100 leading-relaxed">
-                    تابع أحدث الأخبار والتقارير من محافظة شبوة ومختلف أنحاء اليمن. 
-                    نقدم لك الأخبار بموضوعية ومهنية عالية.
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#latest-news" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
-                        <i class="bi bi-newspaper me-2"></i>اقرأ الأخبار
-                    </a>
-                    <a href="#videos" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 rounded-lg font-semibold transition-all duration-300">
-                        <i class="bi bi-play-circle me-2"></i>شاهد الفيديو
-                    </a>
-                </div>
-            </div>
-            <div class="hero-image">
-                @livewire('featured-news-hero')
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Main Content -->
-<div class="container mx-auto px-4 py-8">
-    <!-- Featured News Section -->
-    <section class="mb-12">
-        @livewire('featured-news')
-    </section>
-
-    <!-- Latest News Grid -->
-    <section id="latest-news" class="mb-12">
-        <div class="flex justify-between items-center mb-8">
-            <div class="flex items-center gap-4">
-                <div class="w-1 h-12 bg-blue-600 rounded-full"></div>
-                <div>
-                    <h2 class="text-3xl font-bold text-slate-800">آخر الأخبار</h2>
-                    <p class="text-slate-600">أحدث المستجدات والتطورات</p>
-                </div>
-            </div>
-            <a href="/news" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2">
-                عرض الكل
-                <i class="bi bi-arrow-left"></i>
-            </a>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @livewire('latest-news-grid')
-        </div>
-    </section>
-
-    <!-- Main Content Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        <!-- Main Content Area -->
-        <div class="lg:col-span-3 space-y-8">
-            <!-- Video Section -->
-            <section id="videos" class="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div class="bg-gradient-to-r from-red-600 to-red-700 text-white p-6">
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center gap-3">
-                            <i class="bi bi-play-circle-fill text-2xl"></i>
-                            <h3 class="text-2xl font-bold">الفيديوهات</h3>
-                        </div>
-                        <a href="/videos" class="text-white hover:text-yellow-200 font-semibold transition-colors">
-                            المزيد <i class="bi bi-arrow-left"></i>
-                        </a>
+                
+                <!-- Featured News Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Main Story -->
+                    <div class="md:col-span-2">
+                        <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                            <div class="relative">
+                                <img src="https://via.placeholder.com/800x400" alt="خبر رئيسي" class="w-full h-64 object-cover">
+                                <div class="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-md text-sm font-bold">
+                                    محليات
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h2 class="text-2xl font-bold text-gray-900 mb-3 hover:text-red-600 transition-colors">
+                                    عنوان الخبر الرئيسي يظهر هنا بشكل واضح ومقروء
+                                </h2>
+                                <p class="text-gray-600 mb-4 leading-relaxed">
+                                    نص مقتطف من الخبر يعطي فكرة عن محتوى الخبر ويشجع القارئ على قراءة المزيد من التفاصيل...
+                                </p>
+                                <div class="flex items-center justify-between text-sm text-gray-500">
+                                    <span>منذ ساعتين</span>
+                                    <div class="flex items-center gap-4">
+                                        <span><i class="bi bi-eye me-1"></i>1.2K</span>
+                                        <span><i class="bi bi-chat me-1"></i>45</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
                     </div>
-                </div>
-                <div class="p-6">
-                    @livewire('video-section')
-                </div>
-            </section>
-
-            <!-- Articles Section -->
-            <section class="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div class="bg-gradient-to-r from-green-600 to-green-700 text-white p-6">
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center gap-3">
-                            <i class="bi bi-file-text-fill text-2xl"></i>
-                            <h3 class="text-2xl font-bold">مقالات وتقارير</h3>
-                        </div>
-                        <a href="/articles" class="text-white hover:text-yellow-200 font-semibold transition-colors">
-                            المزيد <i class="bi bi-arrow-left"></i>
-                        </a>
+                    
+                    <!-- Secondary Stories -->
+                    <div class="space-y-4">
+                        <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                            <div class="flex">
+                                <img src="https://via.placeholder.com/150x100" alt="خبر" class="w-24 h-16 object-cover">
+                                <div class="p-3 flex-1">
+                                    <h3 class="font-semibold text-gray-900 text-sm mb-1 hover:text-red-600 transition-colors">
+                                        عنوان خبر فرعي مهم
+                                    </h3>
+                                    <p class="text-xs text-gray-600 mb-2">نص مختصر للخبر...</p>
+                                    <span class="text-xs text-gray-500">منذ 3 ساعات</span>
+                                </div>
+                            </div>
+                        </article>
+                        
+                        <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                            <div class="flex">
+                                <img src="https://via.placeholder.com/150x100" alt="خبر" class="w-24 h-16 object-cover">
+                                <div class="p-3 flex-1">
+                                    <h3 class="font-semibold text-gray-900 text-sm mb-1 hover:text-red-600 transition-colors">
+                                        خبر آخر مهم من المنطقة
+                                    </h3>
+                                    <p class="text-xs text-gray-600 mb-2">تفاصيل مختصرة...</p>
+                                    <span class="text-xs text-gray-500">منذ 4 ساعات</span>
+                                </div>
+                            </div>
+                        </article>
+                        
+                        <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                            <div class="flex">
+                                <img src="https://via.placeholder.com/150x100" alt="خبر" class="w-24 h-16 object-cover">
+                                <div class="p-3 flex-1">
+                                    <h3 class="font-semibold text-gray-900 text-sm mb-1 hover:text-red-600 transition-colors">
+                                        تطورات جديدة في القضية
+                                    </h3>
+                                    <p class="text-xs text-gray-600 mb-2">ملخص سريع...</p>
+                                    <span class="text-xs text-gray-500">منذ 5 ساعات</span>
+                                </div>
+                            </div>
+                        </article>
                     </div>
-                </div>
-                <div class="p-6">
-                    @livewire('articles-section')
-                </div>
-            </section>
-
-            <!-- Sports Section -->
-            <section class="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div class="bg-gradient-to-r from-purple-600 to-purple-700 text-white p-6">
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center gap-3">
-                            <i class="bi bi-trophy-fill text-2xl"></i>
-                            <h3 class="text-2xl font-bold">الرياضة</h3>
-                        </div>
-                        <a href="/sports" class="text-white hover:text-yellow-200 font-semibold transition-colors">
-                            المزيد <i class="bi bi-arrow-left"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="p-6">
-                    @livewire('sports-section')
-                </div>
-            </section>
-        </div>
-
-        <!-- Sidebar -->
-        <div class="space-y-6">
-            <!-- Most Read Articles -->
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div class="bg-gradient-to-r from-orange-600 to-orange-700 text-white p-4">
-                    <div class="flex items-center gap-2">
-                        <i class="bi bi-graph-up text-xl"></i>
-                        <h3 class="text-xl font-bold">الأكثر قراءة</h3>
-                    </div>
-                </div>
-                <div class="p-4">
-                    @livewire('most-read-articles')
-                </div>
-            </div>
-
-            <!-- Categories -->
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div class="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white p-4">
-                    <div class="flex items-center gap-2">
-                        <i class="bi bi-grid-3x3-gap text-xl"></i>
-                        <h3 class="text-xl font-bold">الأقسام</h3>
-                    </div>
-                </div>
-                <div class="p-4">
-                    @livewire('category-cards')
-                </div>
-            </div>
-
-            <!-- Social Media -->
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div class="bg-gradient-to-r from-pink-600 to-pink-700 text-white p-4">
-                    <div class="flex items-center gap-2">
-                        <i class="bi bi-share text-xl"></i>
-                        <h3 class="text-xl font-bold">تابعنا</h3>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="grid grid-cols-2 gap-4">
-                        <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-xl text-center transition-all duration-300 transform hover:scale-105">
-                            <i class="bi bi-facebook text-2xl mb-2 block"></i>
-                            <span class="text-sm font-semibold">فيسبوك</span>
-                        </a>
-                        <a href="#" class="bg-blue-400 hover:bg-blue-500 text-white p-4 rounded-xl text-center transition-all duration-300 transform hover:scale-105">
-                            <i class="bi bi-twitter-x text-2xl mb-2 block"></i>
-                            <span class="text-sm font-semibold">تويتر</span>
-                        </a>
-                        <a href="#" class="bg-red-600 hover:bg-red-700 text-white p-4 rounded-xl text-center transition-all duration-300 transform hover:scale-105">
-                            <i class="bi bi-youtube text-2xl mb-2 block"></i>
-                            <span class="text-sm font-semibold">يوتيوب</span>
-                        </a>
-                        <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-xl text-center transition-all duration-300 transform hover:scale-105">
-                            <i class="bi bi-telegram text-2xl mb-2 block"></i>
-                            <span class="text-sm font-semibold">تليجرام</span>
-                        </a>
+                    
+                    <div class="space-y-4">
+                        <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                            <div class="flex">
+                                <img src="https://via.placeholder.com/150x100" alt="خبر" class="w-24 h-16 object-cover">
+                                <div class="p-3 flex-1">
+                                    <h3 class="font-semibold text-gray-900 text-sm mb-1 hover:text-red-600 transition-colors">
+                                        أخبار اقتصادية مهمة
+                                    </h3>
+                                    <p class="text-xs text-gray-600 mb-2">تفاصيل اقتصادية...</p>
+                                    <span class="text-xs text-gray-500">منذ 6 ساعات</span>
+                                </div>
+                            </div>
+                        </article>
+                        
+                        <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                            <div class="flex">
+                                <img src="https://via.placeholder.com/150x100" alt="خبر" class="w-24 h-16 object-cover">
+                                <div class="p-3 flex-1">
+                                    <h3 class="font-semibold text-gray-900 text-sm mb-1 hover:text-red-600 transition-colors">
+                                        أخبار رياضية
+                                    </h3>
+                                    <p class="text-xs text-gray-600 mb-2">نتائج مباريات...</p>
+                                    <span class="text-xs text-gray-500">منذ 7 ساعات</span>
+                                </div>
+                            </div>
+                        </article>
+                        
+                        <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                            <div class="flex">
+                                <img src="https://via.placeholder.com/150x100" alt="خبر" class="w-24 h-16 object-cover">
+                                <div class="p-3 flex-1">
+                                    <h3 class="font-semibold text-gray-900 text-sm mb-1 hover:text-red-600 transition-colors">
+                                        أخبار تقنية
+                                    </h3>
+                                    <p class="text-xs text-gray-600 mb-2">تطورات تقنية...</p>
+                                    <span class="text-xs text-gray-500">منذ 8 ساعات</span>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </div>
-
-            <!-- Newsletter -->
-            <div class="bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-2xl shadow-lg p-6">
-                <div class="text-center">
-                    <i class="bi bi-envelope-fill text-3xl mb-4 block"></i>
-                    <h3 class="text-xl font-bold mb-2">اشترك في النشرة</h3>
-                    <p class="text-blue-100 mb-4">احصل على آخر الأخبار في بريدك الإلكتروني</p>
+            
+            <!-- Sidebar (1 column) -->
+            <div class="lg:col-span-1">
+                <!-- Trending News -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4 border-b border-gray-200 pb-2">
+                        <i class="bi bi-fire text-red-600 me-2"></i>الأكثر قراءة
+                    </h3>
                     <div class="space-y-3">
-                        <input type="email" placeholder="بريدك الإلكتروني" 
-                               class="w-full px-4 py-3 rounded-lg text-slate-800 focus:outline-none focus:ring-2 focus:ring-white">
-                        <button class="w-full bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
-                            اشترك الآن
-                        </button>
+                        <div class="flex items-start gap-3">
+                            <span class="bg-red-600 text-white text-xs px-2 py-1 rounded-full font-bold">1</span>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-900 hover:text-red-600 transition-colors cursor-pointer">
+                                    خبر شائع يهم الجميع
+                                </h4>
+                                <span class="text-xs text-gray-500">منذ ساعة</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="bg-gray-600 text-white text-xs px-2 py-1 rounded-full font-bold">2</span>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-900 hover:text-red-600 transition-colors cursor-pointer">
+                                    موضوع مهم آخر
+                                </h4>
+                                <span class="text-xs text-gray-500">منذ ساعتين</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="bg-gray-600 text-white text-xs px-2 py-1 rounded-full font-bold">3</span>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-900 hover:text-red-600 transition-colors cursor-pointer">
+                                    خبر مثير للاهتمام
+                                </h4>
+                                <span class="text-xs text-gray-500">منذ 3 ساعات</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Weather Widget -->
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg p-6 mb-6">
+                    <h3 class="text-lg font-bold mb-4">
+                        <i class="bi bi-cloud-sun me-2"></i>الطقس - شبوة
+                    </h3>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-3xl font-bold">28°</div>
+                            <div class="text-sm opacity-90">مشمس</div>
+                        </div>
+                        <div class="text-4xl opacity-80">
+                            <i class="bi bi-sun"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ad Space -->
+                <div class="bg-gray-100 rounded-lg p-6 text-center">
+                    <div class="text-gray-500 text-sm">مساحة إعلانية</div>
+                    <div class="h-48 bg-gray-200 rounded-lg mt-4 flex items-center justify-center">
+                        <span class="text-gray-400">إعلان</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Opinion Section -->
-    <section class="mt-12">
-        <div class="flex justify-between items-center mb-8">
-            <div class="flex items-center gap-4">
-                <div class="w-1 h-12 bg-purple-600 rounded-full"></div>
-                <div>
-                    <h2 class="text-3xl font-bold text-slate-800">آراء وتحليلات</h2>
-                    <p class="text-slate-600">تحليلات وآراء الخبراء</p>
+<!-- Categories Section -->
+<div class="bg-gray-50 py-8">
+    <div class="container mx-auto px-4">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">الأقسام الرئيسية</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Local News -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-red-600 text-white p-4">
+                    <h3 class="text-lg font-bold">
+                        <i class="bi bi-geo-alt me-2"></i>محليات
+                    </h3>
+                </div>
+                <div class="p-4 space-y-3">
+                    <article class="border-b border-gray-200 pb-3">
+                        <h4 class="font-semibold text-gray-900 hover:text-red-600 transition-colors cursor-pointer">
+                            خبر محلي من شبوة
+                        </h4>
+                        <span class="text-xs text-gray-500">منذ ساعة</span>
+                    </article>
+                    <article class="border-b border-gray-200 pb-3">
+                        <h4 class="font-semibold text-gray-900 hover:text-red-600 transition-colors cursor-pointer">
+                            تطورات في المحافظة
+                        </h4>
+                        <span class="text-xs text-gray-500">منذ ساعتين</span>
+                    </article>
+                    <article>
+                        <h4 class="font-semibold text-gray-900 hover:text-red-600 transition-colors cursor-pointer">
+                            أخبار الحكومة المحلية
+                        </h4>
+                        <span class="text-xs text-gray-500">منذ 3 ساعات</span>
+                    </article>
+                </div>
+            </div>
+            
+            <!-- International News -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-blue-600 text-white p-4">
+                    <h3 class="text-lg font-bold">
+                        <i class="bi bi-globe me-2"></i>عربي وعالمي
+                    </h3>
+                </div>
+                <div class="p-4 space-y-3">
+                    <article class="border-b border-gray-200 pb-3">
+                        <h4 class="font-semibold text-gray-900 hover:text-blue-600 transition-colors cursor-pointer">
+                            أخبار من المنطقة العربية
+                        </h4>
+                        <span class="text-xs text-gray-500">منذ ساعة</span>
+                    </article>
+                    <article class="border-b border-gray-200 pb-3">
+                        <h4 class="font-semibold text-gray-900 hover:text-blue-600 transition-colors cursor-pointer">
+                            تطورات عالمية مهمة
+                        </h4>
+                        <span class="text-xs text-gray-500">منذ ساعتين</span>
+                    </article>
+                    <article>
+                        <h4 class="font-semibold text-gray-900 hover:text-blue-600 transition-colors cursor-pointer">
+                            أخبار دولية
+                        </h4>
+                        <span class="text-xs text-gray-500">منذ 3 ساعات</span>
+                    </article>
+                </div>
+            </div>
+            
+            <!-- Sports -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-green-600 text-white p-4">
+                    <h3 class="text-lg font-bold">
+                        <i class="bi bi-trophy me-2"></i>رياضة
+                    </h3>
+                </div>
+                <div class="p-4 space-y-3">
+                    <article class="border-b border-gray-200 pb-3">
+                        <h4 class="font-semibold text-gray-900 hover:text-green-600 transition-colors cursor-pointer">
+                            نتائج المباريات
+                        </h4>
+                        <span class="text-xs text-gray-500">منذ ساعة</span>
+                    </article>
+                    <article class="border-b border-gray-200 pb-3">
+                        <h4 class="font-semibold text-gray-900 hover:text-green-600 transition-colors cursor-pointer">
+                            أخبار كرة القدم
+                        </h4>
+                        <span class="text-xs text-gray-500">منذ ساعتين</span>
+                    </article>
+                    <article>
+                        <h4 class="font-semibold text-gray-900 hover:text-green-600 transition-colors cursor-pointer">
+                            الرياضة المحلية
+                        </h4>
+                        <span class="text-xs text-gray-500">منذ 3 ساعات</span>
+                    </article>
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @livewire('opinion-articles')
-        </div>
-    </section>
+    </div>
 </div>
 
-<!-- Call to Action Section -->
-<section class="bg-gradient-to-r from-slate-900 to-slate-800 text-white py-16 mt-16">
-    <div class="container mx-auto px-4 text-center">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-4xl font-bold mb-6">ابق على اطلاع دائم</h2>
-            <p class="text-xl mb-8 text-slate-300">تابع أحدث الأخبار والتطورات من شبوة واليمن والعالم العربي</p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="/news" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
-                    <i class="bi bi-newspaper me-2"></i>تصفح الأخبار
-                </a>
-                <a href="/subscribe" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 rounded-lg font-semibold transition-all duration-300">
-                    <i class="bi bi-bell me-2"></i>اشترك الآن
-                </a>
+<!-- Video Section -->
+<div class="bg-white py-8">
+    <div class="container mx-auto px-4">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">
+            <i class="bi bi-play-circle me-2"></i>فيديوهات
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Video 1 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="relative">
+                    <img src="https://via.placeholder.com/400x225" alt="فيديو" class="w-full h-48 object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                        <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
+                            <i class="bi bi-play-fill text-white text-2xl"></i>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
+                        05:30
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-900 mb-2">عنوان الفيديو الإخباري</h3>
+                    <p class="text-sm text-gray-600">وصف مختصر للفيديو والمحتوى المعروض</p>
+                    <span class="text-xs text-gray-500 mt-2 block">منذ 4 ساعات</span>
+                </div>
+            </div>
+            
+            <!-- Video 2 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="relative">
+                    <img src="https://via.placeholder.com/400x225" alt="فيديو" class="w-full h-48 object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                        <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
+                            <i class="bi bi-play-fill text-white text-2xl"></i>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
+                        03:45
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-900 mb-2">تقرير خاص من المنطقة</h3>
+                    <p class="text-sm text-gray-600">تقرير مفصل حول الأوضاع الحالية</p>
+                    <span class="text-xs text-gray-500 mt-2 block">منذ 6 ساعات</span>
+                </div>
+            </div>
+            
+            <!-- Video 3 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="relative">
+                    <img src="https://via.placeholder.com/400x225" alt="فيديو" class="w-full h-48 object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                        <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
+                            <i class="bi bi-play-fill text-white text-2xl"></i>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
+                        08:20
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-900 mb-2">مقابلة حصرية</h3>
+                    <p class="text-sm text-gray-600">مقابلة مع شخصية مؤثرة في المنطقة</p>
+                    <span class="text-xs text-gray-500 mt-2 block">منذ 8 ساعات</span>
+                </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-lg font-bold mb-4">شبوة21</h3>
+                <p class="text-gray-400 mb-4">منبرك الأول والخبر - موقع إخباري شامل يغطي أحدث الأخبار من محافظة شبوة واليمن</p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-blue-400 hover:text-blue-300"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-blue-400 hover:text-blue-300"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="text-red-400 hover:text-red-300"><i class="bi bi-youtube"></i></a>
+                    <a href="#" class="text-blue-400 hover:text-blue-300"><i class="bi bi-telegram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4">الأقسام</h3>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-white">محليات</a></li>
+                    <li><a href="#" class="hover:text-white">عربي وعالمي</a></li>
+                    <li><a href="#" class="hover:text-white">رياضة</a></li>
+                    <li><a href="#" class="hover:text-white">فيديو</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4">اتصل بنا</h3>
+                <ul class="space-y-2 text-gray-400">
+                    <li><i class="bi bi-envelope me-2"></i>info@shabwa21.com</li>
+                    <li><i class="bi bi-telephone me-2"></i>+967 123 456 789</li>
+                    <li><i class="bi bi-geo-alt me-2"></i>شبوة، اليمن</li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-4 text-center text-gray-400">
+            <p>&copy; 2025 شبوة21. جميع الحقوق محفوظة.</p>
+        </div>
+    </div>
+</footer>
 @endsection
-
-@push('styles')
-<style>
-    .hero-section {
-        background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .hero-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-        opacity: 0.3;
-    }
-    
-    .news-card {
-        transition: all 0.3s ease;
-        border: 1px solid #e2e8f0;
-    }
-    
-    .news-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        border-color: #3b82f6;
-    }
-    
-    .category-card {
-        transition: all 0.3s ease;
-        cursor: pointer;
-        border: 1px solid #e2e8f0;
-    }
-    
-    .category-card:hover {
-        transform: scale(1.05);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        border-color: #3b82f6;
-    }
-    
-    .sidebar-widget {
-        border-right: 4px solid #3b82f6;
-        transition: all 0.3s ease;
-    }
-    
-    .sidebar-widget:hover {
-        transform: translateX(-5px);
-    }
-    
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-    
-    ::-webkit-scrollbar-track {
-        background: #f1f5f9;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background: #3b82f6;
-        border-radius: 4px;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-        background: #2563eb;
-    }
-    
-    /* Animations */
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    .animate-fade-in {
-        animation: fadeInUp 0.6s ease-out;
-    }
-    
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .hero-section {
-            padding: 2rem 0;
-        }
-        
-        .hero-content h1 {
-            font-size: 2.5rem;
-        }
-        
-        .hero-content p {
-            font-size: 1.1rem;
-        }
-    }
-</style>
-@endpush
