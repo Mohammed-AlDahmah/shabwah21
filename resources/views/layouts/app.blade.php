@@ -44,6 +44,7 @@
     </style>
 </head>
 <body class="bg-gray-50 font-arabic">
+    @livewire('breaking-news')
     @livewire('header')
     
     <main class="min-h-screen">

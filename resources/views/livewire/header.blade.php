@@ -76,7 +76,7 @@
 
             <!-- زر القائمة للموبايل -->
             <div class="lg:hidden">
-                <button class="text-gray-700 hover:text-red-600 transition-colors">
+                <button id="menuToggleBtn" class="text-gray-700 hover:text-accent transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -103,3 +103,15 @@
         </div>
     </div>
 </header>
+
+<div id="mobileMenu" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/60" ></div>
+    <div class="absolute right-0 top-0 h-full w-64 bg-white shadow-lg p-6 flex flex-col gap-4 overflow-y-auto">
+        <button id="closeDrawerBtn" class="self-end mb-4 text-gray-600 hover:text-dark"><i class="bi bi-x-lg text-xl"></i></button>
+        <a href="{{ route('home') }}" class="block py-2 font-semibold text-dark hover:text-primary">الرئيسية</a>
+        @foreach($mainCategories as $cat)
+            <a href="{{ route('news.category', $cat->slug) }}" class="block py-2 text-gray-700 hover:text-primary">{{ $cat->name_ar ?? $cat->name }}</a>
+        @endforeach
+        <a href="{{ route('videos.index') }}" class="block py-2 text-gray-700 hover:text-primary">فيديو</a>
+    </div>
+</div>

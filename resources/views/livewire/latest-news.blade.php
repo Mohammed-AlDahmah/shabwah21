@@ -9,5 +9,6 @@
             @include('livewire.partials.article-card', ['article' => $news])
         @endforeach
     </div>
+    <div id="infinite-scroll-sentinel" class="h-4"></div>
     @endif
 </section>

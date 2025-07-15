@@ -3,10 +3,6 @@
 @section('content')
 
 <div class="container mx-auto px-4 py-6 space-y-8">
-    <!-- شريط الأخبار العاجلة -->
-    <div>
-        @livewire('breaking-news')
-    </div>
 
     <!-- أبرز المستجدات -->
     <div>
