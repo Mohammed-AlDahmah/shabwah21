@@ -7,7 +7,7 @@ use App\Livewire\Admin\Auth\Login;
 use App\Livewire\Admin\NewsManager;
 
 Route::get('/', function () {
-    return view('livewire.homepage');
+    return view('welcome');
 })->name('home');
 
 // News routes
