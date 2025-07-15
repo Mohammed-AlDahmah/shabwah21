@@ -31,7 +31,10 @@
         <!-- التصنيف -->
         @if($article->category)
         <div class="absolute top-2 right-2">
-            <span class="bg-primary text-white px-2 py-1 rounded text-xs font-bold shadow">{{ $article->category->name_ar ?? $article->category->name ?? 'تصنيف' }}</span>
+            <span class="bg-primary text-white px-2 py-1 rounded text-xs font-bold shadow inline-flex items-center gap-1">
+                <i class="bi bi-folder-fill text-[10px]"></i>
+                {{ $article->category->name_ar ?? $article->category->name ?? 'تصنيف' }}
+            </span>
         </div>
         @endif
     </div>

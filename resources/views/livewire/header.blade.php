@@ -17,10 +17,16 @@
                         {{ now()->format('Y-m-d') }}
                     </span>
                 </div>
-                <div class="flex items-center space-x-4 space-x-reverse">
-                    <a href="#" class="hover:text-red-600 transition-colors">تويتر</a>
-                    <a href="#" class="hover:text-red-600 transition-colors">فيسبوك</a>
-                    <a href="#" class="hover:text-red-600 transition-colors">يوتيوب</a>
+                <div class="flex items-center gap-3">
+                    <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="Twitter">
+                        <i class="bi bi-twitter-x text-lg"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="Facebook">
+                        <i class="bi bi-facebook text-lg"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="YouTube">
+                        <i class="bi bi-youtube text-lg"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -82,17 +88,15 @@
     <!-- شريط البحث -->
     <div class="bg-gray-50 border-t border-gray-200">
         <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center space-x-4 space-x-reverse">
+            <div class="flex items-center gap-3">
                 <div class="flex-1 relative">
                     <input type="text" placeholder="ابحث في الأخبار..." 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
-                    <button class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-red-600">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm">
+                    <button class="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary">
+                        <i class="bi bi-search"></i>
                     </button>
                 </div>
-                <button class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors font-medium">
+                <button class="bg-primary text-white px-5 py-2 rounded-md hover:bg-dark transition-colors text-sm font-medium">
                     بحث
                 </button>
             </div>

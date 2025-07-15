@@ -5,7 +5,7 @@
             $main = $featuredNews->first();
             $others = $featuredNews->slice(1,4);
         @endphp
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
             <!-- المقال الرئيسي الكبير -->
             <div class="relative group md:col-span-2 rounded-2xl overflow-hidden shadow-lg">
                 <a href="{{ route('news.show', $main->slug) }}">
@@ -13,7 +13,10 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
                     <div class="absolute bottom-0 left-0 p-6 text-white">
                         <div class="flex items-center mb-2 gap-2">
-                            <span class="bg-accent text-gray-900 text-xs font-bold px-3 py-1 rounded-full">{{ $main->category->name ?? 'عام' }}</span>
+                            <span class="bg-accent text-gray-900 text-xs font-bold px-3 py-1 rounded-full inline-flex items-center gap-1">
+                                <i class="bi bi-folder-fill text-[10px]"></i>
+                                {{ $main->category->name ?? 'عام' }}
+                            </span>
                             <span class="text-xs opacity-80">{{ $main->created_at->format('Y-m-d') }}</span>
                         </div>
                         <h2 class="text-2xl md:text-4xl font-extrabold leading-snug group-hover:text-accent transition-colors">
