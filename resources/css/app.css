@@ -1,5 +1,15 @@
 @import 'tailwindcss';
 
+/* Root CSS variables (Hadramout21 palette) */
+:root {
+  --color-primary: #C08B2D;
+  --color-secondary: #B22B2B;
+  --color-accent: #F4B905;
+  --color-dark: #2C3E50;
+  --color-light: #F8F9FA;
+  --color-gray: #6C757D;
+}
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
