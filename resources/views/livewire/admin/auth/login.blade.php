@@ -34,7 +34,7 @@
                         <input class="form-check-input" type="checkbox" id="remember" wire:model="remember">
                         <label class="form-check-label" for="remember">تذكرني</label>
                     </div>
-                    
+                    <a href="#" class="text-decoration-none text-muted small">نسيت كلمة المرور؟</a>
                 </div>
                 
                 <button type="submit" class="btn btn-primary w-100 py-2">

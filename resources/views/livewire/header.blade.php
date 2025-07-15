@@ -1,86 +1,91 @@
-<header x-data="{ open:false }" class="bg-white shadow-md sticky top-0 z-50 border-b-4 border-primary">
-    <!-- الشريط العلوي -->
-    <div class="bg-dark text-gray-200 border-b border-gray-800">
+<header x-data="{ open:false }" class="bg-white shadow-lg sticky top-0 z-50 border-b-4 border-blue-600">
+    <!-- Top Bar -->
+    <div class="bg-slate-900 text-gray-200 border-b border-slate-700">
         <div class="container mx-auto px-4 py-2">
             <div class="flex items-center justify-between text-sm">
                 <div class="flex items-center space-x-4 space-x-reverse">
                     <span class="flex items-center">
-                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
-                        </svg>
+                        <i class="bi bi-geo-alt-fill text-blue-400 ml-1"></i>
                         حضرموت، اليمن
                     </span>
                     <span class="flex items-center">
-                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-                        </svg>
+                        <i class="bi bi-clock text-blue-400 ml-1"></i>
                         {{ now()->format('Y-m-d') }}
+                    </span>
+                    <span class="flex items-center">
+                        <i class="bi bi-thermometer-half text-blue-400 ml-1"></i>
+                        28°C
                     </span>
                 </div>
                 <div class="flex items-center gap-3">
-                    <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="Twitter">
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="Twitter">
                         <i class="bi bi-twitter-x text-lg"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="Facebook">
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="Facebook">
                         <i class="bi bi-facebook text-lg"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="YouTube">
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="YouTube">
                         <i class="bi bi-youtube text-lg"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="Telegram">
+                        <i class="bi bi-telegram text-lg"></i>
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- الهيدر الرئيسي -->
-    <div class="container mx-auto px-4 py-4 bg-white shadow">
+    <!-- Main Header -->
+    <div class="container mx-auto px-4 py-4 bg-white">
         <div class="flex items-center justify-between">
-            <!-- الشعار -->
+            <!-- Logo -->
             <div class="flex items-center">
                 <a href="{{ route('home') }}" class="flex items-center space-x-3 space-x-reverse">
-                    <img src="/images/logo.png" alt="حضرموت21" class="h-12 w-auto">
+                    <div class="relative">
+                        <img src="/images/logo.png" alt="شبوة21" class="h-14 w-auto">
+                        <div class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
+                    </div>
                     <div class="hidden md:block">
-                        <h1 class="text-2xl font-bold text-gray-900">حضرموت21</h1>
-                        <p class="text-sm text-gray-600">موقع إخباري شامل</p>
+                        <h1 class="text-3xl font-bold text-slate-800">شبوة<span class="text-blue-600">21</span></h1>
+                        <p class="text-sm text-slate-600">منبرك الأول والخبر</p>
                     </div>
                 </a>
             </div>
 
-            <!-- القائمة الرئيسية -->
-            <nav class="hidden lg:flex items-center space-x-6 space-x-reverse relative bg-primary px-6 py-2 rounded-full shadow-lg">
-                <div class="absolute -bottom-0.5 left-0 w-full h-0.5 bg-accent rounded"></div>
-                <a href="{{ route('home') }}" class="px-3 py-1 rounded-md font-medium transition-colors text-white/90 hover:text-white {{ request()->routeIs('home') ? 'font-bold underline decoration-[var(--color-accent)] decoration-2' : '' }}">الرئيسية</a>
+            <!-- Main Navigation -->
+            <nav class="hidden lg:flex items-center space-x-6 space-x-reverse">
+                <a href="{{ route('home') }}" class="px-4 py-2 rounded-lg font-medium transition-all duration-300 text-slate-700 hover:text-blue-600 hover:bg-blue-50 {{ request()->routeIs('home') ? 'text-blue-600 bg-blue-50 font-semibold' : '' }}">الرئيسية</a>
                 @foreach($mainCategories as $cat)
                     @if($cat->children->count())
                         <div class="relative group">
-                            <button class="px-3 py-1 rounded-md font-medium flex items-center gap-1 transition-colors focus:outline-none text-white/90 hover:text-white {{ request('category') == $cat->slug ? 'font-bold underline decoration-[var(--color-accent)] decoration-2' : '' }}">
+                            <button class="px-4 py-2 rounded-lg font-medium flex items-center gap-1 transition-all duration-300 focus:outline-none text-slate-700 hover:text-blue-600 hover:bg-blue-50 {{ request('category') == $cat->slug ? 'text-blue-600 bg-blue-50 font-semibold' : '' }}">
                                 {{ $cat->name_ar ?? $cat->name }}
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                <i class="bi bi-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
                             </button>
-                            <div class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg z-20 opacity-0 group-hover:opacity-100 transition-opacity border border-gray-100">
+                            <div class="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl z-20 opacity-0 group-hover:opacity-100 transition-all duration-300 border border-slate-200 transform scale-95 group-hover:scale-100">
                                 @foreach($cat->children as $child)
-                                    <a href="{{ route('news.category', $child->slug) }}" class="block px-4 py-2 text-gray-700 hover:bg-primary hover:text-white transition-colors {{ request('category') == $child->slug ? 'bg-primary text-white' : '' }}">
+                                    <a href="{{ route('news.category', $child->slug) }}" class="block px-4 py-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors {{ request('category') == $child->slug ? 'bg-blue-50 text-blue-600' : '' }}">
                                         {{ $child->name_ar ?? $child->name }}
                                     </a>
                                 @endforeach
                             </div>
                         </div>
                     @else
-                        <a href="{{ route('news.category', $cat->slug) }}" class="px-3 py-1 rounded-md font-medium transition-colors text-white/90 hover:text-white {{ request('category') == $cat->slug ? 'font-bold underline decoration-[var(--color-accent)] decoration-2' : '' }}">
+                        <a href="{{ route('news.category', $cat->slug) }}" class="px-4 py-2 rounded-lg font-medium transition-all duration-300 text-slate-700 hover:text-blue-600 hover:bg-blue-50 {{ request('category') == $cat->slug ? 'text-blue-600 bg-blue-50 font-semibold' : '' }}">
                             {{ $cat->name_ar ?? $cat->name }}
                         </a>
                     @endif
                 @endforeach
-                <a href="{{ route('videos.index') }}" class="px-3 py-1 rounded-md font-medium transition-colors text-white/90 hover:text-white {{ request()->routeIs('videos.index') ? 'font-bold underline decoration-[var(--color-accent)] decoration-2' : '' }}">فيديو</a>
+                <a href="{{ route('videos.index') }}" class="px-4 py-2 rounded-lg font-medium transition-all duration-300 text-slate-700 hover:text-blue-600 hover:bg-blue-50 {{ request()->routeIs('videos.index') ? 'text-blue-600 bg-blue-50 font-semibold' : '' }}">فيديو</a>
             </nav>
 
-            <!-- زر القائمة للموبايل -->
+            <!-- Mobile Menu Button -->
             <div class="lg:hidden">
-                <button @click="open = !open" class="text-gray-700 hover:text-primary transition-colors focus:outline-none">
-                    <svg x-show="!open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="open = !open" class="text-slate-700 hover:text-blue-600 transition-colors focus:outline-none p-2">
+                    <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
-                    <svg x-show="open" x-cloak class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg x-show="open" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
@@ -88,42 +93,42 @@
         </div>
     </div>
 
-    <!-- قائمة الموبايل المنسدلة -->
-    <nav x-show="open" x-transition.origin.top class="lg:hidden bg-white border-t border-gray-100 shadow-md">
-        <ul class="flex flex-col py-4 px-4 space-y-2 font-bold">
-            <li><a @click="open = false" href="{{ route('home') }}" class="block py-2 text-dark hover:text-primary">الرئيسية</a></li>
+    <!-- Mobile Menu -->
+    <nav x-show="open" x-transition.origin.top class="lg:hidden bg-white border-t border-slate-200 shadow-lg">
+        <div class="px-4 py-4 space-y-2">
+            <a @click="open = false" href="{{ route('home') }}" class="block py-3 px-4 text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-medium">الرئيسية</a>
             @foreach($mainCategories as $cat)
-                <li><a @click="open = false" href="{{ route('news.category', $cat->slug) }}" class="block py-2 text-dark hover:text-primary">{{ $cat->name_ar ?? $cat->name }}</a></li>
+                <a @click="open = false" href="{{ route('news.category', $cat->slug) }}" class="block py-3 px-4 text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-medium">{{ $cat->name_ar ?? $cat->name }}</a>
             @endforeach
-            <li><a @click="open = false" href="{{ route('videos.index') }}" class="block py-2 text-dark hover:text-primary">فيديو</a></li>
-        </ul>
+            <a @click="open = false" href="{{ route('videos.index') }}" class="block py-3 px-4 text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-medium">فيديو</a>
+        </div>
     </nav>
 
-    <!-- شريط البحث -->
-    <div class="bg-gray-50 border-t border-gray-200">
-        <div class="container mx-auto px-4 py-3">
+    <!-- Search Bar -->
+    <div class="bg-slate-50 border-t border-slate-200">
+        <div class="container mx-auto px-4 py-4">
             <div x-data="searchComponent()" class="flex items-center space-x-4 space-x-reverse">
                 <div class="flex-1 relative">
-                    <input x-model="query" @focus="open=true" @keydown.window.escape="open=false" @input.debounce.300="fetchResults" type="text" placeholder="ابحث في الأخبار..." 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary">
-                    <button @click="submit" class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
+                    <input x-model="query" @focus="open=true" @keydown.window.escape="open=false" @input.debounce.300="fetchResults" 
+                           type="text" placeholder="ابحث في الأخبار والتقارير..." 
+                           class="w-full px-6 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-slate-700 placeholder-slate-500">
+                    <button @click="submit" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-blue-600 transition-colors">
+                        <i class="bi bi-search text-lg"></i>
                     </button>
 
-                    <!-- Overlay suggestions -->
+                    <!-- Search Suggestions -->
                     <template x-if="open && results.length">
-                        <ul class="absolute z-50 left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-72 overflow-y-auto">
+                        <ul class="absolute z-50 left-0 right-0 mt-2 bg-white border border-slate-200 rounded-xl shadow-xl max-h-80 overflow-y-auto">
                             <template x-for="item in results" :key="item.id">
                                 <li>
-                                    <a :href="item.url" class="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-700" @click="open=false" x-text="item.title"></a>
+                                    <a :href="item.url" class="block px-6 py-3 hover:bg-slate-50 text-sm text-slate-700 border-b border-slate-100 last:border-b-0" @click="open=false" x-text="item.title"></a>
                                 </li>
                             </template>
                         </ul>
                     </template>
                 </div>
-                <button @click="submit" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors font-medium">
+                <button @click="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl transition-all duration-300 font-semibold flex items-center gap-2">
+                    <i class="bi bi-search"></i>
                     بحث
                 </button>
             </div>
@@ -145,15 +150,3 @@
         </div>
     </div>
 </header>
-
-<div id="mobileMenu" class="fixed inset-0 z-50 hidden">
-    <div class="absolute inset-0 bg-black/60" ></div>
-    <div class="absolute right-0 top-0 h-full w-64 bg-white shadow-lg p-6 flex flex-col gap-4 overflow-y-auto">
-        <button id="closeDrawerBtn" class="self-end mb-4 text-gray-600 hover:text-dark"><i class="bi bi-x-lg text-xl"></i></button>
-        <a href="{{ route('home') }}" class="block py-2 font-semibold text-dark hover:text-primary">الرئيسية</a>
-        @foreach($mainCategories as $cat)
-            <a href="{{ route('news.category', $cat->slug) }}" class="block py-2 text-gray-700 hover:text-primary">{{ $cat->name_ar ?? $cat->name }}</a>
-        @endforeach
-        <a href="{{ route('videos.index') }}" class="block py-2 text-gray-700 hover:text-primary">فيديو</a>
-    </div>
-</div>

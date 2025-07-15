@@ -4,57 +4,81 @@
         <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-2">فيديو غرافيك شبوة21</h2>
         <div class="w-32 h-1 mx-auto rounded bg-yellow-400 mb-2"></div>
     </div>
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- الفيديو الرئيسي -->
-        @php $mainVideo = $videos->first(); @endphp
-        <div class="relative col-span-2 rounded-2xl overflow-hidden shadow-lg">
-            <a href="{{ route('videos.show', $mainVideo->slug) }}" class="block group">
-                <img src="{{ $mainVideo->thumbnail ?: '/images/video-placeholder.jpg' }}" alt="{{ $mainVideo->title }}" class="w-full h-80 object-cover rounded-2xl">
-                <!-- زر تشغيل -->
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="bg-white/80 rounded-full p-4 shadow-lg group-hover:bg-yellow-400 transition-all">
-                        <svg class="w-10 h-10 text-yellow-500 group-hover:text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M6.5 5.5A1.5 1.5 0 018 4h4a1.5 1.5 0 011.5 1.5v9A1.5 1.5 0 0112 16H8a1.5 1.5 0 01-1.5-1.5v-9zM8 5.5v9h4v-9H8z" clip-rule="evenodd"/>
-                        </svg>
+    <div>
+        @forelse($videos as $video)
+            <div class="flex gap-6 p-6 border border-slate-200 rounded-2xl hover:shadow-lg transition-all duration-300 group">
+                <div class="flex-shrink-0 w-32 h-24 bg-slate-200 rounded-xl overflow-hidden relative">
+                    @if($video->thumbnail)
+                        <img src="{{ asset('storage/' . $video->thumbnail) }}" 
+                             alt="{{ $video->title }}" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    @else
+                        <div class="w-full h-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center">
+                            <i class="bi bi-play-circle text-3xl text-white"></i>
+                        </div>
+                    @endif
+                    
+                    <!-- Play Button Overlay -->
+                    <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="bg-white/90 hover:bg-white text-slate-700 p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110">
+                            <i class="bi bi-play-fill text-lg"></i>
+                        </div>
                     </div>
+                    
+                    <!-- Duration Badge -->
+                    @if($video->duration)
+                        <div class="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-xs font-semibold">
+                            {{ $video->duration }}
+                        </div>
+                    @endif
                 </div>
-                <!-- نص فوق الفيديو -->
-                <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/30 to-transparent p-6">
-                    <div class="flex items-center mb-2">
-                        <span class="bg-yellow-400 text-gray-900 text-xs font-bold px-3 py-1 rounded-full mr-2">{{ $mainVideo->category->name ?? 'فيديو' }}</span>
-                        <span class="text-xs text-white opacity-80">{{ $mainVideo->created_at->format('Y-m-d') }}</span>
-                    </div>
-                    <h2 class="text-xl md:text-2xl font-extrabold text-white leading-snug mb-2">
-                        {{ $mainVideo->title }}
-                    </h2>
-                </div>
-            </a>
-        </div>
-        <!-- قائمة الفيديوهات الجانبية -->
-        <div class="flex flex-col gap-4">
-            @foreach($videos->slice(1,5) as $video)
-            <a href="{{ route('videos.show', $video->slug) }}" class="group flex items-center gap-3 bg-white rounded-xl shadow hover:shadow-lg transition-shadow duration-300 overflow-hidden p-2">
-                <div class="relative flex-shrink-0">
-                    <img src="{{ $video->thumbnail ?: '/images/video-placeholder.jpg' }}" alt="{{ $video->title }}" class="w-24 h-16 object-cover rounded-xl">
-                    <!-- أيقونة فيديو -->
-                    <div class="absolute top-2 left-2 bg-white/80 rounded-full p-1 shadow flex items-center justify-center">
-                        <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M4.293 6.707A1 1 0 015 6h6a1 1 0 01.707 1.707l-3 3a1 1 0 01-1.414 0l-3-3z"/>
-                        </svg>
-                    </div>
-                </div>
+                
                 <div class="flex-1 min-w-0">
-                    <div class="flex items-center mb-1">
-                        <span class="bg-yellow-400 text-gray-900 text-xs font-bold px-2 py-0.5 rounded-full mr-2">{{ $video->category->name ?? 'فيديو' }}</span>
-                        <span class="text-xs text-gray-500">{{ $video->created_at->format('Y-m-d') }}</span>
+                    <h4 class="font-bold text-slate-800 text-lg mb-3 line-clamp-2 group-hover:text-red-600 transition-colors">
+                        <a href="{{ route('videos.show', $video->slug) }}" class="hover:text-red-600 transition-colors">
+                            {{ $video->title }}
+                        </a>
+                    </h4>
+                    
+                    <p class="text-slate-600 text-sm mb-4 line-clamp-2 leading-relaxed">
+                        {{ $video->description }}
+                    </p>
+                    
+                    <div class="flex items-center justify-between text-sm text-slate-500">
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center gap-2">
+                                <i class="bi bi-clock text-blue-500"></i>
+                                <span>{{ $video->created_at->diffForHumans() }}</span>
+                            </div>
+                            
+                            <div class="flex items-center gap-2">
+                                <i class="bi bi-eye text-green-500"></i>
+                                <span>{{ $video->views_count ?? 0 }}</span>
+                            </div>
+                            
+                            <div class="flex items-center gap-2">
+                                <i class="bi bi-heart text-red-500"></i>
+                                <span>{{ $video->likes_count ?? 0 }}</span>
+                            </div>
+                        </div>
+                        
+                        @if($video->category)
+                            <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-semibold">
+                                {{ is_object($video->category) ? $video->category->name : ($video->category ?? 'فيديو') }}
+                            </span>
+                        @endif
                     </div>
-                    <h3 class="font-bold text-sm text-gray-900 group-hover:text-yellow-600 transition-colors line-clamp-2">
-                        {{ $video->title }}
-                    </h3>
                 </div>
-            </a>
-            @endforeach
-        </div>
+            </div>
+        @empty
+            <div class="text-center py-16">
+                <div class="bg-slate-50 rounded-2xl p-12">
+                    <i class="bi bi-play-circle text-6xl text-slate-300 mb-6 block"></i>
+                    <h3 class="text-2xl font-bold text-slate-600 mb-3">لا توجد فيديوهات</h3>
+                    <p class="text-slate-500">سيتم عرض الفيديوهات هنا عند إضافتها</p>
+                </div>
+            </div>
+        @endforelse
     </div>
     @endif
 </section>
