@@ -45,3 +45,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
     // Other admin routes
 });
+
+Route::prefix('admin')->middleware(['auth', 'verified'])->name('admin.')->group(function () {
+    Route::view('/', 'admin.dashboard')->name('dashboard');
+});
