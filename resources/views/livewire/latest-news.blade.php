@@ -1,5 +1,5 @@
 <section class="mb-10">
-    @if($latestNews->count() > 0)
+    @if(count($latestNews) > 0)
     <div class="mb-8 text-center">
         <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-2">آخر الأخبار</h2>
         <div class="w-24 h-1 mx-auto rounded bg-yellow-400 mb-2"></div>
