@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\User;
-use App\Models\Post;
+use App\Models\Article;
 
 class DashboardStats extends Component
 {
@@ -19,7 +19,7 @@ class DashboardStats extends Component
     public function refreshStats(): void
     {
         $this->usersCount = User::count();
-        $this->postsCount = Post::count();
+        $this->postsCount = Article::count();
     }
 
     protected $listeners = ['statsUpdated' => 'refreshStats'];
