@@ -1,101 +1,168 @@
-<header class="bg-white shadow-md sticky top-0 z-50 border-b-4 border-primary">
+<div>
     <!-- الشريط العلوي -->
-    <div class="bg-gray-100 border-b border-gray-200">
-        <div class="container mx-auto px-4 py-2">
-            <div class="flex items-center justify-between text-sm text-gray-600">
-                <div class="flex items-center space-x-4 space-x-reverse">
-                    <span class="flex items-center">
-                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
-                        </svg>
-                        حضرموت، اليمن
-                    </span>
-                    <span class="flex items-center">
-                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-                        </svg>
-                        {{ now()->format('Y-m-d') }}
-                    </span>
+    <div class="top-bar bg-gray-900 text-white py-2 text-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <span><i class="bi bi-calendar3"></i> {{ now()->format('l d F Y') }}</span>
+                    <span><i class="bi bi-clock"></i> <span id="live-time">{{ now()->format('H:i:s') }}</span></span>
                 </div>
-                <div class="flex items-center space-x-4 space-x-reverse">
-                    <a href="#" class="hover:text-red-600 transition-colors">تويتر</a>
-                    <a href="#" class="hover:text-red-600 transition-colors">فيسبوك</a>
-                    <a href="#" class="hover:text-red-600 transition-colors">يوتيوب</a>
+                <div class="flex items-center gap-3">
+                    <a href="#" class="hover:text-primary transition"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="hover:text-primary transition"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="hover:text-primary transition"><i class="bi bi-youtube"></i></a>
+                    <a href="#" class="hover:text-primary transition"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="hover:text-primary transition"><i class="bi bi-telegram"></i></a>
+                    <a href="#" class="hover:text-primary transition"><i class="bi bi-whatsapp"></i></a>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- شريط الأخبار العاجلة -->
+    <div class="breaking-news-ticker">
+        <div class="container mx-auto px-4 flex items-center">
+            <span class="breaking-news-label">عاجل</span>
+            <div class="breaking-news-content">
+                @foreach($breakingNews as $news)
+                    <span class="mx-8">{{ $news->title }}</span>
+                @endforeach
             </div>
         </div>
     </div>
 
     <!-- الهيدر الرئيسي -->
-    <div class="container mx-auto px-4 py-4">
-        <div class="flex items-center justify-between">
-            <!-- الشعار -->
-            <div class="flex items-center">
-                <a href="{{ route('home') }}" class="flex items-center space-x-3 space-x-reverse">
-                    <img src="/images/logo.png" alt="شبوة21" class="h-12 w-auto">
-                    <div class="hidden md:block">
-                        <h1 class="text-2xl font-bold text-gray-900">شبوة21</h1>
-                        <p class="text-sm text-gray-600">موقع إخباري شامل</p>
-                    </div>
-                </a>
-            </div>
-
-            <!-- القائمة الرئيسية -->
-            <nav class="hidden lg:flex items-center space-x-6 space-x-reverse relative">
-                <div class="absolute -bottom-4 left-0 w-full h-1 bg-primary rounded"></div>
-                <a href="{{ route('home') }}" class="px-3 py-2 rounded-lg font-medium transition-colors {{ request()->routeIs('home') ? 'bg-primary text-white shadow' : 'text-gray-700 hover:bg-gray-100' }}">الرئيسية</a>
-                @foreach($mainCategories as $cat)
-                    @if($cat->children->count())
-                        <div class="relative group">
-                            <button class="px-3 py-2 rounded-lg font-medium flex items-center gap-1 transition-colors focus:outline-none {{ request('category') == $cat->slug ? 'bg-primary text-white shadow' : 'text-gray-700 hover:bg-gray-100' }}">
-                                {{ $cat->name_ar ?? $cat->name }}
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-                            </button>
-                            <div class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg z-20 opacity-0 group-hover:opacity-100 transition-opacity border border-gray-100">
-                                @foreach($cat->children as $child)
-                                    <a href="{{ route('news.category', $child->slug) }}" class="block px-4 py-2 text-gray-700 hover:bg-primary hover:text-white transition-colors {{ request('category') == $child->slug ? 'bg-primary text-white' : '' }}">
-                                        {{ $child->name_ar ?? $child->name }}
-                                    </a>
-                                @endforeach
-                            </div>
-                        </div>
-                    @else
-                        <a href="{{ route('news.category', $cat->slug) }}" class="px-3 py-2 rounded-lg font-medium transition-colors {{ request('category') == $cat->slug ? 'bg-primary text-white shadow' : 'text-gray-700 hover:bg-gray-100' }}">
-                            {{ $cat->name_ar ?? $cat->name }}
-                        </a>
-                    @endif
-                @endforeach
-                <a href="{{ route('videos.index') }}" class="px-3 py-2 rounded-lg font-medium transition-colors {{ request()->routeIs('videos.index') ? 'bg-primary text-white shadow' : 'text-gray-700 hover:bg-gray-100' }}">فيديو</a>
-            </nav>
-
-            <!-- زر القائمة للموبايل -->
-            <div class="lg:hidden">
-                <button class="text-gray-700 hover:text-red-600 transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- شريط البحث -->
-    <div class="bg-gray-50 border-t border-gray-200">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center space-x-4 space-x-reverse">
-                <div class="flex-1 relative">
-                    <input type="text" placeholder="ابحث في الأخبار..." 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
-                    <button class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-red-600">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
+    <header class="main-header">
+        <div class="container mx-auto px-4">
+            <div class="logo-section">
+                <div class="flex items-center gap-4">
+                    <a href="/" class="site-logo">
+                        شبوة<span>21</span>
+                    </a>
+                </div>
+                
+                <!-- البحث -->
+                <div class="hidden md:flex items-center gap-4">
+                    <form class="relative" action="{{ route('news.search') }}" method="GET">
+                        <input type="text" name="q" placeholder="بحث..." 
+                               class="w-64 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary">
+                        <button type="submit" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-primary">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </form>
+                    
+                    <!-- أيقونة القائمة للموبايل -->
+                    <button class="md:hidden text-2xl" onclick="toggleMobileMenu()">
+                        <i class="bi bi-list"></i>
                     </button>
                 </div>
-                <button class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors font-medium">
-                    بحث
-                </button>
             </div>
         </div>
+    </header>
+
+    <!-- القائمة الرئيسية -->
+    <nav class="main-nav">
+        <div class="container mx-auto px-4">
+            <ul id="main-menu" class="flex">
+                <li>
+                    <a href="/" class="{{ request()->routeIs('home') ? 'active' : '' }}">
+                        <i class="bi bi-house-door"></i> الرئيسية
+                    </a>
+                </li>
+                
+                @foreach($categories as $category)
+                    <li class="group">
+                        <a href="{{ route('news.category', $category->slug) }}" 
+                           class="{{ request()->segment(2) == $category->slug ? 'active' : '' }}">
+                            {{ $category->name }}
+                            @if($category->children->count() > 0)
+                                <i class="bi bi-chevron-down text-xs"></i>
+                            @endif
+                        </a>
+                        
+                        @if($category->children->count() > 0)
+                            <ul class="dropdown-menu">
+                                @foreach($category->children as $child)
+                                    <li>
+                                        <a href="{{ route('news.category', $child->slug) }}">
+                                            {{ $child->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </li>
+                @endforeach
+                
+                <li>
+                    <a href="{{ route('videos.index') }}" class="{{ request()->routeIs('videos.*') ? 'active' : '' }}">
+                        <i class="bi bi-play-circle"></i> فيديو
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{{ route('contact') }}">
+                        <i class="bi bi-envelope"></i> اتصل بنا
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- القائمة للموبايل -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="bg-white w-80 h-full overflow-y-auto">
+            <div class="p-4 border-b">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold">القائمة</h3>
+                    <button onclick="toggleMobileMenu()" class="text-2xl">
+                        <i class="bi bi-x"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <ul class="mobile-nav">
+                <li>
+                    <a href="/" class="block px-4 py-3 border-b hover:bg-gray-50">
+                        <i class="bi bi-house-door"></i> الرئيسية
+                    </a>
+                </li>
+                
+                @foreach($categories as $category)
+                    <li>
+                        <a href="{{ route('news.category', $category->slug) }}" 
+                           class="block px-4 py-3 border-b hover:bg-gray-50">
+                            {{ $category->name }}
+                        </a>
+                    </li>
+                @endforeach
+                
+                <li>
+                    <a href="{{ route('videos.index') }}" class="block px-4 py-3 border-b hover:bg-gray-50">
+                        <i class="bi bi-play-circle"></i> فيديو
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{{ route('contact') }}" class="block px-4 py-3 border-b hover:bg-gray-50">
+                        <i class="bi bi-envelope"></i> اتصل بنا
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-</header>
+</div>
+
+<script>
+    // تحديث الوقت المباشر
+    setInterval(function() {
+        const now = new Date();
+        document.getElementById('live-time').textContent = 
+            now.toLocaleTimeString('ar-YE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }, 1000);
+    
+    // تبديل القائمة للموبايل
+    function toggleMobileMenu() {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+</script>

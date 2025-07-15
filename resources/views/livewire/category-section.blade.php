@@ -1,67 +1,95 @@
-<div class="bg-white rounded-lg shadow-md overflow-hidden">
-    @if($showTitle)
-    <div class="bg-red-600 text-white p-4">
-        <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-3 space-x-reverse">
-                <div class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                    </svg>
-                </div>
-                <h2 class="text-xl font-bold">{{ $category->name_ar }}</h2>
-            </div>
-            @if($showViewAll && $articles->count() > 0)
-            <a href="{{ route('news.category', $category->slug) }}" class="text-white hover:text-yellow-200 text-sm transition-colors flex items-center">
-                عرض الكل
-                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                </svg>
-            </a>
-            @endif
-        </div>
-    </div>
-    @endif
-    
-    <div class="p-4">
-        <div class="space-y-3">
-            @forelse($articles as $index => $article)
-            <div class="group flex space-x-3 space-x-reverse border-b border-gray-100 pb-3 last:border-b-0 hover:bg-gray-50 p-2 rounded transition-colors duration-300">
-                <div class="flex-shrink-0">
-                    <div class="w-8 h-8 bg-red-600 text-white text-xs font-bold rounded flex items-center justify-center">
-                        {{ $index + 1 }}
-                    </div>
-                </div>
-                
-                <div class="flex-1 min-w-0">
-                    <h3 class="text-sm font-semibold text-gray-900 hover:text-red-600 transition-colors duration-300 line-clamp-2 mb-1">
-                        <a href="{{ route('news.show', $article->slug) }}">
-                            {{ $article->title }}
+<div class="category-section">
+    @if($news->count() > 0)
+        @if(($view ?? 'grid') == 'grid')
+            <!-- عرض الشبكة -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                @foreach($news as $item)
+                    <div class="news-card">
+                        <a href="{{ route('news.show', $item->slug) }}" class="block">
+                            <div class="news-card-image">
+                                @if($item->image)
+                                    <img src="{{ asset('storage/' . $item->image) }}" 
+                                         alt="{{ $item->title }}"
+                                         loading="lazy">
+                                @else
+                                    <div class="absolute inset-0 bg-gray-300 flex items-center justify-center">
+                                        <i class="bi bi-image text-gray-500 text-3xl"></i>
+                                    </div>
+                                @endif
+                            </div>
                         </a>
-                    </h3>
-                    
-                    <div class="flex items-center justify-between text-xs text-gray-500">
-                        <span>{{ $article->created_at->format('Y-m-d') }}</span>
-                        <span>{{ $article->views_count ?? 0 }} مشاهدة</span>
+                        
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 line-clamp-2 hover:text-primary transition">
+                                <a href="{{ route('news.show', $item->slug) }}">
+                                    {{ $item->title }}
+                                </a>
+                            </h3>
+                            
+                            <div class="flex items-center text-xs text-gray-500">
+                                <span><i class="bi bi-clock"></i> {{ $item->created_at->diffForHumans() }}</span>
+                                @if($item->views_count > 0)
+                                    <span class="mr-3"><i class="bi bi-eye"></i> {{ number_format($item->views_count) }}</span>
+                                @endif
+                            </div>
+                        </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-            @empty
-            <div class="text-center text-gray-500 py-8">
-                <svg class="w-12 h-12 mx-auto text-gray-300 mb-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
-                </svg>
-                <p class="text-sm">لا توجد أخبار في هذا القسم حالياً</p>
+        @else
+            <!-- عرض القائمة -->
+            <div class="space-y-3">
+                @foreach($news as $item)
+                    <div class="news-list-item">
+                        <div class="flex gap-3">
+                            @if($item->image)
+                                <a href="{{ route('news.show', $item->slug) }}" class="block w-24 h-20 flex-shrink-0">
+                                    <img src="{{ asset('storage/' . $item->image) }}" 
+                                         alt="{{ $item->title }}"
+                                         class="w-full h-full object-cover rounded"
+                                         loading="lazy">
+                                </a>
+                            @endif
+                            
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-sm mb-1 line-clamp-2 hover:text-primary transition">
+                                    <a href="{{ route('news.show', $item->slug) }}">
+                                        {{ $item->title }}
+                                    </a>
+                                </h4>
+                                <div class="text-xs text-gray-500">
+                                    <span><i class="bi bi-clock"></i> {{ $item->created_at->diffForHumans() }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-            @endforelse
-        </div>
-        
-        @if($showViewAll && $articles->count() > 0)
-        <div class="mt-4 pt-3 border-t border-gray-200">
-            <a href="{{ route('news.category', $category->slug) }}" 
-               class="block w-full text-center bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200 transition-colors text-sm">
-                عرض جميع أخبار {{ $category->name_ar }}
-            </a>
-        </div>
         @endif
-    </div>
-</div> 
+    @else
+        <div class="text-center py-8 text-gray-500">
+            <i class="bi bi-folder2-open text-4xl mb-2"></i>
+            <p>لا توجد أخبار في هذا القسم</p>
+        </div>
+    @endif
+</div>
+
+<style>
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .news-list-item {
+        background: white;
+        padding: 12px;
+        border-radius: 8px;
+        transition: all 0.3s;
+    }
+    
+    .news-list-item:hover {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+</style> 

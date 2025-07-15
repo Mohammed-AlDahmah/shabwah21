@@ -1,53 +1,113 @@
-<div>
+<div class="featured-news-section">
     @if($featuredNews->count() > 0)
-    <section class="mb-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- الكارد الرئيسي الكبير -->
-            @php $main = $featuredNews->first(); @endphp
-            <div class="relative group col-span-1 md:col-span-2 rounded-2xl overflow-hidden shadow-lg">
-                <img src="{{ $main->featured_image ?: '/images/placeholder.jpg' }}" alt="{{ $main->title }}" class="w-full h-80 object-cover rounded-2xl">
-                <!-- أيقونة كاميرا -->
-                <div class="absolute top-3 left-3 bg-white/80 rounded-full p-2 shadow flex items-center justify-center">
-                    <svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M4 5a2 2 0 012-2h8a2 2 0 012 2v1h1a1 1 0 011 1v9a2 2 0 01-2 2H4a2 2 0 01-2-2V7a1 1 0 011-1h1V5zm2-1a1 1 0 00-1 1v1h10V5a1 1 0 00-1-1H6zm10 3H4v9a1 1 0 001 1h10a1 1 0 001-1V7z"/>
-                    </svg>
-                </div>
-                <!-- نص فوق الصورة -->
-                <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/30 to-transparent p-6">
-                    <div class="flex items-center mb-2">
-                        <span class="bg-yellow-400 text-gray-900 text-xs font-bold px-3 py-1 rounded-full mr-2">{{ $main->category->name ?? 'عام' }}</span>
-                        <span class="text-xs text-white opacity-80">{{ $main->created_at->format('Y-m-d') }}</span>
-                    </div>
-                    <h2 class="text-2xl md:text-3xl font-extrabold text-white leading-snug mb-2">
-                        <a href="{{ route('news.show', $main->slug) }}">{{ $main->title }}</a>
-                    </h2>
-                </div>
-            </div>
-            <!-- الكاردات الجانبية -->
-            <div class="flex flex-col gap-4">
-                @foreach($featuredNews->slice(1,2) as $side)
-                <div class="relative group rounded-2xl overflow-hidden shadow-md flex-1 min-h-[160px]">
-                    <img src="{{ $side->featured_image ?: '/images/placeholder.jpg' }}" alt="{{ $side->title }}" class="w-full h-full object-cover rounded-2xl min-h-[160px]">
-                    <!-- أيقونة كاميرا -->
-                    <div class="absolute top-3 left-3 bg-white/80 rounded-full p-2 shadow flex items-center justify-center">
-                        <svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M4 5a2 2 0 012-2h8a2 2 0 012 2v1h1a1 1 0 011 1v9a2 2 0 01-2 2H4a2 2 0 01-2-2V7a1 1 0 011-1h1V5zm2-1a1 1 0 00-1 1v1h10V5a1 1 0 00-1-1H6zm10 3H4v9a1 1 0 001 1h10a1 1 0 001-1V7z"/>
-                        </svg>
-                    </div>
-                    <!-- نص فوق الصورة -->
-                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/30 to-transparent p-4">
-                        <div class="flex items-center mb-1">
-                            <span class="bg-yellow-400 text-gray-900 text-xs font-bold px-3 py-1 rounded-full mr-2">{{ $side->category->name ?? 'عام' }}</span>
-                            <span class="text-xs text-white opacity-80">{{ $side->created_at->format('Y-m-d') }}</span>
+        @php $mainNews = $featuredNews->first(); @endphp
+        
+        <!-- الخبر الرئيسي -->
+        <div class="main-featured-news mb-4">
+            <div class="news-card news-card-large">
+                <a href="{{ route('news.show', $mainNews->slug) }}" class="block">
+                    <div class="news-card-image" style="padding-bottom: 50%;">
+                        @if($mainNews->image)
+                            <img src="{{ asset('storage/' . $mainNews->image) }}" 
+                                 alt="{{ $mainNews->title }}"
+                                 class="absolute inset-0 w-full h-full object-cover">
+                        @else
+                            <div class="absolute inset-0 bg-gray-300 flex items-center justify-center">
+                                <i class="bi bi-image text-gray-500 text-4xl"></i>
+                            </div>
+                        @endif
+                        <div class="news-category-badge">
+                            {{ $mainNews->category->name }}
                         </div>
-                        <h3 class="text-base font-bold text-white leading-snug">
-                            <a href="{{ route('news.show', $side->slug) }}">{{ $side->title }}</a>
-                        </h3>
+                    </div>
+                </a>
+                <div class="p-4">
+                    <h2 class="text-2xl font-bold mb-2 hover:text-primary transition">
+                        <a href="{{ route('news.show', $mainNews->slug) }}">
+                            {{ $mainNews->title }}
+                        </a>
+                    </h2>
+                    <p class="text-gray-600 mb-3 line-clamp-2">
+                        {{ $mainNews->summary }}
+                    </p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <span><i class="bi bi-calendar3 ml-1"></i> {{ $mainNews->created_at->format('Y-m-d') }}</span>
+                        <span class="mx-2">|</span>
+                        <span><i class="bi bi-clock ml-1"></i> {{ $mainNews->created_at->format('H:i') }}</span>
+                        @if($mainNews->views_count > 0)
+                            <span class="mx-2">|</span>
+                            <span><i class="bi bi-eye ml-1"></i> {{ number_format($mainNews->views_count) }}</span>
+                        @endif
                     </div>
                 </div>
-                @endforeach
             </div>
         </div>
-    </section>
+        
+        <!-- الأخبار الثانوية -->
+        @if($featuredNews->count() > 1)
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                @foreach($featuredNews->skip(1)->take(4) as $news)
+                    <div class="news-card news-card-small">
+                        <div class="flex gap-3">
+                            <a href="{{ route('news.show', $news->slug) }}" class="block w-1/3">
+                                <div class="relative pb-20 overflow-hidden rounded">
+                                    @if($news->image)
+                                        <img src="{{ asset('storage/' . $news->image) }}" 
+                                             alt="{{ $news->title }}"
+                                             class="absolute inset-0 w-full h-full object-cover">
+                                    @else
+                                        <div class="absolute inset-0 bg-gray-300 flex items-center justify-center">
+                                            <i class="bi bi-image text-gray-500"></i>
+                                        </div>
+                                    @endif
+                                </div>
+                            </a>
+                            <div class="flex-1">
+                                <span class="text-xs text-primary font-semibold">
+                                    {{ $news->category->name }}
+                                </span>
+                                <h3 class="font-bold text-sm mb-1 line-clamp-2 hover:text-primary transition">
+                                    <a href="{{ route('news.show', $news->slug) }}">
+                                        {{ $news->title }}
+                                    </a>
+                                </h3>
+                                <div class="text-xs text-gray-500">
+                                    <span><i class="bi bi-clock"></i> {{ $news->created_at->diffForHumans() }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+    @else
+        <div class="text-center py-8 text-gray-500">
+            <i class="bi bi-newspaper text-4xl mb-2"></i>
+            <p>لا توجد أخبار مميزة حالياً</p>
+        </div>
     @endif
 </div>
+
+<style>
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .news-card-large {
+        height: 100%;
+    }
+    
+    .news-card-small {
+        background: white;
+        padding: 12px;
+        border-radius: 8px;
+        transition: all 0.3s;
+    }
+    
+    .news-card-small:hover {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+</style>

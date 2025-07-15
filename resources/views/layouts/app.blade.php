@@ -25,35 +25,70 @@
     <!-- الخطوط العربية -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @livewireStyles
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
+    
     <style>
-        body { background: #f8fafc; }
-        .sidebar-bg { background: #23272b; }
-        .nav-link.active, .nav-link:hover { background: #C08B2D !important; color: #fff !important; }
-        .nav-link { transition: background 0.2s, color 0.2s; }
+        /* تخصيصات إضافية */
+        :root {
+            --primary-color: #C08B2D;
+            --secondary-color: #FF0000;
+        }
+        
+        /* تأثيرات الحركة */
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* تحسينات للتصميم المتجاوب */
+        @media (max-width: 768px) {
+            .site-logo {
+                font-size: 2rem;
+            }
+            
+            .tabs-nav {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
     </style>
+    
+    @stack('styles')
 </head>
-<body class="bg-gray-50 font-arabic">
-    @livewire('header')
+<body>
+    <div id="app">
+        @livewire('header')
+        
+        <main>
+            @yield('content')
+        </main>
+        
+        @livewire('footer')
+    </div>
     
-    <main class="min-h-screen">
-        @yield('content')
-    </main>
-    
-    @livewire('footer')
     @livewireScripts
     
-    <!-- إضافة تأثيرات إضافية -->
     <script>
         // تأثير التمرير السلس
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -84,9 +119,13 @@
         }, observerOptions);
 
         // مراقبة جميع البطاقات
-        document.querySelectorAll('.card').forEach(card => {
-            observer.observe(card);
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.news-card').forEach(card => {
+                observer.observe(card);
+            });
         });
     </script>
+    
+    @stack('scripts')
 </body>
 </html>
