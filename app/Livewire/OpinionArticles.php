@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\News;
+use App\Models\Article;
 use App\Models\Category;
 
 class OpinionArticles extends Component
@@ -12,7 +12,7 @@ class OpinionArticles extends Component
     {
         $opinionCategory = Category::where('slug', 'opinion')->first();
         
-        $opinionArticles = News::where('is_published', true)
+        $opinionArticles = Article::where('is_published', true)
             ->when($opinionCategory, function($query, $opinionCategory) {
                 return $query->where('category_id', $opinionCategory->id);
             })

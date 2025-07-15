@@ -3,13 +3,13 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\News;
+use App\Models\Article;
 
 class BreakingNews extends Component
 {
     public function render()
     {
-        $breakingNews = News::where('is_breaking', true)
+        $breakingNews = Article::where('is_breaking', true)
             ->where('is_published', true)
             ->orderBy('created_at', 'desc')
             ->take(5)

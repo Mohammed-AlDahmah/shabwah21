@@ -3,13 +3,13 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\News;
+use App\Models\Article;
 
 class FeaturedNewsHero extends Component
 {
     public function render()
     {
-        $featuredNews = News::where('is_featured', true)
+        $featuredNews = Article::where('is_featured', true)
             ->where('is_published', true)
             ->orderBy('created_at', 'desc')
             ->first();

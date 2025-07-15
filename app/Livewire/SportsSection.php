@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\News;
+use App\Models\Article;
 use App\Models\Category;
 
 class SportsSection extends Component
@@ -12,7 +12,7 @@ class SportsSection extends Component
     {
         $sportsCategory = Category::where('slug', 'sports')->first();
         
-        $sportsNews = News::where('is_published', true)
+        $sportsNews = Article::where('is_published', true)
             ->when($sportsCategory, function($query, $sportsCategory) {
                 return $query->where('category_id', $sportsCategory->id);
             })

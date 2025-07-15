@@ -3,13 +3,13 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\News;
+use App\Models\Article;
 
 class LatestNewsGrid extends Component
 {
     public function render()
     {
-        $latestNews = News::where('is_published', true)
+        $latestNews = Article::where('is_published', true)
             ->orderBy('created_at', 'desc')
             ->take(6)
             ->get();
