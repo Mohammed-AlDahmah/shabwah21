@@ -9,13 +9,13 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
     
-    /* حضرموت21 الألوان المخصصة */
-    --color-primary: #C08B2D;
-    --color-secondary: #B22B2B;
-    --color-accent: #F4A261;
-    --color-dark: #2C3E50;
-    --color-light: #F8F9FA;
-    --color-gray: #6C757D;
+    /* لوحة ألوان حضرموت21 الجديدة */
+    --color-primary: #0A4C93; /* أزرق أساسي */
+    --color-secondary: #E63946; /* أحمر ثانوي للتأكيد */
+    --color-accent: #F4B400;   /* أصفر للتظليل */
+    --color-dark: #1A1A1A;     /* خلفيات داكنة */
+    --color-light: #F7F9FC;    /* خلفية فاتحة */
+    --color-gray: #6C6C6C;     /* رمادي عام */
 }
 
 /* الألوان المخصصة */

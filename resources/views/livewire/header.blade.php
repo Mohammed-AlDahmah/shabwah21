@@ -1,8 +1,8 @@
 <header class="bg-white shadow-md sticky top-0 z-50 border-b-4 border-primary">
     <!-- الشريط العلوي -->
-    <div class="bg-gray-100 border-b border-gray-200">
+    <div class="bg-dark text-gray-200 border-b border-gray-800">
         <div class="container mx-auto px-4 py-2">
-            <div class="flex items-center justify-between text-sm text-gray-600">
+            <div class="flex items-center justify-between text-sm">
                 <div class="flex items-center space-x-4 space-x-reverse">
                     <span class="flex items-center">
                         <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
@@ -27,7 +27,7 @@
     </div>
 
     <!-- الهيدر الرئيسي -->
-    <div class="container mx-auto px-4 py-4">
+    <div class="container mx-auto px-4 py-4 bg-white shadow">
         <div class="flex items-center justify-between">
             <!-- الشعار -->
             <div class="flex items-center">
@@ -41,13 +41,13 @@
             </div>
 
             <!-- القائمة الرئيسية -->
-            <nav class="hidden lg:flex items-center space-x-6 space-x-reverse relative">
-                <div class="absolute -bottom-4 left-0 w-full h-1 bg-primary rounded"></div>
-                <a href="{{ route('home') }}" class="px-3 py-2 rounded-lg font-medium transition-colors {{ request()->routeIs('home') ? 'bg-primary text-white shadow' : 'text-gray-700 hover:bg-gray-100' }}">الرئيسية</a>
+            <nav class="hidden lg:flex items-center space-x-6 space-x-reverse relative bg-primary px-6 py-2 rounded-full shadow-lg">
+                <div class="absolute -bottom-0.5 left-0 w-full h-0.5 bg-accent rounded"></div>
+                <a href="{{ route('home') }}" class="px-3 py-1 rounded-md font-medium transition-colors text-white/90 hover:text-white {{ request()->routeIs('home') ? 'font-bold underline decoration-[var(--color-accent)] decoration-2' : '' }}">الرئيسية</a>
                 @foreach($mainCategories as $cat)
                     @if($cat->children->count())
                         <div class="relative group">
-                            <button class="px-3 py-2 rounded-lg font-medium flex items-center gap-1 transition-colors focus:outline-none {{ request('category') == $cat->slug ? 'bg-primary text-white shadow' : 'text-gray-700 hover:bg-gray-100' }}">
+                            <button class="px-3 py-1 rounded-md font-medium flex items-center gap-1 transition-colors focus:outline-none text-white/90 hover:text-white {{ request('category') == $cat->slug ? 'font-bold underline decoration-[var(--color-accent)] decoration-2' : '' }}">
                                 {{ $cat->name_ar ?? $cat->name }}
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                             </button>
@@ -60,12 +60,12 @@
                             </div>
                         </div>
                     @else
-                        <a href="{{ route('news.category', $cat->slug) }}" class="px-3 py-2 rounded-lg font-medium transition-colors {{ request('category') == $cat->slug ? 'bg-primary text-white shadow' : 'text-gray-700 hover:bg-gray-100' }}">
+                        <a href="{{ route('news.category', $cat->slug) }}" class="px-3 py-1 rounded-md font-medium transition-colors text-white/90 hover:text-white {{ request('category') == $cat->slug ? 'font-bold underline decoration-[var(--color-accent)] decoration-2' : '' }}">
                             {{ $cat->name_ar ?? $cat->name }}
                         </a>
                     @endif
                 @endforeach
-                <a href="{{ route('videos.index') }}" class="px-3 py-2 rounded-lg font-medium transition-colors {{ request()->routeIs('videos.index') ? 'bg-primary text-white shadow' : 'text-gray-700 hover:bg-gray-100' }}">فيديو</a>
+                <a href="{{ route('videos.index') }}" class="px-3 py-1 rounded-md font-medium transition-colors text-white/90 hover:text-white {{ request()->routeIs('videos.index') ? 'font-bold underline decoration-[var(--color-accent)] decoration-2' : '' }}">فيديو</a>
             </nav>
 
             <!-- زر القائمة للموبايل -->
