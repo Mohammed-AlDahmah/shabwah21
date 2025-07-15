@@ -5,16 +5,16 @@
             @if($article->image)
                 <img src="{{ $article->image }}" alt="{{ $article->title }}" class="w-full h-full object-cover">
             @else
-                <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary to-secondary">
-                    <span class="text-white text-2xl font-bold">شبوة21</span>
+                <div class="w-full h-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);">
+                    <span class="text-white text-2xl font-bold">حضرموت21</span>
                 </div>
             @endif
         @else
             @if($article->image)
                 <img src="{{ $article->image }}" alt="{{ $article->title }}" class="w-full h-full object-cover">
             @else
-                <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary to-secondary">
-                    <span class="text-white text-2xl font-bold">شبوة21</span>
+                <div class="w-full h-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);">
+                    <span class="text-white text-2xl font-bold">حضرموت21</span>
                 </div>
             @endif
         @endif
@@ -26,7 +26,7 @@
         </div>
         <!-- watermark -->
         <div class="absolute bottom-2 left-2 text-xs text-white bg-black bg-opacity-40 px-2 py-1 rounded">
-            شبوة21
+            حضرموت21
         </div>
         <!-- التصنيف -->
         @if($article->category)
