@@ -47,6 +47,7 @@
     @livewire('header')
     
     <main class="min-h-screen">
+        {{-- يتم عرض محتوى الصفحة هنا عبر @section('content') في كل صفحة --}}
         @yield('content')
     </main>
     

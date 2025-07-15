@@ -39,9 +39,9 @@ Route::get('/privacy', function () {
 })->name('privacy');
 
 Route::get('/login', Login::class)->name('login');
+Route::post('/login', Login::class); // This handles the form submission
 
-Route::middleware(['web', 'auth'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', Dashboard::class)->name('dashboard');
-    Route::get('/news', NewsManager::class)->name('admin.news');
-    // لاحقًا: أضف هنا بقية مسارات لوحة التحكم (الأخبار، التصنيفات، ...)
+Route::middleware(['auth', 'web'])->group(function () {
+    Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
+    // Other admin routes
 });

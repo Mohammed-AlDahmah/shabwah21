@@ -1,3 +1,4 @@
+<div>
 <div class="row g-3">
     <div class="col-md-3">
         <div class="card text-center shadow-sm">
@@ -36,4 +37,5 @@
         </div>
     </div>
 </div>
-<!-- ملاحظة: تأكد من تضمين Bootstrap Icons في المشروع --> 
+<!-- ملاحظة: تأكد من تضمين Bootstrap Icons في المشروع -->
+</div> 

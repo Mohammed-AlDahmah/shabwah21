@@ -17,18 +17,30 @@
     </div>
 </div>
 <!-- هيدر مع الشعار والقائمة -->
-<div class="bg-white border-bottom shadow-sm sticky-top">
-    <div class="container py-3 d-flex justify-content-between align-items-center">
+<header class="bg-white border-bottom shadow-sm sticky-top">
+    <div class="container py-3 d-flex flex-wrap justify-content-between align-items-center">
         <div class="d-flex align-items-center gap-2">
             <img src="/images/logo.png" alt="شبوة21" style="height:48px;">
-            <span class="fs-2 fw-bold text-primary">شبوة<span class="text-secondary">21</span></span>
+            <span class="fs-2 fw-bold text-primary font-arabic">شبوة<span class="text-secondary">21</span></span>
+            <span class="text-muted small ms-2 d-none d-md-inline">منبرك الأول والخبر... موقع إخباري شامل</span>
         </div>
-        <nav>
-            <ul class="nav gap-2 fw-bold">
+        <nav class="flex-grow-1">
+            <ul class="nav justify-content-center fw-bold">
                 <li class="nav-item"><a class="nav-link text-dark" href="#">الرئيسية</a></li>
-                @foreach(\App\Models\Category::orderBy('sort_order')->get() as $cat)
-                    <li class="nav-item"><a class="nav-link text-dark" href="#section-{{ $cat->slug }}">{{ $cat->name }}</a></li>
-                @endforeach
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">محليات</a>
+                    <ul class="dropdown-menu text-end">
+                        <li><a class="dropdown-item" href="#">أخبار حضرموت</a></li>
+                        <li><a class="dropdown-item" href="#">أخبار شبوة</a></li>
+                        <li><a class="dropdown-item" href="#">أخبار عدن</a></li>
+                        <li><a class="dropdown-item" href="#">أخبار سقطرى</a></li>
+                        <li><a class="dropdown-item" href="#">المهرة</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#">تقارير وتحقيقات</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#">عربي وعالمي</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#">مجتمع</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#">فيديو</a></li>
                 <li class="nav-item"><a class="nav-link text-dark" href="#">اتصل بنا</a></li>
             </ul>
         </nav>
@@ -37,9 +49,9 @@
             <button class="btn btn-secondary btn-sm ms-2"><i class="bi bi-search"></i></button>
         </form>
     </div>
-</div>
-<!-- شريط أخبار متحرك -->
-<div class="bg-primary text-white py-2">
+</header>
+<!-- شريط أخبار متحرك (CSS وليس marquee) -->
+<div class="breaking-news-ticker bg-primary text-white py-2">
     <div class="container d-flex align-items-center gap-3">
         <span class="fw-bold"><i class="bi bi-megaphone"></i> شريط الأخبار:</span>
         <div class="news-ticker flex-fill overflow-hidden position-relative">
