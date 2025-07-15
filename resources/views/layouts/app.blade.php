@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name', 'شبوة21') }} - @yield('title', 'الصفحة الرئيسية')</title>
+    <title>{{ config('app.name', 'حضرموت21') }} - @yield('title', 'الصفحة الرئيسية')</title>
     
-    <meta name="description" content="@yield('description', 'موقع شبوة21 الإخباري - آخر الأخبار والتقارير من شبوة واليمن')">
-    <meta name="keywords" content="@yield('keywords', 'أخبار, شبوة, اليمن, إخبارية')">
-    <meta name="author" content="شبوة21">
+    <meta name="description" content="@yield('description', 'موقع حضرموت21 الإخباري - آخر الأخبار والتقارير من حضرموت واليمن')">
+    <meta name="keywords" content="@yield('keywords', 'أخبار, حضرموت, اليمن, إخبارية')">
+    <meta name="author" content="حضرموت21">
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="@yield('og_title', config('app.name', 'شبوة21'))">
-    <meta property="og:description" content="@yield('og_description', 'موقع شبوة21 الإخباري')">
+    <meta property="og:title" content="@yield('og_title', config('app.name', 'حضرموت21'))">
+    <meta property="og:description" content="@yield('og_description', 'موقع حضرموت21 الإخباري')">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="@yield('og_image', '/images/logo.png')">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('twitter_title', config('app.name', 'شبوة21'))">
-    <meta name="twitter:description" content="@yield('twitter_description', 'موقع شبوة21 الإخباري')">
+    <meta name="twitter:title" content="@yield('twitter_title', config('app.name', 'حضرموت21'))">
+    <meta name="twitter:description" content="@yield('twitter_description', 'موقع حضرموت21 الإخباري')">
     <meta name="twitter:image" content="@yield('twitter_image', '/images/logo.png')">
     
     <!-- الخطوط العربية -->
