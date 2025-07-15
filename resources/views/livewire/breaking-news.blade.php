@@ -13,10 +13,10 @@
             </div>
             
             <!-- الأخبار المتحركة -->
-            <div class="flex-1 overflow-hidden">
-                <div class="marquee whitespace-nowrap flex items-center gap-6 text-white text-sm font-medium">
+            <div class="flex-1 overflow-hidden relative">
+                <div class="ticker flex items-center gap-10 text-white text-sm font-medium" x-init="$el.innerHTML += $el.innerHTML" style="animation: ticker 40s linear infinite;">
                     @foreach($breakingNews as $news)
-                        <a href="{{ route('news.show', $news->slug) }}" class="hover:text-yellow-200 transition-colors duration-200 flex items-center gap-2 group">
+                        <a href="{{ route('news.show', $news->slug) }}" class="hover:text-yellow-200 transition-colors duration-200 flex items-center gap-2 group whitespace-nowrap">
                             <span class="font-medium group-hover:font-semibold">{{ $news->title }}</span>
                             <span class="opacity-60 text-xs bg-white/20 px-2 py-1 rounded-full">{{ $news->time_ago }}</span>
                         </a>
@@ -26,16 +26,12 @@
         </div>
         
         <style>
-        .marquee {
-            display: flex;
-            animation: marquee 40s linear infinite;
-        }
-        .breaking-news:hover .marquee {
+        .breaking-news:hover .ticker {
             animation-play-state: paused;
         }
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        @keyframes ticker {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
         </style>
     </div>

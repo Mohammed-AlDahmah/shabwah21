@@ -96,20 +96,46 @@
     <!-- شريط البحث -->
     <div class="bg-gray-50 border-t border-gray-200">
         <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center space-x-4 space-x-reverse">
+            <div x-data="searchComponent()" class="flex items-center space-x-4 space-x-reverse">
                 <div class="flex-1 relative">
-                    <input type="text" placeholder="ابحث في الأخبار..." 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
-                    <button class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-red-600">
+                    <input x-model="query" @focus="open=true" @keydown.window.escape="open=false" @input.debounce.300="fetchResults" type="text" placeholder="ابحث في الأخبار..." 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary">
+                    <button @click="submit" class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </button>
+
+                    <!-- Overlay suggestions -->
+                    <template x-if="open && results.length">
+                        <ul class="absolute z-50 left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-72 overflow-y-auto">
+                            <template x-for="item in results" :key="item.id">
+                                <li>
+                                    <a :href="item.url" class="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-700" @click="open=false" x-text="item.title"></a>
+                                </li>
+                            </template>
+                        </ul>
+                    </template>
                 </div>
-                <button class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors font-medium">
+                <button @click="submit" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors font-medium">
                     بحث
                 </button>
             </div>
+
+            <script>
+            function searchComponent(){
+                return {
+                    query:'',
+                    open:false,
+                    results:[],
+                    fetchResults(){
+                        if(this.query.length<2){this.results=[];return;}
+                        fetch(`/search?q=${encodeURIComponent(this.query)}&json=1`).then(r=>r.json()).then(d=>{this.results=d;});
+                    },
+                    submit(){ if(this.query) window.location=`/search?q=${encodeURIComponent(this.query)}`; }
+                }
+            }
+            </script>
         </div>
     </div>
 </header>
