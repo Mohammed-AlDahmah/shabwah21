@@ -1,4 +1,4 @@
-<header class="bg-white shadow-md sticky top-0 z-50 border-b-4 border-primary">
+<header x-data="{ open:false }" class="bg-white shadow-md sticky top-0 z-50 border-b-4 border-primary">
     <!-- الشريط العلوي -->
     <div class="bg-gray-100 border-b border-gray-200">
         <div class="container mx-auto px-4 py-2">
@@ -70,14 +70,28 @@
 
             <!-- زر القائمة للموبايل -->
             <div class="lg:hidden">
-                <button class="text-gray-700 hover:text-red-600 transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <button @click="open = !open" class="text-gray-700 hover:text-primary transition-colors focus:outline-none">
+                    <svg x-show="!open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg x-show="open" x-cloak class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
         </div>
     </div>
+
+    <!-- قائمة الموبايل المنسدلة -->
+    <nav x-show="open" x-transition.origin.top class="lg:hidden bg-white border-t border-gray-100 shadow-md">
+        <ul class="flex flex-col py-4 px-4 space-y-2 font-bold">
+            <li><a @click="open = false" href="{{ route('home') }}" class="block py-2 text-dark hover:text-primary">الرئيسية</a></li>
+            @foreach($mainCategories as $cat)
+                <li><a @click="open = false" href="{{ route('news.category', $cat->slug) }}" class="block py-2 text-dark hover:text-primary">{{ $cat->name_ar ?? $cat->name }}</a></li>
+            @endforeach
+            <li><a @click="open = false" href="{{ route('videos.index') }}" class="block py-2 text-dark hover:text-primary">فيديو</a></li>
+        </ul>
+    </nav>
 
     <!-- شريط البحث -->
     <div class="bg-gray-50 border-t border-gray-200">
