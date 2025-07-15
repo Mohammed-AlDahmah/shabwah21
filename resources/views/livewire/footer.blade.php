@@ -5,18 +5,18 @@
             <div class="col-span-1 md:col-span-2">
                 <div class="flex items-center space-x-3 space-x-reverse mb-6">
                     <div class="relative">
-                        <img src="/images/logo.png" alt="شبوة21" class="w-12 h-12 object-contain" />
+                        <img src="/images/logo.png" alt="حضرموت21" class="w-12 h-12 object-contain" />
                         <div class="absolute -bottom-1 -right-1 bg-primary text-white text-xs px-2 py-1 rounded-full font-bold">
                             LIVE
                         </div>
                     </div>
                     <div>
-                        <h2 class="text-2xl font-bold text-primary">شبوة21</h2>
+                        <h2 class="text-2xl font-bold text-primary">حضرموت21</h2>
                         <p class="text-sm text-gray-400">موقع إخباري شامل</p>
                     </div>
                 </div>
                 <p class="text-gray-300 mb-6 leading-relaxed">
-                    موقع اخباري كاشف للمستجدات في شبوة والوطن العربي بمهنيه وحياد، 
+                    موقع اخباري كاشف للمستجدات في حضرموت والوطن العربي بمهنيه وحياد، 
                     رسالته الدفاع عن حقوق المواطن واعلاء كلمته وذراعه شبكه المراسلين المنتشرين في عموم الوطن.
                 </p>
                 
@@ -50,13 +50,17 @@
                 </div>
                 
                 <!-- النشرة البريدية -->
-                <div class="bg-gray-800 rounded-lg p-4">
-                    <h4 class="text-white font-bold mb-2">اشترك في النشرة البريدية</h4>
-                    <div class="flex space-x-2 space-x-reverse">
-                        <input type="email" placeholder="أدخل بريدك الإلكتروني" 
-                               class="flex-1 px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                        <button class="btn-primary px-6 py-2 text-sm">اشترك</button>
+                <div class="bg-light rounded-lg p-6 border-l-4 border-primary shadow-md">
+                    <div class="flex items-center gap-3 mb-3 text-dark">
+                        <i class="bi bi-envelope-fill text-2xl text-primary"></i>
+                        <h4 class="font-bold text-lg">اشترك في نشرتنا البريدية</h4>
                     </div>
+                    <p class="text-gray-600 text-sm mb-4">احصل على أهم الأخبار والمقالات في بريدك أسبوعياً.</p>
+                    <form class="flex gap-2" action="#" method="POST">
+                        <input type="email" placeholder="أدخل بريدك الإلكتروني" required
+                               class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-sm">
+                        <button class="bg-primary hover:bg-dark text-white px-5 py-2 rounded-md text-sm font-semibold transition-colors">اشتراك</button>
+                    </form>
                 </div>
             </div>
             
@@ -138,11 +142,11 @@
         <div class="border-t border-gray-700 mt-12 pt-8">
             <div class="flex flex-col md:flex-row items-center justify-between">
                 <p class="text-gray-400 text-center md:text-right">
-                    جميع الحقوق محفوظة لـــ <span class="text-primary font-bold">صحيفة شبوة21</span> &copy; {{ date('Y') }}
+                    جميع الحقوق محفوظة لـــ <span class="text-primary font-bold">صحيفة حضرموت21</span> &copy; {{ date('Y') }}
                 </p>
                 <div class="flex items-center space-x-4 space-x-reverse mt-4 md:mt-0">
                     <span class="text-gray-400 text-sm">تصميم وتطوير</span>
-                    <span class="text-primary font-bold">شبوة21</span>
+                    <span class="text-primary font-bold">حضرموت21</span>
                 </div>
             </div>
         </div>

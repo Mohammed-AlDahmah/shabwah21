@@ -2,6 +2,7 @@
 
 @section('content')
 
+<<<<<<< HEAD
 <!-- Hero Section with Featured News -->
 <section class="hero-section bg-gradient-to-r from-blue-900 to-blue-700 text-white">
     <div class="container mx-auto px-4 py-12">
@@ -27,6 +28,28 @@
                     @livewire('featured-news-hero')
                 </div>
             </div>
+=======
+<div class="container mx-auto px-4 py-6 space-y-8">
+
+    <!-- أبرز المستجدات -->
+    <div>
+        @livewire('featured-news')
+    </div>
+
+    <!-- آخر الأخبار -->
+    <div>
+        @livewire('latest-news')
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- قسم الفيديو -->
+        <div class="lg:col-span-2">
+            @livewire('video-section')
+        </div>
+        <!-- مقالات وتقارير -->
+        <div>
+            @livewire('articles-section')
+>>>>>>> 89b77b35a1e43663df186483df854800243224aa
         </div>
     </div>
 </section>
