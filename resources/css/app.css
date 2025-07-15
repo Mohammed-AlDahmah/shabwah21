@@ -1,430 +1,315 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-<<<<<<< HEAD
-/* Custom styles for the news homepage */
-=======
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
-
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
-    
-    /* حضرموت21 الألوان المخصصة */
-    --color-primary: #D72835;
-    --color-secondary: #0C1B2A;
+/* Custom CSS Variables for حضرموت21 */
+:root {
+    --color-primary: #C08B2D;
+    --color-secondary: #B22B2B;
     --color-accent: #F4B905;
     --color-dark: #2C3E50;
     --color-light: #F8F9FA;
     --color-gray: #6C757D;
 }
 
-/* الألوان المخصصة */
-.bg-primary { background-color: var(--color-primary); }
-.bg-secondary { background-color: var(--color-secondary); }
-.bg-accent { background-color: var(--color-accent); }
-.bg-dark { background-color: var(--color-dark); }
-.bg-light { background-color: var(--color-light); }
-
-.text-primary { color: var(--color-primary); }
-.text-secondary { color: var(--color-secondary); }
-.text-accent { color: var(--color-accent); }
-.text-dark { color: var(--color-dark); }
-.text-light { color: var(--color-light); }
-
-.border-primary { border-color: var(--color-primary); }
-.border-secondary { border-color: var(--color-secondary); }
-.border-accent { border-color: var(--color-accent); }
-
-.hover\:bg-primary:hover { background-color: var(--color-primary); }
-.hover\:bg-secondary:hover { background-color: var(--color-secondary); }
-.hover\:text-primary:hover { color: var(--color-primary); }
-.hover\:text-secondary:hover { color: var(--color-secondary); }
-
-/* تأثيرات إضافية */
-.shadow-custom {
-    box-shadow: 0 4px 6px -1px rgba(215, 40, 53, 0.1), 0 2px 4px -1px rgba(215, 40, 53, 0.06);
+/* Base Styles */
+* {
+    box-sizing: border-box;
 }
 
-/* خطوط مخصصة */
-.font-arabic {
-    font-family: 'Noto Sans Arabic', 'Tahoma', sans-serif;
+body {
+    font-family: 'Noto Sans Arabic', sans-serif;
+    font-feature-settings: 'kern' 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* تأثيرات النص */
-.text-shadow {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+/* Arabic Text Improvements */
+.arabic-text {
+    font-family: 'Noto Sans Arabic', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    letter-spacing: 0.5px;
 }
 
-/* أزرار مخصصة */
-.btn-primary {
-    @apply bg-primary text-white px-6 py-3 rounded-lg font-bold transition-all duration-300 hover:bg-secondary hover:shadow-lg transform hover:-translate-y-1;
+/* Custom Scrollbar */
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) var(--color-light);
 }
 
-.btn-secondary {
-    @apply bg-secondary text-white px-6 py-3 rounded-lg font-bold transition-all duration-300 hover:bg-primary hover:shadow-lg transform hover:-translate-y-1;
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
 }
 
-/* بطاقات مخصصة */
-.card {
-    @apply bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:-translate-y-1;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: var(--color-light);
+    border-radius: 3px;
 }
 
-.card.animate-fade-in {
-    opacity: 1;
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-accent);
+}
+
+/* Gradient Backgrounds */
+.gradient-bg {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+}
+
+.gradient-bg-dark {
+    background: linear-gradient(135deg, var(--color-dark), var(--color-secondary));
+}
+
+.gradient-bg-light {
+    background: linear-gradient(135deg, var(--color-light), #ffffff);
+}
+
+/* Card Hover Effects */
+.card-hover {
+    transition: all 0.3s ease;
     transform: translateY(0);
 }
 
-.card-header {
-    @apply text-white p-4;
+.card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-/* شريط الأخبار العاجلة */
-.breaking-news {
-    @apply bg-secondary text-white p-3 font-bold text-center;
-    animation: slideIn 0.5s ease-in-out;
-}
-
-@keyframes slideIn {
-    from { transform: translateX(-100%); }
-    to { transform: translateX(0); }
-}
-
-/* تأثيرات الصور */
-.image-overlay {
-    position: relative;
-    overflow: hidden;
-}
-
-.image-overlay::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, rgba(215, 40, 53, 0.3), rgba(12, 27, 42, 0.3));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.image-overlay:hover::before {
-    opacity: 1;
-}
-
-/* قائمة التنقل */
-.nav-link {
-    @apply text-dark hover:text-primary font-medium transition-colors duration-300 relative;
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--color-primary);
-    transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-    width: 100%;
-}
-
-/* شريط البحث */
-.search-bar {
-    @apply relative;
-}
-
-.search-input {
-    @apply w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary transition-colors duration-300;
-}
-
-.search-button {
-    @apply absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary transition-colors duration-300;
-}
-
-/* فوتر */
-.footer {
-    @apply bg-dark text-white;
-}
-
-.footer-link {
-    @apply text-gray-300 hover:text-primary transition-colors duration-300;
-}
-
-/* استجابة للشاشات الصغيرة */
-@media (max-width: 768px) {
-    .container {
-        @apply px-4;
-    }
-    
-    .nav-link::after {
-        display: none;
-    }
-}
-
-/* تأثيرات التحميل */
+/* Loading Animation */
 .loading {
-    @apply animate-pulse bg-gray-200 rounded;
-}
-
-/* تأثيرات النص */
->>>>>>> 89b77b35a1e43663df186483df854800243224aa
-.line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.aspect-video {
-    aspect-ratio: 16 / 9;
-}
-
-/* Hero section animations */
-.hero-section {
-    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
     position: relative;
     overflow: hidden;
 }
 
-.hero-section::before {
+.loading::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    animation: loading 1.5s infinite;
 }
 
-/* Card hover effects */
-.news-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+@keyframes loading {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
 }
 
-.news-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+/* Button Styles */
+.btn-primary {
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.category-card {
+.btn-primary:hover {
+    background: var(--color-accent);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(192, 139, 45, 0.3);
+}
+
+.btn-secondary {
+    background: var(--color-secondary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
     transition: all 0.3s ease;
     cursor: pointer;
 }
 
-.category-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+.btn-secondary:hover {
+    background: #8B1F1F;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(178, 43, 43, 0.3);
 }
 
-/* Breaking news ticker */
-.breaking-news-ticker {
-    background: linear-gradient(90deg, #dc2626 0%, #b91c1c 100%);
-    position: relative;
-    overflow: hidden;
-}
-
-.ticker-scroll {
-    display: flex;
-    animation: scroll-left 30s linear infinite;
-    white-space: nowrap;
-}
-
-.ticker-item {
-    margin-right: 2rem;
-    font-weight: 500;
-    text-decoration: none;
-}
-
-.ticker-separator {
-    margin-right: 2rem;
-    color: #fbbf24;
-}
-
-@keyframes scroll-left {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    .hero-section {
-        padding: 2rem 0;
-    }
-    
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-    
-    .hero-content p {
-        font-size: 1rem;
-    }
-    
-    .ticker-scroll {
-        animation-duration: 20s;
-    }
-}
-
-/* Custom scrollbar for webkit browsers */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
-}
-
-/* Button styles */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-weight: 600;
-    text-decoration: none;
+/* Form Styles */
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
     transition: all 0.3s ease;
-    border: 2px solid transparent;
+    background: white;
 }
 
-.btn-primary {
-    background-color: #3b82f6;
-    color: white;
+.form-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(192, 139, 45, 0.1);
 }
 
-.btn-primary:hover {
-    background-color: #2563eb;
-    color: white;
+/* Status Badges */
+.status-published {
+    background: #dcfce7;
+    color: #166534;
 }
 
-.btn-outline-light {
-    border-color: rgba(255, 255, 255, 0.5);
-    color: white;
+.status-pending {
+    background: #fef3c7;
+    color: #d97706;
 }
 
-.btn-outline-light:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: white;
-    color: white;
+.status-draft {
+    background: #f3f4f6;
+    color: #6b7280;
 }
 
-/* Arabic font support */
-.font-arabic {
-    font-family: 'Noto Sans Arabic', sans-serif;
+/* Notifications */
+.notification {
+    position: relative;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    animation: slideIn 0.3s ease;
 }
 
-/* Enhanced animations */
-.animate-fade-in {
+.notification-success {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+    color: #166534;
+}
+
+.notification-error {
+    background: #fef2f2;
+    border-left: 4px solid #ef4444;
+    color: #dc2626;
+}
+
+.notification-warning {
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    color: #d97706;
+}
+
+.notification-info {
+    background: #dbeafe;
+    border-left: 4px solid #3b82f6;
+    color: #1d4ed8;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Table Styles */
+.table-hover tbody tr:hover {
+    background: #f9fafb;
+    transition: background-color 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-light: #1f2937;
+        --color-dark: #f9fafb;
+    }
+}
+
+/* Animation Utilities */
+.fade-in {
     animation: fadeIn 0.5s ease-in-out;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.animate-slide-up {
-    animation: slideUp 0.6s ease-out;
+.scale-in {
+    animation: scaleIn 0.3s ease-in-out;
 }
 
-@keyframes slideUp {
-    from { transform: translateY(30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-/* Icon effects */
-.icon {
-    transition: transform 0.3s ease;
+/* Focus Styles */
+.focus-primary:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(192, 139, 45, 0.1);
+    border-color: var(--color-primary);
 }
 
-.icon:hover {
-    transform: scale(1.1);
+/* Text Selection */
+::selection {
+    background: var(--color-primary);
+    color: white;
 }
 
-/* Card hover effects */
-.card-hover {
-    transition: box-shadow 0.3s ease;
+::-moz-selection {
+    background: var(--color-primary);
+    color: white;
 }
 
-.card-hover:hover {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-/* Arabic text improvements */
-.arabic-text {
-    font-family: 'Noto Sans Arabic', 'Arial', sans-serif;
-    line-height: 1.6;
-}
-
-/* RTL layout improvements */
-.ar-paragraph {
-    direction: rtl;
-    text-align: right;
-}
-
-.ar-list {
-    direction: rtl;
-    text-align: right;
-}
-
-.ar-list li {
-    margin-right: 1rem;
-}
-
-.ar-button {
-    direction: rtl;
-}
-
-.ar-form {
-    direction: rtl;
-}
-
-.ar-form input,
-.ar-form textarea,
-.ar-form select {
-    text-align: right;
-}
-
-.ar-table {
-    direction: rtl;
-}
-
-.ar-table th,
-.ar-table td {
-    text-align: right;
-}
-
-.ar-icon {
-    transform: scaleX(-1);
-}
-
-/* Smooth scrolling */
-html {
-    scroll-behavior: smooth;
+/* Print Styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    .print-only {
+        display: block !important;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
 }

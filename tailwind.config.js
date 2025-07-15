@@ -15,13 +15,13 @@ export default {
                 md: '768px',
                 lg: '1024px',
                 xl: '1280px',
-                '2xl': '1400px', // يشابه عرض h21.news على الشاشات الكبيرة
+                '2xl': '1400px',
             },
         },
         extend: {
             colors: {
-                primary: '#D72835',
-                secondary: '#0C1B2A',
+                primary: '#C08B2D',
+                secondary: '#B22B2B',
                 accent: '#F4B905',
                 dark: '#2C3E50',
                 light: '#F8F9FA',
