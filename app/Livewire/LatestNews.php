@@ -23,7 +23,7 @@ class LatestNews extends Component
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
             ->orderBy('published_at', 'desc')
-            ->paginate(12)->items();
+            ->paginate(12)->getCollection();
     }
 
     public function loadMore()
