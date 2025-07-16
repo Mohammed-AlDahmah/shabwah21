@@ -62,5 +62,36 @@
         }
         </style>
     </div>
+
     @endif
+
+
+       <div class="breaking-news-container overflow-hidden">
+                <div class="container mx-auto px-4">
+                    <div class="flex items-center py-1">
+                        <div class="ticker-badge flex items-center">
+                            <i class="fas fa-bolt mr-2"></i>
+                            عاجل
+                        </div>
+                        <div class="ticker-content flex-1">
+                            <div class="ticker-item">
+                                <span>انعقاد جلسة طارئة لمجلس محافظة شبوة لبحث الأوضاع الأمنية</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span>إطلاق مشروع تنموي جديد بتمويل سعودي في منطقة حبان</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span>وزير الداخلية يزور شبوة للاطلاع على سير العمل الأمني</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span>انطلاق فعاليات مهرجان التراث الشبووي السنوي</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 </div>
+
+
+

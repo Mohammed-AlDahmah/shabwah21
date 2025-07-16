@@ -13,7 +13,7 @@
 .top-nav {
     border-bottom: 1px solid var(--header-border);
     background: var(--top-nav-bg);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: inherit;
 }
 
 .topbar-wrapper {

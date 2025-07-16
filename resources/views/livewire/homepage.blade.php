@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-<<<<<<< HEAD
+ 
 @section('title', 'شبوة21 - موقع إخباري احترافي')
 @section('description', 'موقع شبوة21 الإخباري - آخر الأخبار والتقارير من حضرموت واليمن')
 @section('keywords', 'أخبار, حضرموت, اليمن, إخبارية')
@@ -19,7 +19,7 @@
             
             <div class="slider-area-inner">
                 <livewire:featured-news-hero />
-=======
+ 
 @section('title', 'الرئيسية')
 
 @section('content')
@@ -35,13 +35,12 @@
                 <div class="space-y-6">
                     <h2 class="text-2xl font-bold text-slate-700 border-b-2 border-blue-600 pb-2">أبرز العناوين</h2>
                     @livewire('featured-news', ['limit' => 4])
-                </div>
->>>>>>> main
+                </div> 
             </div>
         </div>
     </section>
 
-<<<<<<< HEAD
+ 
     <!-- Main Content Area -->
     <div class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -349,4 +348,4 @@
     }
 </style>
 @endpush
->>>>>>> main
+ 

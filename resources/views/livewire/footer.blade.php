@@ -1,161 +1,154 @@
 <div>
-<footer id="footer" class="bg-gray-900 text-white py-12" style="background-color: var(--footer-bg);">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div class="md:col-span-2">
-                <div class="flex items-center mb-6">
-                    <img src="{{ asset('images/logo.png') }}" alt="شبوة21" class="h-12 me-4">
-                    <h3 class="text-2xl font-bold">شبوة21</h3>
+    <footer class="bg-slate-900 text-white">
+        <!-- Main Footer -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- About Section -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="/images/logo.png" alt="شبوة21" class="h-12 w-auto">
+                        <div>
+                            <h3 class="text-2xl font-bold">شبوة<span class="text-blue-400">21</span></h3>
+                            <p class="text-slate-400 text-sm">منبرك الأول والخبر</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 leading-relaxed">
+                        موقع إخباري شامل يغطي آخر المستجدات في محافظة شبوة واليمن والعالم العربي، 
+                        برسالة مهنية وحيادية وموضوعية.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg transition-all duration-300 transform hover:scale-110">
+                            <i class="bi bi-facebook text-lg"></i>
+                        </a>
+                        <a href="#" class="bg-blue-400 hover:bg-blue-500 text-white p-3 rounded-lg transition-all duration-300 transform hover:scale-110">
+                            <i class="bi bi-twitter-x text-lg"></i>
+                        </a>
+                        <a href="#" class="bg-red-600 hover:bg-red-700 text-white p-3 rounded-lg transition-all duration-300 transform hover:scale-110">
+                            <i class="bi bi-youtube text-lg"></i>
+                        </a>
+                        <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg transition-all duration-300 transform hover:scale-110">
+                            <i class="bi bi-telegram text-lg"></i>
+                        </a>
+                    </div>
                 </div>
-                <p class="text-gray-400 mb-6 text-lg leading-relaxed">
-                    شبوة21: موقع اخباري كاشف للمستجدات بمهنيه وحياد، رسالته الدفاع عن حقوق المواطن واعلاء كلمته وذراعه شبكة المراسلين المنتشرين في عموم الوطن.
-                </p>
-                <div class="flex gap-4">
-                    <a href="#" class="bg-blue-600 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
-                        <i class="bi bi-facebook"></i>
-                    </a>
-                    <a href="#" class="bg-black hover:bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
-                        <i class="bi bi-twitter-x"></i>
-                    </a>
-                    <a href="#" class="bg-red-600 hover:bg-red-700 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
-                        <i class="bi bi-youtube"></i>
-                    </a>
-                    <a href="#" class="bg-blue-500 hover:bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
-                        <i class="bi bi-telegram"></i>
-                    </a>
-                    <a href="#" class="bg-green-600 hover:bg-green-700 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
-                        <i class="bi bi-whatsapp"></i>
-                    </a>
+
+                <!-- Quick Links -->
+                <div class="space-y-4">
+                    <h4 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                        <i class="bi bi-link-45deg text-blue-400"></i>
+                        روابط سريعة
+                    </h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="{{ route('home') }}" class="text-slate-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+                                <i class="bi bi-house text-blue-400"></i>
+                                الرئيسية
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/news" class="text-slate-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+                                <i class="bi bi-newspaper text-blue-400"></i>
+                                الأخبار
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/videos" class="text-slate-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+                                <i class="bi bi-play-circle text-blue-400"></i>
+                                الفيديوهات
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/about" class="text-slate-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+                                <i class="bi bi-info-circle text-blue-400"></i>
+                                عن الموقع
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/contact" class="text-slate-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+                                <i class="bi bi-envelope text-blue-400"></i>
+                                اتصل بنا
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-            <div>
-                <h3 class="text-lg font-bold mb-6 border-b border-gray-700 pb-2">الأقسام</h3>
-                <ul class="space-y-3 text-gray-400">
-                    <li>
-                        <a href="#" class="hover:text-white transition-colors">
-                            أخبار حضرموت
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="hover:text-white transition-colors">
-                            المجلس الانتقالي
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="hover:text-white transition-colors">
-                            محليات
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="hover:text-white transition-colors">
-                            تقارير وتحقيقات
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="hover:text-white transition-colors">
-                            عربي وعالمي
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="text-lg font-bold mb-6 border-b border-gray-700 pb-2">اتصل بنا</h3>
-                <ul class="space-y-3 text-gray-400">
-                    <li class="flex items-center">
-                        <i class="bi bi-envelope me-3 text-red-400"></i>
-                        info@h21.news
-                    </li>
-                    <li class="flex items-center">
-                        <i class="bi bi-telephone me-3 text-red-400"></i>
-                        +967 123 456 789
-                    </li>
-                    <li class="flex items-center">
-                        <i class="bi bi-geo-alt me-3 text-red-400"></i>
-                        حضرموت، اليمن
-                    </li>
-                </ul>
+
+                <!-- Categories -->
+                <div class="space-y-4">
+                    <h4 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                        <i class="bi bi-grid-3x3-gap text-blue-400"></i>
+                        الأقسام
+                    </h4>
+                    <ul class="space-y-3">
+                        @foreach(\App\Models\Category::take(6)->get() as $category)
+                        <li>
+                            <a href="{{ route('news.category', $category->slug) }}" class="text-slate-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+                                <i class="bi bi-folder text-blue-400"></i>
+                                {{ $category->name_ar ?? $category->name }}
+                            </a>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="space-y-4">
+                    <h4 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                        <i class="bi bi-geo-alt text-blue-400"></i>
+                        معلومات التواصل
+                    </h4>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <i class="bi bi-geo-alt-fill text-blue-400 mt-1"></i>
+                            <div>
+                                <p class="text-slate-300 font-semibold">العنوان</p>
+                                <p class="text-slate-400 text-sm">محافظة شبوة، اليمن</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="bi bi-envelope-fill text-blue-400 mt-1"></i>
+                            <div>
+                                <p class="text-slate-300 font-semibold">البريد الإلكتروني</p>
+                                <p class="text-slate-400 text-sm">info@shabwah21.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="bi bi-telephone-fill text-blue-400 mt-1"></i>
+                            <div>
+                                <p class="text-slate-300 font-semibold">الهاتف</p>
+                                <p class="text-slate-400 text-sm">+967 XXX XXX XXX</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Newsletter -->
+                    <div class="mt-6 p-4 bg-slate-800 rounded-xl">
+                        <h5 class="font-semibold mb-3">اشترك في النشرة</h5>
+                        <div class="space-y-3">
+                            <input type="email" placeholder="بريدك الإلكتروني" 
+                                   class="w-full px-3 py-2 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors">
+                                اشترك الآن
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
 
-<!-- Site Info Section -->
-<div id="site-info" class="py-6 text-center text-gray-400" style="background-color: var(--footer-info-bg);">
-    <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-center justify-between">
-            <div class="mb-4 md:mb-0">
-                <p>&copy; 2025 شبوة21. جميع الحقوق محفوظة.</p>
-            </div>
-            <div class="flex items-center gap-4">
-                <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                    سياسة الخصوصية
-                </a>
-                <span class="text-gray-600">|</span>
-                <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                    شروط الاستخدام
-                </a>
-                <span class="text-gray-600">|</span>
-                <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                    اتصل بنا
-                </a>
+        <!-- Bottom Footer -->
+        <div class="border-t border-slate-700">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-slate-400 text-sm">
+                        © {{ date('Y') }} شبوة21. جميع الحقوق محفوظة.
+                    </div>
+                    <div class="flex items-center gap-6 text-sm">
+                        <a href="/privacy" class="text-slate-400 hover:text-blue-400 transition-colors">سياسة الخصوصية</a>
+                        <a href="/terms" class="text-slate-400 hover:text-blue-400 transition-colors">شروط الاستخدام</a>
+                        <a href="/sitemap" class="text-slate-400 hover:text-blue-400 transition-colors">خريطة الموقع</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
-<style>
-    /* تنسيق الفوتر */
-    #footer {
-        position: relative;
-        background-color: var(--footer-bg);
-        color: white;
-    }
-    
-    #site-info {
-        background-color: var(--footer-info-bg);
-        color: #9ca3af;
-    }
-    
-    .footer-boxed-widget-area {
-        border-color: rgba(255, 255, 255, 0.1);
-    }
-    
-    /* تنسيق الأيقونات الاجتماعية */
-    .social-icons a {
-        transition: all 0.3s ease;
-    }
-    
-    .social-icons a:hover {
-        transform: translateY(-2px);
-    }
-    
-    /* تنسيق الروابط */
-    footer a {
-        transition: all 0.3s ease;
-    }
-    
-    footer a:hover {
-        color: var(--primary-color);
-    }
-    
-    /* تنسيق متجاوب */
-    @media (max-width: 768px) {
-        #footer {
-            padding: 2rem 0;
-        }
-        
-        .social-icons {
-            justify-content: center;
-        }
-        
-        #site-info {
-            padding: 1.5rem 0;
-        }
-        
-        #site-info .flex {
-            flex-direction: column;
-            gap: 1rem;
-        }
-    }
-</style>
+    </footer>
 </div>
