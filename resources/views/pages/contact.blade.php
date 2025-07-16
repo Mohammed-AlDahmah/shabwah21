@@ -113,7 +113,7 @@
                             </div>
                             <div>
                                 <div class="font-semibold text-gray-800">العنوان</div>
-                                <div class="text-gray-600">حضرموت، اليمن</div>
+                                <div class="text-gray-600">شبوة، اليمن</div>
                             </div>
                         </div>
                     </div>
@@ -183,7 +183,7 @@
                         <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                     </svg>
                     <p class="text-gray-600">خريطة تفاعلية لموقعنا</p>
-                    <p class="text-sm text-gray-500">حضرموت، اليمن</p>
+                    <p class="text-sm text-gray-500">شبوة، اليمن</p>
                 </div>
             </div>
         </div>

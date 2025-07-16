@@ -1,152 +1,313 @@
-<header x-data="{ open:false }" class="bg-white shadow-lg sticky top-0 z-50 border-b-4 border-blue-600">
-    <!-- Top Bar -->
-    <div class="bg-slate-900 text-gray-200 border-b border-slate-700">
-        <div class="container mx-auto px-4 py-2">
-            <div class="flex items-center justify-between text-sm">
-                <div class="flex items-center space-x-4 space-x-reverse">
-                    <span class="flex items-center">
-                        <i class="bi bi-geo-alt-fill text-blue-400 ml-1"></i>
-                        حضرموت، اليمن
-                    </span>
-                    <span class="flex items-center">
-                        <i class="bi bi-clock text-blue-400 ml-1"></i>
-                        {{ now()->format('Y-m-d') }}
-                    </span>
-                    <span class="flex items-center">
-                        <i class="bi bi-thermometer-half text-blue-400 ml-1"></i>
-                        28°C
-                    </span>
+<header x-data="{ 
+    open: false, 
+    searchOpen: false, 
+    searchQuery: '', 
+    isSticky: false,
+    currentDate: new Date().toLocaleDateString('ar-SA', { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+    })
+}" 
+@scroll.window="isSticky = window.pageYOffset > 100"
+class="theme-header"
+:class="{ 'sticky-header': isSticky }">
+            
+            <!-- Mobile Menu Overlay -->
+            <div x-show="open" 
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 class="mobile-menu-overlay"
+                 @click="open = false">
+            </div>
+            
+            <!-- Mobile Header -->
+            <div class="container header-container md:hidden">
+                <div class="logo-container">
+                    <div class="logo">
+                        <a href="{{ route('home') }}" class="flex items-center">
+                            <img src="{{ asset('images/logo.svg') }}" alt="شبوة21" class="h-12">
+                        </a>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button @click="searchOpen = !searchOpen" 
+                                class="p-2 text-gray-700 hover:text-primary-color transition-colors rounded-full hover:bg-gray-100"
+                                :class="{ 'bg-primary-color text-white': searchOpen }">
+                            <i class="bi bi-search"></i>
+                        </button>
+                        <button @click="open = !open" 
+                                class="p-2 text-gray-700 hover:text-primary-color transition-colors rounded-full hover:bg-gray-100"
+                                :class="{ 'bg-primary-color text-white': open }">
+                            <i class="bi bi-list"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="flex items-center gap-3">
-                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="Twitter">
-                        <i class="bi bi-twitter-x text-lg"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="Facebook">
-                        <i class="bi bi-facebook text-lg"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="YouTube">
-                        <i class="bi bi-youtube text-lg"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="Telegram">
-                        <i class="bi bi-telegram text-lg"></i>
-                    </a>
+                
+                <!-- Mobile Search -->
+                <div x-show="searchOpen" 
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 transform -translate-y-2"
+                     x-transition:enter-end="opacity-100 transform translate-y-0"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100 transform translate-y-0"
+                     x-transition:leave-end="opacity-0 transform -translate-y-2"
+                     class="mobile-search py-3 border-t">
+                    <form method="get" action="{{ route('news.search') }}" class="flex items-center gap-2">
+                        <input type="text" name="q" placeholder="ابحث في الأخبار والمقالات..." 
+                               class="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-color focus:border-transparent"
+                               x-model="searchQuery"
+                               @keyup.enter="$el.form.submit()">
+                        <button type="submit" 
+                                class="bg-primary-color text-white px-4 py-2 rounded-md hover:bg-opacity-90 transition-colors flex items-center gap-1">
+                            <i class="bi bi-search"></i>
+                            <span class="text-xs">بحث</span>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Mobile Menu -->
+                <div x-show="open" 
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0 transform translate-x-full"
+                     x-transition:enter-end="opacity-100 transform translate-x-0"
+                     x-transition:leave="transition ease-in duration-200"
+                     x-transition:leave-start="opacity-100 transform translate-x-0"
+                     x-transition:leave-end="opacity-0 transform translate-x-full"
+                     class="mobile-menu"
+                     @click.away="open = false">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-200">
+                        <h3 class="text-lg font-bold text-primary-color">القائمة الرئيسية</h3>
+                        <button @click="open = false" class="text-gray-500 hover:text-gray-700 p-1 rounded-full hover:bg-gray-100">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="{{ route('home') }}" 
+                               class="font-bold text-primary-color flex items-center gap-2 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                               @click="open = false">
+                                <i class="bi bi-house-door"></i>
+                                الصفحة الرئيسية
+                            </a>
+                        </li>
+                        
+                        @foreach($mainCategories as $category)
+                            <li>
+                                <a href="{{ route('news.category', $category->slug) }}" 
+                                   class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                                   @click="open = false">
+                                    <div class="flex items-center gap-2">
+                                        @if($category->icon)
+                                            <i class="{{ $category->icon }} text-primary-color"></i>
+                                        @endif
+                                        <span>{{ $category->name }}</span>
+                                    </div>
+                                    @if($category->children->count() > 0)
+                                        <i class="bi bi-chevron-down text-xs text-gray-400"></i>
+                                    @endif
+                                </a>
+                                @if($category->children->count() > 0)
+                                    <ul class="mt-1 space-y-1 pr-4">
+                                        @foreach($category->children as $child)
+                                            <li>
+                                                <a href="{{ route('news.category', $child->slug) }}" 
+                                                   class="text-sm flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 transition-colors"
+                                                   @click="open = false">
+                                                    @if($child->icon)
+                                                        <i class="{{ $child->icon }} text-gray-500"></i>
+                                                    @endif
+                                                    {{ $child->name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </li>
+                        @endforeach
+                        
+                        <li>
+                            <a href="{{ route('videos.index') }}" 
+                               class="flex items-center gap-2 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                               @click="open = false">
+                                <i class="bi bi-play-circle text-primary-color"></i>
+                                فيديو
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('contact') }}" 
+                               class="flex items-center gap-2 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                               @click="open = false">
+                                <i class="bi bi-envelope text-primary-color"></i>
+                                اتصل بنا
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <!-- Mobile Menu Footer -->
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <div class="flex items-center justify-center gap-4">
+                            <a href="#" class="text-gray-500 hover:text-primary-color transition-colors">
+                                <i class="bi bi-facebook text-xl"></i>
+                            </a>
+                            <a href="#" class="text-gray-500 hover:text-primary-color transition-colors">
+                                <i class="bi bi-twitter-x text-xl"></i>
+                            </a>
+                            <a href="#" class="text-gray-500 hover:text-primary-color transition-colors">
+                                <i class="bi bi-instagram text-xl"></i>
+                            </a>
+                            <a href="#" class="text-gray-500 hover:text-primary-color transition-colors">
+                                <i class="bi bi-youtube text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Main Header -->
-    <div class="container mx-auto px-4 py-4 bg-white">
-        <div class="flex items-center justify-between">
-            <!-- Logo -->
-            <div class="flex items-center">
-                <a href="{{ route('home') }}" class="flex items-center space-x-3 space-x-reverse">
-                    <div class="relative">
-                        <img src="/images/logo.png" alt="شبوة21" class="h-14 w-auto">
-                        <div class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
-                    </div>
-                    <div class="hidden md:block">
-                        <h1 class="text-3xl font-bold text-slate-800">شبوة<span class="text-blue-600">21</span></h1>
-                        <p class="text-sm text-slate-600">منبرك الأول والخبر</p>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Main Navigation -->
-            <nav class="hidden lg:flex items-center space-x-6 space-x-reverse">
-                <a href="{{ route('home') }}" class="px-4 py-2 rounded-lg font-medium transition-all duration-300 text-slate-700 hover:text-blue-600 hover:bg-blue-50 {{ request()->routeIs('home') ? 'text-blue-600 bg-blue-50 font-semibold' : '' }}">الرئيسية</a>
-                @foreach($mainCategories as $cat)
-                    @if($cat->children->count())
-                        <div class="relative group">
-                            <button class="px-4 py-2 rounded-lg font-medium flex items-center gap-1 transition-all duration-300 focus:outline-none text-slate-700 hover:text-blue-600 hover:bg-blue-50 {{ request('category') == $cat->slug ? 'text-blue-600 bg-blue-50 font-semibold' : '' }}">
-                                {{ $cat->name_ar ?? $cat->name }}
-                                <i class="bi bi-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
-                            </button>
-                            <div class="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl z-20 opacity-0 group-hover:opacity-100 transition-all duration-300 border border-slate-200 transform scale-95 group-hover:scale-100">
-                                @foreach($cat->children as $child)
-                                    <a href="{{ route('news.category', $child->slug) }}" class="block px-4 py-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors {{ request('category') == $child->slug ? 'bg-blue-50 text-blue-600' : '' }}">
-                                        {{ $child->name_ar ?? $child->name }}
+            
+            <!-- Top Navigation - Desktop -->
+            <nav id="top-nav" class="top-nav header-nav hidden md:block">
+                <div class="container">
+                    <div class="topbar-wrapper">
+                        <!-- التاريخ -->
+                        <div class="topbar-today-date">
+                            <span x-text="currentDate"></span>
+                        </div>
+                        
+                        <!-- الروابط والأيقونات -->
+                        <div class="flex items-center gap-4">
+                            <ul class="components flex items-center gap-2">
+                                <li class="social-icons-item">
+                                    <a href="#" title="RSS" class="tooltip">
+                                        <i class="bi bi-rss"></i>
                                     </a>
-                                @endforeach
+                                </li>
+                                <li class="social-icons-item">
+                                    <a href="#" title="فيسبوك" class="tooltip">
+                                        <i class="bi bi-facebook"></i>
+                                    </a>
+                                </li>
+                                <li class="social-icons-item">
+                                    <a href="#" title="تويتر" class="tooltip">
+                                        <i class="bi bi-twitter-x"></i>
+                                    </a>
+                                </li>
+                                <li class="social-icons-item">
+                                    <a href="#" title="لينكد إن" class="tooltip">
+                                        <i class="bi bi-linkedin"></i>
+                                    </a>
+                                </li>
+                                <li class="social-icons-item">
+                                    <a href="#" title="يوتيوب" class="tooltip">
+                                        <i class="bi bi-youtube"></i>
+                                    </a>
+                                </li>
+                                <li class="social-icons-item">
+                                    <a href="#" title="إنستغرام" class="tooltip">
+                                        <i class="bi bi-instagram"></i>
+                                    </a>
+                                </li>
+                                <li class="social-icons-item">
+                                    <a href="#" title="تليجرام" class="tooltip">
+                                        <i class="bi bi-telegram"></i>
+                                    </a>
+                                </li>
+                                <li class="menu-item custom-menu-link">
+                                    <a href="#" title="مقال عشوائي" class="tooltip">
+                                        <i class="bi bi-shuffle"></i>
+                                        <span class="hidden md:inline">مقال عشوائي</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item custom-menu-link">
+                                    <a href="#" title="القائمة" class="tooltip">
+                                        <i class="bi bi-list"></i>
+                                        <span class="hidden md:inline">القائمة</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                            <!-- شريط البحث -->
+                            <div class="search-bar menu-item custom-menu-link">
+                                <form method="get" action="{{ route('news.search') }}" class="relative">
+                                    <input type="text" name="q" placeholder="ابحث في الأخبار والمقالات..." 
+                                           class="search-input px-4 py-1.5 pr-10 text-sm"
+                                           x-model="searchQuery"
+                                           @keyup.enter="$el.form.submit()">
+                                    <button type="submit" class="search-submit">
+                                        <i class="bi bi-search"></i>
+                                    </button>
+                                </form>
                             </div>
                         </div>
-                    @else
-                        <a href="{{ route('news.category', $cat->slug) }}" class="px-4 py-2 rounded-lg font-medium transition-all duration-300 text-slate-700 hover:text-blue-600 hover:bg-blue-50 {{ request('category') == $cat->slug ? 'text-blue-600 bg-blue-50 font-semibold' : '' }}">
-                            {{ $cat->name_ar ?? $cat->name }}
-                        </a>
-                    @endif
-                @endforeach
-                <a href="{{ route('videos.index') }}" class="px-4 py-2 rounded-lg font-medium transition-all duration-300 text-slate-700 hover:text-blue-600 hover:bg-blue-50 {{ request()->routeIs('videos.index') ? 'text-blue-600 bg-blue-50 font-semibold' : '' }}">فيديو</a>
-            </nav>
-
-            <!-- Mobile Menu Button -->
-            <div class="lg:hidden">
-                <button @click="open = !open" class="text-slate-700 hover:text-blue-600 transition-colors focus:outline-none p-2">
-                    <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                    <svg x-show="open" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <nav x-show="open" x-transition.origin.top class="lg:hidden bg-white border-t border-slate-200 shadow-lg">
-        <div class="px-4 py-4 space-y-2">
-            <a @click="open = false" href="{{ route('home') }}" class="block py-3 px-4 text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-medium">الرئيسية</a>
-            @foreach($mainCategories as $cat)
-                <a @click="open = false" href="{{ route('news.category', $cat->slug) }}" class="block py-3 px-4 text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-medium">{{ $cat->name_ar ?? $cat->name }}</a>
-            @endforeach
-            <a @click="open = false" href="{{ route('videos.index') }}" class="block py-3 px-4 text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-medium">فيديو</a>
-        </div>
-    </nav>
-
-    <!-- Search Bar -->
-    <div class="bg-slate-50 border-t border-slate-200">
-        <div class="container mx-auto px-4 py-4">
-            <div x-data="searchComponent()" class="flex items-center space-x-4 space-x-reverse">
-                <div class="flex-1 relative">
-                    <input x-model="query" @focus="open=true" @keydown.window.escape="open=false" @input.debounce.300="fetchResults" 
-                           type="text" placeholder="ابحث في الأخبار والتقارير..." 
-                           class="w-full px-6 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-slate-700 placeholder-slate-500">
-                    <button @click="submit" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-blue-600 transition-colors">
-                        <i class="bi bi-search text-lg"></i>
-                    </button>
-
-                    <!-- Search Suggestions -->
-                    <template x-if="open && results.length">
-                        <ul class="absolute z-50 left-0 right-0 mt-2 bg-white border border-slate-200 rounded-xl shadow-xl max-h-80 overflow-y-auto">
-                            <template x-for="item in results" :key="item.id">
-                                <li>
-                                    <a :href="item.url" class="block px-6 py-3 hover:bg-slate-50 text-sm text-slate-700 border-b border-slate-100 last:border-b-0" @click="open=false" x-text="item.title"></a>
-                                </li>
-                            </template>
-                        </ul>
-                    </template>
+                    </div>
                 </div>
-                <button @click="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl transition-all duration-300 font-semibold flex items-center gap-2">
-                    <i class="bi bi-search"></i>
-                    بحث
-                </button>
+            </nav>
+            
+            <!-- Main Navigation - Desktop -->
+            <div class="main-nav-wrapper bg-white shadow-sm hidden md:block">
+                <nav id="main-nav" class="main-nav header-nav">
+                    <div class="container">
+                        <div class="main-menu-wrapper">
+                            <!-- Logo -->
+                            
+                            <div class="main-page-btn">
+                                <a href="{{ route('home') }}" class="flex items-center gap-2">
+                                    <i class="bi bi-house-door"></i>
+                                    الصفحة الرئيسية
+                                </a>
+                            </div>
+                            <!-- Navigation Menu -->
+                            <div class="main-menu main-menu-wrap flex-1 mx-8">
+                                <div id="main-nav-menu" class="main-menu header-menu">
+                                    <ul class="menu">
+                                        @foreach($mainCategories as $category)
+                                            <li class="menu-item group relative">
+                                                <a href="{{ route('news.category', $category->slug) }}" 
+                                                   class="hover:text-primary-color transition-colors font-medium flex items-center gap-1">
+                                                    @if($category->icon)
+                                                        <i class="{{ $category->icon }}"></i>
+                                                    @endif
+                                                    {{ $category->name }}
+                                                    @if($category->children->count() > 0)
+                                                        <i class="bi bi-chevron-down text-xs"></i>
+                                                    @endif
+                                                </a>
+                                                @if($category->children->count() > 0)
+                                                    <ul>
+                                                        @foreach($category->children as $child)
+                                                            <li>
+                                                                <a href="{{ route('news.category', $child->slug) }}" 
+                                                                   class="flex items-center">
+                                                                    @if($child->icon)
+                                                                        <i class="{{ $child->icon }} ml-2"></i>
+                                                                    @endif
+                                                                    {{ $child->name }}
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                        
+                                        <li class="menu-item">
+                                            <a href="{{ route('videos.index') }}" 
+                                               class="hover:text-primary-color transition-colors font-medium flex items-center gap-1">
+                                                <i class="bi bi-play-circle"></i>
+                                                فيديو
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Main Page Button -->
+                          
+                        </div>
+                    </div>
+                </nav>
             </div>
-
-            <script>
-            function searchComponent(){
-                return {
-                    query:'',
-                    open:false,
-                    results:[],
-                    fetchResults(){
-                        if(this.query.length<2){this.results=[];return;}
-                        fetch(`/search?q=${encodeURIComponent(this.query)}&json=1`).then(r=>r.json()).then(d=>{this.results=d;});
-                    },
-                    submit(){ if(this.query) window.location=`/search?q=${encodeURIComponent(this.query)}`; }
-                }
-            }
-            </script>
-        </div>
-    </div>
-</header>
+        </header>

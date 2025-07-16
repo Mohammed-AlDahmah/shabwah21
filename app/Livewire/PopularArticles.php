@@ -16,10 +16,10 @@ class PopularArticles extends Component
 
     public function render()
     {
-        $popularArticles = Article::with('category')
-            ->where('is_published', true)
+        $popularArticles = Article::published()
+            ->with(['category'])
             ->orderBy('views_count', 'desc')
-            ->limit($this->limit)
+            ->take($this->limit)
             ->get();
 
         return view('livewire.popular-articles', compact('popularArticles'));

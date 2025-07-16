@@ -1,87 +1,163 @@
 <div>
-    @if($breakingNews->count() > 0)
-        <div class="relative w-full overflow-hidden bg-gradient-to-r from-red-600 via-red-700 to-red-600 breaking-news shadow-lg">
-            <div class="container mx-auto flex items-center px-4 py-3 gap-4">
-                <!-- Breaking News Icon -->
-                <div class="flex items-center gap-3">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full bg-white text-red-600 font-extrabold text-lg shadow-lg animate-pulse">
-                        <i class="bi bi-broadcast text-xl"></i>
-                    </div>
-                    <span class="text-white font-bold text-lg hidden sm:block">عاجل</span>
-                </div>
+@if(isset($breakingNews) && $breakingNews->count() > 0)
+<div id="tie-block_581" class="mag-box breaking-news-outer">
+    <div class="breaking bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg">
+        <div class="container mx-auto">
+            <div class="flex items-center py-3">
+                <!-- Breaking News Label -->
+                <span class="breaking-title flex items-center gap-2">
+                    <span class="tie-icon-bolt breaking-icon text-yellow-400 text-lg animate-pulse">
+                        <i class="bi bi-lightning-charge"></i>
+                    </span>
+                    <span class="breaking-title-text font-bold text-white">شريط الاخبار</span>
+                </span>
                 
-                <!-- News Ticker -->
-                <div class="flex-1 overflow-hidden">
-                    <div class="flex items-center gap-8 animate-scroll">
-                        @foreach($breakingNews as $news)
-                            <div class="flex-shrink-0 flex items-center gap-4">
-                                <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                                <a href="{{ route('news.show', $news->slug) }}" 
-                                   class="text-white hover:text-yellow-200 transition-colors font-medium text-sm sm:text-base line-clamp-1">
+                <!-- Breaking News Ticker -->
+                <div class="ticker-wrapper has-js ticker-dir-right flex-1 overflow-hidden relative mr-4">
+                    <div class="ticker">
+                        <div class="ticker-content text-white animate-marquee">
+                            @foreach($breakingNews as $index => $news)
+                                @if($index > 0)
+                                    <span class="ticker-separator mx-8 text-yellow-400">●</span>
+                                @endif
+                                <a href="{{ route('news.show', $news->slug) }}" class="ticker-item hover:text-yellow-200 transition-colors duration-200 inline-block">
                                     {{ $news->title }}
                                 </a>
-                            </div>
-                        @endforeach
-                        
-                        <!-- Duplicate for seamless loop -->
-                        @foreach($breakingNews as $news)
-                            <div class="flex-shrink-0 flex items-center gap-4">
-                                <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                                <a href="{{ route('news.show', $news->slug) }}" 
-                                   class="text-white hover:text-yellow-200 transition-colors font-medium text-sm sm:text-base line-clamp-1">
-                                    {{ $news->title }}
-                                </a>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Live Indicator -->
-                <div class="flex items-center gap-2">
-                    <div class="w-3 h-3 bg-white rounded-full animate-pulse"></div>
-                    <span class="text-white font-semibold text-sm hidden md:block">مباشر</span>
                 </div>
             </div>
         </div>
-    @endif
+    </div>
+</div>
+
+<style>
+    /* تنسيق الأخبار العاجلة */
+    .breaking-news-outer {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
     
-    <style>
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
+    .breaking {
+        background: linear-gradient(135deg, var(--secondary-color), #dc2626);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .breaking-title {
+        background: var(--secondary-color);
+        padding: 0.75rem 1.5rem;
+        border-radius: 0 25px 25px 0;
+        white-space: nowrap;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .breaking-title-text {
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .ticker-wrapper {
+        position: relative;
+        height: 100%;
+        padding: 0.75rem 0;
+    }
+    
+    .ticker-content {
+        display: inline-block;
+        white-space: nowrap;
+        animation: scroll-right 60s linear infinite;
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+    
+    .ticker-item {
+        text-decoration: none;
+        color: white;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .ticker-item:hover {
+        color: #fbbf24;
+        text-decoration: none;
+    }
+    
+    .ticker-separator {
+        color: #fbbf24;
+        font-weight: bold;
+        opacity: 0.7;
+    }
+    
+    /* الحركة */
+    @keyframes scroll-right {
+        0% {
+            transform: translateX(100%);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+    
+    /* توقيف الحركة عند التفاعل */
+    .breaking:hover .ticker-content {
+        animation-play-state: paused;
+    }
+    
+    /* تنسيق الأيقونات */
+    .tie-icon-bolt {
+        animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+    }
+    
+    /* تنسيق متجاوب */
+    @media (max-width: 768px) {
+        .breaking-title {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
         }
         
-        .animate-scroll {
-            animation: scroll 30s linear infinite;
+        .breaking-title-text {
+            font-size: 0.9rem;
         }
         
-        .breaking-news {
-            background: linear-gradient(90deg, #dc2626 0%, #b91c1c 50%, #dc2626 100%);
-            background-size: 200% 100%;
-            animation: gradient 3s ease infinite;
+        .ticker-content {
+            font-size: 0.85rem;
+            animation-duration: 40s;
         }
         
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+        .ticker-separator {
+            margin: 0 1rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .breaking-title {
+            padding: 0.4rem 0.8rem;
         }
         
-        .line-clamp-1 {
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+        .breaking-title-text {
+            font-size: 0.8rem;
         }
-    </style>
+        
+        .ticker-content {
+            font-size: 0.8rem;
+            animation-duration: 30s;
+        }
+    }
+</style>
+@endif
 </div>

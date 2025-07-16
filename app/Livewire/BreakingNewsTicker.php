@@ -9,9 +9,10 @@ class BreakingNewsTicker extends Component
 {
     public function render()
     {
-        $breakingNews = Article::where('is_breaking', true)
-            ->where('is_published', true)
-            ->orderBy('created_at', 'desc')
+        $breakingNews = Article::published()
+            ->breaking()
+            ->with(['category'])
+            ->latest('published_at')
             ->take(10)
             ->get();
             

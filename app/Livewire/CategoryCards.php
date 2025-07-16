@@ -9,9 +9,12 @@ class CategoryCards extends Component
 {
     public function render()
     {
-        $categories = Category::where('is_active', true)
-            ->orderBy('sort_order')
-            ->take(8)
+        $categories = Category::active()
+            ->withCount(['articles' => function($query) {
+                $query->published();
+            }])
+            ->having('articles_count', '>', 0)
+            ->take(5)
             ->get();
             
         return view('livewire.category-cards', compact('categories'));

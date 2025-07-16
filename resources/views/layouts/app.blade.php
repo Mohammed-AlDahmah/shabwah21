@@ -3,93 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name', 'حضرموت21') }} - @yield('title', 'الصفحة الرئيسية')</title>
-    
-    <meta name="description" content="@yield('description', 'موقع حضرموت21 الإخباري - آخر الأخبار والتقارير من حضرموت واليمن')">
+    <title>@yield('title', 'شبوة21 - موقع إخباري احترافي')</title>
+    <meta name="description" content="@yield('description', 'موقع شبوة21 الإخباري - آخر الأخبار والتقارير من حضرموت واليمن')">
     <meta name="keywords" content="@yield('keywords', 'أخبار, حضرموت, اليمن, إخبارية')">
-    <meta name="author" content="حضرموت21">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="@yield('og_title', config('app.name', 'حضرموت21'))">
-    <meta property="og:description" content="@yield('og_description', 'موقع حضرموت21 الإخباري')">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="@yield('og_image', '/images/logo.png')">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('twitter_title', config('app.name', 'حضرموت21'))">
-    <meta name="twitter:description" content="@yield('twitter_description', 'موقع حضرموت21 الإخباري')">
-    <meta name="twitter:image" content="@yield('twitter_image', '/images/logo.png')">
+    <meta name="author" content="شبوة21">
     
     <!-- الخطوط العربية -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @livewireStyles
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        body { background: #f8fafc; }
-        .sidebar-bg { background: #23272b; }
-        .nav-link.active, .nav-link:hover { background: #C08B2D !important; color: #fff !important; }
-        .nav-link { transition: background 0.2s, color 0.2s; }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Tailwind CSS -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Livewire Styles -->
+    @livewireStyles
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/variables.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/utilities.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/breaking-news.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/hero.css') }}">
+    
+    <style>
+        /* تحديث الألوان الأساسية */
+       
+        /* أنماط الموقع الأساسية */
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--light-bg);
+            background-image: linear-gradient(45deg, var(--light-bg), var(--light-bg));
+        }
+        
+        /* التخطيط الأساسي */
+        #tie-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #tie-wrapper {
+            flex: 1;
+        }
+        
+        /* الشريط الملون */
+        .rainbow-line {
+            height: 3px;
+            background: linear-gradient(to right, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff);
+        }
+        
+        /* الحاوي */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* التنسيق المتجاوب */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+    
+    @stack('styles')
 </head>
-<body class="bg-gray-50 font-arabic">
-    @livewire('breaking-news')
-    @livewire('header')
+<body>
+    <div id="tie-container" class="site tie-container">
+        <div id="tie-wrapper">
+            <div class="rainbow-line"></div>
+            
+            <!-- Header -->
+            <livewire:header />
+            @include('livewire.partials.hero')
+            <!-- Breaking News Ticker -->
+            <livewire:breaking-news-ticker />
+            
+            <!-- Main Content -->
+            <main>
+                @yield('content')
+            </main>
+            
+            <!-- Footer -->
+            <livewire:footer />
+        </div>
+    </div>
     
-    <main class="min-h-screen">
-        {{-- يتم عرض محتوى الصفحة هنا عبر @section('content') في كل صفحة --}}
-        @yield('content')
-    </main>
-    
-    @livewire('footer')
+    <!-- Livewire Scripts -->
     @livewireScripts
     
-    <!-- إضافة تأثيرات إضافية -->
-    <script>
-        // تأثير التمرير السلس
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // تأثير ظهور العناصر عند التمرير
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-in');
-                }
-            });
-        }, observerOptions);
-
-        // مراقبة جميع البطاقات
-        document.querySelectorAll('.card').forEach(card => {
-            observer.observe(card);
-        });
-    </script>
+    @stack('scripts')
 </body>
 </html>

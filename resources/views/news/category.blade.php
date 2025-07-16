@@ -44,7 +44,7 @@
                                  class="w-full h-full object-cover">
                         @else
                             <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-500 to-red-700">
-                                <span class="text-white text-2xl font-bold">حضرموت21</span>
+                                <span class="text-white text-2xl font-bold">شبوة21</span>
                             </div>
                         @endif
                         

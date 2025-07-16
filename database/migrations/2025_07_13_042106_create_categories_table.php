@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->boolean('show_in_nav')->default(false); // جديد: هل يظهر في القائمة الرئيسية؟
             $table->integer('order')->default(0); // جديد: ترتيب الظهور في القائمة
+            $table->string('icon')->nullable(); // أيقونة القسم
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();

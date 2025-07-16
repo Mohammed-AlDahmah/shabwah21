@@ -1,39 +1,16 @@
-<div class="bg-gradient-to-br from-blue-400 to-blue-600 text-white p-6 rounded-lg">
-    <div class="flex items-center justify-between mb-4">
+<div class="bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 text-white rounded-xl p-6 mb-6">
+    <h3 class="text-lg font-bold mb-4 flex items-center">
+        <i class="bi bi-cloud-sun me-3 text-2xl"></i>
+        الطقس - شبوة
+    </h3>
+    <div class="flex items-center justify-between">
         <div>
-            <h4 class="font-bold text-lg">{{ $weatherData['city'] }}</h4>
-            <p class="text-blue-100 text-sm">{{ now()->format('l, d F Y') }}</p>
+            <div class="text-4xl font-bold">{{ $weatherData['temperature'] }}°</div>
+            <div class="text-sm opacity-90">{{ $weatherData['condition'] }}</div>
+            <div class="text-xs opacity-75 mt-1">الرطوبة: {{ $weatherData['humidity'] }}%</div>
         </div>
-        <div class="text-right">
-            <i class="{{ $weatherData['icon'] }} text-3xl"></i>
-        </div>
-    </div>
-    
-    <div class="flex items-center justify-between mb-4">
-        <div>
-            <span class="text-3xl font-bold">{{ $weatherData['temperature'] }}°</span>
-            <span class="text-blue-100 text-sm">C</span>
-        </div>
-        <div class="text-right">
-            <p class="text-blue-100">{{ $weatherData['condition'] }}</p>
-        </div>
-    </div>
-    
-    <div class="grid grid-cols-2 gap-4 text-sm">
-        <div class="flex items-center gap-2">
-            <i class="bi bi-droplet"></i>
-            <div>
-                <p class="text-blue-100">الرطوبة</p>
-                <p class="font-semibold">{{ $weatherData['humidity'] }}%</p>
-            </div>
-        </div>
-        
-        <div class="flex items-center gap-2">
-            <i class="bi bi-wind"></i>
-            <div>
-                <p class="text-blue-100">الرياح</p>
-                <p class="font-semibold">{{ $weatherData['wind_speed'] }} كم/س</p>
-            </div>
+        <div class="text-5xl opacity-80">
+            <i class="{{ $weatherData['icon'] }}"></i>
         </div>
     </div>
 </div>

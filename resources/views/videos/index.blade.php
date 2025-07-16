@@ -4,8 +4,8 @@
 <div class="container mx-auto px-4 py-8">
     <!-- عنوان الصفحة -->
     <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-800 mb-2">فيديو حضرموت21</h1>
-        <p class="text-gray-600">أحدث الفيديوهات والتقارير المصورة من حضرموت والوطن العربي</p>
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">فيديو شبوة21</h1>
+        <p class="text-gray-600">أحدث الفيديوهات والتقارير المصورة من شبوة والوطن العربي</p>
     </div>
 
     <!-- شبكة الفيديوهات -->
@@ -21,7 +21,7 @@
                                  class="w-full h-full object-cover">
                         @else
                             <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-500 to-red-700">
-                                <span class="text-white text-2xl font-bold">حضرموت21</span>
+                                <span class="text-white text-2xl font-bold">شبوة21</span>
                             </div>
                         @endif
                         
@@ -64,7 +64,7 @@
                         
                         <!-- معلومات إضافية -->
                         <div class="flex items-center justify-between text-xs text-gray-500">
-                            <span>حضرموت21</span>
+                            <span>شبوة21</span>
                             <span>{{ $video->published_at ? $video->published_at->diffForHumans() : '' }}</span>
                         </div>
                     </div>

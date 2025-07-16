@@ -48,3 +48,35 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
     // Other admin routes
 });
+
+  
+
+ 
+// Example routes for categories and other pages
+Route::get('/category/{slug}', function ($slug) {
+    // Logic to fetch category and display articles
+    return view('category-page', ['slug' => $slug]);
+})->name('news.category');
+
+Route::get('/videos', function () {
+    return view('videos-page');
+})->name('videos.index');
+
+Route::get('/contact', function () {
+    return view('contact-page');
+})->name('contact');
+
+Route::get('/about', function () {
+    return view('about-page');
+})->name('about');
+
+Route::get('/english-news', function () {
+    return view('english-news-page');
+})->name('english.news');
+
+Route::get('/articles', function () {
+    return view('articles-index');
+})->name('articles.index');
+
+// Livewire component route (if you want to test the header in isolation)
+// Route::livewire('/header-test', Header::class);

@@ -44,7 +44,7 @@
                                  class="w-full h-full object-cover">
                         @else
                             <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-500 to-red-700">
-                                <span class="text-white text-2xl font-bold">حضرموت21</span>
+                                <span class="text-white text-2xl font-bold">شبوة21</span>
                             </div>
                         @endif
                         
@@ -105,9 +105,9 @@
             <div class="max-w-md mx-auto">
                 <h4 class="font-semibold text-gray-700 mb-3">اقتراحات للبحث:</h4>
                 <div class="flex flex-wrap gap-2">
-                    <a href="{{ route('search', ['q' => 'حضرموت']) }}" 
+                    <a href="{{ route('search', ['q' => 'شبوة']) }}" 
                        class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors duration-200">
-                        حضرموت
+                        شبوة
                     </a>
                     <a href="{{ route('search', ['q' => 'المجلس الانتقالي']) }}" 
                        class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors duration-200">

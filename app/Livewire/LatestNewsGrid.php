@@ -9,8 +9,9 @@ class LatestNewsGrid extends Component
 {
     public function render()
     {
-        $latestNews = Article::where('is_published', true)
-            ->orderBy('created_at', 'desc')
+        $latestNews = Article::published()
+            ->with(['category'])
+            ->latest('published_at')
             ->take(6)
             ->get();
             

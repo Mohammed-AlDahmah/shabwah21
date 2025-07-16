@@ -11,9 +11,9 @@ class VideoSeeder extends Seeder
     {
         $videos = [
             [
-                'title' => 'تقرير خاص: حكمة الانتقالي تحبط أطماع الأعداء وتعزز استقرار حضرموت',
+                'title' => 'تقرير خاص: حكمة الانتقالي تحبط أطماع الأعداء وتعزز استقرار شبوة',
                 'slug' => 'special-report-hadramout',
-                'description' => 'تقرير خاص عن دور المجلس الانتقالي في استقرار حضرموت.',
+                'description' => 'تقرير خاص عن دور المجلس الانتقالي في استقرار شبوة.',
                 'thumbnail' => '/images/video1.jpg',
                 'video_url' => 'https://www.youtube.com/watch?v=xxxxxxx',
                 'is_featured' => true,
@@ -21,9 +21,9 @@ class VideoSeeder extends Seeder
                 'published_at' => now(),
             ],
             [
-                'title' => 'لقاء خاص مع قيادات حضرموت حول آخر المستجدات',
+                'title' => 'لقاء خاص مع قيادات شبوة حول آخر المستجدات',
                 'slug' => 'leaders-interview-hadramout',
-                'description' => 'لقاء مع قيادات حضرموت حول التطورات الأخيرة.',
+                'description' => 'لقاء مع قيادات شبوة حول التطورات الأخيرة.',
                 'thumbnail' => '/images/video2.jpg',
                 'video_url' => 'https://www.youtube.com/watch?v=yyyyyyy',
                 'is_featured' => false,

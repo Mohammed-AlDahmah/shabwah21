@@ -9,9 +9,10 @@ class FeaturedNewsHero extends Component
 {
     public function render()
     {
-        $featuredNews = Article::where('is_featured', true)
-            ->where('is_published', true)
-            ->orderBy('created_at', 'desc')
+        $featuredNews = Article::published()
+            ->featured()
+            ->with(['category'])
+            ->latest('published_at')
             ->first();
             
         return view('livewire.featured-news-hero', compact('featuredNews'));

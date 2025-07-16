@@ -17,6 +17,10 @@ class Category extends Model
         'color',
         'sort_order',
         'is_active',
+        'show_in_nav',
+        'order',
+        'icon',
+        'parent_id',
     ];
 
     protected $casts = [
