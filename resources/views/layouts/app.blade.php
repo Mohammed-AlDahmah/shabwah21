@@ -25,18 +25,9 @@
     @livewireStyles
     
     <!-- CSS Files -->
-    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/variables.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/utilities.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-   
-   
-    <link rel="stylesheet" href="{{ asset('css/breaking-news.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/hero.css') }}">
-    
-    
+    <link rel="stylesheet" href="{{ asset('css/core.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components.css') }}">
+  
     @stack('styles')
 </head>
 <body>

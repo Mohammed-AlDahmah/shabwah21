@@ -78,7 +78,7 @@ class="theme-header"
                      x-transition:leave="transition ease-in duration-200"
                      x-transition:leave-start="opacity-100 transform translate-x-0"
                      x-transition:leave-end="opacity-0 transform translate-x-full"
-                     class="mobile-menu"
+                     class="mobile-menu overflow-visible h-auto"
                      @click.away="open = false">
                     <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-200">
                         <h3 class="text-lg font-bold text-primary-color">القائمة الرئيسية</h3>
@@ -115,7 +115,21 @@ class="theme-header"
                                     <ul class="mt-1 space-y-1 pr-4">
                                         @foreach($category->children as $child)
                                             <li>
+                                    <i class="bi bi-chevron-down text-xs text-gray-400"></i>
+                                    <ul class="mt-1 space-y-1 pr-4">
+                                        @foreach($category->children as $child)
+                                            <li>
                                                 <a href="{{ route('news.category', $child->slug) }}" 
+                                                   class="text-sm flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 transition-colors"
+                                                   @click="open = false">
+                                                    @if($child->icon)
+                                                        <i class="{{ $child->icon }} text-gray-500"></i>
+                                                    @endif
+                                                    {{ $child->name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
                                                    class="text-sm flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 transition-colors"
                                                    @click="open = false">
                                                     @if($child->icon)
