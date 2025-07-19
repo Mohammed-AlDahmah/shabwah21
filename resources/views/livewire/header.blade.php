@@ -362,3 +362,48 @@ class="theme-header"
                 </nav>
             </div>
         </header>
+
+<script>
+// Top Navigation Scroll Effects
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.querySelector('.theme-header');
+    const topNav = document.querySelector('.top-nav');
+    let lastScrollTop = 0;
+    let scrollTimeout;
+    
+    function handleScroll() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollThreshold = 30;
+        const hideThreshold = 80;
+        
+        // إزالة الكلاسات السابقة
+        header.classList.remove('header-scrolled', 'header-compact');
+        
+        if (scrollTop > scrollThreshold) {
+            // إخفاء الـ top navigation مباشرة
+            header.classList.add('header-compact');
+        }
+        
+        if (scrollTop > hideThreshold) {
+            // إخفاء الـ top navigation عند التمرير للأسفل
+            if (scrollTop > lastScrollTop) {
+                header.classList.add('header-scrolled');
+            } else {
+                // إظهار الـ top navigation عند التمرير للأعلى
+                header.classList.remove('header-scrolled');
+            }
+        }
+        
+        lastScrollTop = scrollTop;
+    }
+    
+    // إضافة event listener للتمرير
+    window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(handleScroll, 10);
+    });
+    
+    // تفعيل عند تحميل الصفحة
+    handleScroll();
+});
+</script>

@@ -1,11 +1,56 @@
 /* Header Styles - شبوة21 */
 
+/* Top Navigation Scroll Effects */
+.theme-header.header-scrolled .top-nav {
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-header.header-compact .top-nav {
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Main Navigation - No slide effect */
+.theme-header.header-scrolled .main-nav-wrapper {
+    transform: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-header.header-compact .main-nav-wrapper {
+    transform: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Remove gap when top nav is hidden */
+.theme-header.header-scrolled .top-nav,
+.theme-header.header-compact .top-nav {
+    margin-bottom: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.theme-header.header-compact .search-input {
+    width: 250px;
+    padding: 0.4rem 0.8rem 0.4rem 2rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-header.header-compact .search-input:focus {
+    width: 280px;
+}
+
+
+
 /* Main Header Container */
 .theme-header {
     position: relative;
     z-index: 1000;
     background: white;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
 /* Sticky Header */
@@ -34,6 +79,11 @@
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     border-bottom: 1px solid #dee2e6;
     padding: 0.5rem 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1002;
+    height: auto;
+    overflow: visible;
 }
 
 .topbar-wrapper {
@@ -191,6 +241,11 @@
     background: white;
     border-bottom: 1px solid #e9ecef;
     padding: 0.75rem 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1001;
+    margin-top: 0;
+    border-top: none;
 }
 
 .main-menu-wrapper {
@@ -880,6 +935,28 @@
         display: none;
     }
     
+    /* Mobile Header Scroll Effects */
+    .theme-header.header-scrolled .mobile-header-container {
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .theme-header.header-compact .mobile-header-container {
+        transform: translateY(-100%);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .theme-header.header-compact .mobile-header-wrapper {
+        padding: 0.5rem 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .theme-header.header-compact .mobile-logo-img {
+        max-height: 35px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
     /* إظهار الهيدر الموبايل */
     .mobile-header-container {
         display: block;
@@ -1077,4 +1154,21 @@
     .mobile-menu-overlay {
         display: none !important;
     }
+}
+
+/* Remove gap when top nav is hidden */
+.theme-header.header-scrolled .top-nav,
+.theme-header.header-compact .top-nav {
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    border: none;
+}
+
+/* Ensure main nav moves up smoothly */
+.theme-header.header-scrolled .main-nav-wrapper,
+.theme-header.header-compact .main-nav-wrapper {
+    border-top: none;
+    margin-top: 0;
 }
