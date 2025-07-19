@@ -161,15 +161,7 @@
     </div>
 
     <!-- Newsletter Section -->
-    <section class="newsletter-section bg-gradient-to-r from-[#C08B2D] to-[#B22B2B] py-16">
-        <div class="container mx-auto px-4">
-            <div class="text-center text-white mb-8">
-                <h2 class="text-3xl font-bold mb-4">ابق على اطلاع بآخر الأخبار</h2>
-                <p class="text-xl">اشترك في النشرة الإخبارية واحصل على آخر الأخبار والتقارير</p>
-            </div>
-            <livewire:newsletter-signup />
-        </div>
-    </section>
+     
 @endsection
 
 @push('styles')
