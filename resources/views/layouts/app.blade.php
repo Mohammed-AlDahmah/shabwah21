@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="{{ asset('css/components.css') }}">
     <link rel="stylesheet" href="{{ asset('css/featured-news.css') }}">
   
-    @stack('styles')
+    @yield('styles')
 </head>
 <body>
     
@@ -40,7 +40,10 @@
             
             <!-- Header -->
             <livewire:header />
-            @include('livewire.partials.hero')
+            
+            @if(!request()->routeIs('privacy') && !request()->routeIs('terms'))
+                @include('livewire.partials.hero')
+            @endif
             
             <!-- Main Content -->
             <main>

@@ -1,73 +1,120 @@
 @extends('layouts.app')
 
-@section('title', 'من نحن')
-@section('description', 'تعرف على موقع شبوة21 الإخباري ورسالتنا في تغطية الأخبار')
+@section('title', 'من نحن - شبوة 21')
 
 @section('content')
-<div class="bg-gradient-to-br from-red-600 to-red-800 text-white py-16">
-    <div class="container mx-auto px-4 text-center">
-        <h1 class="text-4xl font-bold mb-4">من نحن</h1>
-        <p class="text-xl text-gray-200">موقع شبوة21 الإخباري</p>
-    </div>
-</div>
+<div class="min-h-screen bg-gray-50 py-12">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-800 mb-4">من نحن</h1>
+                <p class="text-gray-600 text-lg">تعرف على فريق شبوة 21 ورؤيتنا ورسالتنا</p>
+            </div>
 
-<div class="container mx-auto px-4 py-12">
-    <div class="max-w-4xl mx-auto">
-        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">حول شبوة21</h2>
-            <p class="text-gray-600 leading-relaxed mb-6">
-                تأسس موقع شبوة21 ليصبح مصدراً موثوقاً للأخبار والتقارير المحلية والعربية، مع التركيز على الأحداث الجارية في شبوة والمنطقة الجنوبية من اليمن.
-            </p>
-            
-            <div class="bg-gradient-to-r from-red-600 to-red-700 text-white p-6 rounded-lg text-center mb-6">
-                <span class="text-white text-4xl font-bold">شبوة21</span>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">رؤيتنا</h3>
-                    <p class="text-gray-600">
-                        نسعى لأن نكون المصدر الأول للأخبار الموثوقة والدقيقة في شبوة والمنطقة، 
-                        مع التركيز على الشفافية والمهنية في تغطية الأحداث.
+            <!-- Content -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="prose prose-lg max-w-none">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">رؤيتنا</h2>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        نسعى لأن نكون المنصة الإخبارية الأولى والأكثر موثوقية في محافظة شبوة واليمن، نقدم أخباراً دقيقة ومحايدة وموضوعية، ونكون صوتاً للشعب اليمني في نقل الحقائق والأحداث.
+                    </p>
+
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">رسالتنا</h2>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        تقديم محتوى إخباري عالي الجودة، محايد وموضوعي، يلبي احتياجات القراء في محافظة شبوة واليمن والعالم العربي. نلتزم بالدقة والشفافية والمسؤولية في نقل الأخبار والمعلومات.
+                    </p>
+
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">قيمنا</h2>
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="text-lg font-semibold text-yellow-600 mb-2">الدقة والموثوقية</h3>
+                            <p class="text-gray-700">نحرص على التحقق من صحة المعلومات قبل نشرها</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="text-lg font-semibold text-yellow-600 mb-2">الحيادية والموضوعية</h3>
+                            <p class="text-gray-700">نقدم الأخبار بموضوعية دون تحيز أو توجيه</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="text-lg font-semibold text-yellow-600 mb-2">الشفافية</h3>
+                            <p class="text-gray-700">نكون شفافين في مصادرنا وطرق عملنا</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="text-lg font-semibold text-yellow-600 mb-2">المسؤولية الاجتماعية</h3>
+                            <p class="text-gray-700">نخدم المجتمع ونعزز الوعي والمعرفة</p>
+                        </div>
+                    </div>
+
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">فريق العمل</h2>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        يتكون فريق شبوة 21 من مجموعة من الصحفيين المحترفين والمحررين ذوي الخبرة، الذين يعملون بجد لتقديم أفضل محتوى إخباري لقرائنا الكرام.
+                    </p>
+
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">خدماتنا</h2>
+                    <ul class="list-disc list-inside text-gray-700 mb-6 space-y-2">
+                        <li><strong>الأخبار المحلية:</strong> تغطية شاملة لأحداث محافظة شبوة</li>
+                        <li><strong>الأخبار الوطنية:</strong> متابعة آخر التطورات في اليمن</li>
+                        <li><strong>الأخبار الدولية:</strong> تغطية الأحداث العالمية المهمة</li>
+                        <li><strong>التحليلات والتقارير:</strong> تحليلات عميقة وتقارير مفصلة</li>
+                        <li><strong>الفيديوهات:</strong> محتوى مرئي عالي الجودة</li>
+                        <li><strong>النشرات الإخبارية:</strong> تحديثات دورية عبر البريد الإلكتروني</li>
+                    </ul>
+
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">إحصائياتنا</h2>
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="text-center bg-yellow-50 p-6 rounded-lg">
+                            <div class="text-3xl font-bold text-yellow-600 mb-2">1000+</div>
+                            <div class="text-gray-700">مقال منشور</div>
+                        </div>
+                        <div class="text-center bg-yellow-50 p-6 rounded-lg">
+                            <div class="text-3xl font-bold text-yellow-600 mb-2">50K+</div>
+                            <div class="text-gray-700">قارئ شهرياً</div>
+                        </div>
+                        <div class="text-center bg-yellow-50 p-6 rounded-lg">
+                            <div class="text-3xl font-bold text-yellow-600 mb-2">24/7</div>
+                            <div class="text-gray-700">تغطية مستمرة</div>
+                        </div>
+                    </div>
+
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">التواصل معنا</h2>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        نحن نرحب بتواصلكم وملاحظاتكم. يمكنكم الوصول إلينا عبر:
+                    </p>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-800 mb-4">معلومات الاتصال</h3>
+                                <div class="space-y-2">
+                                    <p class="text-gray-700"><i class="bi bi-envelope ml-2"></i> info@shabwah21.com</p>
+                                    <p class="text-gray-700"><i class="bi bi-telephone ml-2"></i> +967 123 456 789</p>
+                                    <p class="text-gray-700"><i class="bi bi-geo-alt ml-2"></i> محافظة شبوة، اليمن</p>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-800 mb-4">ساعات العمل</h3>
+                                <div class="space-y-2">
+                                    <p class="text-gray-700">الأحد - الخميس: 8:00 ص - 6:00 م</p>
+                                    <p class="text-gray-700">الجمعة - السبت: 9:00 ص - 4:00 م</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Last Updated -->
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <p class="text-sm text-gray-500">
+                        آخر تحديث: {{ date('Y-m-d') }}
                     </p>
                 </div>
-                
-                <div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">رسالتنا</h3>
-                    <p class="text-gray-600">
-                        تقديم أخبار عالية الجودة ومعلومات دقيقة لجمهورنا الكريم، 
-                        مع الحفاظ على المصداقية والحيادية في جميع تقاريرنا.
-                    </p>
-                </div>
             </div>
-        </div>
-        
-        <div class="bg-white rounded-lg shadow-lg p-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">فريق العمل</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="text-center">
-                    <div class="w-24 h-24 bg-red-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <span class="text-white text-2xl font-bold">م</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">فريق التحرير</h3>
-                    <p class="text-gray-600 text-sm">محررون محترفون متخصصون في مختلف المجالات</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="w-24 h-24 bg-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <span class="text-white text-2xl font-bold">م</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">المراسلون</h3>
-                    <p class="text-gray-600 text-sm">شبكة من المراسلين المنتشرين في مختلف المناطق</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="w-24 h-24 bg-green-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <span class="text-white text-2xl font-bold">م</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">فريق التقنية</h3>
-                    <p class="text-gray-600 text-sm">مطورون ومصممون لضمان تجربة مستخدم ممتازة</p>
-                </div>
+
+            <!-- Back to Home -->
+            <div class="text-center mt-8">
+                <a href="{{ route('home') }}" class="inline-flex items-center px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg transition-colors">
+                    <i class="bi bi-house ml-2"></i>
+                    العودة للرئيسية
+                </a>
             </div>
         </div>
     </div>

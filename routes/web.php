@@ -41,6 +41,10 @@ Route::get('/privacy', function () {
     return view('pages.privacy');
 })->name('privacy');
 
+Route::get('/terms', function () {
+    return view('pages.terms');
+})->name('terms');
+
 Route::get('/login', Login::class)->name('login');
 Route::post('/login', Login::class); // This handles the form submission
 

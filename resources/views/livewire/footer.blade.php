@@ -1,231 +1,144 @@
-<div>
-    <footer class="bg-slate-900 text-white">
-        <!-- Main Footer -->
-        <div class="container mx-auto px-4 py-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- About Section -->
-                <div class="space-y-6 footer-grid-item">
-                    <div class="flex items-center gap-4 mb-8">
-                        <img src="/images/logo.png" alt="شبوة21" class="h-16 w-auto footer-logo">
-                        <div>
-                            <h3 class="text-3xl font-bold footer-brand-text">شبوة<span class="text-blue-400">21</span></h3>
-                            <p class="text-slate-400 text-sm mt-1">منبرك الأول والخبر</p>
-                        </div>
-                    </div>
-                    <p class="text-slate-300 leading-relaxed text-justify">
-                        موقع إخباري شامل يغطي آخر المستجدات في محافظة شبوة واليمن والعالم العربي، 
-                        برسالة مهنية وحيادية وموضوعية. نقدم لكم الأخبار العاجلة والتحليلات العميقة.
-                    </p>
-                    
-                    <!-- Stats -->
-                    <div class="grid grid-cols-2 gap-4 mt-6">
-                        <div class="text-center p-3 bg-slate-800 rounded-xl">
-                            <div class="text-2xl font-bold text-blue-400">{{ number_format($stats['today_visitors']) }}</div>
-                            <div class="text-xs text-slate-400">زائر اليوم</div>
-                        </div>
-                        <div class="text-center p-3 bg-slate-800 rounded-xl">
-                            <div class="text-2xl font-bold text-green-400">{{ $stats['today_articles'] }}</div>
-                            <div class="text-xs text-slate-400">مقال جديد</div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex gap-4 mt-6">
-                        <a href="#" class="social-icon bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-xl transition-all duration-300 transform hover:scale-110 shadow-lg">
-                            <i class="bi bi-facebook text-xl"></i>
-                        </a>
-                        <a href="#" class="social-icon bg-blue-400 hover:bg-blue-500 text-white p-4 rounded-xl transition-all duration-300 transform hover:scale-110 shadow-lg">
-                            <i class="bi bi-twitter-x text-xl"></i>
-                        </a>
-                        <a href="#" class="social-icon bg-red-600 hover:bg-red-700 text-white p-4 rounded-xl transition-all duration-300 transform hover:scale-110 shadow-lg">
-                            <i class="bi bi-youtube text-xl"></i>
-                        </a>
-                        <a href="#" class="social-icon bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-xl transition-all duration-300 transform hover:scale-110 shadow-lg">
-                            <i class="bi bi-telegram text-xl"></i>
-                        </a>
-                    </div>
+<footer class="footer-section bg-gray-900 text-white relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="footer-bg-pattern absolute inset-0 opacity-5">
+        <div class="pattern-grid"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 py-12 relative z-10">
+        <!-- Main Footer Content -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            <!-- About Section -->
+            <div class="footer-section">
+                <div class="footer-logo mb-4">
+                    <img src="{{ asset('images/logo.png') }}" alt="شبوة 21" class="h-12">
                 </div>
-
-                <!-- Quick Links -->
-                <div class="space-y-6 footer-grid-item">
-                    <h4 class="text-xl font-bold text-white mb-8 flex items-center gap-3 footer-section-header">
-                        <i class="bi bi-link-45deg text-blue-400 text-2xl"></i>
-                        روابط سريعة
-                    </h4>
-                    <ul class="space-y-4">
-                        <li>
-                            <a href="{{ route('home') }}" class="footer-link text-slate-300 hover:text-blue-400 transition-colors flex items-center gap-3 text-lg">
-                                <i class="bi bi-house text-blue-400"></i>
-                                الرئيسية
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/news" class="footer-link text-slate-300 hover:text-blue-400 transition-colors flex items-center gap-3 text-lg">
-                                <i class="bi bi-newspaper text-blue-400"></i>
-                                الأخبار
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/videos" class="footer-link text-slate-300 hover:text-blue-400 transition-colors flex items-center gap-3 text-lg">
-                                <i class="bi bi-play-circle text-blue-400"></i>
-                                الفيديوهات
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/about" class="footer-link text-slate-300 hover:text-blue-400 transition-colors flex items-center gap-3 text-lg">
-                                <i class="bi bi-info-circle text-blue-400"></i>
-                                عن الموقع
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/contact" class="footer-link text-slate-300 hover:text-blue-400 transition-colors flex items-center gap-3 text-lg">
-                                <i class="bi bi-envelope text-blue-400"></i>
-                                اتصل بنا
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/sitemap" class="footer-link text-slate-300 hover:text-blue-400 transition-colors flex items-center gap-3 text-lg">
-                                <i class="bi bi-diagram-3 text-blue-400"></i>
-                                خريطة الموقع
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Categories -->
-                <div class="space-y-6 footer-grid-item">
-                    <h4 class="text-xl font-bold text-white mb-8 flex items-center gap-3 footer-section-header">
-                        <i class="bi bi-grid-3x3-gap text-blue-400 text-2xl"></i>
-                        الأقسام
-                    </h4>
-                    <ul class="space-y-4">
-                        @foreach($categories as $category)
-                        <li>
-                            <a href="{{ route('news.category', $category->slug) }}" class="footer-link text-slate-300 hover:text-blue-400 transition-colors flex items-center gap-3 text-lg">
-                                <i class="bi bi-folder text-blue-400"></i>
-                                {{ $category->name_ar ?? $category->name }}
-                            </a>
-                        </li>
-                        @endforeach
-                    </ul>
-                    
-                    <!-- View All Categories -->
-                    <div class="mt-6">
-                        <a href="/categories" class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors text-sm font-semibold">
-                            <span>عرض جميع الأقسام</span>
-                            <i class="bi bi-arrow-left"></i>
+                <p class="text-gray-300 leading-relaxed mb-4">
+                    {{ $footerDescription }}
+                </p>
+                <div class="social-links flex space-x-4 space-x-reverse">
+                    @if(isset($socialMediaLinks['facebook']))
+                        <a href="{{ $socialMediaLinks['facebook'] }}" target="_blank" class="social-link facebook">
+                            <i class="bi bi-facebook"></i>
                         </a>
-                    </div>
-                    
-                    <!-- Additional Stats -->
-                    <div class="mt-8 p-4 bg-slate-800 rounded-xl">
-                        <h5 class="font-semibold text-white mb-3 flex items-center gap-2">
-                            <i class="bi bi-graph-up text-green-400"></i>
-                            إحصائيات الموقع
-                        </h5>
-                        <div class="space-y-2 text-sm">
-                            <div class="flex justify-between">
-                                <span class="text-slate-400">إجمالي المقالات:</span>
-                                <span class="text-white font-semibold">{{ number_format($stats['total_articles']) }}</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-400">عدد الأقسام:</span>
-                                <span class="text-white font-semibold">{{ $stats['total_categories'] }}</span>
-                            </div>
-                        </div>
-                    </div>
+                    @endif
+                    @if(isset($socialMediaLinks['twitter']))
+                        <a href="{{ $socialMediaLinks['twitter'] }}" target="_blank" class="social-link twitter">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+                    @endif
+                    @if(isset($socialMediaLinks['instagram']))
+                        <a href="{{ $socialMediaLinks['instagram'] }}" target="_blank" class="social-link instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                    @endif
+                    @if(isset($socialMediaLinks['youtube']))
+                        <a href="{{ $socialMediaLinks['youtube'] }}" target="_blank" class="social-link youtube">
+                            <i class="bi bi-youtube"></i>
+                        </a>
+                    @endif
+                    @if(isset($socialMediaLinks['telegram']))
+                        <a href="{{ $socialMediaLinks['telegram'] }}" target="_blank" class="social-link telegram">
+                            <i class="bi bi-telegram"></i>
+                        </a>
+                    @endif
+                    @if(isset($socialMediaLinks['linkedin']))
+                        <a href="{{ $socialMediaLinks['linkedin'] }}" target="_blank" class="social-link linkedin">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    @endif
                 </div>
+            </div>
 
-                <!-- Contact Info -->
-                <div class="space-y-6 footer-grid-item">
-                    <h4 class="text-xl font-bold text-white mb-8 flex items-center gap-3 footer-section-header">
-                        <i class="bi bi-geo-alt text-blue-400 text-2xl"></i>
-                        معلومات التواصل
-                    </h4>
-                    <div class="space-y-6">
-                        <div class="contact-item flex items-start gap-4">
-                            <i class="bi bi-geo-alt-fill contact-icon text-xl mt-1"></i>
-                            <div>
-                                <p class="text-slate-300 font-semibold text-lg">العنوان</p>
-                                <p class="text-slate-400 text-sm mt-1">محافظة شبوة، اليمن</p>
-                            </div>
-                        </div>
-                        <div class="contact-item flex items-start gap-4">
-                            <i class="bi bi-envelope-fill contact-icon text-xl mt-1"></i>
-                            <div>
-                                <p class="text-slate-300 font-semibold text-lg">البريد الإلكتروني</p>
-                                <p class="text-slate-400 text-sm mt-1">info@shabwah21.com</p>
-                            </div>
-                        </div>
-                        <div class="contact-item flex items-start gap-4">
-                            <i class="bi bi-telephone-fill contact-icon text-xl mt-1"></i>
-                            <div>
-                                <p class="text-slate-300 font-semibold text-lg">الهاتف</p>
-                                <p class="text-slate-400 text-sm mt-1">+967 XXX XXX XXX</p>
-                            </div>
-                        </div>
-                        <div class="contact-item flex items-start gap-4">
-                            <i class="bi bi-clock-fill contact-icon text-xl mt-1"></i>
-                            <div>
-                                <p class="text-slate-300 font-semibold text-lg">ساعات العمل</p>
-                                <p class="text-slate-400 text-sm mt-1">24/7 - على مدار الساعة</p>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h3 class="footer-title mb-4">روابط سريعة</h3>
+                <ul class="footer-links space-y-2">
+                    <li><a href="{{ route('home') }}" class="footer-link">الرئيسية</a></li>
+                    <li><a href="{{ route('news.index') }}" class="footer-link">الأخبار</a></li>
+                    <li><a href="{{ route('videos.index') }}" class="footer-link">الفيديوهات</a></li>
+                    <li><a href="{{ route('about') }}" class="footer-link">من نحن</a></li>
+                    <li><a href="{{ route('contact') }}" class="footer-link">اتصل بنا</a></li>
+                </ul>
+            </div>
 
-                    <!-- Newsletter -->
-                    <div class="mt-8 p-6 newsletter-box rounded-2xl">
-                        <h5 class="font-bold text-lg mb-4 text-white">اشترك في النشرة الإخبارية</h5>
-                        <p class="text-slate-300 text-sm mb-4">احصل على آخر الأخبار والتحديثات مباشرة في بريدك الإلكتروني</p>
-                        
-                        @if($subscribed)
-                            <div class="bg-green-600 text-white p-4 rounded-xl text-center">
-                                <i class="bi bi-check-circle text-2xl mb-2"></i>
-                                <p class="font-bold">تم الاشتراك بنجاح!</p>
-                                <p class="text-sm">ستصلك آخر الأخبار قريباً</p>
-                            </div>
-                        @else
-                            <form wire:submit.prevent="subscribe" class="space-y-4">
-                                <div>
-                                    <input type="email" wire:model="email" placeholder="أدخل بريدك الإلكتروني" 
-                                           class="newsletter-input w-full px-4 py-3 rounded-xl bg-slate-700 border text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg">
-                                    @error('email')
-                                        <p class="text-red-400 text-sm mt-2">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <button type="submit" class="newsletter-btn w-full text-white px-6 py-3 rounded-xl font-bold transition-colors text-lg" 
-                                        wire:loading.attr="disabled" wire:loading.class="opacity-50">
-                                    <span wire:loading.remove>
-                                        <i class="bi bi-envelope me-2"></i>
-                                        اشترك الآن
-                                    </span>
-                                    <span wire:loading>
-                                        <i class="bi bi-arrow-clockwise animate-spin me-2"></i>
-                                        جاري الاشتراك...
-                                    </span>
-                                </button>
-                            </form>
-                        @endif
-                    </div>
+            <!-- Categories -->
+            <div class="footer-section">
+                <h3 class="footer-title mb-4">الأقسام</h3>
+                <ul class="footer-links space-y-2">
+                    @foreach(\App\Models\Category::take(5)->get() as $category)
+                        <li>
+                            <a href="{{ route('news.category', $category->slug) }}" class="footer-link">
+                                {{ $category->name }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="footer-section">
+                <h3 class="footer-title mb-4">معلومات الاتصال</h3>
+                <div class="contact-info space-y-3">
+                    @if(isset($contactInfo['email']))
+                        <div class="contact-item flex items-center">
+                            <i class="bi bi-envelope text-yellow-400 ml-2"></i>
+                            <a href="mailto:{{ $contactInfo['email'] }}" class="contact-link">
+                                {{ $contactInfo['email'] }}
+                            </a>
+                        </div>
+                    @endif
+                    @if(isset($contactInfo['phone']))
+                        <div class="contact-item flex items-center">
+                            <i class="bi bi-telephone text-yellow-400 ml-2"></i>
+                            <a href="tel:{{ $contactInfo['phone'] }}" class="contact-link">
+                                {{ $contactInfo['phone'] }}
+                            </a>
+                        </div>
+                    @endif
+                    @if(isset($contactInfo['address']))
+                        <div class="contact-item flex items-center">
+                            <i class="bi bi-geo-alt text-yellow-400 ml-2"></i>
+                            <span class="contact-text">{{ $contactInfo['address'] }}</span>
+                        </div>
+                    @endif
+                    @if(isset($contactInfo['working_hours']))
+                        <div class="contact-item flex items-center">
+                            <i class="bi bi-clock text-yellow-400 ml-2"></i>
+                            <span class="contact-text">{{ $contactInfo['working_hours'] }}</span>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter Section -->
+        <div class="newsletter-section bg-gray-800 rounded-lg p-6 mb-8">
+            <div class="text-center">
+                <h3 class="newsletter-title text-xl font-bold mb-2">اشترك في النشرة الإخبارية</h3>
+                <p class="newsletter-description text-gray-300 mb-4">
+                    احصل على آخر الأخبار والتحديثات مباشرة في بريدك الإلكتروني
+                </p>
+                <div class="newsletter-form flex max-w-md mx-auto">
+                    <input type="email" placeholder="أدخل بريدك الإلكتروني" 
+                           class="newsletter-input flex-1 px-4 py-2 rounded-r-lg border-0 focus:ring-2 focus:ring-yellow-400">
+                    <button class="newsletter-btn bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-l-lg transition-colors">
+                        اشتراك
+                    </button>
                 </div>
             </div>
         </div>
 
         <!-- Bottom Footer -->
-        <div class="border-t border-slate-700 bottom-footer">
-            <div class="container mx-auto px-4 py-8">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                    <div class="text-slate-400 text-sm text-center md:text-right">
-                        <p class="mb-2">© {{ date('Y') }} شبوة21. جميع الحقوق محفوظة.</p>
-                        <p class="text-xs">تم التطوير بواسطة فريق شبوة21</p>
-                        <p class="text-xs mt-1">آخر تحديث: {{ now()->format('Y-m-d H:i') }}</p>
-                    </div>
-                    <div class="flex items-center gap-8 text-sm">
-                        <a href="/privacy" class="bottom-footer-link text-slate-400 hover:text-blue-400 transition-colors">سياسة الخصوصية</a>
-                        <a href="/terms" class="bottom-footer-link text-slate-400 hover:text-blue-400 transition-colors">شروط الاستخدام</a>
-                        <a href="/sitemap" class="bottom-footer-link text-slate-400 hover:text-blue-400 transition-colors">خريطة الموقع</a>
-                    </div>
+        <div class="footer-bottom border-t border-gray-700 pt-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="copyright text-gray-400 text-sm mb-4 md:mb-0">
+                    © {{ date('Y') }} شبوة 21. جميع الحقوق محفوظة.
+                </div>
+                <div class="footer-legal flex space-x-6 space-x-reverse text-sm">
+                    <a href="{{ route('privacy') }}" class="legal-link">{{ $privacyPolicy }}</a>
+                    <a href="{{ route('terms') }}" class="legal-link">{{ $termsOfService }}</a>
                 </div>
             </div>
         </div>
-    </footer>
-</div>
+    </div>
+</footer>

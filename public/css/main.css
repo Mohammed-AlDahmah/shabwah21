@@ -1,16 +1,17 @@
 /* ===== Main CSS - شبوة21 ===== */
 
-/* Import other CSS files */
-@import url('variables.css');
-@import url('reset.css');
-@import url('core.css');
-@import url('components.css');
-@import url('header.css');
-@import url('footer.css');
-@import url('featured-news.css');
-@import url('breaking-news.css');
-@import url('category.css');
-@import url('utilities.css');
+/* Import all CSS files */
+@import 'variables.css';
+@import 'reset.css';
+@import 'utilities.css';
+@import 'core.css';
+@import 'header.css';
+@import 'hero.css';
+@import 'footer.css';
+@import 'components.css';
+@import 'featured-news.css';
+@import 'breaking-news.css';
+@import 'sports.css';
 
 /* ===== Homepage Specific Styles ===== */
 
