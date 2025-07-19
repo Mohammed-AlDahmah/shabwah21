@@ -3,7 +3,7 @@
         <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
             <div class="aspect-video bg-slate-200 overflow-hidden relative">
                 @if($article->image)
-                    <img src="{{ asset('storage/' . $article->image) }}" 
+                    <img src="{{ \App\Helpers\ImageHelper::getImageUrl($article->image) }}" 
                          alt="{{ $article->title }}" 
                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                 @else

@@ -1,29 +1,33 @@
-<div class="bg-white rounded-xl shadow-lg p-6 mb-6">
-    <h3 class="text-xl font-bold text-gray-900 mb-6 border-b border-gray-200 pb-3 flex items-center">
-        <i class="bi bi-fire text-red-600 me-3 text-2xl"></i>
-        الأكثر قراءة
-    </h3>
-    <div class="space-y-4">
-        @foreach($popularArticles as $index => $article)
-        <div class="flex items-start gap-3">
-            <span class="bg-red-600 text-white text-sm px-3 py-1 rounded-full font-bold flex-shrink-0">
-                {{ $index + 1 }}
-            </span>
-            <div class="flex-1">
-                <h4 class="text-sm font-semibold text-gray-900 hover:text-red-600 transition-colors cursor-pointer mb-1">
-                    <a href="{{ route('news.show', $article->slug) }}">
-                        {{ $article->title }}
-                    </a>
-                </h4>
-                <div class="flex items-center gap-2 text-xs text-gray-500">
-                    <span>{{ $article->time_ago }}</span>
-                    <span class="flex items-center">
-                        <i class="bi bi-eye me-1"></i>
-                        {{ number_format($article->views_count) }}
+<div class="popular-articles">
+    @if($popularArticles->count() > 0)
+        <div class="space-y-4">
+            @foreach($popularArticles as $index => $article)
+                <div class="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                    <span class="bg-gradient-to-r from-[#C08B2D] to-[#B22B2B] text-white text-sm px-3 py-1 rounded-full font-bold flex-shrink-0">
+                        {{ $index + 1 }}
                     </span>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-sm font-semibold text-slate-800 hover:text-[#C08B2D] transition-colors cursor-pointer mb-1 line-clamp-2">
+                            <a href="{{ route('news.show', $article->slug) }}" class="hover:underline">
+                                {{ $article->title }}
+                            </a>
+                        </h4>
+                        <div class="flex items-center gap-2 text-xs text-slate-500">
+                            <span>{{ $article->time_ago }}</span>
+                            <span class="flex items-center">
+                                <i class="bi bi-eye me-1"></i>
+                                {{ number_format($article->views_count ?? 0) }}
+                            </span>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            @endforeach
         </div>
-        @endforeach
-    </div>
+    @else
+        <!-- Placeholder when no popular articles -->
+        <div class="text-center py-8">
+            <i class="bi bi-fire text-3xl text-slate-300 mb-3 block"></i>
+            <p class="text-slate-500 text-sm">لا توجد مقالات شائعة</p>
+        </div>
+    @endif
 </div> 

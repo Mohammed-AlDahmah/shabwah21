@@ -25,12 +25,15 @@
     @livewireStyles
     
     <!-- CSS Files -->
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/core.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/featured-news.css') }}">
   
     @stack('styles')
 </head>
 <body>
+    
     <div id="tie-container" class="site tie-container">
         <div id="tie-wrapper">
             <div class="rainbow-line"></div>
@@ -38,8 +41,6 @@
             <!-- Header -->
             <livewire:header />
             @include('livewire.partials.hero')
-            <!-- Breaking News Ticker -->
-            <livewire:breaking-news-ticker />
             
             <!-- Main Content -->
             <main>

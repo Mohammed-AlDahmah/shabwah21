@@ -52,23 +52,7 @@ Route::middleware(['auth', 'web'])->group(function () {
   
 
  
-// Example routes for categories and other pages
-Route::get('/category/{slug}', function ($slug) {
-    // Logic to fetch category and display articles
-    return view('category-page', ['slug' => $slug]);
-})->name('news.category');
-
-Route::get('/videos', function () {
-    return view('videos-page');
-})->name('videos.index');
-
-Route::get('/contact', function () {
-    return view('contact-page');
-})->name('contact');
-
-Route::get('/about', function () {
-    return view('about-page');
-})->name('about');
+// Remove duplicate routes - these are already defined above
 
 Route::get('/english-news', function () {
     return view('english-news-page');

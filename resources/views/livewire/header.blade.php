@@ -115,21 +115,7 @@ class="theme-header"
                                     <ul class="mt-1 space-y-1 pr-4">
                                         @foreach($category->children as $child)
                                             <li>
-                                    <i class="bi bi-chevron-down text-xs text-gray-400"></i>
-                                    <ul class="mt-1 space-y-1 pr-4">
-                                        @foreach($category->children as $child)
-                                            <li>
                                                 <a href="{{ route('news.category', $child->slug) }}" 
-                                                   class="text-sm flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 transition-colors"
-                                                   @click="open = false">
-                                                    @if($child->icon)
-                                                        <i class="{{ $child->icon }} text-gray-500"></i>
-                                                    @endif
-                                                    {{ $child->name }}
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
                                                    class="text-sm flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 transition-colors"
                                                    @click="open = false">
                                                     @if($child->icon)
@@ -266,13 +252,12 @@ class="theme-header"
                     <div class="container">
                         <div class="main-menu-wrapper">
                             <!-- Logo -->
-                            
-                            <div class="main-page-btn">
-                                <a href="{{ route('home') }}" class="flex items-center gap-2">
-                                    <i class="bi bi-house-door"></i>
-                                    الصفحة الرئيسية
+                            <div class="image-logo">
+                                <a href="{{ route('home') }}">
+                                    <img src="{{ asset('images/logo.svg') }}" alt="شبوة21" class="h-14">
                                 </a>
                             </div>
+                            
                             <!-- Navigation Menu -->
                             <div class="main-menu main-menu-wrap flex-1 mx-8">
                                 <div id="main-nav-menu" class="main-menu header-menu">
@@ -319,7 +304,12 @@ class="theme-header"
                             </div>
                             
                             <!-- Main Page Button -->
-                          
+                            <div class="main-page-btn">
+                                <a href="{{ route('home') }}" class="flex items-center gap-2">
+                                    <i class="bi bi-house-door"></i>
+                                    الصفحة الرئيسية
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </nav>

@@ -46,7 +46,7 @@ class ArticleSeeder extends Seeder
                 'category_id' => $reports?->id,
                 'author' => 'مراسل شبوة21',
                 'views_count' => 80,
-                'is_featured' => false,
+                'is_featured' => true,
                 'is_breaking' => false,
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(2),

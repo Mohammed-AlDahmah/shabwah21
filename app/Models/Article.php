@@ -10,7 +10,7 @@ use Carbon\Carbon;
 class Article extends Model
 {
     protected $fillable = [
-        'title', 'slug', 'content', 'image', 'category_id', 'author_id', 'published_at', 'meta_data', 'type'
+        'title', 'slug', 'excerpt', 'content', 'featured_image', 'images', 'category_id', 'author', 'source', 'source_url', 'views_count', 'is_featured', 'is_breaking', 'is_published', 'published_at', 'meta_data', 'type'
     ];
 
     // أنواع المقالات المسموحة
@@ -81,6 +81,16 @@ class Article extends Model
     public function incrementViews()
     {
         $this->increment('views_count');
+    }
+
+    public function getImageAttribute()
+    {
+        return $this->featured_image;
+    }
+
+    public function setImageAttribute($value)
+    {
+        $this->featured_image = $value;
     }
 
     protected static function boot()

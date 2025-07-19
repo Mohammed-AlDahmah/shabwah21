@@ -3,9 +3,15 @@
         <div class="flex gap-6 p-6 border border-slate-200 rounded-2xl hover:shadow-lg transition-all duration-300 group">
             <div class="flex-shrink-0 w-32 h-24 bg-slate-200 rounded-xl overflow-hidden">
                 @if($news->image)
-                    <img src="{{ asset('storage/' . $news->image) }}" 
-                         alt="{{ $news->title }}" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    @if(filter_var($news->image, FILTER_VALIDATE_URL))
+                        <img src="{{ $news->image }}" 
+                             alt="{{ $news->title }}" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    @else
+                        <img src="{{ asset('storage/' . $news->image) }}" 
+                             alt="{{ $news->title }}" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    @endif
                 @else
                     <div class="w-full h-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center">
                         <i class="bi bi-trophy text-3xl text-white"></i>

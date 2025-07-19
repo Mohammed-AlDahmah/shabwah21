@@ -1,0 +1,613 @@
+/* ===== Featured News Styles ===== */
+
+/* تأثيرات عامة للأخبار المميزة */
+.featured-news-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.featured-news-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(192, 139, 45, 0.02) 0%, rgba(178, 43, 43, 0.02) 100%);
+    z-index: -1;
+}
+
+/* تأثيرات الخبر الرئيسي */
+.main-featured-article {
+    position: relative;
+    overflow: hidden;
+}
+
+.main-featured-article::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.main-featured-article:hover::before {
+    left: 100%;
+}
+
+/* تأثيرات الصورة */
+.featured-image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.featured-image-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+    z-index: 2;
+}
+
+.featured-image-container:hover::after {
+    transform: translateX(100%);
+}
+
+/* تأثيرات الأزرار */
+.featured-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.featured-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.featured-btn:hover::before {
+    left: 100%;
+}
+
+.featured-btn span,
+.featured-btn i {
+    position: relative;
+    z-index: 2;
+}
+
+/* تأثيرات البطاقات الجانبية */
+.side-featured-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.side-featured-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(192, 139, 45, 0.05), transparent);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.side-featured-card:hover::before {
+    left: 100%;
+}
+
+.side-featured-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+/* تأثيرات الشارات */
+.featured-badge {
+    position: relative;
+    overflow: hidden;
+    animation: pulse 2s infinite;
+}
+
+.featured-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.featured-badge:hover::before {
+    left: 100%;
+}
+
+/* تأثيرات الرقم في البطاقات */
+.number-badge {
+    position: relative;
+    overflow: hidden;
+    animation: bounce 1s ease-in-out infinite alternate;
+}
+
+.number-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.number-badge:hover::before {
+    left: 100%;
+}
+
+/* تأثيرات النص */
+.featured-title {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.featured-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #C08B2D, #B22B2B);
+    transition: width 0.3s ease;
+}
+
+.featured-title:hover::after {
+    width: 100%;
+}
+
+/* تأثيرات الأيقونات */
+.featured-icon {
+    transition: all 0.3s ease;
+}
+
+.featured-icon:hover {
+    transform: scale(1.2) rotate(5deg);
+    color: #C08B2D;
+}
+
+/* تأثيرات الخلفية المتحركة */
+.floating-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-particles::before,
+.floating-particles::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(192, 139, 45, 0.3);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+}
+
+.floating-particles::before {
+    top: 20%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.floating-particles::after {
+    top: 60%;
+    left: 80%;
+    animation-delay: 3s;
+}
+
+/* تأثيرات الظل المتحرك */
+.dynamic-shadow {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.dynamic-shadow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    border-radius: inherit;
+}
+
+.dynamic-shadow:hover::before {
+    opacity: 1;
+}
+
+/* تأثيرات الخط المتحرك */
+.animated-underline {
+    position: relative;
+    overflow: hidden;
+}
+
+.animated-underline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #C08B2D, #B22B2B);
+    transition: left 0.5s ease;
+}
+
+.animated-underline:hover::after {
+    left: 0;
+}
+
+/* تأثيرات النقاط المتحركة */
+.loading-dots {
+    position: relative;
+}
+
+.loading-dots::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4px;
+    height: 4px;
+    background: #C08B2D;
+    border-radius: 50%;
+    animation: dot-pulse 1.5s infinite;
+}
+
+/* الأنيميشن */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes dot-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(192, 139, 45, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(192, 139, 45, 0.8);
+    }
+}
+
+/* تأثيرات الهوفر المتقدمة */
+.hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.hover-rotate {
+    transition: all 0.3s ease;
+}
+
+.hover-rotate:hover {
+    transform: rotate(2deg);
+}
+
+.hover-glow {
+    transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 30px rgba(192, 139, 45, 0.5);
+}
+
+/* تأثيرات الخلفية المتدرجة */
+.gradient-bg {
+    background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%);
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* تأثيرات الحدود المتحركة */
+.animated-border {
+    position: relative;
+    overflow: hidden;
+}
+
+.animated-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #C08B2D, #B22B2B);
+    transition: left 0.5s ease;
+}
+
+.animated-border:hover::before {
+    left: 0;
+}
+
+/* تأثيرات التمدد */
+.expand-on-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.expand-on-hover:hover {
+    transform: scale(1.05);
+}
+
+/* تأثيرات الشفافية */
+.fade-in-out {
+    transition: opacity 0.3s ease;
+}
+
+.fade-in-out:hover {
+    opacity: 0.8;
+}
+
+/* تأثيرات الدوران */
+.rotate-on-hover {
+    transition: transform 0.3s ease;
+}
+
+.rotate-on-hover:hover {
+    transform: rotate(360deg);
+}
+
+/* تأثيرات التموج */
+.ripple-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple-effect::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(192, 139, 45, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.ripple-effect:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+/* الاستجابة للأجهزة المحمولة */
+@media (max-width: 768px) {
+    .featured-news-section {
+        padding: 1rem;
+    }
+    
+    .main-featured-article {
+        margin-bottom: 2rem;
+    }
+    
+    .side-featured-card {
+        margin-bottom: 1rem;
+    }
+    
+    .featured-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .number-badge {
+        width: 24px;
+        height: 24px;
+        font-size: 0.75rem;
+    }
+    
+    .featured-badge {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
+    }
+}
+
+/* تأثيرات الحركة المتقدمة */
+.slide-in-left {
+    animation: slideInLeft 0.5s ease-out;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.5s ease-out;
+}
+
+.slide-in-up {
+    animation: slideInUp 0.5s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* تأثيرات الإضاءة */
+.light-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.light-effect::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(192, 139, 45, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.light-effect:hover::before {
+    opacity: 1;
+}
+
+/* تأثيرات الخط الذهبي */
+.golden-line {
+    position: relative;
+}
+
+.golden-line::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #C08B2D, #B22B2B, #C08B2D);
+    background-size: 200% 100%;
+    animation: golden-flow 2s ease-in-out infinite;
+}
+
+@keyframes golden-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* تأثيرات الانعكاس */
+.reflection-effect {
+    position: relative;
+}
+
+.reflection-effect::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(192, 139, 45, 0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: scaleY(-1);
+}
+
+.reflection-effect:hover::after {
+    opacity: 1;
+} 
