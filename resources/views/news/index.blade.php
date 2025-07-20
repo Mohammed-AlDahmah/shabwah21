@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-2 py-6">
     <!-- شريط البحث والتصفية -->
     <div class="bg-white rounded-lg shadow-md p-4 mb-6">
         <form action="{{ route('search') }}" method="GET" class="flex flex-col md:flex-row gap-4">
@@ -20,12 +20,12 @@
     </div>
 
     <!-- قسم الأخبار -->
-    <div class="mb-12">
+    <div class="mb-8">
         <h2 class="text-2xl font-bold text-primary mb-4 flex items-center gap-2">
             <span>📰</span> آخر الأخبار
         </h2>
         @if($news->count())
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             @foreach($news as $item)
                 @include('livewire.partials.article-card', ['article' => $item])
             @endforeach
@@ -36,15 +36,15 @@
         @endif
     </div>
     <!-- فاصل ذهبي -->
-    <div class="h-1 w-full bg-gradient-to-r from-primary to-secondary rounded mb-12"></div>
+    <div class="h-1 w-full bg-gradient-to-r from-primary to-secondary rounded mb-8"></div>
 
     <!-- قسم التقارير -->
-    <div class="mb-12">
+    <div class="mb-8">
         <h2 class="text-2xl font-bold text-primary mb-4 flex items-center gap-2">
             <span>📑</span> تقارير وتحقيقات
         </h2>
         @if($reports->count())
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             @foreach($reports as $item)
                 @include('livewire.partials.article-card', ['article' => $item])
             @endforeach
@@ -54,15 +54,15 @@
         <div class="text-center text-gray-400">لا توجد تقارير</div>
         @endif
     </div>
-    <div class="h-1 w-full bg-gradient-to-r from-primary to-secondary rounded mb-12"></div>
+    <div class="h-1 w-full bg-gradient-to-r from-primary to-secondary rounded mb-8"></div>
 
     <!-- قسم المقالات -->
-    <div class="mb-12">
+    <div class="mb-8">
         <h2 class="text-2xl font-bold text-primary mb-4 flex items-center gap-2">
             <span>✍️</span> مقالات
         </h2>
         @if($articles->count())
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             @foreach($articles as $item)
                 @include('livewire.partials.article-card', ['article' => $item])
             @endforeach
@@ -72,15 +72,15 @@
         <div class="text-center text-gray-400">لا توجد مقالات</div>
         @endif
     </div>
-    <div class="h-1 w-full bg-gradient-to-r from-primary to-secondary rounded mb-12"></div>
+    <div class="h-1 w-full bg-gradient-to-r from-primary to-secondary rounded mb-8"></div>
 
     <!-- قسم الانفوجرافيك -->
-    <div class="mb-12">
+    <div class="mb-8">
         <h2 class="text-2xl font-bold text-primary mb-4 flex items-center gap-2">
             <span>📊</span> انفوجرافيك
         </h2>
         @if($infographics->count())
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             @foreach($infographics as $item)
                 @include('livewire.partials.article-card', ['article' => $item, 'isInfographic' => true])
             @endforeach

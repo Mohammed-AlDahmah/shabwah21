@@ -26,8 +26,8 @@ class="theme-header"
                  @click="open = false">
             </div>
             
-            <!-- Mobile Header -->
-            <div class="mobile-header-container">
+            <!-- Mobile Header - يظهر فقط في الموبايل -->
+            <div class="mobile-header-container md:hidden">
                 <div class="mobile-header-wrapper">
                     <div class="mobile-logo-section">
                         <a href="{{ route('home') }}" class="mobile-logo-link">
@@ -215,166 +215,172 @@ class="theme-header"
                 </div>
             </div>
             
-            <!-- Top Navigation - Desktop -->
-            <nav id="top-nav" class="top-nav header-nav hidden md:block">
-                <div class="container">
-                    <div class="topbar-wrapper">
-                        <!-- التاريخ -->
-                        <div class="topbar-today-date">
-                            <span x-text="currentDate"></span>
-                        </div>
-                        
-                        <!-- الروابط والأيقونات -->
-                        <div class="flex items-center gap-4">
-                            <ul class="components flex items-center gap-2">
-                                <li class="social-icons-item">
-                                    <a href="#" title="RSS" class="tooltip">
-                                        <i class="bi bi-rss"></i>
-                                    </a>
-                                </li>
-                                <li class="social-icons-item">
-                                    <a href="#" title="فيسبوك" class="tooltip">
-                                        <i class="bi bi-facebook"></i>
-                                    </a>
-                                </li>
-                                <li class="social-icons-item">
-                                    <a href="#" title="تويتر" class="tooltip">
-                                        <i class="bi bi-twitter-x"></i>
-                                    </a>
-                                </li>
-                                <li class="social-icons-item">
-                                    <a href="#" title="لينكد إن" class="tooltip">
-                                        <i class="bi bi-linkedin"></i>
-                                    </a>
-                                </li>
-                                <li class="social-icons-item">
-                                    <a href="#" title="يوتيوب" class="tooltip">
-                                        <i class="bi bi-youtube"></i>
-                                    </a>
-                                </li>
-                                <li class="social-icons-item">
-                                    <a href="#" title="إنستغرام" class="tooltip">
-                                        <i class="bi bi-instagram"></i>
-                                    </a>
-                                </li>
-                                <li class="social-icons-item">
-                                    <a href="#" title="تليجرام" class="tooltip">
-                                        <i class="bi bi-telegram"></i>
-                                    </a>
-                                </li>
-                                <li class="menu-item custom-menu-link">
-                                    <a href="#" title="مقال عشوائي" class="tooltip">
-                                        <i class="bi bi-shuffle"></i>
-                                        <span class="hidden md:inline">مقال عشوائي</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item custom-menu-link">
-                                    <a href="#" title="القائمة" class="tooltip">
-                                        <i class="bi bi-list"></i>
-                                        <span class="hidden md:inline">القائمة</span>
-                                    </a>
-                                </li>
-                            </ul>
-                            
-                            <!-- شريط البحث -->
-                            <div class="search-bar menu-item custom-menu-link">
-                                <form method="get" action="{{ route('news.search') }}" class="relative">
-                                    <input type="text" name="q" placeholder="ابحث في الأخبار والمقالات..." 
-                                           class="search-input px-4 py-1.5 pr-10 text-sm"
-                                           x-model="searchQuery"
-                                           @keyup.enter="$el.form.submit()">
-                                    <button type="submit" class="search-submit">
-                                        <i class="bi bi-search"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            
-            <!-- Main Navigation - Desktop -->
-            <div class="main-nav-wrapper bg-white shadow-sm hidden md:block">
-                <nav id="main-nav" class="main-nav header-nav">
+            <!-- Desktop Header - يظهر فقط في الديسكتوب -->
+            <div class="desktop-header-container hidden md:block">
+                <!-- Top Navigation - Desktop -->
+                <nav id="top-nav" class="top-nav header-nav">
                     <div class="container">
-                        <div class="main-menu-wrapper">
-                            <!-- Logo -->
-                            <div class="image-logo">
-                                <a href="{{ route('home') }}">
-                                    <img src="{{ asset('images/logo.png') }}" alt="شبوة21">
-                                </a>
+                        <div class="topbar-wrapper">
+                            <!-- التاريخ -->
+                            <div class="topbar-today-date">
+                                <span x-text="currentDate"></span>
                             </div>
                             
-                            <!-- Navigation Menu -->
-                            <div class="main-menu main-menu-wrap">
-                                <div id="main-nav-menu" class="main-menu header-menu">
-                                    <ul class="menu">
-                                        @foreach($mainCategories as $category)
-                                            <li class="menu-item group relative">
-                                                <a href="{{ route('news.category', $category->slug) }}" 
-                                                   class="hover:text-primary-color transition-colors font-medium flex items-center gap-1">
-                                                    @if($category->icon)
-                                                        <i class="{{ $category->icon }}"></i>
-                                                    @endif
-                                                    {{ $category->name }}
-                                                    @if($category->children->count() > 0)
-                                                        <i class="bi bi-chevron-down text-xs"></i>
-                                                    @endif
-                                                </a>
-                                                @if($category->children->count() > 0)
-                                                    <ul>
-                                                        @foreach($category->children as $child)
-                                                            <li>
-                                                                <a href="{{ route('news.category', $child->slug) }}" 
-                                                                   class="flex items-center">
-                                                                    @if($child->icon)
-                                                                        <i class="{{ $child->icon }} ml-2"></i>
-                                                                    @endif
-                                                                    {{ $child->name }}
-                                                                </a>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                @endif
-                                            </li>
-                                        @endforeach
-                                        
-                                        <li class="menu-item">
-                                            <a href="{{ route('videos.index') }}" 
-                                               class="hover:text-primary-color transition-colors font-medium flex items-center gap-1">
-                                                <i class="bi bi-play-circle"></i>
-                                                فيديو
-                                            </a>
-                                        </li>
-                                    </ul>
+                            <!-- الروابط والأيقونات -->
+                            <div class="flex items-center gap-4">
+                                <ul class="components flex items-center gap-2">
+                                    <li class="social-icons-item">
+                                        <a href="#" title="RSS" class="tooltip">
+                                            <i class="bi bi-rss"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-icons-item">
+                                        <a href="#" title="فيسبوك" class="tooltip">
+                                            <i class="bi bi-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-icons-item">
+                                        <a href="#" title="تويتر" class="tooltip">
+                                            <i class="bi bi-twitter-x"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-icons-item">
+                                        <a href="#" title="لينكد إن" class="tooltip">
+                                            <i class="bi bi-linkedin"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-icons-item">
+                                        <a href="#" title="يوتيوب" class="tooltip">
+                                            <i class="bi bi-youtube"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-icons-item">
+                                        <a href="#" title="إنستغرام" class="tooltip">
+                                            <i class="bi bi-instagram"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-icons-item">
+                                        <a href="#" title="تليجرام" class="tooltip">
+                                            <i class="bi bi-telegram"></i>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item custom-menu-link">
+                                        <a href="#" title="مقال عشوائي" class="tooltip">
+                                            <i class="bi bi-shuffle"></i>
+                                            <span class="hidden md:inline">مقال عشوائي</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item custom-menu-link">
+                                        <a href="#" title="القائمة" class="tooltip">
+                                            <i class="bi bi-list"></i>
+                                            <span class="hidden md:inline">القائمة</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                
+                                <!-- شريط البحث -->
+                                <div class="search-bar menu-item custom-menu-link">
+                                    <form method="get" action="{{ route('news.search') }}" class="relative">
+                                        <input type="text" name="q" placeholder="ابحث في الأخبار والمقالات..." 
+                                               class="search-input px-4 py-1.5 pr-10 text-sm"
+                                               x-model="searchQuery"
+                                               @keyup.enter="$el.form.submit()">
+                                        <button type="submit" class="search-submit">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </form>
                                 </div>
-                            </div>
-                            
-                            <!-- Main Page Button -->
-                            <div class="main-page-btn">
-                                <a href="{{ route('home') }}" class="flex items-center gap-2">
-                                    <i class="bi bi-house-door"></i>
-                                    الصفحة الرئيسية
-                                </a>
                             </div>
                         </div>
                     </div>
                 </nav>
+                
+                <!-- Main Navigation - Desktop -->
+                <div class="main-nav-wrapper bg-white shadow-sm">
+                    <nav id="main-nav" class="main-nav header-nav">
+                        <div class="container">
+                            <div class="main-menu-wrapper">
+                                <!-- Logo -->
+                                <div class="image-logo">
+                                    <a href="{{ route('home') }}">
+                                        <img src="{{ asset('images/logo.png') }}" alt="شبوة21">
+                                    </a>
+                                </div>
+                                
+                                <!-- Navigation Menu -->
+                                <div class="main-menu main-menu-wrap">
+                                    <div id="main-nav-menu" class="main-menu header-menu">
+                                        <ul class="menu">
+                                            @foreach($mainCategories as $category)
+                                                <li class="menu-item group relative">
+                                                    <a href="{{ route('news.category', $category->slug) }}" 
+                                                       class="hover:text-primary-color transition-colors font-medium flex items-center gap-1">
+                                                        @if($category->icon)
+                                                            <i class="{{ $category->icon }}"></i>
+                                                        @endif
+                                                        {{ $category->name }}
+                                                        @if($category->children->count() > 0)
+                                                            <i class="bi bi-chevron-down text-xs"></i>
+                                                        @endif
+                                                    </a>
+                                                    @if($category->children->count() > 0)
+                                                        <ul>
+                                                            @foreach($category->children as $child)
+                                                                <li>
+                                                                    <a href="{{ route('news.category', $child->slug) }}" 
+                                                                       class="flex items-center">
+                                                                        @if($child->icon)
+                                                                            <i class="{{ $child->icon }} ml-2"></i>
+                                                                        @endif
+                                                                        {{ $child->name }}
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                            
+                                            <li class="menu-item">
+                                                <a href="{{ route('videos.index') }}" 
+                                                   class="hover:text-primary-color transition-colors font-medium flex items-center gap-1">
+                                                    <i class="bi bi-play-circle"></i>
+                                                    فيديو
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <!-- Main Page Button -->
+                                <div class="main-page-btn">
+                                    <a href="{{ route('home') }}" class="flex items-center gap-2">
+                                        <i class="bi bi-house-door"></i>
+                                        الصفحة الرئيسية
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
             </div>
         </header>
 
 <script>
-// Top Navigation Scroll Effects
+// Enhanced Header Scroll Effects for Chrome and Mobile compatibility
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.querySelector('.theme-header');
-    const topNav = document.querySelector('.top-nav');
+    const mobileHeader = document.querySelector('.mobile-header-container');
+    const desktopHeader = document.querySelector('.desktop-header-container');
     let lastScrollTop = 0;
     let scrollTimeout;
+    let ticking = false;
     
-    function handleScroll() {
+    function updateHeader() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const scrollThreshold = 30;
         const hideThreshold = 80;
+        const isMobile = window.innerWidth <= 768;
         
         // إزالة الكلاسات السابقة
         header.classList.remove('header-scrolled', 'header-compact');
@@ -394,16 +400,201 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
+        // Mobile-specific sticky handling
+        if (isMobile && mobileHeader) {
+            if (scrollTop > 100) {
+                // Ensure mobile header is sticky
+                mobileHeader.style.position = 'fixed';
+                mobileHeader.style.top = '0';
+                mobileHeader.style.left = '0';
+                mobileHeader.style.right = '0';
+                mobileHeader.style.width = '100%';
+                mobileHeader.style.zIndex = '1001';
+                mobileHeader.style.transform = 'translateZ(0)';
+                mobileHeader.style.webkitTransform = 'translateZ(0)';
+                mobileHeader.style.willChange = 'transform';
+                mobileHeader.style.background = 'rgba(255, 255, 255, 0.95)';
+                mobileHeader.style.backdropFilter = 'blur(10px)';
+                mobileHeader.style.webkitBackdropFilter = 'blur(10px)';
+            } else {
+                // Reset mobile header to normal
+                mobileHeader.style.position = 'relative';
+                mobileHeader.style.background = 'white';
+                mobileHeader.style.backdropFilter = 'none';
+                mobileHeader.style.webkitBackdropFilter = 'none';
+            }
+        }
+        
         lastScrollTop = scrollTop;
+        ticking = false;
     }
     
-    // إضافة event listener للتمرير
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateHeader);
+            ticking = true;
+        }
+    }
+    
+    // إضافة event listener للتمرير مع throttling
     window.addEventListener('scroll', function() {
+        requestTick();
+    }, { passive: true });
+    
+    // إضافة event listener للتمرير مع debouncing للـ resize
+    window.addEventListener('resize', function() {
         clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(handleScroll, 10);
-    });
+        scrollTimeout = setTimeout(updateHeader, 100);
+    }, { passive: true });
     
     // تفعيل عند تحميل الصفحة
-    handleScroll();
+    updateHeader();
+    
+    // Chrome-specific fixes
+    if (navigator.userAgent.indexOf('Chrome') !== -1) {
+        // Force reflow for Chrome
+        header.style.transform = 'translateZ(0)';
+        header.style.webkitTransform = 'translateZ(0)';
+        
+        // Ensure sticky positioning works
+        if (header.classList.contains('sticky-header')) {
+            header.style.position = 'fixed';
+            header.style.top = '0';
+            header.style.left = '0';
+            header.style.right = '0';
+            header.style.width = '100%';
+            header.style.zIndex = '1001';
+        }
+        
+        // Mobile header Chrome fixes
+        if (mobileHeader) {
+            mobileHeader.style.transform = 'translateZ(0)';
+            mobileHeader.style.webkitTransform = 'translateZ(0)';
+            mobileHeader.style.willChange = 'transform';
+        }
+    }
+    
+    // Mutation observer for dynamic content changes
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                if (header.classList.contains('sticky-header')) {
+                    // Ensure sticky header is properly positioned
+                    header.style.position = 'fixed';
+                    header.style.top = '0';
+                    header.style.left = '0';
+                    header.style.right = '0';
+                    header.style.width = '100%';
+                    header.style.zIndex = '1001';
+                    header.style.transform = 'translateZ(0)';
+                    header.style.webkitTransform = 'translateZ(0)';
+                    
+                    // Mobile header specific fixes
+                    if (mobileHeader && window.innerWidth <= 768) {
+                        mobileHeader.style.position = 'fixed';
+                        mobileHeader.style.top = '0';
+                        mobileHeader.style.left = '0';
+                        mobileHeader.style.right = '0';
+                        mobileHeader.style.width = '100%';
+                        mobileHeader.style.zIndex = '1001';
+                        mobileHeader.style.transform = 'translateZ(0)';
+                        mobileHeader.style.webkitTransform = 'translateZ(0)';
+                        mobileHeader.style.background = 'rgba(255, 255, 255, 0.95)';
+                        mobileHeader.style.backdropFilter = 'blur(10px)';
+                        mobileHeader.style.webkitBackdropFilter = 'blur(10px)';
+                    }
+                }
+            }
+        });
+    });
+    
+    observer.observe(header, {
+        attributes: true,
+        attributeFilter: ['class']
+    });
+});
+
+// Additional Chrome and Mobile-specific fixes
+if (navigator.userAgent.indexOf('Chrome') !== -1) {
+    document.addEventListener('DOMContentLoaded', function() {
+        const header = document.querySelector('.theme-header');
+        const mobileHeader = document.querySelector('.mobile-header-container');
+        
+        // Force hardware acceleration
+        header.style.transform = 'translateZ(0)';
+        header.style.webkitTransform = 'translateZ(0)';
+        header.style.willChange = 'transform';
+        
+        if (mobileHeader) {
+            mobileHeader.style.transform = 'translateZ(0)';
+            mobileHeader.style.webkitTransform = 'translateZ(0)';
+            mobileHeader.style.willChange = 'transform';
+        }
+        
+        // Ensure proper stacking context
+        header.style.zIndex = '1000';
+        
+        // Fix for Chrome's sticky positioning issues
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const isMobile = window.innerWidth <= 768;
+            
+            if (header.classList.contains('sticky-header')) {
+                header.style.position = 'fixed';
+                header.style.top = '0';
+                header.style.left = '0';
+                header.style.right = '0';
+                header.style.width = '100%';
+                header.style.zIndex = '1001';
+                
+                // Mobile header specific fixes
+                if (isMobile && mobileHeader) {
+                    mobileHeader.style.position = 'fixed';
+                    mobileHeader.style.top = '0';
+                    mobileHeader.style.left = '0';
+                    mobileHeader.style.right = '0';
+                    mobileHeader.style.width = '100%';
+                    mobileHeader.style.zIndex = '1001';
+                    mobileHeader.style.background = 'rgba(255, 255, 255, 0.95)';
+                    mobileHeader.style.backdropFilter = 'blur(10px)';
+                    mobileHeader.style.webkitBackdropFilter = 'blur(10px)';
+                }
+            }
+        }, { passive: true });
+    });
+}
+
+// Mobile-specific fixes for all browsers
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileHeader = document.querySelector('.mobile-header-container');
+    
+    if (mobileHeader) {
+        // Ensure mobile header has proper positioning
+        mobileHeader.style.position = 'relative';
+        mobileHeader.style.zIndex = '1000';
+        
+        // Handle mobile header sticky behavior
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile && scrollTop > 100) {
+                mobileHeader.style.position = 'fixed';
+                mobileHeader.style.top = '0';
+                mobileHeader.style.left = '0';
+                mobileHeader.style.right = '0';
+                mobileHeader.style.width = '100%';
+                mobileHeader.style.zIndex = '1001';
+                mobileHeader.style.background = 'rgba(255, 255, 255, 0.95)';
+                mobileHeader.style.backdropFilter = 'blur(10px)';
+                mobileHeader.style.webkitBackdropFilter = 'blur(10px)';
+            } else if (isMobile) {
+                mobileHeader.style.position = 'relative';
+                mobileHeader.style.background = 'white';
+                mobileHeader.style.backdropFilter = 'none';
+                mobileHeader.style.webkitBackdropFilter = 'none';
+            }
+        }, { passive: true });
+    }
 });
 </script>

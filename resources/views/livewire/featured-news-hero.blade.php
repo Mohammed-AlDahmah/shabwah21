@@ -1,6 +1,6 @@
 <div class="featured-news-hero">
     @if($featuredNews)
-        <article class="main-featured-article group bg-white rounded-3xl shadow-2xl overflow-hidden hover:shadow-3xl transition-all duration-700 relative hover-lift">
+        <article class="featured-news-card group bg-white rounded-3xl overflow-hidden hover:shadow-3xl transition-all duration-700 relative hover-lift">
             <!-- Image Container -->
             <div class="featured-image-container aspect-[16/9] bg-gradient-to-br from-slate-200 to-slate-300 overflow-hidden relative">
                 @if($featuredNews->image)
@@ -70,7 +70,7 @@
         </article>
     @else
         <!-- Placeholder when no featured news -->
-        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden p-12 text-center">
+        <div class="featured-news-card bg-white rounded-3xl overflow-hidden p-12 text-center">
             <div class="bg-gradient-to-br from-[#C08B2D] via-[#B22B2B] to-[#C08B2D] w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6">
                 <i class="bi bi-newspaper text-4xl text-white"></i>
             </div>

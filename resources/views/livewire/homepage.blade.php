@@ -11,9 +11,9 @@
     </section>
 
     <!-- Hero Section with Featured News -->
-    <section class="hero-section bg-gradient-to-br from-slate-50 to-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <section class="hero-section bg-gradient-to-br from-slate-50 to-white py-8">
+        <div class="container mx-auto px-2">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- Main Featured News (2 columns) -->
                 <div class="lg:col-span-2">
                     <div class="section-header mb-6">
@@ -30,12 +30,47 @@
                 
                 <!-- Sidebar Featured News (1 column) -->
                 <div class="lg:col-span-1">
-                    <div class="section-header mb-6">
-                        <h3 class="text-xl font-bold text-slate-800 border-b-2 border-[#C08B2D] pb-2">
-                            أبرز العناوين
-                        </h3>
+                    <div class="space-y-6">
+                        <!-- Homepage Button -->
+                        <div class="homepage-btn-section">
+                            <a href="{{ route('home') }}" class="btn-primary w-full text-center">
+                                <i class="bi bi-house-door ml-2"></i>
+                                الصفحة الرئيسية
+                            </a>
+                        </div>
+                        
+                        <!-- Featured News Sidebar -->
+                        <div class="sidebar-widget bg-white rounded-2xl p-6">
+                            <div class="section-header mb-6">
+                                <h3 class="text-lg font-bold text-slate-800 mb-2">أخبار مميزة</h3>
+                                <div class="w-12 h-1 bg-gradient-to-r from-[#C08B2D] to-[#B22B2B] rounded"></div>
+                            </div>
+                            <livewire:featured-news limit="4" />
+                        </div>
+                        
+                        <!-- Popular Articles -->
+                        <div class="sidebar-widget bg-white rounded-2xl p-6">
+                            <div class="section-header mb-6">
+                                <h3 class="text-lg font-bold text-slate-800 mb-2">الأكثر قراءة</h3>
+                                <div class="w-12 h-1 bg-gradient-to-r from-[#C08B2D] to-[#B22B2B] rounded"></div>
+                            </div>
+                            <livewire:popular-articles />
+                        </div>
+                        
+                        <!-- Weather Widget -->
+                        <div class="weather-widget bg-white rounded-2xl p-6">
+                            <livewire:weather-widget />
+                        </div>
+                        
+                        <!-- Newsletter Sidebar -->
+                        <div class="newsletter-sidebar rounded-2xl p-6 text-white relative overflow-hidden">
+                            <div class="relative z-10">
+                                <h3 class="text-lg font-bold mb-3">اشترك في النشرة الإخبارية</h3>
+                                <p class="text-sm mb-4 opacity-90">احصل على آخر الأخبار والتقارير مباشرة في بريدك الإلكتروني</p>
+                                <livewire:newsletter-signup />
+                            </div>
+                        </div>
                     </div>
-                    <livewire:featured-news limit="4" />
                 </div>
             </div>
         </div>
@@ -43,125 +78,117 @@
 
     <!-- Main Content Area -->
     <div class="bg-slate-50">
-        <div class="container mx-auto px-4 py-12">
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                <!-- Main Content (3 columns) -->
-                <div class="lg:col-span-3">
-                    <div class="space-y-12">
-                        <!-- Latest News Section -->
-                        <section class="news-section bg-white rounded-2xl shadow-lg p-8">
-                            <div class="section-header mb-8">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center gap-4">
-                                        <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
-                                        <div>
-                                            <h2 class="text-2xl font-bold text-slate-800">آخر الأخبار</h2>
-                                            <p class="text-slate-600">أحدث الأخبار والتقارير</p>
-                                        </div>
-                                    </div>
-                                    <a href="{{ route('news.index') }}" class="btn-primary">
-                                        عرض جميع الأخبار
-                                        <i class="bi bi-arrow-left mr-2"></i>
-                                    </a>
+        <div class="container mx-auto px-2 py-8">
+            <!-- Latest News Section - Full Width with Margins -->
+            <div class="w-full mb-8">
+                <section class="section-card bg-white rounded-2xl p-6">
+                    <div class="section-header mb-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
+                                <div>
+                                    <h2 class="text-2xl font-bold text-slate-800">آخر الأخبار</h2>
+                                    <p class="text-slate-600">أحدث الأخبار والتقارير</p>
                                 </div>
                             </div>
-                            <livewire:latest-news-grid />
-                        </section>
-
-                        <!-- Category Sections -->
-                        <section class="category-sections bg-white rounded-2xl shadow-lg p-8">
-                            <div class="section-header mb-8">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
-                                    <div>
-                                        <h2 class="text-2xl font-bold text-slate-800">الأقسام الإخبارية</h2>
-                                        <p class="text-slate-600">تصفح الأخبار حسب التصنيف</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <livewire:category-section />
-                        </section>
-
-                        <!-- Video Section -->
-                        <section class="video-section bg-white rounded-2xl shadow-lg p-8">
-                            <div class="section-header mb-8">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
-                                    <div>
-                                        <h2 class="text-2xl font-bold text-slate-800">فيديو شبوة21</h2>
-                                        <p class="text-slate-600">أحدث الفيديوهات والتقارير المصورة</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <livewire:video-section />
-                        </section>
-
-                        <!-- Sports Section -->
-                        <section class="sports-section bg-white rounded-2xl shadow-lg p-8">
-                            <div class="section-header mb-8">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
-                                    <div>
-                                        <h2 class="text-2xl font-bold text-slate-800">الرياضة</h2>
-                                        <p class="text-slate-600">أخبار الرياضة المحلية والعالمية</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <livewire:sports-section />
-                        </section>
+                            <a href="{{ route('news.index') }}" class="btn-primary">
+                                عرض جميع الأخبار
+                                <i class="bi bi-arrow-left mr-2"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
+                    <livewire:latest-news-grid />
+                </section>
+            </div>
 
-                <!-- Sidebar (1 column) -->
-                <div class="lg:col-span-1">
-                    <div class="space-y-8">
-                        <!-- Popular Articles -->
-                        <section class="popular-articles bg-white rounded-2xl shadow-lg p-6">
-                            <div class="section-header mb-6">
-                                <h3 class="text-lg font-bold text-slate-800 border-b-2 border-[#C08B2D] pb-2">
-                                    الأكثر قراءة
-                                </h3>
+            <!-- Other Sections in Grid Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-1 gap-6">
+                <!-- Category Sections -->
+                <section class="section-card bg-white rounded-2xl p-6">
+                    <div class="section-header mb-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">الأقسام الإخبارية</h2>
+                                <p class="text-slate-600">تصفح الأخبار حسب التصنيف</p>
                             </div>
-                            <livewire:popular-articles />
-                        </section>
-
-                        <!-- Weather Widget -->
-                        <section class="weather-widget bg-white rounded-2xl shadow-lg p-6">
-                            <div class="section-header mb-6">
-                                <h3 class="text-lg font-bold text-slate-800 border-b-2 border-[#C08B2D] pb-2">
-                                    الطقس
-                                </h3>
-                            </div>
-                            <livewire:weather-widget />
-                        </section>
-
-                        <!-- Most Read Articles -->
-                        <section class="most-read bg-white rounded-2xl shadow-lg p-6">
-                            <div class="section-header mb-6">
-                                <h3 class="text-lg font-bold text-slate-800 border-b-2 border-[#C08B2D] pb-2">
-                                    الأكثر مشاهدة
-                                </h3>
-                            </div>
-                            <livewire:most-read-articles />
-                        </section>
-
-                        <!-- Newsletter Signup -->
-                        <section class="newsletter-sidebar bg-gradient-to-br from-[#C08B2D] to-[#B22B2B] rounded-2xl shadow-lg p-6 text-white">
-                            <div class="text-center">
-                                <i class="bi bi-envelope text-3xl mb-4"></i>
-                                <h3 class="text-lg font-bold mb-2">اشترك في النشرة الإخبارية</h3>
-                                <p class="text-sm mb-4">احصل على آخر الأخبار مباشرة في بريدك الإلكتروني</p>
-                                <livewire:newsletter-signup />
-                            </div>
-                        </section>
+                        </div>
                     </div>
-                </div>
+                    <livewire:category-section />
+                </section>
+
+                <!-- Video Section -->
+                <section class="section-card bg-white rounded-2xl p-6">
+                    <div class="section-header mb-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">فيديو شبوة21</h2>
+                                <p class="text-slate-600">أحدث الفيديوهات والتقارير المصورة</p>
+                            </div>
+                        </div>
+                    </div>
+                    <livewire:video-section />
+                </section>
+
+                <!-- Sports Section -->
+                <section class="section-card bg-white rounded-2xl p-6">
+                    <div class="section-header mb-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">الرياضة</h2>
+                                <p class="text-slate-600">أخبار الرياضة المحلية والعالمية</p>
+                            </div>
+                        </div>
+                    </div>
+                    <livewire:sports-section />
+                </section>
             </div>
         </div>
     </div>
 
+    <!-- Additional Sections -->
+    <section class="additional-sections py-8">
+        <div class="container mx-auto px-2">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Opinion Articles -->
+                <section class="section-card bg-white rounded-2xl p-6">
+                    <div class="section-header mb-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">الرأي والتحليل</h2>
+                                <p class="text-slate-600">مقالات الرأي والتحليلات السياسية</p>
+                            </div>
+                        </div>
+                    </div>
+                    <livewire:opinion-articles />
+                </section>
+
+                <!-- Most Read Articles -->
+                <section class="section-card bg-white rounded-2xl p-6">
+                    <div class="section-header mb-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">الأكثر قراءة</h2>
+                                <p class="text-slate-600">الأخبار الأكثر تداولاً وقراءة</p>
+                            </div>
+                        </div>
+                    </div>
+                    <livewire:most-read-articles />
+                </section>
+            </div>
+        </div>
+    </section>
+
     <!-- Newsletter Section -->
-     
+    <section class="newsletter-section py-12">
+        <div class="container mx-auto px-2">
+            <livewire:newsletter-signup />
+        </div>
+    </section>
 @endsection
 
 @push('styles')

@@ -2,7 +2,7 @@
     @if($featuredNews->count() > 0)
         <div class="space-y-4">
             @foreach($featuredNews->take($limit ?? 4) as $index => $news)
-                <article class="side-featured-card group bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:transform hover:scale-105 border border-gray-100">
+                <article class="news-grid-card group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:transform hover:scale-105">
                     <div class="flex gap-4 p-4">
                         <!-- Image -->
                         <div class="flex-shrink-0 w-24 h-20 bg-gradient-to-br from-slate-200 to-slate-300 rounded-xl overflow-hidden relative">
@@ -60,7 +60,7 @@
     @else
         <!-- Placeholder when no featured news -->
         <div class="text-center py-8">
-            <div class="bg-slate-50 rounded-2xl p-8">
+            <div class="sidebar-widget bg-slate-50 rounded-2xl p-8">
                 <i class="bi bi-newspaper text-4xl text-slate-300 mb-4 block"></i>
                 <h3 class="text-lg font-bold text-slate-600 mb-2">لا توجد أخبار مميزة</h3>
                 <p class="text-slate-500 text-sm">سيتم عرض الأخبار المميزة هنا عند إضافتها</p>

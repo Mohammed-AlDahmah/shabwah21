@@ -1,6 +1,6 @@
 <div class="latest-news-grid">
     @if($latestNews->count() > 0)
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             @foreach($latestNews as $news)
                 <article class="news-card group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-500 hover:transform hover:scale-105 border border-gray-100">
                     <!-- Image -->
@@ -24,7 +24,7 @@
                     </div>
                     
                     <!-- Content -->
-                    <div class="p-6">
+                    <div class="p-4">
                         <h3 class="font-bold text-slate-800 mb-3 line-clamp-2 group-hover:text-[#C08B2D] transition-colors leading-tight">
                             <a href="{{ route('news.show', $news->slug) }}" class="hover:underline">
                                 {{ $news->title }}
