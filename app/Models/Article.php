@@ -10,7 +10,7 @@ use Carbon\Carbon;
 class Article extends Model
 {
     protected $fillable = [
-        'title', 'slug', 'excerpt', 'content', 'featured_image', 'images', 'category_id', 'author', 'source', 'source_url', 'views_count', 'is_featured', 'is_breaking', 'is_published', 'published_at', 'meta_data', 'type'
+        'title', 'slug', 'excerpt', 'content', 'featured_image', 'images', 'category_id', 'author_id', 'author', 'source', 'source_url', 'views_count', 'is_featured', 'is_breaking', 'is_published', 'published_at', 'meta_data', 'type'
     ];
 
     // أنواع المقالات المسموحة
@@ -38,6 +38,11 @@ class Article extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function scopePublished($query)
@@ -91,6 +96,14 @@ class Article extends Model
     public function setImageAttribute($value)
     {
         $this->featured_image = $value;
+    }
+
+    public function getAuthorNameAttribute()
+    {
+        if ($this->author_id && $this->author) {
+            return $this->author->name;
+        }
+        return $this->author ?? 'غير محدد';
     }
 
     protected static function boot()

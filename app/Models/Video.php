@@ -13,6 +13,9 @@ class Video extends Model
         'description',
         'thumbnail',
         'video_url',
+        'category_id',
+        'author_id',
+        'duration',
         'is_featured',
         'is_published',
         'published_at',
@@ -37,5 +40,48 @@ class Video extends Model
                 $video->published_at = now();
             }
         });
+    }
+
+    /**
+     * Get the category that owns the video.
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Get the author that owns the video.
+     */
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
+
+    /**
+     * Get the video's thumbnail URL.
+     */
+    public function getThumbnailUrlAttribute()
+    {
+        if ($this->thumbnail) {
+            return \App\Helpers\ImageHelper::getImageUrl($this->thumbnail);
+        }
+        return null;
+    }
+
+    /**
+     * Scope a query to only include published videos.
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('is_published', true);
+    }
+
+    /**
+     * Scope a query to only include featured videos.
+     */
+    public function scopeFeatured($query)
+    {
+        return $query->where('is_featured', true);
     }
 } 

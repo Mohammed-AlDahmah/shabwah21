@@ -5,34 +5,30 @@ namespace App\Livewire\Admin;
 use Livewire\Component;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\User;
+use App\Models\Video;
 use Carbon\Carbon;
 
-class Dashboard extends Component
+class AdminHome extends Component
 {
     public $totalArticles = 0;
     public $publishedArticles = 0;
     public $totalViews = 0;
     public $totalCategories = 0;
+    public $totalUsers = 0;
+    public $totalVideos = 0;
     public $articlesGrowth = 0;
     public $publishedGrowth = 0;
     public $viewsGrowth = 0;
     public $recentArticles = [];
     public $popularCategories = [];
-
-    protected $listeners = [
-        'articleDeleted' => 'loadStats',
-        'articleCreated' => 'loadStats',
-        'articleUpdated' => 'loadStats',
-        'categoryDeleted' => 'loadStats',
-        'categoryCreated' => 'loadStats',
-        'categoryUpdated' => 'loadStats',
-    ];
+    public $recentUsers = [];
+    public $recentVideos = [];
 
     public function mount()
     {
         $this->loadStats();
-        $this->loadRecentArticles();
-        $this->loadPopularCategories();
+        $this->loadRecentData();
     }
 
     public function loadStats()
@@ -48,6 +44,12 @@ class Dashboard extends Component
         
         // Total Categories
         $this->totalCategories = Category::count();
+        
+        // Total Users
+        $this->totalUsers = User::count();
+        
+        // Total Videos
+        $this->totalVideos = Video::count();
         
         // Growth Calculations
         $this->calculateGrowth();
@@ -74,16 +76,13 @@ class Dashboard extends Component
         $this->viewsGrowth = $lastMonthViews > 0 ? round((($currentMonthViews - $lastMonthViews) / $lastMonthViews) * 100, 1) : 0;
     }
 
-    public function loadRecentArticles()
+    public function loadRecentData()
     {
         $this->recentArticles = Article::with('category')
             ->latest('created_at')
             ->take(5)
             ->get();
-    }
 
-    public function loadPopularCategories()
-    {
         $categories = Category::withCount('articles')->get();
         $totalArticles = $categories->sum('articles_count');
         
@@ -91,33 +90,19 @@ class Dashboard extends Component
             $category->percentage = $totalArticles > 0 ? round(($category->articles_count / $totalArticles) * 100, 1) : 0;
             return $category;
         })->sortByDesc('articles_count')->take(5);
-    }
 
-    public function deleteArticle($articleId)
-    {
-        $article = Article::find($articleId);
-        
-        if ($article) {
-            $article->delete();
-            $this->loadStats();
-            $this->loadRecentArticles();
-            
-            $this->dispatch('showToast', [
-                'type' => 'success',
-                'title' => 'تم الحذف بنجاح',
-                'message' => 'تم حذف المقال بنجاح'
-            ]);
-        } else {
-            $this->dispatch('showToast', [
-                'type' => 'error',
-                'title' => 'خطأ',
-                'message' => 'لم يتم العثور على المقال'
-            ]);
-        }
+        $this->recentUsers = User::latest('created_at')
+            ->take(5)
+            ->get();
+
+        $this->recentVideos = Video::with('category')
+            ->latest('created_at')
+            ->take(5)
+            ->get();
     }
 
     public function render()
     {
-        return view('livewire.admin.dashboard');
+        return view('livewire.admin.admin-home');
     }
-}
+} 
