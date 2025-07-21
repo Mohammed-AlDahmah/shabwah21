@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Category;
+use App\Models\SiteSettings;
 use Livewire\Component;
 
 class Header extends Component
@@ -26,6 +27,12 @@ class Header extends Component
             ->orderBy('sort_order')
             ->get();
 
-        return view('livewire.header', compact('mainCategories', 'allCategories'));
+        // جلب الإعدادات كقيم منفصلة
+        $showVideo = SiteSettings::getValue('show_video_in_nav', true);
+        $showAbout = SiteSettings::getValue('show_about_in_nav', true);
+        $showContact = SiteSettings::getValue('show_contact_in_nav', true);
+        $showSocial = SiteSettings::getValue('show_social_links_in_nav', true);
+
+        return view('livewire.header', compact('mainCategories', 'allCategories', 'showVideo', 'showAbout', 'showContact', 'showSocial'));
     }
 }

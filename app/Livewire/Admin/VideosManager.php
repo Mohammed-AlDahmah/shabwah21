@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\Video;
 use App\Models\Category;
+use App\Models\Author;
 use App\Models\User;
 use Illuminate\Support\Str;
 
@@ -203,8 +204,7 @@ class VideosManager extends Component
 
         $videos = $query->latest()->paginate(12);
         $categories = Category::all();
-        $users = User::all();
-
-        return view('livewire.admin.videos-manager', compact('videos', 'categories', 'users'));
+        $authors = Author::active()->get();
+        return view('livewire.admin.videos-manager', compact('videos', 'categories', 'authors'));
     }
 } 

@@ -1,14 +1,14 @@
-<div class="news-management">
+<div class="infographics-management">
     <!-- Page Header -->
     <div class="page-header mb-8">
         <div class="flex justify-between items-center">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900 mb-2">إدارة الأخبار</h1>
-                <p class="text-gray-600">إدارة جميع الأخبار في الموقع</p>
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">إدارة الإنفوجرافيك</h1>
+                <p class="text-gray-600">إدارة جميع الإنفوجرافيك في الموقع</p>
             </div>
             <button wire:click="createArticle" class="btn-primary">
                 <i class="bi bi-plus-circle ml-2"></i>
-                خبر جديد
+                إنفوجرافيك جديد
             </button>
         </div>
     </div>
@@ -22,7 +22,7 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">البحث</label>
                     <div class="relative">
                         <input type="text" wire:model.live="search" 
-                               placeholder="ابحث في الأخبار..." 
+                               placeholder="ابحث في الإنفوجرافيك..." 
                                class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent">
                         <i class="bi bi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                     </div>
@@ -49,40 +49,43 @@
                     </select>
                 </div>
 
-                <!-- Breaking Filter -->
-                <div class="breaking-filter">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">الأخبار العاجلة</label>
-                    <select wire:model.live="breakingFilter" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent">
-                        <option value="">جميع الأخبار</option>
-                        <option value="breaking">عاجل</option>
-                        <option value="normal">عادي</option>
+                <!-- Infographic Type Filter -->
+                <div class="infographic-type-filter">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">نوع الإنفوجرافيك</label>
+                    <select wire:model.live="infographicTypeFilter" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent">
+                        <option value="">جميع الأنواع</option>
+                        <option value="statistical">إحصائي</option>
+                        <option value="timeline">زمني</option>
+                        <option value="comparison">مقارنة</option>
+                        <option value="process">عملية</option>
+                        <option value="geographic">جغرافي</option>
                     </select>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- News Table -->
-    <div class="news-table">
+    <!-- Infographics Table -->
+    <div class="infographics-table">
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full">
                     <thead class="bg-gray-50">
                         <tr>
                             <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                الخبر
+                                الإنفوجرافيك
                             </th>
                             <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 القسم
                             </th>
                             <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                الكاتب
+                                المصمم
+                            </th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                النوع
                             </th>
                             <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 الحالة
-                            </th>
-                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                الأولوية
                             </th>
                             <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 التاريخ
@@ -104,25 +107,20 @@
                                                      alt="{{ $article->title }}">
                                             @else
                                                 <div class="h-12 w-16 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center">
-                                                    <i class="bi bi-image text-gray-400"></i>
+                                                    <i class="bi bi-bar-chart text-gray-400"></i>
                                                 </div>
                                             @endif
                                         </div>
                                         <div class="mr-4">
                                             <div class="text-sm font-medium text-gray-900">
                                                 {{ Str::limit($article->title, 50) }}
-                                                @if($article->is_breaking)
-                                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 mr-2">
-                                                        عاجل
-                                                    </span>
-                                                @endif
                                             </div>
                                             <div class="text-sm text-gray-500">
                                                 {{ Str::limit($article->excerpt, 60) }}
                                             </div>
-                                            @if($article->news_source)
+                                            @if($article->infographic_designer)
                                                 <div class="text-xs text-gray-400">
-                                                    المصدر: {{ $article->news_source }}
+                                                    المصمم: {{ $article->infographic_designer }}
                                                 </div>
                                             @endif
                                         </div>
@@ -139,7 +137,28 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
-                                    {{ $article->author_name ?? 'غير محدد' }}
+                                    {{ $article->infographic_designer ?? 'غير محدد' }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    @php
+                                        $infographicTypeColors = [
+                                            'statistical' => 'bg-blue-100 text-blue-800',
+                                            'timeline' => 'bg-green-100 text-green-800',
+                                            'comparison' => 'bg-purple-100 text-purple-800',
+                                            'process' => 'bg-orange-100 text-orange-800',
+                                            'geographic' => 'bg-red-100 text-red-800'
+                                        ];
+                                        $infographicTypeText = [
+                                            'statistical' => 'إحصائي',
+                                            'timeline' => 'زمني',
+                                            'comparison' => 'مقارنة',
+                                            'process' => 'عملية',
+                                            'geographic' => 'جغرافي'
+                                        ];
+                                    @endphp
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $infographicTypeColors[$article->infographic_type ?? 'statistical'] }}">
+                                        {{ $infographicTypeText[$article->infographic_type ?? 'statistical'] }}
+                                    </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center">
                                     <button wire:click="togglePublish({{ $article->id }})" 
@@ -150,25 +169,6 @@
                                         <i class="bi bi-{{ $article->is_published ? 'check-circle' : 'clock' }} ml-1"></i>
                                         {{ $article->is_published ? 'منشور' : 'مسودة' }}
                                     </button>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-center">
-                                    @php
-                                        $priorityColors = [
-                                            'low' => 'bg-gray-100 text-gray-800',
-                                            'normal' => 'bg-blue-100 text-blue-800',
-                                            'high' => 'bg-orange-100 text-orange-800',
-                                            'urgent' => 'bg-red-100 text-red-800'
-                                        ];
-                                        $priorityText = [
-                                            'low' => 'منخفضة',
-                                            'normal' => 'عادية',
-                                            'high' => 'عالية',
-                                            'urgent' => 'عاجلة'
-                                        ];
-                                    @endphp
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $priorityColors[$article->news_priority ?? 'normal'] }}">
-                                        {{ $priorityText[$article->news_priority ?? 'normal'] }}
-                                    </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
                                     {{ $article->created_at->format('Y/m/d') }}
@@ -183,10 +183,6 @@
                                                 class="text-red-600 hover:text-red-800 transition-colors">
                                             <i class="bi bi-trash text-lg"></i>
                                         </button>
-                                        <button wire:click="toggleBreaking({{ $article->id }})" 
-                                                class="text-orange-600 hover:text-orange-800 transition-colors">
-                                            <i class="bi bi-lightning text-lg"></i>
-                                        </button>
                                         <a href="{{ route('news.show', $article->slug) }}" 
                                            target="_blank" 
                                            class="text-blue-600 hover:text-blue-800 transition-colors">
@@ -199,12 +195,12 @@
                             <tr>
                                 <td colspan="7" class="px-6 py-12 text-center">
                                     <div class="empty-state">
-                                        <i class="bi bi-newspaper text-4xl text-gray-300 mb-4"></i>
-                                        <h3 class="text-lg font-semibold text-gray-600 mb-2">لا توجد أخبار</h3>
-                                        <p class="text-gray-500 mb-4">ابدأ بإنشاء خبرك الأول</p>
+                                        <i class="bi bi-bar-chart text-4xl text-gray-300 mb-4"></i>
+                                        <h3 class="text-lg font-semibold text-gray-600 mb-2">لا توجد إنفوجرافيك</h3>
+                                        <p class="text-gray-500 mb-4">ابدأ بإنشاء إنفوجرافيكك الأول</p>
                                         <button wire:click="createArticle" class="btn-primary">
                                             <i class="bi bi-plus-circle ml-2"></i>
-                                            إنشاء خبر جديد
+                                            إنشاء إنفوجرافيك جديد
                                         </button>
                                     </div>
                                 </td>
@@ -230,7 +226,7 @@
                 <div class="mt-3">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="text-lg font-medium text-gray-900">
-                            {{ $editingArticle ? 'تعديل الخبر' : 'خبر جديد' }}
+                            {{ $editingArticle ? 'تعديل الإنفوجرافيك' : 'إنفوجرافيك جديد' }}
                         </h3>
                         <button wire:click="closeModal" class="text-gray-400 hover:text-gray-600">
                             <i class="bi bi-x text-2xl"></i>
@@ -241,10 +237,10 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <!-- Title -->
                             <div class="md:col-span-2">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">عنوان الخبر</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">عنوان الإنفوجرافيك</label>
                                 <input type="text" wire:model="form.title" 
                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
-                                       placeholder="أدخل عنوان الخبر">
+                                       placeholder="أدخل عنوان الإنفوجرافيك">
                                 @error('form.title') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
@@ -274,70 +270,93 @@
                                 @error('form.author_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
-                            <!-- News Source -->
+                            <!-- Infographic Type -->
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">مصدر الخبر</label>
-                                <input type="text" wire:model="form.news_source" 
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
-                                       placeholder="مصدر الخبر">
-                                @error('form.news_source') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                            </div>
-
-                            <!-- News Location -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">موقع الخبر</label>
-                                <input type="text" wire:model="form.news_location" 
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
-                                       placeholder="موقع الخبر">
-                                @error('form.news_location') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                            </div>
-
-                            <!-- News Date -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">تاريخ الخبر</label>
-                                <input type="date" wire:model="form.news_date" 
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent">
-                                @error('form.news_date') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                            </div>
-
-                            <!-- News Priority -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">أولوية الخبر</label>
-                                <select wire:model="form.news_priority" 
+                                <label class="block text-sm font-medium text-gray-700 mb-2">نوع الإنفوجرافيك</label>
+                                <select wire:model="form.infographic_type" 
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent">
-                                    <option value="low">منخفضة</option>
-                                    <option value="normal">عادية</option>
-                                    <option value="high">عالية</option>
-                                    <option value="urgent">عاجلة</option>
+                                    <option value="statistical">إحصائي</option>
+                                    <option value="timeline">زمني</option>
+                                    <option value="comparison">مقارنة</option>
+                                    <option value="process">عملية</option>
+                                    <option value="geographic">جغرافي</option>
                                 </select>
-                                @error('form.news_priority') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                @error('form.infographic_type') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Infographic Designer -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">المصمم</label>
+                                <input type="text" wire:model="form.infographic_designer" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
+                                       placeholder="اسم المصمم">
+                                @error('form.infographic_designer') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Infographic Data Source -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">مصدر البيانات</label>
+                                <input type="text" wire:model="form.infographic_data_source" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
+                                       placeholder="مصدر البيانات">
+                                @error('form.infographic_data_source') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Infographic Dimensions -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">الأبعاد</label>
+                                <input type="text" wire:model="form.infographic_dimensions" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
+                                       placeholder="مثال: 1920x1080">
+                                @error('form.infographic_dimensions') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Infographic Language -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">اللغة</label>
+                                <select wire:model="form.infographic_language" 
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent">
+                                    <option value="ar">عربي</option>
+                                    <option value="en">إنجليزي</option>
+                                    <option value="both">كلاهما</option>
+                                </select>
+                                @error('form.infographic_language') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
                             <!-- Excerpt -->
                             <div class="md:col-span-2">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">ملخص الخبر</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">ملخص الإنفوجرافيك</label>
                                 <textarea wire:model="form.excerpt" rows="3"
                                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
-                                          placeholder="أدخل ملخص الخبر"></textarea>
+                                          placeholder="أدخل ملخص الإنفوجرافيك"></textarea>
                                 @error('form.excerpt') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
                             <!-- Content -->
                             <div class="md:col-span-2">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">محتوى الخبر</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">محتوى الإنفوجرافيك</label>
                                 <textarea wire:model="form.content" rows="8"
                                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
-                                          placeholder="أدخل محتوى الخبر"></textarea>
+                                          placeholder="أدخل محتوى الإنفوجرافيك"></textarea>
                                 @error('form.content') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
-                            <!-- News Tags -->
+                            <!-- Infographic Colors -->
                             <div class="md:col-span-2">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">الكلمات المفتاحية</label>
-                                <input type="text" wire:model="form.news_tags" 
+                                <label class="block text-sm font-medium text-gray-700 mb-2">الألوان المستخدمة</label>
+                                <input type="text" wire:model="form.infographic_colors" 
                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
-                                       placeholder="الكلمات المفتاحية مفصولة بفواصل">
-                                @error('form.news_tags') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                       placeholder="الألوان المستخدمة في الإنفوجرافيك">
+                                @error('form.infographic_colors') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Infographic Embed Code -->
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">كود التضمين</label>
+                                <textarea wire:model="form.infographic_embed_code" rows="3"
+                                          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
+                                          placeholder="كود التضمين (إذا كان متوفر)"></textarea>
+                                @error('form.infographic_embed_code') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
                             <!-- Featured Image -->
@@ -361,6 +380,15 @@
                                 @endif
                             </div>
 
+                            <!-- Infographic File -->
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">ملف الإنفوجرافيك</label>
+                                <input type="file" wire:model="infographicFile" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
+                                       accept=".pdf,.svg,.png,.jpg,.jpeg">
+                                @error('infographicFile') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
                             <!-- Published Status -->
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">حالة النشر</label>
@@ -379,7 +407,7 @@
                                 @error('form.is_published') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
-                            <!-- Featured & Breaking -->
+                            <!-- Featured & Interactive & Downloadable -->
                             <div class="md:col-span-2">
                                 <div class="flex items-center space-x-6 space-x-reverse">
                                     <label class="flex items-center">
@@ -388,9 +416,14 @@
                                         <span class="text-sm text-gray-700">مميز</span>
                                     </label>
                                     <label class="flex items-center">
-                                        <input type="checkbox" wire:model="form.is_breaking" 
+                                        <input type="checkbox" wire:model="form.infographic_interactive" 
                                                class="ml-2 text-[#C08B2D] focus:ring-[#C08B2D] rounded">
-                                        <span class="text-sm text-gray-700">خبر عاجل</span>
+                                        <span class="text-sm text-gray-700">تفاعلي</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" wire:model="form.infographic_downloadable" 
+                                               class="ml-2 text-[#C08B2D] focus:ring-[#C08B2D] rounded">
+                                        <span class="text-sm text-gray-700">قابل للتحميل</span>
                                     </label>
                                 </div>
                             </div>
@@ -403,7 +436,7 @@
                             </button>
                             <button type="submit" 
                                     class="px-4 py-2 bg-[#C08B2D] text-white rounded-lg hover:bg-[#B22B2B] transition-colors">
-                                {{ $editingArticle ? 'تحديث الخبر' : 'إنشاء الخبر' }}
+                                {{ $editingArticle ? 'تحديث الإنفوجرافيك' : 'إنشاء الإنفوجرافيك' }}
                             </button>
                         </div>
                     </form>
@@ -413,8 +446,8 @@
     @endif
 
     <style>
-    /* News Management Styles */
-    .news-management {
+    /* Infographics Management Styles */
+    .infographics-management {
         padding: 2rem;
     }
 
@@ -450,23 +483,23 @@
     }
 
     /* Table Styles */
-    .news-table table {
+    .infographics-table table {
         border-collapse: collapse;
     }
 
-    .news-table th {
+    .infographics-table th {
         background: #f9fafb;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.05em;
     }
 
-    .news-table td, .news-table th {
+    .infographics-table td, .infographics-table th {
         padding: 1rem 1.5rem;
         text-align: right;
     }
 
-    .news-table tbody tr:hover {
+    .infographics-table tbody tr:hover {
         background: #f9fafb;
     }
 
@@ -477,7 +510,7 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-        .news-management {
+        .infographics-management {
             padding: 1rem;
         }
         
@@ -485,7 +518,7 @@
             padding: 1.5rem;
         }
         
-        .news-table {
+        .infographics-table {
             overflow-x: auto;
         }
     }
@@ -501,7 +534,7 @@
             title: title,
             text: message,
             toast: true,
-             position: 'top-start',
+            position: 'top-start',
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,

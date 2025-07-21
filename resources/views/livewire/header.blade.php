@@ -157,7 +157,8 @@ class="theme-header"
                                 </li>
                             @endforeach
                             
-                            <!-- فيديو -->
+                            {{-- فيديو --}}
+                            @if($showVideo)
                             <li class="mobile-nav-item">
                                 <a href="{{ route('videos.index') }}" 
                                    class="mobile-nav-link"
@@ -169,8 +170,25 @@ class="theme-header"
                                     <i class="bi bi-arrow-left mobile-nav-arrow"></i>
                                 </a>
                             </li>
+                            @endif
                             
-                            <!-- اتصل بنا -->
+                            {{-- عن الموقع --}}
+                            @if($showAbout)
+                            <li class="mobile-nav-item">
+                                <a href="{{ route('about') }}" 
+                                   class="mobile-nav-link"
+                                   @click="open = false">
+                                    <div class="mobile-nav-link-content">
+                                        <i class="bi bi-info-circle mobile-nav-icon"></i>
+                                        <span class="mobile-nav-text">عن الموقع</span>
+                                    </div>
+                                    <i class="bi bi-arrow-left mobile-nav-arrow"></i>
+                                </a>
+                            </li>
+                            @endif
+                            
+                            {{-- اتصل بنا --}}
+                            @if($showContact)
                             <li class="mobile-nav-item">
                                 <a href="{{ route('contact') }}" 
                                    class="mobile-nav-link"
@@ -182,6 +200,12 @@ class="theme-header"
                                     <i class="bi bi-arrow-left mobile-nav-arrow"></i>
                                 </a>
                             </li>
+                            @endif
+
+                            {{-- أيقونات التواصل الاجتماعي --}}
+                            @if($showSocial)
+                                {{-- ضع هنا كود أيقونات التواصل الاجتماعي --}}
+                            @endif
                         </ul>
                     </div>
                     
@@ -341,6 +365,8 @@ class="theme-header"
                                                 </li>
                                             @endforeach
                                             
+                                            {{-- فيديو --}}
+                                            @if($showVideo)
                                             <li class="menu-item">
                                                 <a href="{{ route('videos.index') }}" 
                                                    class="hover:text-primary-color transition-colors font-medium flex items-center gap-1">
@@ -348,6 +374,34 @@ class="theme-header"
                                                     فيديو
                                                 </a>
                                             </li>
+                                            @endif
+
+                                            {{-- عن الموقع --}}
+                                            @if($showAbout)
+                                            <li class="menu-item">
+                                                <a href="{{ route('about') }}" 
+                                                   class="hover:text-primary-color transition-colors font-medium flex items-center gap-1">
+                                                    <i class="bi bi-info-circle"></i>
+                                                    عن الموقع
+                                                </a>
+                                            </li>
+                                            @endif
+
+                                            {{-- اتصل بنا --}}
+                                            @if($showContact)
+                                            <li class="menu-item">
+                                                <a href="{{ route('contact') }}" 
+                                                   class="hover:text-primary-color transition-colors font-medium flex items-center gap-1">
+                                                    <i class="bi bi-envelope"></i>
+                                                    اتصل بنا
+                                                </a>
+                                            </li>
+                                            @endif
+
+                                            {{-- أيقونات التواصل الاجتماعي --}}
+                                            @if($showSocial)
+                                                {{-- ضع هنا كود أيقونات التواصل الاجتماعي --}}
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>

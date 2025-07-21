@@ -5,12 +5,23 @@
 @section('keywords', 'أخبار, حضرموت, اليمن, إخبارية')
 
 @section('content')
+    @php
+        use App\Models\SiteSettings;
+    @endphp
+
+    @if(!request()->routeIs('privacy') && !request()->routeIs('terms') && SiteSettings::getValue('show_hero_section', true))
+        @include('livewire.partials.hero')
+    @endif
+            
     <!-- Breaking News Ticker -->
+    @if(SiteSettings::getValue('show_breaking_news', true))
     <section class="breaking-news-section">
         <livewire:breaking-news-ticker />
     </section>
+    @endif
 
     <!-- Hero Section with Featured News -->
+     
     <section class="hero-section bg-gradient-to-br from-slate-50 to-white py-8">
         <div class="container mx-auto px-2">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -63,6 +74,7 @@
                         </div>
                         
                         <!-- Newsletter Sidebar -->
+                        @if(SiteSettings::getValue('show_newsletter', true))
                         <div class="newsletter-sidebar rounded-2xl p-6 text-white relative overflow-hidden">
                             <div class="relative z-10">
                                 <h3 class="text-lg font-bold mb-3">اشترك في النشرة الإخبارية</h3>
@@ -70,11 +82,13 @@
                                 <livewire:newsletter-signup />
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </section>
+ 
 
     <!-- Main Content Area -->
     <div class="bg-slate-50">
@@ -117,20 +131,6 @@
                     <livewire:category-section />
                 </section>
 
-                <!-- Video Section -->
-                <section class="section-card bg-white rounded-2xl p-6">
-                    <div class="section-header mb-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
-                            <div>
-                                <h2 class="text-2xl font-bold text-slate-800">فيديو شبوة21</h2>
-                                <p class="text-slate-600">أحدث الفيديوهات والتقارير المصورة</p>
-                            </div>
-                        </div>
-                    </div>
-                    <livewire:video-section />
-                </section>
-
                 <!-- Sports Section -->
                 <section class="section-card bg-white rounded-2xl p-6">
                     <div class="section-header mb-6">
@@ -163,7 +163,7 @@
                             </div>
                         </div>
                     </div>
-                    <livewire:opinion-articles />
+                    <livewire:opinion-articles :limit="$opinionArticlesPerPage" />
                 </section>
 
                 <!-- Most Read Articles -->
@@ -184,11 +184,23 @@
     </section>
 
     <!-- Newsletter Section -->
-    <section class="newsletter-section py-12">
-        <div class="container mx-auto px-2">
-            <livewire:newsletter-signup />
+    
+
+    <!-- Video Section -->
+    @if(SiteSettings::getValue('show_video_in_nav', true))
+    <section class="section-card bg-white rounded-2xl p-6">
+        <div class="section-header mb-6">
+            <div class="flex items-center gap-4">
+                <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800">فيديو شبوة21</h2>
+                    <p class="text-slate-600">أحدث الفيديوهات والتقارير المصورة</p>
+                </div>
+            </div>
         </div>
+        <livewire:video-section :limit="$videosPerPage" />
     </section>
+    @endif
 @endsection
 
 @push('styles')

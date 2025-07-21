@@ -187,21 +187,46 @@
                         @error('form.enable_comments') <span class="error-text">{{ $message }}</span> @enderror
                     </div>
 
+                    
+                </div>
+            </div>
+
+            <!-- Navbar & Home Settings -->
+            <div class="settings-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="bi bi-layout-text-sidebar-reverse ml-2"></i>
+                        إعدادات القائمة الرئيسية والواجهة
+                    </h3>
+                </div>
+                <div class="card-content">
                     <div class="form-group">
-                        <label class="form-label">عرض النشرة الإخبارية</label>
-                        <div class="flex items-center space-x-4 space-x-reverse">
-                            <label class="flex items-center">
-                                <input type="radio" wire:model="form.enable_newsletter" value="1" 
-                                       class="ml-2 text-[#C08B2D] focus:ring-[#C08B2D]">
-                                <span class="text-sm text-gray-700">مفعل</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" wire:model="form.enable_newsletter" value="0" 
-                                       class="ml-2 text-[#C08B2D] focus:ring-[#C08B2D]">
-                                <span class="text-sm text-gray-700">معطل</span>
-                            </label>
-                        </div>
-                        @error('form.enable_newsletter') <span class="error-text">{{ $message }}</span> @enderror
+                        <label class="form-label">إظهار قسم الهيرو (Hero Section)</label>
+                        <input type="checkbox" wire:model="form.show_hero_section">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">إظهار شريط الأخبار العاجلة (Breaking News)</label>
+                        <input type="checkbox" wire:model="form.show_breaking_news">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">إظهار النشرة البريدية (Newsletter)</label>
+                        <input type="checkbox" wire:model="form.show_newsletter">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">إظهار قسم الفيديو في القائمة</label>
+                        <input type="checkbox" wire:model="form.show_video_in_nav">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">إظهار صفحة "عن الموقع" في القائمة</label>
+                        <input type="checkbox" wire:model="form.show_about_in_nav">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">إظهار صفحة "اتصل بنا" في القائمة</label>
+                        <input type="checkbox" wire:model="form.show_contact_in_nav">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">إظهار أيقونات التواصل الاجتماعي في القائمة</label>
+                        <input type="checkbox" wire:model="form.show_social_links_in_nav">
                     </div>
                 </div>
             </div>
@@ -326,7 +351,7 @@
             title: title,
             text: message,
             toast: true,
-            position: 'top-end',
+             position: 'top-start',
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,

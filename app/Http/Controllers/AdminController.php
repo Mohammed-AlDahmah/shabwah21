@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Author;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Video;
@@ -120,9 +121,8 @@ class AdminController extends Controller
      */
     public function createArticle()
     {
-        $categories = Category::all();
-        $authors = User::where('role', 'author')->get();
-        
+        $categories = Category::where('is_active', true)->get();
+        $authors = Author::where('is_active', true)->get();
         return view('admin.articles.create', compact('categories', 'authors'));
     }
 
@@ -136,7 +136,7 @@ class AdminController extends Controller
             'excerpt' => 'required|string|max:500',
             'content' => 'required|string',
             'category_id' => 'required|exists:categories,id',
-            'author_id' => 'required|exists:users,id',
+            'author_id' => 'required|exists:authors,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'is_published' => 'boolean',
             'is_featured' => 'boolean',
@@ -159,7 +159,7 @@ class AdminController extends Controller
     public function editArticle(Article $article)
     {
         $categories = Category::all();
-        $authors = User::where('role', 'author')->get();
+        $authors = Article::where('is_active', 'true')->get();
         
         return view('admin.articles.edit', compact('article', 'categories', 'authors'));
     }

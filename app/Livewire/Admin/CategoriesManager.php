@@ -18,19 +18,23 @@ class CategoriesManager extends Component
 
     // Form fields
     public $form = [
-        'name' => '',
+        'name_ar' => '',
+        'name_en' => '',
         'description' => '',
         'color' => '#C08B2D',
         'icon' => 'bi bi-newspaper',
         'slug' => '',
+        'type' => 'article',
     ];
 
     protected $rules = [
-        'form.name' => 'required|string|max:255',
+        'form.name_ar' => 'required|string|max:255',
+        'form.name_en' => 'required|string|max:255',
         'form.description' => 'nullable|string|max:500',
         'form.color' => 'required|string|max:7',
         'form.icon' => 'required|string|max:50',
         'form.slug' => 'nullable|string|max:255|unique:categories,slug',
+        'form.type' => 'required|in:news,report,article,infographic,video,opinion',
     ];
 
     protected $listeners = [
@@ -63,11 +67,13 @@ class CategoriesManager extends Component
         if ($category) {
             $this->editingCategory = $category;
             $this->form = [
-                'name' => $category->name,
+                'name_ar' => $category->name_ar,
+                'name_en' => $category->name_en,
                 'description' => $category->description,
                 'color' => $category->color,
                 'icon' => $category->icon,
                 'slug' => $category->slug,
+                'type' => $category->type,
             ];
             $this->showEditModal = true;
         }
@@ -78,17 +84,20 @@ class CategoriesManager extends Component
         $this->validate();
 
         $data = [
-            'name' => $this->form['name'],
+            'name_ar' => $this->form['name_ar'],
+            'name_en' => $this->form['name_en'],
             'description' => $this->form['description'],
             'color' => $this->form['color'],
             'icon' => $this->form['icon'],
-            'slug' => $this->form['slug'] ?: Str::slug($this->form['name']),
+            'slug' => $this->form['slug'] ?: Str::slug($this->form['name_ar']),
+            'type' => $this->form['type'],
         ];
 
         if ($this->editingCategory) {
             // Update unique rule for editing
             $this->validate([
-                'form.name' => 'required|string|max:255|unique:categories,name,' . $this->editingCategory->id,
+                'form.name_ar' => 'required|string|max:255|unique:categories,name_ar,' . $this->editingCategory->id,
+                'form.name_en' => 'required|string|max:255|unique:categories,name_en,' . $this->editingCategory->id,
                 'form.slug' => 'nullable|string|max:255|unique:categories,slug,' . $this->editingCategory->id,
             ]);
             
@@ -153,11 +162,13 @@ class CategoriesManager extends Component
     public function resetForm()
     {
         $this->form = [
-            'name' => '',
+            'name_ar' => '',
+            'name_en' => '',
             'description' => '',
             'color' => '#C08B2D',
             'icon' => 'bi bi-newspaper',
             'slug' => '',
+            'type' => 'article',
         ];
         $this->editingCategory = null;
     }
@@ -171,7 +182,8 @@ class CategoriesManager extends Component
     {
         $query = Category::withCount('articles')
             ->when($this->search, function ($query) {
-                $query->where('name', 'like', '%' . $this->search . '%')
+                $query->where('name_ar', 'like', '%' . $this->search . '%')
+                      ->orWhere('name_en', 'like', '%' . $this->search . '%')
                       ->orWhere('description', 'like', '%' . $this->search . '%');
             });
 

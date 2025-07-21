@@ -349,7 +349,7 @@
             title: title,
             text: message,
             toast: true,
-            position: 'top-end',
+             position: 'top-start',
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,

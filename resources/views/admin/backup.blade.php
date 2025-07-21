@@ -1,7 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'النسخ الاحتياطية - شبوة21')
-
 @section('content')
-    <livewire:admin.backup-manager />
+    <div class="p-6">
+        <h1 class="text-2xl font-bold text-gray-900 mb-4">النسخ الاحتياطية</h1>
+        <p class="text-gray-600">صفحة النسخ الاحتياطية - قيد التطوير</p>
+    </div>
 @endsection 

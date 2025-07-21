@@ -25,6 +25,8 @@ use App\Livewire\Admin\AdminHome;
 
 // Redirect login to admin login
 Route::redirect('/login', '/admin/login');
+Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
+Route::post('/admin/login', [AdminController::class, 'authenticate'])->name('admin.authenticate');
 
 // Public routes
 Route::get('/', function () {
@@ -66,63 +68,52 @@ Route::get('/terms', function () {
     return view('pages.terms');
 })->name('terms');
 
-// Admin routes
-Route::prefix('admin')->name('admin.')->group(function () {
-    // Guest routes
-    Route::middleware('guest')->group(function () {
-        Route::get('/login', [AdminController::class, 'login'])->name('login');
-        Route::post('/login', [AdminController::class, 'authenticate'])->name('authenticate');
-    });
-
-    // Protected routes
-    Route::middleware('auth')->group(function () {
-        // Dashboard
-        Route::get('/', function () {
-            return view('admin.dashboard');
-        })->name('dashboard');
-        
-        // Test component
-        Route::get('/test', function () {
-            return view('admin.test');
-        })->name('test');
-        
-        // Articles management
-        Route::get('/articles', function () {
-            return view('admin.articles');
-        })->name('articles.index');
-        
-        // Categories management
-        Route::get('/categories', function () {
-            return view('admin.categories');
-        })->name('categories.index');
-        
-        // Videos management
-        Route::get('/videos', function () {
-            return view('admin.videos');
-        })->name('videos.index');
-        
-        // Users management
-        Route::get('/users', function () {
-            return view('admin.users');
-        })->name('users.index');
-        
-        // Settings
-        Route::get('/settings', function () {
-            return view('admin.settings');
-        })->name('settings.index');
-        
-        // Backup
-        Route::get('/backup', function () {
-            return view('admin.backup');
-        })->name('backup.index');
-        Route::get('/backup/download/{path}', [AdminController::class, 'downloadBackup'])->name('backup.download');
-        
-        // Roles (placeholder)
-        Route::get('/roles', function () {
-            return view('admin.roles.index');
-        })->name('roles.index');
-        
-        // Logout
-        Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
-    });
+// Admin Routes
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+    
+    Route::get('/news', function () {
+        return view('admin.news');
+    })->name('admin.news');
+    
+    Route::get('/reports', function () {
+        return view('admin.reports');
+    })->name('admin.reports');
+    
+    Route::get('/opinions', function () {
+        return view('admin.opinions');
+    })->name('admin.opinions');
+    
+    Route::get('/infographics', function () {
+        return view('admin.infographics');
+    })->name('admin.infographics');
+    
+    Route::get('/articles', function () {
+        return view('admin.articles');
+    })->name('admin.articles');
+    
+    Route::get('/authors', function () {
+        return view('admin.authors');
+    })->name('admin.authors');
+    Route::get('/categories', function () {
+        return view('admin.categories');
+    })->name('admin.categories');
+    Route::get('/settings', function () {
+        return view('admin.settings');
+    })->name('admin.settings');
+    Route::get('/videos', VideosManager::class)->name('admin.videos');
+    
+    Route::get('/users', function () {
+        return view('admin.users');
+    })->name('admin.users');
+    
+    Route::get('/backup', function () {
+        return view('admin.backup');
+    })->name('admin.backup');
+    
+    Route::get('/roles', function () {
+        return view('admin.roles');
+    })->name('admin.roles');
 });

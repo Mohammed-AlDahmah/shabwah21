@@ -23,6 +23,13 @@ class User extends Authenticatable
         'password',
         'role',
         'is_active',
+        'phone',
+        'position',
+        'department',
+        'bio',
+        'avatar',
+        'last_login_at',
+        'email_verified_at',
     ];
 
     /**
@@ -46,6 +53,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'is_active' => 'boolean',
+            'last_login_at' => 'datetime',
         ];
     }
 
@@ -95,5 +103,85 @@ class User extends Authenticatable
     public function isActive()
     {
         return $this->is_active;
+    }
+
+    /**
+     * Get user's role display name.
+     */
+    public function getRoleDisplayNameAttribute()
+    {
+        $roles = [
+            'admin' => 'مدير',
+            'editor' => 'محرر',
+            'user' => 'مستخدم',
+        ];
+
+        return $roles[$this->role] ?? $this->role;
+    }
+
+    /**
+     * Get user's avatar URL.
+     */
+    public function getAvatarUrlAttribute()
+    {
+        if ($this->avatar) {
+            return \App\Helpers\ImageHelper::getImageUrl($this->avatar);
+        }
+        return null;
+    }
+
+    /**
+     * Get user's initials for avatar.
+     */
+    public function getInitialsAttribute()
+    {
+        $words = explode(' ', $this->name);
+        $initials = '';
+        
+        foreach ($words as $word) {
+            $initials .= mb_substr($word, 0, 1, 'UTF-8');
+        }
+        
+        return mb_strtoupper($initials, 'UTF-8');
+    }
+
+    /**
+     * Check if user has specific role.
+     */
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
+
+    /**
+     * Check if user has any of the given roles.
+     */
+    public function hasAnyRole($roles)
+    {
+        return in_array($this->role, (array) $roles);
+    }
+
+    /**
+     * Check if user is super admin.
+     */
+    public function isSuperAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Check if user can manage content.
+     */
+    public function canManageContent()
+    {
+        return in_array($this->role, ['admin', 'editor']);
+    }
+
+    /**
+     * Check if user can publish content.
+     */
+    public function canPublishContent()
+    {
+        return in_array($this->role, ['admin', 'editor', 'reporter']);
     }
 }

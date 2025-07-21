@@ -22,11 +22,15 @@ class Homepage extends Component
 
     public function render()
     {
+        $videosPerPage = SiteSettings::getValue('videos_per_page', 6);
+        $opinionArticlesPerPage = SiteSettings::getValue('opinion_articles_per_page', 4);
         return view('livewire.homepage', [
             'heroDescription' => $this->heroDescription,
             'footerDescription' => $this->footerDescription,
             'socialMediaLinks' => $this->socialMediaLinks,
-            'contactInfo' => $this->contactInfo
+            'contactInfo' => $this->contactInfo,
+            'videosPerPage' => $videosPerPage,
+            'opinionArticlesPerPage' => $opinionArticlesPerPage,
         ]);
     }
 }

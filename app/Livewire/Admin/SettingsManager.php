@@ -22,6 +22,14 @@ class SettingsManager extends Component
         'social_youtube' => '',
         'footer_text' => '',
         'analytics_code' => '',
+        // Navbar & Home (as key/value)
+        'show_hero_section' => true,
+        'show_breaking_news' => true,
+        'show_newsletter' => true,
+        'show_video_in_nav' => true,
+        'show_about_in_nav' => true,
+        'show_contact_in_nav' => true,
+        'show_social_links_in_nav' => true,
     ];
 
     protected $rules = [
@@ -36,6 +44,14 @@ class SettingsManager extends Component
         'form.social_youtube' => 'nullable|url',
         'form.footer_text' => 'nullable|string|max:500',
         'form.analytics_code' => 'nullable|string',
+        // Navbar & Home
+        'form.show_hero_section' => 'boolean',
+        'form.show_breaking_news' => 'boolean',
+        'form.show_newsletter' => 'boolean',
+        'form.show_video_in_nav' => 'boolean',
+        'form.show_about_in_nav' => 'boolean',
+        'form.show_contact_in_nav' => 'boolean',
+        'form.show_social_links_in_nav' => 'boolean',
     ];
 
     protected $listeners = [
@@ -50,25 +66,26 @@ class SettingsManager extends Component
     public function loadSettings()
     {
         $this->isLoading = true;
-        
         try {
-            $settings = SiteSettings::first();
-            
-            if ($settings) {
-                $this->form = [
-                    'site_name' => $settings->site_name ?? '',
-                    'site_description' => $settings->site_description ?? '',
-                    'site_keywords' => $settings->site_keywords ?? '',
-                    'contact_email' => $settings->contact_email ?? '',
-                    'contact_phone' => $settings->contact_phone ?? '',
-                    'social_facebook' => $settings->social_facebook ?? '',
-                    'social_twitter' => $settings->social_twitter ?? '',
-                    'social_instagram' => $settings->social_instagram ?? '',
-                    'social_youtube' => $settings->social_youtube ?? '',
-                    'footer_text' => $settings->footer_text ?? '',
-                    'analytics_code' => $settings->analytics_code ?? '',
-                ];
-            }
+            $this->form['site_name'] = \App\Models\SiteSettings::getValue('site_name', '');
+            $this->form['site_description'] = \App\Models\SiteSettings::getValue('site_description', '');
+            $this->form['site_keywords'] = \App\Models\SiteSettings::getValue('site_keywords', '');
+            $this->form['contact_email'] = \App\Models\SiteSettings::getValue('contact_email', '');
+            $this->form['contact_phone'] = \App\Models\SiteSettings::getValue('contact_phone', '');
+            $this->form['social_facebook'] = \App\Models\SiteSettings::getValue('social_facebook', '');
+            $this->form['social_twitter'] = \App\Models\SiteSettings::getValue('social_twitter', '');
+            $this->form['social_instagram'] = \App\Models\SiteSettings::getValue('social_instagram', '');
+            $this->form['social_youtube'] = \App\Models\SiteSettings::getValue('social_youtube', '');
+            $this->form['footer_text'] = \App\Models\SiteSettings::getValue('footer_text', '');
+            $this->form['analytics_code'] = \App\Models\SiteSettings::getValue('analytics_code', '');
+            // Navbar & Home
+            $this->form['show_hero_section'] = (bool) \App\Models\SiteSettings::getValue('show_hero_section', true);
+            $this->form['show_breaking_news'] = (bool) \App\Models\SiteSettings::getValue('show_breaking_news', true);
+            $this->form['show_newsletter'] = (bool) \App\Models\SiteSettings::getValue('show_newsletter', true);
+            $this->form['show_video_in_nav'] = (bool) \App\Models\SiteSettings::getValue('show_video_in_nav', true);
+            $this->form['show_about_in_nav'] = (bool) \App\Models\SiteSettings::getValue('show_about_in_nav', true);
+            $this->form['show_contact_in_nav'] = (bool) \App\Models\SiteSettings::getValue('show_contact_in_nav', true);
+            $this->form['show_social_links_in_nav'] = (bool) \App\Models\SiteSettings::getValue('show_social_links_in_nav', true);
         } catch (\Exception $e) {
             $this->dispatch('showToast', [
                 'type' => 'error',
@@ -76,20 +93,17 @@ class SettingsManager extends Component
                 'message' => 'حدث خطأ أثناء تحميل الإعدادات'
             ]);
         }
-        
         $this->isLoading = false;
     }
 
     public function saveSettings()
     {
         $this->validate();
-
         $this->isLoading = true;
-
         try {
-            $settings = SiteSettings::firstOrCreate([]);
-            $settings->update($this->form);
-
+            foreach ($this->form as $key => $value) {
+                \App\Models\SiteSettings::setValue($key, $value);
+            }
             $this->dispatch('showToast', [
                 'type' => 'success',
                 'title' => 'تم الحفظ بنجاح',
@@ -102,7 +116,6 @@ class SettingsManager extends Component
                 'message' => 'حدث خطأ أثناء حفظ الإعدادات'
             ]);
         }
-
         $this->isLoading = false;
     }
 

@@ -7,13 +7,20 @@ use App\Models\Video;
 
 class VideoSection extends Component
 {
+    public $limit = 3;
+
+    public function mount($limit = 3)
+    {
+        $this->limit = $limit;
+    }
+
     public function render()
     {
         $videos = Video::where('is_published', true)
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
             ->latest('published_at')
-            ->take(3)
+            ->take($this->limit)
             ->get();
 
         return view('livewire.video-section', compact('videos'));

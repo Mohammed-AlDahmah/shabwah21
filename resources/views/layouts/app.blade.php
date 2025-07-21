@@ -38,9 +38,7 @@
             <!-- Header -->
             <livewire:header />
             
-            @if(!request()->routeIs('privacy') && !request()->routeIs('terms'))
-                @include('livewire.partials.hero')
-            @endif
+            
             
             <!-- Main Content -->
             <main>

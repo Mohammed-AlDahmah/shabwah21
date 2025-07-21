@@ -16,7 +16,7 @@
     <!-- Filters -->
     <div class="filters-section mb-6">
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <!-- Search -->
                 <div class="search-box">
                     <label class="block text-sm font-medium text-gray-700 mb-2">البحث</label>
@@ -48,6 +48,20 @@
                         <option value="draft">مسودة</option>
                     </select>
                 </div>
+
+                <!-- Article Type Filter -->
+                <div class="article-type-filter">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">نوع المقال</label>
+                    <select wire:model.live="articleTypeFilter" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent">
+                        <option value="">جميع الأنواع</option>
+                        <option value="general">عام</option>
+                        <option value="analysis">تحليل</option>
+                        <option value="feature">مميز</option>
+                        <option value="interview">مقابلة</option>
+                        <option value="review">مراجعة</option>
+                        <option value="tutorial">تعليمي</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
@@ -69,10 +83,10 @@
                                 الكاتب
                             </th>
                             <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                الحالة
+                                النوع
                             </th>
                             <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                المشاهدات
+                                الحالة
                             </th>
                             <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 التاريخ
@@ -88,13 +102,13 @@
                                 <td class="px-6 py-4">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-12 w-16">
-                                            @if($article->image)
+                                            @if($article->featured_image)
                                                 <img class="h-12 w-16 object-cover rounded-lg" 
-                                                     src="{{ \App\Helpers\ImageHelper::getImageUrl($article->image) }}" 
+                                                     src="{{ \App\Helpers\ImageHelper::getImageUrl($article->featured_image) }}" 
                                                      alt="{{ $article->title }}">
                                             @else
                                                 <div class="h-12 w-16 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center">
-                                                    <i class="bi bi-image text-gray-400"></i>
+                                                    <i class="bi bi-file-text text-gray-400"></i>
                                                 </div>
                                             @endif
                                         </div>
@@ -105,6 +119,11 @@
                                             <div class="text-sm text-gray-500">
                                                 {{ Str::limit($article->excerpt, 60) }}
                                             </div>
+                                            @if($article->article_topic)
+                                                <div class="text-xs text-gray-400">
+                                                    الموضوع: {{ $article->article_topic }}
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </td>
@@ -122,6 +141,29 @@
                                     {{ $article->author_name ?? 'غير محدد' }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    @php
+                                        $articleTypeColors = [
+                                            'general' => 'bg-gray-100 text-gray-800',
+                                            'analysis' => 'bg-blue-100 text-blue-800',
+                                            'feature' => 'bg-purple-100 text-purple-800',
+                                            'interview' => 'bg-green-100 text-green-800',
+                                            'review' => 'bg-orange-100 text-orange-800',
+                                            'tutorial' => 'bg-red-100 text-red-800'
+                                        ];
+                                        $articleTypeText = [
+                                            'general' => 'عام',
+                                            'analysis' => 'تحليل',
+                                            'feature' => 'مميز',
+                                            'interview' => 'مقابلة',
+                                            'review' => 'مراجعة',
+                                            'tutorial' => 'تعليمي'
+                                        ];
+                                    @endphp
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $articleTypeColors[$article->article_type ?? 'general'] }}">
+                                        {{ $articleTypeText[$article->article_type ?? 'general'] }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
                                     <button wire:click="togglePublish({{ $article->id }})" 
                                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium cursor-pointer transition-colors
                                                    {{ $article->is_published 
@@ -130,9 +172,6 @@
                                         <i class="bi bi-{{ $article->is_published ? 'check-circle' : 'clock' }} ml-1"></i>
                                         {{ $article->is_published ? 'منشور' : 'مسودة' }}
                                     </button>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
-                                    {{ number_format($article->views_count ?? 0) }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
                                     {{ $article->created_at->format('Y/m/d') }}
@@ -159,7 +198,7 @@
                             <tr>
                                 <td colspan="7" class="px-6 py-12 text-center">
                                     <div class="empty-state">
-                                        <i class="bi bi-newspaper text-4xl text-gray-300 mb-4"></i>
+                                        <i class="bi bi-file-text text-4xl text-gray-300 mb-4"></i>
                                         <h3 class="text-lg font-semibold text-gray-600 mb-2">لا توجد مقالات</h3>
                                         <p class="text-gray-500 mb-4">ابدأ بإنشاء مقالتك الأولى</p>
                                         <button wire:click="createArticle" class="btn-primary">
@@ -227,11 +266,69 @@
                                 <select wire:model="form.author_id" 
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent">
                                     <option value="">اختر الكاتب</option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @foreach($authors as $author)
+                                        <option value="{{ $author->id }}">{{ $author->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('form.author_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Article Type -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">نوع المقال</label>
+                                <select wire:model="form.article_type" 
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent">
+                                    <option value="general">عام</option>
+                                    <option value="analysis">تحليل</option>
+                                    <option value="feature">مميز</option>
+                                    <option value="interview">مقابلة</option>
+                                    <option value="review">مراجعة</option>
+                                    <option value="tutorial">تعليمي</option>
+                                </select>
+                                @error('form.article_type') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Article Topic -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">موضوع المقال</label>
+                                <input type="text" wire:model="form.article_topic" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
+                                       placeholder="موضوع المقال">
+                                @error('form.article_topic') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Article Difficulty -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">مستوى الصعوبة</label>
+                                <select wire:model="form.article_difficulty" 
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent">
+                                    <option value="easy">سهل</option>
+                                    <option value="medium">متوسط</option>
+                                    <option value="hard">صعب</option>
+                                </select>
+                                @error('form.article_difficulty') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Article Target Audience -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">الجمهور المستهدف</label>
+                                <select wire:model="form.article_target_audience" 
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent">
+                                    <option value="general">عام</option>
+                                    <option value="experts">خبراء</option>
+                                    <option value="beginners">مبتدئين</option>
+                                    <option value="students">طلاب</option>
+                                </select>
+                                @error('form.article_target_audience') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Article Reading Time -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">وقت القراءة</label>
+                                <input type="text" wire:model="form.article_reading_time" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
+                                       placeholder="مثال: 5 دقائق">
+                                @error('form.article_reading_time') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
                             <!-- Excerpt -->
@@ -252,6 +349,42 @@
                                 @error('form.content') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
+                            <!-- Article Keywords -->
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">الكلمات المفتاحية</label>
+                                <input type="text" wire:model="form.article_keywords" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
+                                       placeholder="الكلمات المفتاحية مفصولة بفواصل">
+                                @error('form.article_keywords') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Article Summary -->
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">ملخص مفصل</label>
+                                <textarea wire:model="form.article_summary" rows="3"
+                                          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
+                                          placeholder="ملخص مفصل للمقال"></textarea>
+                                @error('form.article_summary') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Article Conclusion -->
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">الاستنتاجات</label>
+                                <textarea wire:model="form.article_conclusion" rows="3"
+                                          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
+                                          placeholder="استنتاجات المقال"></textarea>
+                                @error('form.article_conclusion') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Article References -->
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">المراجع</label>
+                                <textarea wire:model="form.article_references" rows="3"
+                                          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
+                                          placeholder="مراجع المقال"></textarea>
+                                @error('form.article_references') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
                             <!-- Featured Image -->
                             <div class="md:col-span-2">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">الصورة الرئيسية</label>
@@ -265,25 +398,12 @@
                                         <img src="{{ $image->temporaryUrl() }}" 
                                              class="w-32 h-24 object-cover rounded-lg border">
                                     </div>
-                                @elseif($editingArticle && $editingArticle->image)
+                                @elseif($editingArticle && $editingArticle->featured_image)
                                     <div class="mt-2">
-                                        <img src="{{ \App\Helpers\ImageHelper::getImageUrl($editingArticle->image) }}" 
+                                        <img src="{{ \App\Helpers\ImageHelper::getImageUrl($editingArticle->featured_image) }}" 
                                              class="w-32 h-24 object-cover rounded-lg border">
                                     </div>
                                 @endif
-                            </div>
-
-                            <!-- Type -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">نوع المقال</label>
-                                <select wire:model="form.type" 
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent">
-                                    <option value="news">خبر</option>
-                                    <option value="report">تقرير</option>
-                                    <option value="article">مقال</option>
-                                    <option value="infographic">إنفوجرافيك</option>
-                                </select>
-                                @error('form.type') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
                             <!-- Published Status -->
@@ -304,18 +424,13 @@
                                 @error('form.is_published') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
-                            <!-- Featured & Breaking -->
+                            <!-- Featured -->
                             <div class="md:col-span-2">
                                 <div class="flex items-center space-x-6 space-x-reverse">
                                     <label class="flex items-center">
                                         <input type="checkbox" wire:model="form.is_featured" 
                                                class="ml-2 text-[#C08B2D] focus:ring-[#C08B2D] rounded">
                                         <span class="text-sm text-gray-700">مميز</span>
-                                    </label>
-                                    <label class="flex items-center">
-                                        <input type="checkbox" wire:model="form.is_breaking" 
-                                               class="ml-2 text-[#C08B2D] focus:ring-[#C08B2D] rounded">
-                                        <span class="text-sm text-gray-700">خبر عاجل</span>
                                     </label>
                                 </div>
                             </div>
@@ -426,7 +541,7 @@
             title: title,
             text: message,
             toast: true,
-            position: 'top-end',
+             position: 'top-start',
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
@@ -453,7 +568,7 @@
             cancelButtonText: 'إلغاء'
         }).then((result) => {
             if (result.isConfirmed) {
-                @this.deleteArticleConfirmed(id);
+                @this.deleteArticleConfirmed({id: id});
             }
         });
     });

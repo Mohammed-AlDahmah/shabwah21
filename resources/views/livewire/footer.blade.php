@@ -1,3 +1,6 @@
+@php
+        use App\Models\SiteSettings;
+    @endphp
 <footer class="footer-section bg-gray-900 text-white relative overflow-hidden">
     <!-- Background Pattern -->
     <div class="footer-bg-pattern absolute inset-0 opacity-5">
@@ -110,8 +113,7 @@
                 </div>
             </div>
         </div>
-
-        <!-- Newsletter Section -->
+        @if(SiteSettings::getValue('show_newsletter', true))
         <div class="newsletter-section bg-gray-800 rounded-lg p-6 mb-8">
             <div class="text-center">
                 <h3 class="newsletter-title text-xl font-bold mb-2">اشترك في النشرة الإخبارية</h3>
@@ -127,6 +129,9 @@
                 </div>
             </div>
         </div>
+    @endif
+        <!-- Newsletter Section -->
+       
 
         <!-- Bottom Footer -->
         <div class="footer-bottom border-t border-gray-700 pt-6">

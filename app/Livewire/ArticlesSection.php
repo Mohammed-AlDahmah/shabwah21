@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Author;
 
 class ArticlesSection extends Component
 {

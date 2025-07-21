@@ -6,41 +6,42 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\Article;
-use App\Models\Category;
 use App\Models\Author;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Str;
 
-class NewsManager extends Component
+class OpinionsManager extends Component
 {
     use WithPagination, WithFileUploads;
 
     public $search = '';
     public $categoryFilter = '';
     public $statusFilter = '';
-    public $breakingFilter = '';
+    public $opinionTypeFilter = '';
     public $showCreateModal = false;
     public $showEditModal = false;
     public $editingArticle = null;
 
-    // Form fields - News specific
+    // Form fields - Opinion specific
     public $form = [
         'title' => '',
         'excerpt' => '',
         'content' => '',
         'category_id' => '',
         'author_id' => '',
-        'type' => 'news', // Fixed for news
+        'type' => 'opinion', // Fixed for opinions
         'is_published' => true,
         'is_featured' => false,
         'is_breaking' => false,
-        // News specific fields
-        'news_source' => '',
-        'news_location' => '',
-        'news_date' => '',
-        'news_priority' => 'normal', // low, normal, high, urgent
-        'news_tags' => '',
-        'news_related_articles' => '',
+        // Opinion specific fields
+        'opinion_type' => 'editorial', // editorial, column, analysis, commentary
+        'opinion_topic' => '',
+        'opinion_perspective' => 'neutral', // neutral, supportive, critical, balanced
+        'opinion_expertise' => '',
+        'opinion_credentials' => '',
+        'opinion_related_events' => '',
+        'opinion_call_to_action' => '',
     ];
 
     public $image;
@@ -54,13 +55,14 @@ class NewsManager extends Component
         'form.is_published' => 'boolean',
         'form.is_featured' => 'boolean',
         'form.is_breaking' => 'boolean',
-        // News specific validation
-        'form.news_source' => 'nullable|string|max:255',
-        'form.news_location' => 'nullable|string|max:255',
-        'form.news_date' => 'nullable|date',
-        'form.news_priority' => 'required|in:low,normal,high,urgent',
-        'form.news_tags' => 'nullable|string|max:500',
-        'form.news_related_articles' => 'nullable|string|max:500',
+        // Opinion specific validation
+        'form.opinion_type' => 'required|in:editorial,column,analysis,commentary',
+        'form.opinion_topic' => 'nullable|string|max:255',
+        'form.opinion_perspective' => 'required|in:neutral,supportive,critical,balanced',
+        'form.opinion_expertise' => 'nullable|string|max:255',
+        'form.opinion_credentials' => 'nullable|string|max:500',
+        'form.opinion_related_events' => 'nullable|string|max:500',
+        'form.opinion_call_to_action' => 'nullable|string|max:500',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ];
 
@@ -99,17 +101,18 @@ class NewsManager extends Component
                 'content' => $article->content,
                 'category_id' => $article->category_id,
                 'author_id' => $article->author_id,
-                'type' => 'news',
+                'type' => 'opinion',
                 'is_published' => $article->is_published,
                 'is_featured' => $article->is_featured,
                 'is_breaking' => $article->is_breaking,
-                // News specific fields
-                'news_source' => $article->news_source ?? '',
-                'news_location' => $article->news_location ?? '',
-                'news_date' => $article->news_date ?? '',
-                'news_priority' => $article->news_priority ?? 'normal',
-                'news_tags' => $article->news_tags ?? '',
-                'news_related_articles' => $article->news_related_articles ?? '',
+                // Opinion specific fields
+                'opinion_type' => $article->opinion_type ?? 'editorial',
+                'opinion_topic' => $article->opinion_topic ?? '',
+                'opinion_perspective' => $article->opinion_perspective ?? 'neutral',
+                'opinion_expertise' => $article->opinion_expertise ?? '',
+                'opinion_credentials' => $article->opinion_credentials ?? '',
+                'opinion_related_events' => $article->opinion_related_events ?? '',
+                'opinion_call_to_action' => $article->opinion_call_to_action ?? '',
             ];
             $this->showEditModal = true;
         }
@@ -125,18 +128,19 @@ class NewsManager extends Component
             'content' => $this->form['content'],
             'category_id' => $this->form['category_id'],
             'author_id' => $this->form['author_id'],
-            'type' => 'news',
+            'type' => 'opinion',
             'is_published' => $this->form['is_published'],
             'is_featured' => $this->form['is_featured'],
             'is_breaking' => $this->form['is_breaking'],
             'slug' => Str::slug($this->form['title']),
-            // News specific data
-            'news_source' => $this->form['news_source'],
-            'news_location' => $this->form['news_location'],
-            'news_date' => $this->form['news_date'],
-            'news_priority' => $this->form['news_priority'],
-            'news_tags' => $this->form['news_tags'],
-            'news_related_articles' => $this->form['news_related_articles'],
+            // Opinion specific data
+            'opinion_type' => $this->form['opinion_type'],
+            'opinion_topic' => $this->form['opinion_topic'],
+            'opinion_perspective' => $this->form['opinion_perspective'],
+            'opinion_expertise' => $this->form['opinion_expertise'],
+            'opinion_credentials' => $this->form['opinion_credentials'],
+            'opinion_related_events' => $this->form['opinion_related_events'],
+            'opinion_call_to_action' => $this->form['opinion_call_to_action'],
         ];
 
         if ($this->image) {
@@ -149,7 +153,7 @@ class NewsManager extends Component
             $this->dispatch('showToast', [
                 'type' => 'success',
                 'title' => 'تم التحديث بنجاح',
-                'message' => 'تم تحديث الخبر بنجاح'
+                'message' => 'تم تحديث مقال الرأي بنجاح'
             ]);
             $this->dispatch('articleUpdated');
         } else {
@@ -157,7 +161,7 @@ class NewsManager extends Component
             $this->dispatch('showToast', [
                 'type' => 'success',
                 'title' => 'تم الإنشاء بنجاح',
-                'message' => 'تم إنشاء الخبر بنجاح'
+                'message' => 'تم إنشاء مقال الرأي بنجاح'
             ]);
             $this->dispatch('articleCreated');
         }
@@ -181,7 +185,7 @@ class NewsManager extends Component
             $this->dispatch('showToast', [
                 'type' => 'success',
                 'title' => 'تم الحذف بنجاح',
-                'message' => 'تم حذف الخبر بنجاح'
+                'message' => 'تم حذف مقال الرأي بنجاح'
             ]);
             $this->dispatch('articleDeleted');
         }
@@ -195,20 +199,7 @@ class NewsManager extends Component
             $this->dispatch('showToast', [
                 'type' => 'success',
                 'title' => 'تم التحديث بنجاح',
-                'message' => $article->is_published ? 'تم نشر الخبر' : 'تم إلغاء نشر الخبر'
-            ]);
-        }
-    }
-
-    public function toggleBreaking($articleId)
-    {
-        $article = Article::find($articleId);
-        if ($article) {
-            $article->update(['is_breaking' => !$article->is_breaking]);
-            $this->dispatch('showToast', [
-                'type' => 'success',
-                'title' => 'تم التحديث بنجاح',
-                'message' => $article->is_breaking ? 'تم تعيين الخبر كعاجل' : 'تم إلغاء تعيين الخبر كعاجل'
+                'message' => $article->is_published ? 'تم نشر مقال الرأي' : 'تم إلغاء نشر مقال الرأي'
             ]);
         }
     }
@@ -228,16 +219,17 @@ class NewsManager extends Component
             'content' => '',
             'category_id' => '',
             'author_id' => '',
-            'type' => 'news',
+            'type' => 'opinion',
             'is_published' => true,
             'is_featured' => false,
             'is_breaking' => false,
-            'news_source' => '',
-            'news_location' => '',
-            'news_date' => '',
-            'news_priority' => 'normal',
-            'news_tags' => '',
-            'news_related_articles' => '',
+            'opinion_type' => 'editorial',
+            'opinion_topic' => '',
+            'opinion_perspective' => 'neutral',
+            'opinion_expertise' => '',
+            'opinion_credentials' => '',
+            'opinion_related_events' => '',
+            'opinion_call_to_action' => '',
         ];
         $this->image = null;
         $this->editingArticle = null;
@@ -258,7 +250,7 @@ class NewsManager extends Component
         $this->resetPage();
     }
 
-    public function updatedBreakingFilter()
+    public function updatedOpinionTypeFilter()
     {
         $this->resetPage();
     }
@@ -266,12 +258,12 @@ class NewsManager extends Component
     public function render()
     {
         $query = Article::with(['category', 'author'])
-            ->where('type', 'news')
+            ->where('type', 'opinion')
             ->when($this->search, function ($query) {
                 $query->where('title', 'like', '%' . $this->search . '%')
                       ->orWhere('excerpt', 'like', '%' . $this->search . '%')
-                      ->orWhere('news_source', 'like', '%' . $this->search . '%')
-                      ->orWhere('news_location', 'like', '%' . $this->search . '%');
+                      ->orWhere('opinion_topic', 'like', '%' . $this->search . '%')
+                      ->orWhere('opinion_expertise', 'like', '%' . $this->search . '%');
             })
             ->when($this->categoryFilter, function ($query) {
                 $query->where('category_id', $this->categoryFilter);
@@ -279,14 +271,13 @@ class NewsManager extends Component
             ->when($this->statusFilter !== '', function ($query) {
                 $query->where('is_published', $this->statusFilter === 'published');
             })
-            ->when($this->breakingFilter !== '', function ($query) {
-                $query->where('is_breaking', $this->breakingFilter === 'breaking');
+            ->when($this->opinionTypeFilter, function ($query) {
+                $query->where('opinion_type', $this->opinionTypeFilter);
             });
 
         $articles = $query->latest()->paginate(10);
-        $categories = Category::where('type', 'news')->where('is_active', true)->get();
-        $authors = Author::active()->get();
-
-        return view('livewire.admin.news-manager', compact('articles', 'categories', 'authors'));
+        $categories = Category::where('type', 'opinion')->where('is_active', true)->get();
+         $authors = Author::active()->get();
+        return view('livewire.admin.opinions-manager', compact('articles', 'categories', 'authors'));
     }
 } 

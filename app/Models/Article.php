@@ -10,7 +10,17 @@ use Carbon\Carbon;
 class Article extends Model
 {
     protected $fillable = [
-        'title', 'slug', 'excerpt', 'content', 'featured_image', 'images', 'category_id', 'author_id', 'author', 'source', 'source_url', 'views_count', 'is_featured', 'is_breaking', 'is_published', 'published_at', 'meta_data', 'type'
+        'title', 'slug', 'excerpt', 'content', 'featured_image', 'images', 'category_id', 'author_id', 'author', 'source', 'source_url', 'views_count', 'is_featured', 'is_breaking', 'is_published', 'published_at', 'meta_data', 'type',
+        // News specific fields
+        'news_source', 'news_location', 'news_date', 'news_priority', 'news_tags', 'news_related_articles',
+        // Report specific fields
+        'report_type', 'report_duration', 'report_location', 'report_interviews', 'report_sources', 'report_conclusions', 'report_recommendations', 'report_attachments',
+        // Opinion specific fields
+        'opinion_type', 'opinion_topic', 'opinion_perspective', 'opinion_expertise', 'opinion_credentials', 'opinion_related_events', 'opinion_call_to_action',
+        // Infographic specific fields
+        'infographic_type', 'infographic_data_source', 'infographic_designer', 'infographic_dimensions', 'infographic_colors', 'infographic_language', 'infographic_downloadable', 'infographic_interactive', 'infographic_embed_code', 'infographic_file',
+        // Article specific fields
+        'article_type', 'article_topic', 'article_keywords', 'article_summary', 'article_conclusion', 'article_references', 'article_reading_time', 'article_difficulty', 'article_target_audience'
     ];
 
     // أنواع المقالات المسموحة
@@ -29,6 +39,9 @@ class Article extends Model
         'is_published' => 'boolean',
         'published_at' => 'datetime',
         'meta_data' => 'array',
+        'news_date' => 'date',
+        'infographic_downloadable' => 'boolean',
+        'infographic_interactive' => 'boolean',
     ];
 
     protected $dates = [
@@ -42,7 +55,7 @@ class Article extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(Author::class, 'author_id');
     }
 
     public function scopePublished($query)
@@ -100,10 +113,13 @@ class Article extends Model
 
     public function getAuthorNameAttribute()
     {
-        if ($this->author_id && $this->author) {
+        if ($this->author_id && $this->author && is_object($this->author)) {
             return $this->author->name;
         }
-        return $this->author ?? 'غير محدد';
+        if (is_string($this->author)) {
+            return $this->author;
+        }
+        return 'غير محدد';
     }
 
     protected static function boot()

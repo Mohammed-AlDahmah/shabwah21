@@ -102,9 +102,9 @@
                         <i class="bi bi-clock-history ml-2"></i>
                         أحدث المقالات
                     </h2>
-                    <a href="{{ route('admin.articles.index') }}" class="btn-primary">
-                        عرض الكل
-                        <i class="bi bi-arrow-left mr-2"></i>
+                    <a href="{{ route('admin.articles') }}" class="btn-primary">
+                        <i class="bi bi-file-text ml-2"></i>
+                        إدارة المقالات
                     </a>
                 </div>
                 
@@ -169,22 +169,22 @@
                 </div>
                 
                 <div class="quick-actions">
-                    <a href="{{ route('admin.articles.index') }}" class="quick-action-btn primary">
+                    <a href="{{ route('admin.articles') }}" class="quick-action-btn primary">
                         <i class="bi bi-plus-circle"></i>
                         <span>مقال جديد</span>
                     </a>
                     
-                    <a href="{{ route('admin.categories.index') }}" class="quick-action-btn secondary">
+                    <a href="{{ route('admin.categories') }}" class="quick-action-btn secondary">
                         <i class="bi bi-folder-plus"></i>
                         <span>قسم جديد</span>
                     </a>
                     
-                    <a href="{{ route('admin.videos.index') }}" class="quick-action-btn secondary">
+                    <a href="{{ route('admin.videos') }}" class="quick-action-btn secondary">
                         <i class="bi bi-camera-video"></i>
                         <span>فيديو جديد</span>
                     </a>
                     
-                    <a href="{{ route('admin.users.index') }}" class="quick-action-btn secondary">
+                    <a href="{{ route('admin.users') }}" class="quick-action-btn secondary">
                         <i class="bi bi-person-plus"></i>
                         <span>مستخدم جديد</span>
                     </a>
@@ -694,7 +694,7 @@
             title: title,
             text: message,
             toast: true,
-            position: 'top-end',
+             position: 'top-start',
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,

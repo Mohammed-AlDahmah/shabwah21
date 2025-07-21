@@ -177,8 +177,8 @@
                                 <select wire:model="form.author_id" 
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent">
                                     <option value="">اختر الكاتب</option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @foreach($authors as $author)
+                                        <option value="{{ $author->id }}">{{ $author->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('form.author_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
@@ -477,7 +477,7 @@
             title: title,
             text: message,
             toast: true,
-            position: 'top-end',
+             position: 'top-start',
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,

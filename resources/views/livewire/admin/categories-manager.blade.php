@@ -54,8 +54,20 @@
                     </div>
                     
                     <div class="category-content">
-                        <h3 class="category-name">{{ $category->name }}</h3>
+                        <h3 class="category-name">{{ $category->name_ar }} <span class="text-xs text-gray-400">({{ $category->name_en }})</span></h3>
                         <p class="category-description">{{ $category->description ?: 'لا يوجد وصف' }}</p>
+                        <div class="category-type text-xs text-gray-500 mb-2">
+                            نوع القسم: 
+                            @switch($category->type)
+                                @case('article') مقالات @break
+                                @case('news') أخبار @break
+                                @case('report') تقارير @break
+                                @case('opinion') رأي @break
+                                @case('infographic') إنفوجرافيك @break
+                                @case('video') فيديو @break
+                                @default {{ $category->type }}
+                            @endswitch
+                        </div>
                         
                         <div class="category-stats">
                             <div class="stat-item">
@@ -117,13 +129,21 @@
 
                     <form wire:submit="saveCategory">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Name -->
-                            <div class="md:col-span-2">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">اسم القسم</label>
-                                <input type="text" wire:model="form.name" 
+                            <!-- Name AR -->
+                            <div class="md:col-span-1">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">اسم القسم (عربي)</label>
+                                <input type="text" wire:model="form.name_ar" 
                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
-                                       placeholder="أدخل اسم القسم">
-                                @error('form.name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                       placeholder="أدخل اسم القسم بالعربية">
+                                @error('form.name_ar') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+                            <!-- Name EN -->
+                            <div class="md:col-span-1">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">اسم القسم (إنجليزي)</label>
+                                <input type="text" wire:model="form.name_en" 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent"
+                                       placeholder="Enter category name in English">
+                                @error('form.name_en') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
                             <!-- Description -->
@@ -141,6 +161,20 @@
                                 <input type="color" wire:model="form.color" 
                                        class="w-full h-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent">
                                 @error('form.color') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Type -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">نوع القسم</label>
+                                <select wire:model="form.type" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C08B2D] focus:border-transparent">
+                                    <option value="article">مقالات</option>
+                                    <option value="news">أخبار</option>
+                                    <option value="report">تقارير</option>
+                                    <option value="opinion">رأي</option>
+                                    <option value="infographic">إنفوجرافيك</option>
+                                    <option value="video">فيديو</option>
+                                </select>
+                                @error('form.type') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
                             <!-- Icon -->
@@ -348,6 +382,10 @@
         color: #6b7280;
         margin-bottom: 1rem;
         line-height: 1.5;
+    }
+
+    .category-type {
+        margin-bottom: 0.5rem;
     }
 
     .category-stats {

@@ -11,7 +11,7 @@
                 <h1 class="text-3xl font-bold text-gray-900 mb-2">إنشاء مقال جديد</h1>
                 <p class="text-gray-600">أضف محتوى إخباري جديد للموقع</p>
             </div>
-            <a href="{{ route('admin.articles.index') }}" class="btn-secondary">
+            <a href="{{ route('admin.articles') }}" class="btn-secondary">
                 <i class="bi bi-arrow-right ml-2"></i>
                 العودة للمقالات
             </a>

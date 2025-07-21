@@ -27,6 +27,8 @@ class Category extends Model
         'is_active' => 'boolean',
     ];
 
+    public const TYPES = ['news', 'report', 'article', 'infographic', 'video', 'opinion'];
+
     public function articles(): HasMany
     {
         return $this->hasMany(Article::class);

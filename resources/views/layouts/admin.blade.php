@@ -14,9 +14,6 @@
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
-    <!-- Alpine.js -->
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
     <!-- Livewire Styles -->
     @livewireStyles
     
@@ -345,7 +342,7 @@
 </head>
 <body>
     <!-- Sidebar -->
-    <div class="sidebar" x-data="{ open: true }" :class="{ 'collapsed': !open, 'mobile-open': $store.sidebar.open }">
+    <div class="sidebar">
         <div class="sidebar-header">
             <div class="sidebar-logo">
                 <img src="{{ asset('images/logo.png') }}" alt="شبوة21">
@@ -364,15 +361,35 @@
             
             <div class="nav-section">
                 <div class="nav-section-title">إدارة المحتوى</div>
-                <a href="{{ route('admin.articles.index') }}" class="nav-item {{ request()->routeIs('admin.articles.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.news') }}" class="nav-item {{ request()->routeIs('admin.news') ? 'active' : '' }}">
                     <i class="bi bi-newspaper"></i>
+                    <span>الأخبار</span>
+                </a>
+                <a href="{{ route('admin.reports') }}" class="nav-item {{ request()->routeIs('admin.reports') ? 'active' : '' }}">
+                    <i class="bi bi-file-earmark-text"></i>
+                    <span>التقارير</span>
+                </a>
+                <a href="{{ route('admin.opinions') }}" class="nav-item {{ request()->routeIs('admin.opinions') ? 'active' : '' }}">
+                    <i class="bi bi-chat-quote"></i>
+                    <span>مقالات الرأي</span>
+                </a>
+                <a href="{{ route('admin.articles') }}" class="nav-item {{ request()->routeIs('admin.articles') ? 'active' : '' }}">
+                    <i class="bi bi-file-text"></i>
                     <span>المقالات</span>
                 </a>
-                <a href="{{ route('admin.categories.index') }}" class="nav-item {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.authors') }}" class="nav-item {{ request()->routeIs('admin.authors') ? 'active' : '' }}">
+                    <i class="bi bi-people"></i>
+                    <span>المؤلفين</span>
+                </a>
+                <a href="{{ route('admin.infographics') }}" class="nav-item {{ request()->routeIs('admin.infographics') ? 'active' : '' }}">
+                    <i class="bi bi-bar-chart"></i>
+                    <span>الإنفوجرافيك</span>
+                </a>
+                <a href="{{ route('admin.categories') }}" class="nav-item {{ request()->routeIs('admin.categories') ? 'active' : '' }}">
                     <i class="bi bi-folder"></i>
                     <span>الأقسام</span>
                 </a>
-                <a href="{{ route('admin.videos.index') }}" class="nav-item {{ request()->routeIs('admin.videos.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.videos') }}" class="nav-item {{ request()->routeIs('admin.videos') ? 'active' : '' }}">
                     <i class="bi bi-camera-video"></i>
                     <span>الفيديوهات</span>
                 </a>
@@ -380,19 +397,19 @@
             
             <div class="nav-section">
                 <div class="nav-section-title">إدارة النظام</div>
-                <a href="{{ route('admin.users.index') }}" class="nav-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.users') }}" class="nav-item {{ request()->routeIs('admin.users') ? 'active' : '' }}">
                     <i class="bi bi-people"></i>
                     <span>المستخدمين</span>
                 </a>
-                <a href="{{ route('admin.roles.index') }}" class="nav-item {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.roles') }}" class="nav-item {{ request()->routeIs('admin.roles') ? 'active' : '' }}">
                     <i class="bi bi-shield-check"></i>
                     <span>الصلاحيات</span>
                 </a>
-                <a href="{{ route('admin.settings.index') }}" class="nav-item {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.settings') }}" class="nav-item {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
                     <i class="bi bi-gear"></i>
                     <span>الإعدادات</span>
                 </a>
-                <a href="{{ route('admin.backup.index') }}" class="nav-item {{ request()->routeIs('admin.backup.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.backup') }}" class="nav-item {{ request()->routeIs('admin.backup') ? 'active' : '' }}">
                     <i class="bi bi-cloud-arrow-up"></i>
                     <span>النسخ الاحتياطية</span>
                 </a>
@@ -401,11 +418,11 @@
     </div>
 
     <!-- Main Content -->
-    <div class="main-content" x-data="{ sidebarOpen: true }" :class="{ 'expanded': !sidebarOpen }">
+    <div class="main-content">
         <!-- Header -->
         <header class="header">
             <div class="header-left">
-                <button class="sidebar-toggle" @click="$store.sidebar.toggle()">
+                <button class="sidebar-toggle">
                     <i class="bi bi-list"></i>
                 </button>
                 <nav class="breadcrumb">
@@ -443,13 +460,18 @@
 
     <!-- Alpine.js Store -->
     <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.store('sidebar', {
-                open: window.innerWidth > 768,
-                toggle() {
-                    this.open = !this.open;
-                }
-            });
+        // Simple sidebar toggle without Alpine
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarToggle = document.querySelector('.sidebar-toggle');
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+            
+            if (sidebarToggle && sidebar && mainContent) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('collapsed');
+                    mainContent.classList.toggle('expanded');
+                });
+            }
         });
     </script>
 
@@ -472,7 +494,7 @@
                     title: title,
                     text: message,
                     toast: true,
-                    position: 'top-end',
+                     position: 'top-start',
                     showConfirmButton: false,
                     timer: 3000,
                     timerProgressBar: true,

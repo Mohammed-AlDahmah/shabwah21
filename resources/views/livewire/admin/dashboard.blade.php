@@ -77,7 +77,8 @@
                         <i class="bi bi-clock-history ml-2"></i>
                         أحدث المقالات
                     </h2>
-                    <a href="{{ route('admin.articles.index') }}" class="btn-primary">
+                    <a href="{{ route('admin.articles') }}"
+                       class="text-[#C08B2D] hover:text-[#B22B2B] transition-colors">
                         عرض الكل
                         <i class="bi bi-arrow-left mr-2"></i>
                     </a>
@@ -159,22 +160,22 @@
                 </div>
                 
                 <div class="quick-actions">
-                    <a href="{{ route('admin.articles.index') }}" class="quick-action-btn primary">
-                        <i class="bi bi-plus-circle"></i>
-                        <span>مقال جديد</span>
+                    <a href="{{ route('admin.articles') }}" class="quick-action-btn primary">
+                        <i class="bi bi-file-text"></i>
+                        <span>إدارة المقالات</span>
                     </a>
                     
-                    <a href="{{ route('admin.categories.index') }}" class="quick-action-btn secondary">
+                    <a href="{{ route('admin.categories') }}" class="quick-action-btn secondary">
                         <i class="bi bi-folder-plus"></i>
                         <span>قسم جديد</span>
                     </a>
                     
-                    <a href="{{ route('admin.videos.index') }}" class="quick-action-btn secondary">
+                    <a href="{{ route('admin.videos') }}" class="quick-action-btn secondary">
                         <i class="bi bi-camera-video"></i>
                         <span>فيديو جديد</span>
                     </a>
                     
-                    <a href="{{ route('admin.settings.index') }}" class="quick-action-btn secondary">
+                    <a href="{{ route('admin.settings') }}" class="quick-action-btn secondary">
                         <i class="bi bi-gear"></i>
                         <span>الإعدادات</span>
                     </a>
@@ -642,7 +643,7 @@ window.addEventListener('showToast', event => {
         title: title,
         text: message,
         toast: true,
-        position: 'top-end',
+         position: 'top-start',
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true,

@@ -11,39 +11,42 @@ use App\Models\Author;
 use App\Models\User;
 use Illuminate\Support\Str;
 
-class NewsManager extends Component
+class ReportsManager extends Component
 {
     use WithPagination, WithFileUploads;
 
     public $search = '';
     public $categoryFilter = '';
     public $statusFilter = '';
-    public $breakingFilter = '';
+    public $reportTypeFilter = '';
     public $showCreateModal = false;
     public $showEditModal = false;
     public $editingArticle = null;
 
-    // Form fields - News specific
+    // Form fields - Report specific
     public $form = [
         'title' => '',
         'excerpt' => '',
         'content' => '',
         'category_id' => '',
         'author_id' => '',
-        'type' => 'news', // Fixed for news
+        'type' => 'report', // Fixed for reports
         'is_published' => true,
         'is_featured' => false,
         'is_breaking' => false,
-        // News specific fields
-        'news_source' => '',
-        'news_location' => '',
-        'news_date' => '',
-        'news_priority' => 'normal', // low, normal, high, urgent
-        'news_tags' => '',
-        'news_related_articles' => '',
+        // Report specific fields
+        'report_type' => 'investigation', // investigation, analysis, field, research
+        'report_duration' => '',
+        'report_location' => '',
+        'report_interviews' => '',
+        'report_sources' => '',
+        'report_conclusions' => '',
+        'report_recommendations' => '',
+        'report_attachments' => '',
     ];
 
     public $image;
+    public $attachments = [];
 
     protected $rules = [
         'form.title' => 'required|string|max:255',
@@ -54,14 +57,17 @@ class NewsManager extends Component
         'form.is_published' => 'boolean',
         'form.is_featured' => 'boolean',
         'form.is_breaking' => 'boolean',
-        // News specific validation
-        'form.news_source' => 'nullable|string|max:255',
-        'form.news_location' => 'nullable|string|max:255',
-        'form.news_date' => 'nullable|date',
-        'form.news_priority' => 'required|in:low,normal,high,urgent',
-        'form.news_tags' => 'nullable|string|max:500',
-        'form.news_related_articles' => 'nullable|string|max:500',
+        // Report specific validation
+        'form.report_type' => 'required|in:investigation,analysis,field,research',
+        'form.report_duration' => 'nullable|string|max:255',
+        'form.report_location' => 'nullable|string|max:255',
+        'form.report_interviews' => 'nullable|string|max:1000',
+        'form.report_sources' => 'nullable|string|max:1000',
+        'form.report_conclusions' => 'nullable|string|max:1000',
+        'form.report_recommendations' => 'nullable|string|max:1000',
+        'form.report_attachments' => 'nullable|string|max:500',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'attachments.*' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx|max:5120',
     ];
 
     protected $listeners = [
@@ -99,17 +105,19 @@ class NewsManager extends Component
                 'content' => $article->content,
                 'category_id' => $article->category_id,
                 'author_id' => $article->author_id,
-                'type' => 'news',
+                'type' => 'report',
                 'is_published' => $article->is_published,
                 'is_featured' => $article->is_featured,
                 'is_breaking' => $article->is_breaking,
-                // News specific fields
-                'news_source' => $article->news_source ?? '',
-                'news_location' => $article->news_location ?? '',
-                'news_date' => $article->news_date ?? '',
-                'news_priority' => $article->news_priority ?? 'normal',
-                'news_tags' => $article->news_tags ?? '',
-                'news_related_articles' => $article->news_related_articles ?? '',
+                // Report specific fields
+                'report_type' => $article->report_type ?? 'investigation',
+                'report_duration' => $article->report_duration ?? '',
+                'report_location' => $article->report_location ?? '',
+                'report_interviews' => $article->report_interviews ?? '',
+                'report_sources' => $article->report_sources ?? '',
+                'report_conclusions' => $article->report_conclusions ?? '',
+                'report_recommendations' => $article->report_recommendations ?? '',
+                'report_attachments' => $article->report_attachments ?? '',
             ];
             $this->showEditModal = true;
         }
@@ -125,18 +133,20 @@ class NewsManager extends Component
             'content' => $this->form['content'],
             'category_id' => $this->form['category_id'],
             'author_id' => $this->form['author_id'],
-            'type' => 'news',
+            'type' => 'report',
             'is_published' => $this->form['is_published'],
             'is_featured' => $this->form['is_featured'],
             'is_breaking' => $this->form['is_breaking'],
             'slug' => Str::slug($this->form['title']),
-            // News specific data
-            'news_source' => $this->form['news_source'],
-            'news_location' => $this->form['news_location'],
-            'news_date' => $this->form['news_date'],
-            'news_priority' => $this->form['news_priority'],
-            'news_tags' => $this->form['news_tags'],
-            'news_related_articles' => $this->form['news_related_articles'],
+            // Report specific data
+            'report_type' => $this->form['report_type'],
+            'report_duration' => $this->form['report_duration'],
+            'report_location' => $this->form['report_location'],
+            'report_interviews' => $this->form['report_interviews'],
+            'report_sources' => $this->form['report_sources'],
+            'report_conclusions' => $this->form['report_conclusions'],
+            'report_recommendations' => $this->form['report_recommendations'],
+            'report_attachments' => $this->form['report_attachments'],
         ];
 
         if ($this->image) {
@@ -144,12 +154,20 @@ class NewsManager extends Component
             $data['featured_image'] = $imagePath;
         }
 
+        if ($this->attachments) {
+            $attachmentPaths = [];
+            foreach ($this->attachments as $attachment) {
+                $attachmentPaths[] = $attachment->store('reports/attachments', 'public');
+            }
+            $data['report_attachments'] = implode(',', $attachmentPaths);
+        }
+
         if ($this->editingArticle) {
             $this->editingArticle->update($data);
             $this->dispatch('showToast', [
                 'type' => 'success',
                 'title' => 'تم التحديث بنجاح',
-                'message' => 'تم تحديث الخبر بنجاح'
+                'message' => 'تم تحديث التقرير بنجاح'
             ]);
             $this->dispatch('articleUpdated');
         } else {
@@ -157,7 +175,7 @@ class NewsManager extends Component
             $this->dispatch('showToast', [
                 'type' => 'success',
                 'title' => 'تم الإنشاء بنجاح',
-                'message' => 'تم إنشاء الخبر بنجاح'
+                'message' => 'تم إنشاء التقرير بنجاح'
             ]);
             $this->dispatch('articleCreated');
         }
@@ -181,7 +199,7 @@ class NewsManager extends Component
             $this->dispatch('showToast', [
                 'type' => 'success',
                 'title' => 'تم الحذف بنجاح',
-                'message' => 'تم حذف الخبر بنجاح'
+                'message' => 'تم حذف التقرير بنجاح'
             ]);
             $this->dispatch('articleDeleted');
         }
@@ -195,20 +213,7 @@ class NewsManager extends Component
             $this->dispatch('showToast', [
                 'type' => 'success',
                 'title' => 'تم التحديث بنجاح',
-                'message' => $article->is_published ? 'تم نشر الخبر' : 'تم إلغاء نشر الخبر'
-            ]);
-        }
-    }
-
-    public function toggleBreaking($articleId)
-    {
-        $article = Article::find($articleId);
-        if ($article) {
-            $article->update(['is_breaking' => !$article->is_breaking]);
-            $this->dispatch('showToast', [
-                'type' => 'success',
-                'title' => 'تم التحديث بنجاح',
-                'message' => $article->is_breaking ? 'تم تعيين الخبر كعاجل' : 'تم إلغاء تعيين الخبر كعاجل'
+                'message' => $article->is_published ? 'تم نشر التقرير' : 'تم إلغاء نشر التقرير'
             ]);
         }
     }
@@ -228,18 +233,21 @@ class NewsManager extends Component
             'content' => '',
             'category_id' => '',
             'author_id' => '',
-            'type' => 'news',
+            'type' => 'report',
             'is_published' => true,
             'is_featured' => false,
             'is_breaking' => false,
-            'news_source' => '',
-            'news_location' => '',
-            'news_date' => '',
-            'news_priority' => 'normal',
-            'news_tags' => '',
-            'news_related_articles' => '',
+            'report_type' => 'investigation',
+            'report_duration' => '',
+            'report_location' => '',
+            'report_interviews' => '',
+            'report_sources' => '',
+            'report_conclusions' => '',
+            'report_recommendations' => '',
+            'report_attachments' => '',
         ];
         $this->image = null;
+        $this->attachments = [];
         $this->editingArticle = null;
     }
 
@@ -258,7 +266,7 @@ class NewsManager extends Component
         $this->resetPage();
     }
 
-    public function updatedBreakingFilter()
+    public function updatedReportTypeFilter()
     {
         $this->resetPage();
     }
@@ -266,12 +274,12 @@ class NewsManager extends Component
     public function render()
     {
         $query = Article::with(['category', 'author'])
-            ->where('type', 'news')
+            ->where('type', 'report')
             ->when($this->search, function ($query) {
                 $query->where('title', 'like', '%' . $this->search . '%')
                       ->orWhere('excerpt', 'like', '%' . $this->search . '%')
-                      ->orWhere('news_source', 'like', '%' . $this->search . '%')
-                      ->orWhere('news_location', 'like', '%' . $this->search . '%');
+                      ->orWhere('report_location', 'like', '%' . $this->search . '%')
+                      ->orWhere('report_interviews', 'like', '%' . $this->search . '%');
             })
             ->when($this->categoryFilter, function ($query) {
                 $query->where('category_id', $this->categoryFilter);
@@ -279,14 +287,14 @@ class NewsManager extends Component
             ->when($this->statusFilter !== '', function ($query) {
                 $query->where('is_published', $this->statusFilter === 'published');
             })
-            ->when($this->breakingFilter !== '', function ($query) {
-                $query->where('is_breaking', $this->breakingFilter === 'breaking');
+            ->when($this->reportTypeFilter, function ($query) {
+                $query->where('report_type', $this->reportTypeFilter);
             });
 
         $articles = $query->latest()->paginate(10);
-        $categories = Category::where('type', 'news')->where('is_active', true)->get();
+        $categories = Category::where('type', 'report')->where('is_active', true)->get();
         $authors = Author::active()->get();
 
-        return view('livewire.admin.news-manager', compact('articles', 'categories', 'authors'));
+        return view('livewire.admin.reports-manager', compact('articles', 'categories', 'authors'));
     }
 } 
