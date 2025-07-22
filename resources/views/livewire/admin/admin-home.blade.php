@@ -1,297 +1,185 @@
 <div class="admin-dashboard">
-    <!-- Header Stats -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-8">
-        <!-- Total Articles -->
-        <div class="stat-card bg-gradient-to-br from-blue-500 to-blue-600">
-            <div class="stat-icon">
-                <i class="bi bi-newspaper"></i>
-            </div>
-            <div class="stat-content">
-                <h3 class="stat-title">إجمالي المقالات</h3>
-                <p class="stat-value">{{ $totalArticles }}</p>
-                <p class="stat-change {{ $articlesGrowth >= 0 ? 'positive' : 'negative' }}">
-                    <i class="bi bi-arrow-{{ $articlesGrowth >= 0 ? 'up' : 'down' }}"></i>
-                    {{ abs($articlesGrowth) }}% هذا الشهر
-                </p>
-            </div>
-        </div>
+    <!-- إشعارات إدارية (مثال) -->
+    <div class="mb-4">
+        @livewire('admin.notifications')
+    </div>
 
-        <!-- Published Articles -->
-        <div class="stat-card bg-gradient-to-br from-green-500 to-green-600">
-            <div class="stat-icon">
-                <i class="bi bi-check-circle"></i>
-            </div>
+    <!-- Dashboard Stats Cards (أصغر) -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mb-6">
+        <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-tags"></i></div>
             <div class="stat-content">
-                <h3 class="stat-title">المقالات المنشورة</h3>
-                <p class="stat-value">{{ $publishedArticles }}</p>
-                <p class="stat-change {{ $publishedGrowth >= 0 ? 'positive' : 'negative' }}">
-                    <i class="bi bi-arrow-{{ $publishedGrowth >= 0 ? 'up' : 'down' }}"></i>
-                    {{ abs($publishedGrowth) }}% هذا الشهر
-                </p>
-            </div>
-        </div>
-
-        <!-- Total Views -->
-        <div class="stat-card bg-gradient-to-br from-purple-500 to-purple-600">
-            <div class="stat-icon">
-                <i class="bi bi-eye"></i>
-            </div>
-            <div class="stat-content">
-                <h3 class="stat-title">إجمالي المشاهدات</h3>
-                <p class="stat-value">{{ number_format($totalViews) }}</p>
-                <p class="stat-change {{ $viewsGrowth >= 0 ? 'positive' : 'negative' }}">
-                    <i class="bi bi-arrow-{{ $viewsGrowth >= 0 ? 'up' : 'down' }}"></i>
-                    {{ abs($viewsGrowth) }}% هذا الشهر
-                </p>
-            </div>
-        </div>
-
-        <!-- Categories -->
-        <div class="stat-card bg-gradient-to-br from-orange-500 to-orange-600">
-            <div class="stat-icon">
-                <i class="bi bi-folder"></i>
-            </div>
-            <div class="stat-content">
-                <h3 class="stat-title">الأقسام</h3>
+                <h3 class="stat-title">عدد الأقسام</h3>
                 <p class="stat-value">{{ $totalCategories }}</p>
-                <p class="stat-change neutral">
-                    <i class="bi bi-dash"></i>
-                    ثابت
-                </p>
             </div>
         </div>
-
-        <!-- Users -->
-        <div class="stat-card bg-gradient-to-br from-indigo-500 to-indigo-600">
-            <div class="stat-icon">
-                <i class="bi bi-people"></i>
-            </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-megaphone"></i></div>
             <div class="stat-content">
-                <h3 class="stat-title">المستخدمين</h3>
-                <p class="stat-value">{{ $totalUsers }}</p>
-                <p class="stat-change neutral">
-                    <i class="bi bi-dash"></i>
-                    ثابت
-                </p>
+                <h3 class="stat-title">عدد الأخبار</h3>
+                <p class="stat-value">{{ \App\Models\Article::where('type','news')->count() }}</p>
             </div>
         </div>
-
-        <!-- Videos -->
-        <div class="stat-card bg-gradient-to-br from-red-500 to-red-600">
-            <div class="stat-icon">
-                <i class="bi bi-camera-video"></i>
-            </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-file-earmark-text"></i></div>
             <div class="stat-content">
-                <h3 class="stat-title">الفيديوهات</h3>
+                <h3 class="stat-title">عدد المقالات</h3>
+                <p class="stat-value">{{ \App\Models\Article::where('type','article')->count() }}</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-camera-video"></i></div>
+            <div class="stat-content">
+                <h3 class="stat-title">عدد الفيديوهات</h3>
                 <p class="stat-value">{{ $totalVideos }}</p>
-                <p class="stat-change neutral">
-                    <i class="bi bi-dash"></i>
-                    ثابت
-                </p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-people"></i></div>
+            <div class="stat-content">
+                <h3 class="stat-title">عدد المستخدمين</h3>
+                <p class="stat-value">{{ $totalUsers }}</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-person-badge"></i></div>
+            <div class="stat-content">
+                <h3 class="stat-title">عدد المؤلفين</h3>
+                <p class="stat-value">{{ \App\Models\Author::count() }}</p>
             </div>
         </div>
     </div>
 
-    <!-- Main Content Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Recent Articles -->
-        <div class="lg:col-span-2">
-            <div class="content-card">
-                <div class="card-header">
-                    <h2 class="card-title">
-                        <i class="bi bi-clock-history ml-2"></i>
-                        أحدث المقالات
-                    </h2>
-                    <a href="{{ route('admin.articles') }}" class="btn-primary">
-                        <i class="bi bi-file-text ml-2"></i>
-                        إدارة المقالات
-                    </a>
-                </div>
-                
-                <div class="recent-articles">
-                    @forelse($recentArticles as $article)
-                        <div class="article-item">
-                            <div class="article-image">
-                                @if($article->image)
-                                    <img src="{{ \App\Helpers\ImageHelper::getImageUrl($article->image) }}" 
-                                         alt="{{ $article->title }}" class="w-full h-full object-cover">
+    <!-- صف أحدث المحتوى المتنوع (أعرض) -->
+    <div class="w-full overflow-x-auto mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-4 min-w-[900px]" style="min-width:900px;">
+            <!-- أحدث المقالات -->
+            <div class="content-card p-0 min-w-[220px]">
+                <div class="card-header"><h3 class="card-title"><i class="bi bi-file-earmark-text ml-2"></i>أحدث المقالات</h3></div>
+                <div class="divide-y">
+                    @foreach($recentArticles as $item)
+                        <div class="flex items-center gap-2 p-2">
+                            <div class="w-10 h-10 rounded overflow-hidden flex-shrink-0 bg-gray-100 flex items-center justify-center">
+                                @if($item->image)
+                                    <img src="{{ \App\Helpers\ImageHelper::getImageUrl($item->image) }}" alt="" class="w-full h-full object-cover">
                                 @else
-                                    <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                                        <i class="bi bi-image text-gray-400 text-2xl"></i>
-                                    </div>
+                                    <i class="bi bi-image text-gray-300 text-xl"></i>
                                 @endif
                             </div>
-                            
-                            <div class="article-content">
-                                <h3 class="article-title">
-                                    <a href="{{ route('news.show', $article->slug) }}" target="_blank" class="hover:text-[#C08B2D]">
-                                        {{ $article->title }}
-                                    </a>
-                                </h3>
-                                <p class="article-excerpt">{{ Str::limit($article->excerpt, 100) }}</p>
-                                
-                                <div class="article-meta">
-                                    <span class="meta-item">
-                                        <i class="bi bi-calendar ml-1"></i>
-                                        {{ $article->created_at->diffForHumans() }}
-                                    </span>
-                                    <span class="meta-item">
-                                        <i class="bi bi-eye ml-1"></i>
-                                        {{ number_format($article->views_count ?? 0) }}
-                                    </span>
-                                    <span class="meta-item">
-                                        <i class="bi bi-folder ml-1"></i>
-                                        {{ $article->category->name ?? 'بدون قسم' }}
-                                    </span>
+                            <div class="flex-1 min-w-0">
+                                <div class="font-bold text-xs truncate">{{ $item->title }}</div>
+                                <div class="text-gray-500 text-[11px] flex items-center gap-1">
+                                    <i class="bi bi-calendar"></i>{{ $item->created_at->diffForHumans() }}
+                                    <span class="ml-1"><i class="bi bi-folder"></i>{{ $item->category->name ?? 'بدون قسم' }}</span>
                                 </div>
                             </div>
                         </div>
-                    @empty
-                        <div class="empty-state">
-                            <i class="bi bi-newspaper text-4xl text-gray-300 mb-4"></i>
-                            <h3 class="text-lg font-semibold text-gray-600 mb-2">لا توجد مقالات</h3>
-                            <p class="text-gray-500">ابدأ بإنشاء مقالتك الأولى</p>
+                    @endforeach
+                </div>
+            </div>
+            <!-- أحدث الأخبار -->
+            <div class="content-card p-0 min-w-[220px]">
+                <div class="card-header"><h3 class="card-title"><i class="bi bi-megaphone ml-2"></i>أحدث الأخبار</h3></div>
+                <div class="divide-y">
+                    @foreach($recentNews as $item)
+                        <div class="flex items-center gap-2 p-2">
+                            <div class="w-10 h-10 rounded overflow-hidden flex-shrink-0 bg-gray-100 flex items-center justify-center">
+                                @if($item->image)
+                                    <img src="{{ \App\Helpers\ImageHelper::getImageUrl($item->image) }}" alt="" class="w-full h-full object-cover">
+                                @else
+                                    <i class="bi bi-image text-gray-300 text-xl"></i>
+                                @endif
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="font-bold text-xs truncate">{{ $item->title }}</div>
+                                <div class="text-gray-500 text-[11px] flex items-center gap-1">
+                                    <i class="bi bi-calendar"></i>{{ $item->created_at->diffForHumans() }}
+                                    <span class="ml-1"><i class="bi bi-folder"></i>{{ $item->category->name ?? 'بدون قسم' }}</span>
+                                </div>
+                            </div>
                         </div>
-                    @endforelse
+                    @endforeach
+                </div>
+            </div>
+            <!-- أحدث الرأي -->
+            <div class="content-card p-0 min-w-[220px]">
+                <div class="card-header"><h3 class="card-title"><i class="bi bi-chat-quote ml-2"></i>أحدث الرأي</h3></div>
+                <div class="divide-y">
+                    @foreach($recentOpinions as $item)
+                        <div class="flex items-center gap-2 p-2">
+                            <div class="w-10 h-10 rounded overflow-hidden flex-shrink-0 bg-gray-100 flex items-center justify-center">
+                                @if($item->image)
+                                    <img src="{{ \App\Helpers\ImageHelper::getImageUrl($item->image) }}" alt="" class="w-full h-full object-cover">
+                                @else
+                                    <i class="bi bi-image text-gray-300 text-xl"></i>
+                                @endif
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="font-bold text-xs truncate">{{ $item->title }}</div>
+                                <div class="text-gray-500 text-[11px] flex items-center gap-1">
+                                    <i class="bi bi-calendar"></i>{{ $item->created_at->diffForHumans() }}
+                                    <span class="ml-1"><i class="bi bi-folder"></i>{{ $item->category->name ?? 'بدون قسم' }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <!-- أحدث الفيديوهات -->
+            <div class="content-card p-0 min-w-[220px]">
+                <div class="card-header"><h3 class="card-title"><i class="bi bi-camera-video ml-2"></i>أحدث الفيديوهات</h3></div>
+                <div class="divide-y">
+                    @foreach($recentVideos as $item)
+                        <div class="flex items-center gap-2 p-2">
+                            <div class="w-10 h-10 rounded overflow-hidden flex-shrink-0 bg-gray-100 flex items-center justify-center">
+                                @if($item->thumbnail)
+                                    <img src="{{ \App\Helpers\ImageHelper::getImageUrl($item->thumbnail) }}" alt="" class="w-full h-full object-cover">
+                                @else
+                                    <i class="bi bi-camera-video text-gray-300 text-xl"></i>
+                                @endif
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="font-bold text-xs truncate">{{ $item->title }}</div>
+                                <div class="text-gray-500 text-[11px] flex items-center gap-1">
+                                    <i class="bi bi-calendar"></i>{{ $item->created_at->diffForHumans() }}
+                                    <span class="ml-1"><i class="bi bi-folder"></i>{{ $item->category->name ?? 'بدون قسم' }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <!-- أحدث التقارير -->
+            <div class="content-card p-0 min-w-[220px]">
+                <div class="card-header"><h3 class="card-title"><i class="bi bi-journal-text ml-2"></i>أحدث التقارير</h3></div>
+                <div class="divide-y">
+                    @foreach($recentReports as $item)
+                        <div class="flex items-center gap-2 p-2">
+                            <div class="w-10 h-10 rounded overflow-hidden flex-shrink-0 bg-gray-100 flex items-center justify-center">
+                                @if($item->image)
+                                    <img src="{{ \App\Helpers\ImageHelper::getImageUrl($item->image) }}" alt="" class="w-full h-full object-cover">
+                                @else
+                                    <i class="bi bi-image text-gray-300 text-xl"></i>
+                                @endif
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="font-bold text-xs truncate">{{ $item->title }}</div>
+                                <div class="text-gray-500 text-[11px] flex items-center gap-1">
+                                    <i class="bi bi-calendar"></i>{{ $item->created_at->diffForHumans() }}
+                                    <span class="ml-1"><i class="bi bi-folder"></i>{{ $item->category->name ?? 'بدون قسم' }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Sidebar -->
-        <div class="lg:col-span-1">
-            <!-- Quick Actions -->
-            <div class="content-card mb-6">
-                <div class="card-header">
-                    <h2 class="card-title">
-                        <i class="bi bi-lightning ml-2"></i>
-                        إجراءات سريعة
-                    </h2>
-                </div>
-                
-                <div class="quick-actions">
-                    <a href="{{ route('admin.articles') }}" class="quick-action-btn primary">
-                        <i class="bi bi-plus-circle"></i>
-                        <span>مقال جديد</span>
-                    </a>
-                    
-                    <a href="{{ route('admin.categories') }}" class="quick-action-btn secondary">
-                        <i class="bi bi-folder-plus"></i>
-                        <span>قسم جديد</span>
-                    </a>
-                    
-                    <a href="{{ route('admin.videos') }}" class="quick-action-btn secondary">
-                        <i class="bi bi-camera-video"></i>
-                        <span>فيديو جديد</span>
-                    </a>
-                    
-                    <a href="{{ route('admin.users') }}" class="quick-action-btn secondary">
-                        <i class="bi bi-person-plus"></i>
-                        <span>مستخدم جديد</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Popular Categories -->
-            <div class="content-card mb-6">
-                <div class="card-header">
-                    <h2 class="card-title">
-                        <i class="bi bi-bar-chart ml-2"></i>
-                        الأقسام الشائعة
-                    </h2>
-                </div>
-                
-                <div class="popular-categories">
-                    @forelse($popularCategories as $category)
-                        <div class="category-item">
-                            <div class="category-info">
-                                <h4 class="category-name">{{ $category->name }}</h4>
-                                <p class="category-count">{{ $category->articles_count }} مقال</p>
-                            </div>
-                            <div class="category-progress">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: {{ $category->percentage }}%"></div>
-                                </div>
-                                <span class="progress-text">{{ $category->percentage }}%</span>
-                            </div>
-                        </div>
-                    @empty
-                        <div class="empty-state">
-                            <i class="bi bi-folder text-2xl text-gray-300 mb-2"></i>
-                            <p class="text-gray-500 text-sm">لا توجد أقسام</p>
-                        </div>
-                    @endforelse
-                </div>
-            </div>
-
-            <!-- Recent Users -->
-            <div class="content-card mb-6">
-                <div class="card-header">
-                    <h2 class="card-title">
-                        <i class="bi bi-people ml-2"></i>
-                        المستخدمين الجدد
-                    </h2>
-                </div>
-                
-                <div class="recent-users">
-                    @forelse($recentUsers as $user)
-                        <div class="user-item">
-                            <div class="user-avatar">
-                                <div class="avatar-circle">
-                                    {{ substr($user->name, 0, 1) }}
-                                </div>
-                            </div>
-                            <div class="user-info">
-                                <h4 class="user-name">{{ $user->name }}</h4>
-                                <p class="user-role">{{ ucfirst($user->role) }}</p>
-                                <p class="user-date">{{ $user->created_at->diffForHumans() }}</p>
-                            </div>
-                        </div>
-                    @empty
-                        <div class="empty-state">
-                            <i class="bi bi-people text-2xl text-gray-300 mb-2"></i>
-                            <p class="text-gray-500 text-sm">لا يوجد مستخدمين</p>
-                        </div>
-                    @endforelse
-                </div>
-            </div>
-
-            <!-- Recent Videos -->
-            <div class="content-card">
-                <div class="card-header">
-                    <h2 class="card-title">
-                        <i class="bi bi-camera-video ml-2"></i>
-                        أحدث الفيديوهات
-                    </h2>
-                </div>
-                
-                <div class="recent-videos">
-                    @forelse($recentVideos as $video)
-                        <div class="video-item">
-                            <div class="video-thumbnail">
-                                @if($video->thumbnail)
-                                    <img src="{{ \App\Helpers\ImageHelper::getImageUrl($video->thumbnail) }}" 
-                                         alt="{{ $video->title }}" class="w-full h-full object-cover">
-                                @else
-                                    <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                                        <i class="bi bi-play-circle text-gray-400 text-2xl"></i>
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="video-info">
-                                <h4 class="video-title">{{ Str::limit($video->title, 40) }}</h4>
-                                <p class="video-category">{{ $video->category->name ?? 'بدون قسم' }}</p>
-                                <p class="video-date">{{ $video->created_at->diffForHumans() }}</p>
-                            </div>
-                        </div>
-                    @empty
-                        <div class="empty-state">
-                            <i class="bi bi-camera-video text-2xl text-gray-300 mb-2"></i>
-                            <p class="text-gray-500 text-sm">لا توجد فيديوهات</p>
-                        </div>
-                    @endforelse
-                </div>
-            </div>
-        </div>
+    <!-- Site Analytics Section -->
+    <div class="mt-10">
+        <h2 class="text-2xl font-bold mb-4 text-gray-700 flex items-center"><i class="bi bi-graph-up-arrow ml-2"></i>إحصائيات الزوار</h2>
+        @livewire('admin.site-analytics')
     </div>
 
     <style>
@@ -302,78 +190,47 @@
 
     /* Stat Cards */
     .stat-card {
-        background: white;
-        border-radius: 1rem;
-        padding: 1.5rem;
-        color: white;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-
-    .stat-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
-
-    .stat-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.5s;
-    }
-
-    .stat-card:hover::before {
-        left: 100%;
-    }
-
-    .stat-icon {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        font-size: 2rem;
-        opacity: 0.8;
-    }
-
-    .stat-content {
-        position: relative;
-        z-index: 1;
-    }
-
-    .stat-title {
-        font-size: 0.875rem;
-        font-weight: 500;
-        margin-bottom: 0.5rem;
-        opacity: 0.9;
-    }
-
-    .stat-value {
-        font-size: 2rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-    }
-
-    .stat-change {
-        font-size: 0.75rem;
+        background: linear-gradient(135deg, rgba(192,139,45,0.95), rgba(178,43,43,0.92));
+        border-radius: 1.5rem;
+        box-shadow: 0 6px 32px 0 rgba(0,0,0,0.10), 0 1.5px 4px 0 rgba(0,0,0,0.08);
+        color: #fff;
+        padding: 2.2rem 1.2rem 1.5rem 1.2rem;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 0.25rem;
+        min-height: 160px;
+        position: relative;
+        transition: transform 0.2s, box-shadow 0.2s;
     }
-
-    .stat-change.positive {
-        color: #10b981;
+    .stat-card:hover {
+        transform: translateY(-4px) scale(1.03);
+        box-shadow: 0 12px 40px 0 rgba(192,139,45,0.18), 0 2px 8px 0 rgba(178,43,43,0.10);
     }
-
-    .stat-change.negative {
-        color: #ef4444;
+    .stat-icon {
+        font-size: 2.8rem;
+        opacity: 0.92;
+        margin-bottom: 1.1rem;
+        filter: drop-shadow(0 2px 8px rgba(0,0,0,0.10));
     }
-
-    .stat-change.neutral {
-        color: #6b7280;
+    .stat-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.5rem;
+        color: #fff;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.10);
+    }
+    .stat-value {
+        font-size: 2.7rem;
+        font-weight: 900;
+        color: #fff;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.13);
+        margin-bottom: 0.2rem;
+    }
+    @media (max-width: 768px) {
+        .stat-card { padding: 1.2rem 0.5rem; min-height: 120px; }
+        .stat-icon { font-size: 2rem; }
+        .stat-value { font-size: 1.5rem; }
     }
 
     /* Content Cards */
@@ -681,6 +538,52 @@
             width: 100%;
             height: 120px;
         }
+    }
+
+    /* تحسين كروت الإحصائيات (تصغير) */
+    .stat-card {
+        background: linear-gradient(135deg, rgba(192,139,45,0.95), rgba(178,43,43,0.92));
+        border-radius: 1.1rem;
+        box-shadow: 0 3px 16px 0 rgba(0,0,0,0.10), 0 1px 2px 0 rgba(0,0,0,0.08);
+        color: #fff;
+        padding: 1.1rem 0.6rem 0.8rem 0.6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 90px;
+        position: relative;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .stat-card:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 6px 20px 0 rgba(192,139,45,0.13), 0 1px 4px 0 rgba(178,43,43,0.08);
+    }
+    .stat-icon {
+        font-size: 1.5rem;
+        opacity: 0.92;
+        margin-bottom: 0.5rem;
+        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.08));
+    }
+    .stat-title {
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        margin-bottom: 0.2rem;
+        color: #fff;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    }
+    .stat-value {
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: #fff;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.10);
+        margin-bottom: 0.1rem;
+        text-align: center;
+    }
+    @media (max-width: 768px) {
+        .stat-card { padding: 0.5rem 0.2rem; min-height: 60px; }
+        .stat-icon { font-size: 1rem; }
+        .stat-value { font-size: 0.9rem; }
     }
     </style>
 

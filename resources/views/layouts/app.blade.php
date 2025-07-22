@@ -15,6 +15,9 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    
     <!-- Tailwind CSS -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
@@ -26,6 +29,10 @@
     <link rel="stylesheet" href="{{ asset('css/core.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components.css') }}">
     <link rel="stylesheet" href="{{ asset('css/featured-news.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/infographics.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/poems.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/health.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/special-sections.css') }}">
   
     @yield('styles')
 </head>
@@ -49,6 +56,9 @@
             <livewire:footer />
         </div>
     </div>
+    
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
     <!-- Livewire Scripts -->
     @livewireScripts

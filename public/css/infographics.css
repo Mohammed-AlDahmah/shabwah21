@@ -1,0 +1,203 @@
+/* Infographics Section Styles */
+.infographics-section {
+    position: relative;
+    background: linear-gradient(135deg, rgba(192,139,45,0.08) 0%, rgba(178,43,43,0.08) 100%);
+}
+
+.infographics-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="infographic-pattern" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%2306b6d4" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%2306b6d4" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%2306b6d4" opacity="0.08"/><circle cx="10" cy="60" r="0.5" fill="%2306b6d4" opacity="0.08"/><circle cx="90" cy="40" r="0.5" fill="%2306b6d4" opacity="0.08"/></pattern></defs><rect width="100" height="100" fill="url(%23infographic-pattern)"/></svg>');
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.infographics-slider {
+    position: relative;
+    padding: 0 80px;
+}
+
+.infographics-swiper {
+    overflow: hidden;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(241, 208, 208, 0.532);
+}
+
+.swiper-slide {
+    height: auto;
+    padding: 15px;
+}
+
+.infographic-card {
+    animation: fadeInUp 0.8s ease-out;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.infographic-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+/* كارد الانفوجرافيك بألوان الهوية فقط */
+.infographic-card .bg-white {
+    background: #fff;
+    border: 1.5px solid rgba(192,139,45,0.13);
+    box-shadow: 0 8px 32px 0 rgba(192,139,45,0.32), 0 1.5px 4px 0 rgba(192,139,45,0.18);
+}
+
+/* Navigation Buttons */
+.infographic-swiper-button-next,
+.infographic-swiper-button-prev {
+    color: #fff;
+    background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 8px 25px rgba(192,139,45,0.13);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+}
+
+.infographic-swiper-button-next:hover,
+.infographic-swiper-button-prev:hover {
+    background: linear-gradient(135deg, #B22B2B 0%, #C08B2D 100%);
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(6, 182, 212, 0.3);
+}
+
+.infographic-swiper-button-next::after,
+.infographic-swiper-button-prev::after {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Pagination */
+.infographic-swiper-pagination {
+    position: relative;
+    margin-top: 40px;
+}
+
+.infographic-swiper-pagination .swiper-pagination-bullet {
+    background: #C08B2D;
+    opacity: 0.3;
+    width: 14px;
+    height: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%;
+}
+
+.infographic-swiper-pagination .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #B22B2B;
+    transform: scale(1.3);
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);
+}
+
+/* Card Content Styles */
+.infographic-card h3 a {
+    color: #C08B2D;
+    transition: color 0.3s ease;
+}
+
+.infographic-card h3 a:hover {
+    color: #B22B2B;
+}
+
+.infographic-card .bg-cyan-50, .infographic-card .bg-blue-50 {
+    background: #fff;
+    border: 1px solid rgba(192,139,45,0.10);
+    color: #C08B2D;
+}
+
+.infographic-card .text-cyan-600, .infographic-card .text-blue-600 {
+    color: #C08B2D !important;
+}
+
+/* Button Styles */
+.infographic-card .bg-gradient-to-r {
+    background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%) !important;
+    color: #fff !important;
+    font-weight: 600;
+    border-radius: 0.8rem;
+    box-shadow: 0 4px 15px rgba(192, 139, 45, 0.13);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.infographic-card .bg-gradient-to-r:hover {
+    background: linear-gradient(135deg, #B22B2B 0%, #C08B2D 100%) !important;
+    color: #fff !important;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 25px rgba(192, 139, 45, 0.18);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .infographics-slider {
+        padding: 0 8px !important;
+    }
+    .infographics-swiper {
+        border-radius: 12px !important;
+    }
+    .swiper-slide {
+        padding: 4px !important;
+    }
+    .infographic-card .bg-white {
+        border-radius: 12px !important;
+        padding: 10px 4px !important;
+    }
+    .infographic-swiper-button-next,
+    .infographic-swiper-button-prev {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 1rem !important;
+    }
+    .infographic-card h3 {
+        font-size: 1.1rem !important;
+    }
+    .infographic-card .bg-gradient-to-r {
+        font-size: 0.95rem !important;
+        padding: 0.7rem 1.2rem !important;
+    }
+    .infographic-swiper-pagination {
+        margin-top: 12px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .infographics-slider {
+        padding: 0 20px;
+    }
+    
+    .infographic-swiper-button-next,
+    .infographic-swiper-button-prev {
+        width: 45px;
+        height: 45px;
+    }
+} 

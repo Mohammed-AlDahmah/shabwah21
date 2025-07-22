@@ -309,6 +309,7 @@
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(100%);
+                z-index: 60;
             }
             
             .sidebar.mobile-open {
@@ -321,6 +322,22 @@
             
             .header {
                 padding: 1rem;
+            }
+            
+            /* Mobile Overlay */
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 55;
+            }
+            
+            .sidebar-overlay.active {
+                display: block;
             }
         }
         
@@ -341,6 +358,9 @@
     </style>
 </head>
 <body>
+    <!-- Mobile Overlay -->
+    <div class="sidebar-overlay"></div>
+
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
@@ -465,11 +485,28 @@
             const sidebarToggle = document.querySelector('.sidebar-toggle');
             const sidebar = document.querySelector('.sidebar');
             const mainContent = document.querySelector('.main-content');
+            const sidebarOverlay = document.querySelector('.sidebar-overlay');
             
-            if (sidebarToggle && sidebar && mainContent) {
+            if (sidebarToggle && sidebar && mainContent && sidebarOverlay) {
                 sidebarToggle.addEventListener('click', function() {
-                    sidebar.classList.toggle('collapsed');
-                    mainContent.classList.toggle('expanded');
+                    sidebar.classList.toggle('mobile-open');
+                    sidebarOverlay.classList.toggle('active');
+                });
+
+                // Close sidebar when clicking overlay
+                sidebarOverlay.addEventListener('click', function() {
+                    sidebar.classList.remove('mobile-open');
+                    sidebarOverlay.classList.remove('active');
+                });
+
+                // Close sidebar when clicking outside on mobile
+                document.addEventListener('click', function(event) {
+                    if (window.innerWidth <= 768) {
+                        if (!sidebar.contains(event.target) && !sidebarToggle.contains(event.target)) {
+                            sidebar.classList.remove('mobile-open');
+                            sidebarOverlay.classList.remove('active');
+                        }
+                    }
                 });
             }
         });

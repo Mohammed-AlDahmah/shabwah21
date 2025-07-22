@@ -23,6 +23,9 @@ class AdminHome extends Component
     public $recentArticles = [];
     public $popularCategories = [];
     public $recentUsers = [];
+    public $recentNews = [];
+    public $recentOpinions = [];
+    public $recentReports = [];
     public $recentVideos = [];
 
     public function mount()
@@ -79,24 +82,42 @@ class AdminHome extends Component
     public function loadRecentData()
     {
         $this->recentArticles = Article::with('category')
+            ->where('type', 'article')
+            ->latest('created_at')
+            ->take(5)
+            ->get();
+
+        $this->recentNews = Article::with('category')
+            ->where('type', 'news')
+            ->latest('created_at')
+            ->take(5)
+            ->get();
+
+        $this->recentOpinions = Article::with('category')
+            ->where('type', 'opinion')
+            ->latest('created_at')
+            ->take(5)
+            ->get();
+
+        $this->recentReports = Article::with('category')
+            ->where('type', 'report')
+            ->latest('created_at')
+            ->take(5)
+            ->get();
+
+        $this->recentVideos = Video::with('category')
             ->latest('created_at')
             ->take(5)
             ->get();
 
         $categories = Category::withCount('articles')->get();
         $totalArticles = $categories->sum('articles_count');
-        
         $this->popularCategories = $categories->map(function ($category) use ($totalArticles) {
             $category->percentage = $totalArticles > 0 ? round(($category->articles_count / $totalArticles) * 100, 1) : 0;
             return $category;
         })->sortByDesc('articles_count')->take(5);
 
         $this->recentUsers = User::latest('created_at')
-            ->take(5)
-            ->get();
-
-        $this->recentVideos = Video::with('category')
-            ->latest('created_at')
             ->take(5)
             ->get();
     }

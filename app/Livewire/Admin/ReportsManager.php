@@ -292,7 +292,7 @@ class ReportsManager extends Component
             });
 
         $articles = $query->latest()->paginate(10);
-        $categories = Category::where('type', 'report')->where('is_active', true)->get();
+        $categories = Category::getActiveByType('report');
         $authors = Author::active()->get();
 
         return view('livewire.admin.reports-manager', compact('articles', 'categories', 'authors'));

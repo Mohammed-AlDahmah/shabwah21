@@ -201,6 +201,73 @@
         <livewire:video-section :limit="$videosPerPage" />
     </section>
     @endif
+
+    <!-- الانفوجرافيك -->
+    <section class="infographics-wrapper py-12">
+        <div class="container mx-auto px-2">
+            <div class="section-header mb-8">
+                <div class="flex items-center gap-4">
+                    <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">انفوجرافيك</h2>
+                        <p class="text-slate-600">رسوم بيانية ومعلومات مرئية تفاعلية</p>
+                    </div>
+                </div>
+            </div>
+            @livewire('infographics-section')
+        </div>
+    </section>
+
+    <!-- الأقسام المخصصة في صف واحد -->
+    <section class="special-sections py-1">
+        <div class="container mx-auto px-0">
+            <div class="section-header mb-2">
+                <div class="flex items-center gap-1">
+                    <div class="w-1 h-6 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
+                    <h2 class="text-base font-bold text-slate-800">الأقسام المميزة</h2>
+                </div>
+            </div>
+            <div class="grid grid-cols-4 gap-[2px]">
+                <!-- كارد موحد لجميع الأقسام -->
+                <div class="special-card bg-white rounded-md p-0 flex flex-col items-center border border-gray-200 shadow-sm">
+                    <div class="special-card-header w-full flex flex-col items-center justify-center py-1 rounded-t-md">
+                        <div class="icon-circle mb-1"><i class="bi bi-quote text-[#C08B2D] text-base"></i></div>
+                        <h3 class="text-xs font-bold text-slate-700 text-center">قصائد شعرية</h3>
+                    </div>
+                    <div class="flex-1 flex flex-col w-full px-1 pb-1">
+                        @livewire('poems-section')
+                    </div>
+                </div>
+                <div class="special-card bg-white rounded-md p-0 flex flex-col items-center border border-gray-200 shadow-sm">
+                    <div class="special-card-header w-full flex flex-col items-center justify-center py-1 rounded-t-md">
+                        <div class="icon-circle mb-1"><i class="bi bi-heart-pulse text-[#C08B2D] text-base"></i></div>
+                        <h3 class="text-xs font-bold text-slate-700 text-center">طب وصحة</h3>
+                    </div>
+                    <div class="flex-1 flex flex-col w-full px-1 pb-1">
+                        @livewire('health-section')
+                    </div>
+                </div>
+                <div class="special-card bg-white rounded-md p-0 flex flex-col items-center border border-gray-200 shadow-sm">
+                    <div class="special-card-header w-full flex flex-col items-center justify-center py-1 rounded-t-md">
+                        <div class="icon-circle mb-1"><i class="bi bi-emoji-smile text-[#C08B2D] text-base"></i></div>
+                        <h3 class="text-xs font-bold text-slate-700 text-center">تهاني</h3>
+                    </div>
+                    <div class="flex-1 flex flex-col w-full px-1 pb-1">
+                        @livewire('greetings-section')
+                    </div>
+                </div>
+                <div class="special-card bg-white rounded-md p-0 flex flex-col items-center border border-gray-200 shadow-sm">
+                    <div class="special-card-header w-full flex flex-col items-center justify-center py-1 rounded-t-md">
+                        <div class="icon-circle mb-1"><i class="bi bi-heart text-[#C08B2D] text-base"></i></div>
+                        <h3 class="text-xs font-bold text-slate-700 text-center">تعازي</h3>
+                    </div>
+                    <div class="flex-1 flex flex-col w-full px-1 pb-1">
+                        @livewire('condolences-section')
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
 
 @push('styles')

@@ -42,5 +42,12 @@ class AppServiceProvider extends ServiceProvider
         Livewire::component('admin.opinions-manager', \App\Livewire\Admin\OpinionsManager::class);
         Livewire::component('admin.infographics-manager', \App\Livewire\Admin\InfographicsManager::class);
         Livewire::component('admin.authors-manager', \App\Livewire\Admin\AuthorsManager::class);
+
+        // تسجيل المكونات الجديدة للأقسام المخصصة
+        Livewire::component('infographics-section', \App\Livewire\InfographicsSection::class);
+        Livewire::component('poems-section', \App\Livewire\PoemsSection::class);
+        Livewire::component('health-section', \App\Livewire\HealthSection::class);
+        Livewire::component('greetings-section', \App\Livewire\GreetingsSection::class);
+        Livewire::component('condolences-section', \App\Livewire\CondolencesSection::class);
     }
 }

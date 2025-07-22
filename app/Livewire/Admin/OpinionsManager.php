@@ -276,7 +276,7 @@ class OpinionsManager extends Component
             });
 
         $articles = $query->latest()->paginate(10);
-        $categories = Category::where('type', 'opinion')->where('is_active', true)->get();
+        $categories = Category::getActiveByType('opinion');
          $authors = Author::active()->get();
         return view('livewire.admin.opinions-manager', compact('articles', 'categories', 'authors'));
     }

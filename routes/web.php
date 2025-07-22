@@ -11,6 +11,7 @@ use App\Livewire\Admin\UsersManager;
 use App\Livewire\Admin\SettingsManager;
 use App\Livewire\Admin\BackupManager;
 use App\Livewire\Admin\AdminHome;
+use App\Http\Middleware\LogVisitor;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,45 +29,53 @@ Route::redirect('/login', '/admin/login');
 Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::post('/admin/login', [AdminController::class, 'authenticate'])->name('admin.authenticate');
 
-// Public routes
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-
-// News routes
-Route::prefix('news')->name('news.')->group(function () {
-    Route::get('/', [NewsController::class, 'index'])->name('index');
-    Route::get('/search', [NewsController::class, 'search'])->name('search');
-    Route::get('/category/{category:slug}', [NewsController::class, 'category'])->name('category');
-    Route::get('/{article:slug}', [NewsController::class, 'show'])->name('show');
-});
-
-// Videos routes
-Route::prefix('videos')->name('videos.')->group(function () {
+// Public routes with visitor logging
+Route::middleware([LogVisitor::class])->group(function () {
     Route::get('/', function () {
-        return view('videos.index');
-    })->name('index');
-    Route::get('/{video:slug}', function () {
-        return view('videos.show');
-    })->name('show');
+        return view('home');
+    })->name('home');
+
+    // News routes
+    Route::prefix('news')->name('news.')->group(function () {
+        Route::get('/', [NewsController::class, 'index'])->name('index');
+        Route::get('/search', [NewsController::class, 'search'])->name('search');
+        Route::get('/category/{category:slug}', [NewsController::class, 'category'])->name('category');
+        Route::get('/{article:slug}', [NewsController::class, 'show'])->name('show');
+    });
+
+    // Videos routes
+    Route::prefix('videos')->name('videos.')->group(function () {
+        Route::get('/', function () {
+            return view('videos.index');
+        })->name('index');
+        Route::get('/{video:slug}', function () {
+            return view('videos.show');
+        })->name('show');
+    });
+
+    // Pages routes
+    Route::get('/about', function () {
+        return view('pages.about');
+    })->name('about');
+
+    Route::get('/contact', function () {
+        return view('pages.contact');
+    })->name('contact');
+
+    Route::get('/privacy', function () {
+        return view('pages.privacy');
+    })->name('privacy');
+
+    Route::get('/terms', function () {
+        return view('pages.terms');
+    })->name('terms');
+
+    // Routes للأقسام المخصصة
+    Route::get('/poems', [NewsController::class, 'poems'])->name('news.poems');
+Route::get('/health', [NewsController::class, 'health'])->name('news.health');
+Route::get('/greetings', [NewsController::class, 'greetings'])->name('news.greetings');
+Route::get('/infographics', [NewsController::class, 'infographics'])->name('news.infographics');
 });
-
-// Pages routes
-Route::get('/about', function () {
-    return view('pages.about');
-})->name('about');
-
-Route::get('/contact', function () {
-    return view('pages.contact');
-})->name('contact');
-
-Route::get('/privacy', function () {
-    return view('pages.privacy');
-})->name('privacy');
-
-Route::get('/terms', function () {
-    return view('pages.terms');
-})->name('terms');
 
 // Admin Routes
 Route::prefix('admin')->middleware(['auth'])->group(function () {

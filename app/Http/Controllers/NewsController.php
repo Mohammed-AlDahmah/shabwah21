@@ -88,4 +88,55 @@ class NewsController extends Controller
             
         return view('news.search', compact('articles', 'query'));
     }
+
+    /**
+     * صفحة القصائد الشعرية
+     */
+    public function poems()
+    {
+        $category = Category::where('slug', 'poems')->first();
+        $articles = Article::where('category_id', $category->id)
+            ->where('is_published', true)
+            ->latest('published_at')
+            ->paginate(12);
+            
+        return view('news.category.poems', compact('category', 'articles'));
+    }
+
+    /**
+     * صفحة الطب والصحة
+     */
+    public function health()
+    {
+        $category = Category::where('slug', 'health')->first();
+        $articles = Article::where('category_id', $category->id)
+            ->where('is_published', true)
+            ->latest('published_at')
+            ->paginate(12);
+            
+        return view('news.category.health', compact('category', 'articles'));
+    }
+
+    /**
+     * صفحة التهاني والتعازي
+     */
+    public function greetings()
+    {
+        $category = Category::where('slug', 'greetings')->first();
+        $articles = Article::where('category_id', $category->id)
+            ->where('is_published', true)
+            ->latest('published_at')
+            ->paginate(12);
+            
+        return view('news.category.greetings', compact('category', 'articles'));
+    }
+
+    public function infographics()
+    {
+        $articles = Article::where('type', 'infographic')
+            ->where('is_published', true)
+            ->latest('published_at')
+            ->paginate(12);
+        return view('news.category.infographics', compact('articles'));
+    }
 }

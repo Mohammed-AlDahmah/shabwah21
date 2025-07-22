@@ -286,7 +286,7 @@ class ArticlesManager extends Component
             });
 
         $articles = $query->latest()->paginate(10);
-        $categories = Category::where('type', 'article')->where('is_active', true)->get();
+        $categories = Category::getActiveByType('article');
         $authors = Author::active()->get();
 
         return view('livewire.admin.articles-manager', compact('articles', 'categories', 'authors'));

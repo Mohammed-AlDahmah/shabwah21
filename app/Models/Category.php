@@ -74,4 +74,11 @@ class Category extends Model
             }
         });
     }
+
+    public static function getActiveByType($type = 'article')
+    {
+        return \Cache::remember('categories_active_' . $type, 3600, function() use ($type) {
+            return static::where('type', $type)->where('is_active', true)->get();
+        });
+    }
 }

@@ -1,0 +1,143 @@
+/* Health Section Styles */
+.health-section {
+    position: relative;
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
+}
+
+.health-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="health-pattern" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%2310b981" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%2310b981" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%2310b981" opacity="0.08"/><circle cx="10" cy="60" r="0.5" fill="%2310b981" opacity="0.08"/><circle cx="90" cy="40" r="0.5" fill="%2310b981" opacity="0.08"/></pattern></defs><rect width="100" height="100" fill="url(%23health-pattern)"/></svg>');
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.health-slider {
+    position: relative;
+    padding: 0 80px;
+}
+
+.health-slider .swiper-container {
+    overflow: hidden;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(16, 185, 129, 0.1);
+}
+
+.health-card {
+    animation: fadeInUp 0.8s ease-out;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.health-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.health-card .bg-white {
+    background: linear-gradient(145deg, #ffffff 0%, #f0fdf4 100%);
+    border: 1px solid rgba(16, 185, 129, 0.1);
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1);
+}
+
+/* Navigation Buttons */
+.health-swiper-button-next,
+.health-swiper-button-prev {
+    color: #059669;
+    background: linear-gradient(145deg, #ffffff 0%, #f0fdf4 100%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid rgba(16, 185, 129, 0.1);
+}
+
+.health-swiper-button-next:hover,
+.health-swiper-button-prev:hover {
+    background: linear-gradient(145deg, #059669 0%, #10b981 100%);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(16, 185, 129, 0.3);
+}
+
+.health-swiper-button-next::after,
+.health-swiper-button-prev::after {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Pagination */
+.health-swiper-pagination {
+    position: relative;
+    margin-top: 40px;
+}
+
+.health-swiper-pagination .swiper-pagination-bullet {
+    background: #059669;
+    opacity: 0.3;
+    width: 14px;
+    height: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%;
+}
+
+.health-swiper-pagination .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: linear-gradient(145deg, #059669 0%, #10b981 100%);
+    transform: scale(1.3);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+/* Card Content Styles */
+.health-card h3 a {
+    color: #0f172a;
+    transition: color 0.3s ease;
+}
+
+.health-card h3 a:hover {
+    color: #059669;
+}
+
+/* Button Styles */
+.health-card a[href*="news.show"] {
+    color: #059669;
+    transition: all 0.3s ease;
+}
+
+.health-card a[href*="news.show"]:hover {
+    color: #047857;
+    transform: translateX(-5px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .health-slider {
+        padding: 0 40px;
+    }
+    
+    .health-swiper-button-next,
+    .health-swiper-button-prev {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .health-swiper-button-next::after,
+    .health-swiper-button-prev::after {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .health-slider {
+        padding: 0 20px;
+    }
+    
+    .health-swiper-button-next,
+    .health-swiper-button-prev {
+        width: 45px;
+        height: 45px;
+    }
+} 

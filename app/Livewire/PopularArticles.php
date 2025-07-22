@@ -16,12 +16,12 @@ class PopularArticles extends Component
 
     public function render()
     {
-        $popularArticles = Article::published()
-            ->with(['category'])
-            ->orderBy('views_count', 'desc')
-            ->take($this->limit)
-            ->get();
-
+        $popularArticles = \Cache::remember('popular_articles', 600, function() {
+            return \App\Models\Article::orderBy('views_count', 'desc')
+                ->where('is_published', true)
+                ->take(10)
+                ->get();
+        });
         return view('livewire.popular-articles', compact('popularArticles'));
     }
 } 

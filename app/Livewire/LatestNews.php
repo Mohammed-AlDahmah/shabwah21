@@ -41,6 +41,6 @@ class LatestNews extends Component
 
     public function render()
     {
-        return view('livewire.latest-news');
+        return view('livewire.latest-news')->with('latestNews', $this->latestNews);
     }
 }

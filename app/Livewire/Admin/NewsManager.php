@@ -284,7 +284,7 @@ class NewsManager extends Component
             });
 
         $articles = $query->latest()->paginate(10);
-        $categories = Category::where('type', 'news')->where('is_active', true)->get();
+        $categories = Category::getActiveByType('news');
         $authors = Author::active()->get();
 
         return view('livewire.admin.news-manager', compact('articles', 'categories', 'authors'));

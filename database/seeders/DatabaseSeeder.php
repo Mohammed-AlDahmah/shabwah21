@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             AuthorsSeeder::class,
             ArticleSeeder::class,
             VideoSeeder::class,
+            SpecialArticlesSeeder::class,
         ]);
     }
 }

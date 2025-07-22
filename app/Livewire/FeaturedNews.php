@@ -27,6 +27,13 @@ class FeaturedNews extends Component
 
     public function render()
     {
-        return view('livewire.featured-news');
+        $featuredArticles = \Cache::remember('featured_articles', 300, function() {
+            return \App\Models\Article::where('is_featured', true)
+                ->where('is_published', true)
+                ->latest('published_at')
+                ->take(5)
+                ->get();
+        });
+        return view('livewire.featured-news', compact('featuredArticles'));
     }
 }

@@ -295,7 +295,7 @@ class InfographicsManager extends Component
             });
 
         $articles = $query->latest()->paginate(10);
-        $categories = Category::where('type', 'infographic')->where('is_active', true)->get();
+        $categories = Category::getActiveByType('infographic');
         $authors = Author::active()->get();
         return view('livewire.admin.infographics-manager', compact('articles', 'categories', 'authors'));
     }
