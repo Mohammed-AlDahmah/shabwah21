@@ -1,1 +1,2 @@
-@livewire('homepage') 
+@livewire('homepage')
+ 

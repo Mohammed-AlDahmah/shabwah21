@@ -30,8 +30,6 @@
     <link rel="stylesheet" href="{{ asset('css/components.css') }}">
     <link rel="stylesheet" href="{{ asset('css/featured-news.css') }}">
     <link rel="stylesheet" href="{{ asset('css/infographics.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/poems.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/health.css') }}">
     <link rel="stylesheet" href="{{ asset('css/special-sections.css') }}">
   
     @yield('styles')

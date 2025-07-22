@@ -15,11 +15,10 @@ class GreetingsSection extends Component
     {
         $this->category = Category::where('slug', 'greetings')->first();
         if ($this->category) {
-            // عرض فقط المقالات التي تحتوي على كلمات التهاني
             $this->greetings = Article::where('category_id', $this->category->id)
                 ->where('is_published', true)
                 ->latest('published_at')
-                ->take(6)
+                ->take(4)
                 ->get();
         }
     }

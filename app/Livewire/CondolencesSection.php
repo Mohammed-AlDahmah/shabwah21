@@ -15,7 +15,6 @@ class CondolencesSection extends Component
     {
         $this->category = Category::where('slug', 'condolences')->first();
         if ($this->category) {
-            // عرض فقط المقالات التي تحتوي على كلمات التعازي
             $this->condolences = Article::where('category_id', $this->category->id)
                 ->where('is_published', true)
                 ->latest('published_at')

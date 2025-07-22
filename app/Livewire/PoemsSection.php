@@ -18,7 +18,7 @@ class PoemsSection extends Component
             $this->poems = Article::where('category_id', $this->category->id)
                 ->where('is_published', true)
                 ->latest('published_at')
-                ->take(6)
+                ->take(4)
                 ->get();
         }
     }
