@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             ArticleSeeder::class,
             VideoSeeder::class,
             SpecialArticlesSeeder::class,
+            AboutAndContactPagesSeeder::class,
         ]);
     }
 }
