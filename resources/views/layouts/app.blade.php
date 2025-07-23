@@ -28,9 +28,13 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/core.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/breaking-news.css') }}">
     <link rel="stylesheet" href="{{ asset('css/featured-news.css') }}">
     <link rel="stylesheet" href="{{ asset('css/infographics.css') }}">
     <link rel="stylesheet" href="{{ asset('css/special-sections.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/breaking-news.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mobile-fixes.css') }}">
   
     @yield('styles')
 </head>

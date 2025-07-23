@@ -21,7 +21,7 @@ class FeaturedNews extends Component
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
             ->orderBy('published_at', 'desc')
-            ->take(6)
+            ->take(3)
             ->get();
     }
 

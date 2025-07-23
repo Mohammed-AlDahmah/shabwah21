@@ -253,7 +253,7 @@
                         <span class="status-value neutral">{{ now()->format('H:i') }}</span>
                     </div>
                 </div>
-            </div>
+                </div>
         </div>
     </div>
 </div>

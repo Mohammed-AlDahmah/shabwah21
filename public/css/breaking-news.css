@@ -1,38 +1,585 @@
+/* Breaking News Enhanced Styles */
 .breaking-news-container {
-    background: linear-gradient(90deg, #8b0000, #c08b2d);
+    background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%);
     color: white;
     padding: 0.75rem 1rem;
     margin-top: -1px;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-.ticker-content {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    animation: ticker 30s linear infinite;
+/* محسن للأداء */
+.breaking-news-ticker-optimized {
+    display: inline-block;
     white-space: nowrap;
+    will-change: transform;
+    backface-visibility: hidden;
+    animation: smooth-scroll-rtl 30s linear infinite;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    color: #ffffff !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+@keyframes smooth-scroll-rtl {
+    0% { 
+        transform: translateX(100%); 
+    }
+    100% { 
+        transform: translateX(-100%); 
+    }
 }
 
 .ticker-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    display: inline-block;
     padding: 0 1.5rem;
+    white-space: nowrap;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .ticker-badge {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.25);
     padding: 0.25rem 0.75rem;
     border-radius: 50px;
     font-weight: bold;
     font-size: 0.85rem;
+    flex-shrink: 0;
+    text-shadow: none;
+    backdrop-filter: blur(4px);
 }
 
-@keyframes ticker {
+.ticker-separator {
+    color: #fef3c7;
+    margin: 0 1rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* إصلاح شامل لمشكلة الموبايل */
+@media (max-width: 768px) {
+    .breaking-news-container {
+        width: 100vw;
+        max-width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        padding: 0.5rem 1rem;
+        box-sizing: border-box;
+        background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%) !important;
+    }
+    
+    .breaking-news-ticker-optimized {
+        animation-duration: 120s;
+        font-size: 0.875rem;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        font-weight: 600;
+    }
+    
+    .ticker-item {
+        padding: 0 1rem;
+        font-size: 0.875rem;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        font-weight: 500;
+    }
+    
+    /* منع overflow على body */
+    body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+    }
+    
+    html {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+    
+    /* إصلاح للcontainer */
+    .container {
+        max-width: 100% !important;
+        overflow: hidden !important;
+    }
+    
+    /* تحسينات إضافية للموبايل */
+    .breaking-news {
+        background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%) !important;
+    }
+    
+    .breaking-news .text-white {
+        color: #ffffff !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        font-weight: 600;
+    }
+    
+    .breaking-news a {
+        color: #ffffff !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+}
+
+@media (max-width: 480px) {
+    .breaking-news-container {
+        padding: 0.5rem;
+        background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%) !important;
+    }
+    
+    .breaking-news-ticker-optimized {
+        animation-duration: 150s;
+        font-size: 0.8125rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+        font-weight: 700;
+    }
+    
+    .ticker-item {
+        padding: 0 0.75rem;
+        font-size: 0.8125rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+        font-weight: 600;
+    }
+    
+    .ticker-badge {
+        font-size: 0.75rem;
+        padding: 0.125rem 0.5rem;
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(6px);
+        text-shadow: none;
+    }
+    
+    /* تحسينات إضافية للشاشات الصغيرة */
+    .breaking-news {
+        background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%) !important;
+    }
+    
+    .breaking-news .text-white {
+        color: #ffffff !important;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+        font-weight: 700;
+    }
+    
+    .breaking-news a {
+        color: #ffffff !important;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+        font-weight: 600;
+    }
+    
+    .breaking-news a:hover {
+        color: #fef3c7 !important;
+        text-shadow: 0 3px 6px rgba(0, 0, 0, 1);
+    }
+}
+
+/* تحسينات الأداء */
+.breaking-news-container:hover .breaking-news-ticker-optimized,
+.breaking-news-container:hover .ticker-content {
+    animation-play-state: paused;
+}
+
+/* إزالة التداخل مع أي animations أخرى */
+.breaking-news-container * {
+    box-sizing: border-box;
+}
+
+/* Smooth performance optimizations */
+.breaking-news-container,
+.breaking-news-ticker-optimized {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Breaking News Ticker Styles - الأنماط المنقولة من البليد */
+.breaking-news {
+    will-change: transform;
+    backface-visibility: hidden;
+    background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%) !important;
+}
+
+.breaking-news:hover .breaking-news-ticker {
+    animation-play-state: paused;
+}
+
+/* تحسينات الألوان والتباين */
+.breaking-news .text-white {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    color: #ffffff !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.breaking-news a {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    color: #ffffff !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: inline-block !important;
+}
+
+.breaking-news a:hover {
+    color: #fef3c7 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+    transform: translateY(-1px);
+}
+
+.breaking-news a:active,
+.breaking-news a:focus {
+    color: #fbbf24 !important;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8);
+    outline: none;
+}
+
+.breaking-news a:visited {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* ضمان ظهور جميع النصوص في البريكينج نيوز */
+.breaking-news,
+.breaking-news *,
+.breaking-news-ticker,
+.breaking-news-ticker * {
+    color: #ffffff !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* إجبار كل الروابط في البريكينج نيوز لتبقى بيضاء */
+.breaking-news-link,
+.breaking-news-link:link,
+.breaking-news-link:visited,
+.breaking-news-link:active {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: inline-block !important;
+}
+
+.breaking-news-link:hover {
+    color: #fef3c7 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7) !important;
+    transform: translateY(-1px);
+}
+
+.breaking-news-link span {
+    color: inherit !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: inline !important;
+}
+
+/* ضمان أن جميع العناصر الفرعية ترث اللون */
+.breaking-news a *,
+.breaking-news-link * {
+    color: inherit !important;
+}
+
+/* إضافة قواعد شاملة للموبايل */
+@media (max-width: 768px) {
+    .breaking-news-link,
+    .breaking-news-link:link,  
+    .breaking-news-link:visited,
+    .breaking-news-link:active,
+    .breaking-news-link:focus {
+        color: #ffffff !important;
+        text-decoration: none !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+        font-weight: 600 !important;
+    }
+    
+    .breaking-news-link:hover {
+        color: #fef3c7 !important;
+        text-shadow: 0 3px 6px rgba(0, 0, 0, 1) !important;
+    }
+    
+    .breaking-news-link *,
+    .breaking-news-link span {
+        color: inherit !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .breaking-news-link,
+    .breaking-news-link:link,  
+    .breaking-news-link:visited,
+    .breaking-news-link:active,
+    .breaking-news-link:focus {
+        color: #ffffff !important;
+        text-decoration: none !important;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9) !important;
+        font-weight: 700 !important;
+    }
+    
+    .breaking-news-link:hover {
+        color: #fef3c7 !important;
+        text-shadow: 0 3px 6px rgba(0, 0, 0, 1) !important;
+    }
+}
+
+@keyframes scroll-rtl {
+    0% { 
+        transform: translateX(100%); 
+    }
+    100% { 
+        transform: translateX(-100%); 
+    }
+}
+
+.breaking-news-ticker {
+    display: inline-block;
+    padding-left: 100%;
+    will-change: transform;
+    backface-visibility: hidden;
+    animation: scroll-rtl 90s linear infinite;
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+/* تأكد من أن الـ animation يعمل */
+.breaking-news-ticker {
+    animation-name: scroll-rtl !important;
+    animation-duration: 90s !important;
+    animation-timing-function: linear !important;
+    animation-iteration-count: infinite !important;
+    animation-play-state: running !important;
+}
+
+/* إبطاء الحركة عند التمرير */
+.breaking-news:hover .breaking-news-ticker {
+    animation-play-state: paused;
+}
+
+/* الحالة عندما لا توجد أخبار - إيقاف animation */
+.breaking-news-ticker.no-animation {
+    animation: none;
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* ضمان ظهور النص بشكل طبيعي */
+.breaking-news-ticker,
+.breaking-news-ticker * {
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #ffffff !important;
+}
+
+/* إصلاح مشكلة الموبايل للتيكر */
+@media (max-width: 768px) {
+    .breaking-news {
+        margin: 0;
+        width: 100vw;
+        max-width: 100vw;
+        box-sizing: border-box;
+        background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%) !important;
+    }
+    
+    .breaking-news .container {
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin: 0;
+    }
+    
+    .breaking-news-ticker {
+        font-size: 0.875rem;
+        animation-duration: 120s;
+        color: #ffffff !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        font-weight: 600;
+    }
+    
+    .breaking-news-ticker a {
+        color: #ffffff !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    
+    /* منع overflow horizontal */
+    body, html {
+        overflow-x: hidden;
+        max-width: 100vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .breaking-news {
+        background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%) !important;
+    }
+    
+    .breaking-news .container {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        gap: 0.5rem;
+    }
+    
+    .breaking-news-ticker {
+        font-size: 0.8125rem;
+        animation-duration: 150s;
+        color: #ffffff !important;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+        font-weight: 700;
+    }
+    
+    .breaking-news-ticker a {
+        color: #ffffff !important;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+        font-weight: 600;
+    }
+    
+    .breaking-news-ticker a:hover {
+        color: #fef3c7 !important;
+        text-shadow: 0 3px 6px rgba(0, 0, 0, 1);
+    }
+}
+
+/*=================== Animation للشريط المتحرك ===================*/
+
+/* Animation بسيط وفعال - من اليسار إلى اليمين */
+@keyframes moveNews {
     0% {
-        transform: translateX(100%);
+        transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        -moz-transform: translateX(-100%);
+        -o-transform: translateX(-100%);
     }
     100% {
+        transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -o-transform: translateX(100%);
+    }
+}
+
+@-webkit-keyframes moveNews {
+    0% {
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+    100% {
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+}
+
+@-moz-keyframes moveNews {
+    0% {
+        -moz-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+    100% {
+        -moz-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+}
+
+/* قواعد للشريط المتحرك */
+.breaking-news-scroll {
+    display: inline-block !important;
+    white-space: nowrap !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+    animation: scroll-rtl 90s linear infinite !important;
+    animation-name: scroll-rtl !important;
+    animation-duration: 90s !important;
+    animation-timing-function: linear !important;
+    animation-iteration-count: infinite !important;
+    animation-play-state: running !important;
+    padding-left: 100% !important;
+    will-change: transform !important;
+    backface-visibility: hidden !important;
+    -webkit-animation: scroll-rtl 90s linear infinite !important;
+    -moz-animation: scroll-rtl 90s linear infinite !important;
+    -o-animation: scroll-rtl 90s linear infinite !important;
+}
+
+.breaking-news-scroll:hover {
+    animation-play-state: paused !important;
+}
+
+/* تأكد من السرعات الصحيحة لكل الأجهزة */
+.breaking-news-scroll-simple {
+    display: inline-block !important;
+    white-space: nowrap !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+    animation: scroll-rtl 90s linear infinite !important;
+    padding-left: 100% !important;
+    will-change: transform !important;
+    backface-visibility: hidden !important;
+}
+
+.breaking-news-scroll-simple:hover {
+    animation-play-state: paused !important;
+}
+
+/* للتابليت والموبايل - سرعات أبطأ جداً */
+@media (max-width: 768px) {
+    .breaking-news-scroll,
+    .breaking-news-scroll-simple,
+    .breaking-news-ticker {
+        animation-duration: 120s !important;
+        font-size: 0.875rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .breaking-news-scroll,
+    .breaking-news-scroll-simple,
+    .breaking-news-ticker {
+        animation-duration: 150s !important;
+        font-size: 0.8125rem !important;
+    }
+}
+
+/*=================== قواعد نهائية لضمان ظهور النصوص ===================*/
+
+/* قواعد شاملة وأولوية عالية */
+.breaking-news-ticker-wrapper .breaking-news,
+.breaking-news-ticker-wrapper .breaking-news *,
+.breaking-news-ticker-wrapper .breaking-news-ticker,
+.breaking-news-ticker-wrapper .breaking-news-ticker *,
+.breaking-news-ticker-wrapper .breaking-news-link,
+.breaking-news-ticker-wrapper .breaking-news-link * {
+    color: #ffffff !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* إجبار النصوص على الظهور دائماً - حتى في حالة الـ hover */
+.breaking-news-ticker-wrapper span,
+.breaking-news-ticker-wrapper a,
+.breaking-news-ticker-wrapper a span {
+    color: #ffffff !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: inline !important;
+}
+
+/* قواعد خاصة للـ animation - تأكد من أن النص مرئي أثناء الحركة */
+@keyframes scroll-rtl {
+    0% { 
+        transform: translateX(-100%);
+    }
+    100% { 
+        transform: translateX(100%);
+    }
+}
+
+/* Animation جديد محسن للعربية */
+@keyframes scroll-arabic {
+    0% { 
+        transform: translateX(100%);
+    }
+    100% { 
         transform: translateX(-100%);
     }
 }

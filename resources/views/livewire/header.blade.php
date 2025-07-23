@@ -241,139 +241,139 @@ class="theme-header"
             
             <!-- Desktop Header - يظهر فقط في الديسكتوب -->
             <div class="desktop-header-container hidden md:block">
-                <!-- Top Navigation - Desktop -->
+            <!-- Top Navigation - Desktop -->
                 <nav id="top-nav" class="top-nav header-nav">
-                    <div class="container">
-                        <div class="topbar-wrapper">
-                            <!-- التاريخ -->
-                            <div class="topbar-today-date">
-                                <span x-text="currentDate"></span>
-                            </div>
+                <div class="container">
+                    <div class="topbar-wrapper">
+                        <!-- التاريخ -->
+                        <div class="topbar-today-date">
+                            <span x-text="currentDate"></span>
+                        </div>
+                        
+                        <!-- الروابط والأيقونات -->
+                        <div class="flex items-center gap-4">
+                            <ul class="components flex items-center gap-2">
+                                <li class="social-icons-item">
+                                    <a href="#" title="RSS" class="tooltip">
+                                        <i class="bi bi-rss"></i>
+                                    </a>
+                                </li>
+                                <li class="social-icons-item">
+                                    <a href="#" title="فيسبوك" class="tooltip">
+                                        <i class="bi bi-facebook"></i>
+                                    </a>
+                                </li>
+                                <li class="social-icons-item">
+                                    <a href="#" title="تويتر" class="tooltip">
+                                        <i class="bi bi-twitter-x"></i>
+                                    </a>
+                                </li>
+                                <li class="social-icons-item">
+                                    <a href="#" title="لينكد إن" class="tooltip">
+                                        <i class="bi bi-linkedin"></i>
+                                    </a>
+                                </li>
+                                <li class="social-icons-item">
+                                    <a href="#" title="يوتيوب" class="tooltip">
+                                        <i class="bi bi-youtube"></i>
+                                    </a>
+                                </li>
+                                <li class="social-icons-item">
+                                    <a href="#" title="إنستغرام" class="tooltip">
+                                        <i class="bi bi-instagram"></i>
+                                    </a>
+                                </li>
+                                <li class="social-icons-item">
+                                    <a href="#" title="تليجرام" class="tooltip">
+                                        <i class="bi bi-telegram"></i>
+                                    </a>
+                                </li>
+                                <li class="menu-item custom-menu-link">
+                                    <a href="#" title="مقال عشوائي" class="tooltip">
+                                        <i class="bi bi-shuffle"></i>
+                                        <span class="hidden md:inline">مقال عشوائي</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item custom-menu-link">
+                                    <a href="#" title="القائمة" class="tooltip">
+                                        <i class="bi bi-list"></i>
+                                        <span class="hidden md:inline">القائمة</span>
+                                    </a>
+                                </li>
+                            </ul>
                             
-                            <!-- الروابط والأيقونات -->
-                            <div class="flex items-center gap-4">
-                                <ul class="components flex items-center gap-2">
-                                    <li class="social-icons-item">
-                                        <a href="#" title="RSS" class="tooltip">
-                                            <i class="bi bi-rss"></i>
-                                        </a>
-                                    </li>
-                                    <li class="social-icons-item">
-                                        <a href="#" title="فيسبوك" class="tooltip">
-                                            <i class="bi bi-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li class="social-icons-item">
-                                        <a href="#" title="تويتر" class="tooltip">
-                                            <i class="bi bi-twitter-x"></i>
-                                        </a>
-                                    </li>
-                                    <li class="social-icons-item">
-                                        <a href="#" title="لينكد إن" class="tooltip">
-                                            <i class="bi bi-linkedin"></i>
-                                        </a>
-                                    </li>
-                                    <li class="social-icons-item">
-                                        <a href="#" title="يوتيوب" class="tooltip">
-                                            <i class="bi bi-youtube"></i>
-                                        </a>
-                                    </li>
-                                    <li class="social-icons-item">
-                                        <a href="#" title="إنستغرام" class="tooltip">
-                                            <i class="bi bi-instagram"></i>
-                                        </a>
-                                    </li>
-                                    <li class="social-icons-item">
-                                        <a href="#" title="تليجرام" class="tooltip">
-                                            <i class="bi bi-telegram"></i>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item custom-menu-link">
-                                        <a href="#" title="مقال عشوائي" class="tooltip">
-                                            <i class="bi bi-shuffle"></i>
-                                            <span class="hidden md:inline">مقال عشوائي</span>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item custom-menu-link">
-                                        <a href="#" title="القائمة" class="tooltip">
-                                            <i class="bi bi-list"></i>
-                                            <span class="hidden md:inline">القائمة</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                
-                                <!-- شريط البحث -->
-                                <div class="search-bar menu-item custom-menu-link">
-                                    <form method="get" action="{{ route('news.search') }}" class="relative">
-                                        <input type="text" name="q" placeholder="ابحث في الأخبار والمقالات..." 
-                                               class="search-input px-4 py-1.5 pr-10 text-sm"
-                                               x-model="searchQuery"
-                                               @keyup.enter="$el.form.submit()">
-                                        <button type="submit" class="search-submit">
-                                            <i class="bi bi-search"></i>
-                                        </button>
-                                    </form>
-                                </div>
+                            <!-- شريط البحث -->
+                            <div class="search-bar menu-item custom-menu-link">
+                                <form method="get" action="{{ route('news.search') }}" class="relative">
+                                    <input type="text" name="q" placeholder="ابحث في الأخبار والمقالات..." 
+                                           class="search-input px-4 py-1.5 pr-10 text-sm"
+                                           x-model="searchQuery"
+                                           @keyup.enter="$el.form.submit()">
+                                    <button type="submit" class="search-submit">
+                                        <i class="bi bi-search"></i>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
-                </nav>
-                
-                <!-- Main Navigation - Desktop -->
+                </div>
+            </nav>
+            
+            <!-- Main Navigation - Desktop -->
                 <div class="main-nav-wrapper bg-white shadow-sm">
-                    <nav id="main-nav" class="main-nav header-nav">
-                        <div class="container">
-                            <div class="main-menu-wrapper">
-                                <!-- Logo -->
-                                <div class="image-logo">
-                                    <a href="{{ route('home') }}">
-                                        <img src="{{ asset('images/logo.png') }}" alt="شبوة21">
-                                    </a>
-                                </div>
-                                
-                                <!-- Navigation Menu -->
-                                <div class="main-menu main-menu-wrap">
-                                    <div id="main-nav-menu" class="main-menu header-menu">
-                                        <ul class="menu">
-                                            @foreach($mainCategories as $category)
-                                                <li class="menu-item group relative">
-                                                    <a href="{{ route('news.category', $category->slug) }}" 
-                                                       class="hover:text-primary-color transition-colors font-medium flex items-center gap-1">
-                                                        @if($category->icon)
-                                                            <i class="{{ $category->icon }}"></i>
-                                                        @endif
-                                                        {{ $category->name }}
-                                                        @if($category->children->count() > 0)
-                                                            <i class="bi bi-chevron-down text-xs"></i>
-                                                        @endif
-                                                    </a>
-                                                    @if($category->children->count() > 0)
-                                                        <ul>
-                                                            @foreach($category->children as $child)
-                                                                <li>
-                                                                    <a href="{{ route('news.category', $child->slug) }}" 
-                                                                       class="flex items-center">
-                                                                        @if($child->icon)
-                                                                            <i class="{{ $child->icon }} ml-2"></i>
-                                                                        @endif
-                                                                        {{ $child->name }}
-                                                                    </a>
-                                                                </li>
-                                                            @endforeach
-                                                        </ul>
+                <nav id="main-nav" class="main-nav header-nav">
+                    <div class="container">
+                        <div class="main-menu-wrapper">
+                            <!-- Logo -->
+                            <div class="image-logo">
+                                <a href="{{ route('home') }}">
+                                    <img src="{{ asset('images/logo.png') }}" alt="شبوة21">
+                                </a>
+                            </div>
+                            
+                            <!-- Navigation Menu -->
+                            <div class="main-menu main-menu-wrap">
+                                <div id="main-nav-menu" class="main-menu header-menu">
+                                    <ul class="menu">
+                                        @foreach($mainCategories as $category)
+                                            <li class="menu-item group relative">
+                                                <a href="{{ route('news.category', $category->slug) }}" 
+                                                   class="hover:text-primary-color transition-colors font-medium flex items-center gap-1">
+                                                    @if($category->icon)
+                                                        <i class="{{ $category->icon }}"></i>
                                                     @endif
-                                                </li>
-                                            @endforeach
-                                            
+                                                    {{ $category->name }}
+                                                    @if($category->children->count() > 0)
+                                                        <i class="bi bi-chevron-down text-xs"></i>
+                                                    @endif
+                                                </a>
+                                                @if($category->children->count() > 0)
+                                                    <ul>
+                                                        @foreach($category->children as $child)
+                                                            <li>
+                                                                <a href="{{ route('news.category', $child->slug) }}" 
+                                                                   class="flex items-center">
+                                                                    @if($child->icon)
+                                                                        <i class="{{ $child->icon }} ml-2"></i>
+                                                                    @endif
+                                                                    {{ $child->name }}
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                        
                                             {{-- فيديو --}}
                                             @if($showVideo)
-                                            <li class="menu-item">
-                                                <a href="{{ route('videos.index') }}" 
-                                                   class="hover:text-primary-color transition-colors font-medium flex items-center gap-1">
-                                                    <i class="bi bi-play-circle"></i>
-                                                    فيديو
-                                                </a>
-                                            </li>
+                                        <li class="menu-item">
+                                            <a href="{{ route('videos.index') }}" 
+                                               class="hover:text-primary-color transition-colors font-medium flex items-center gap-1">
+                                                <i class="bi bi-play-circle"></i>
+                                                فيديو
+                                            </a>
+                                        </li>
                                             @endif
 
                                             {{-- عن الموقع --}}
@@ -402,20 +402,20 @@ class="theme-header"
                                             @if($showSocial)
                                                 {{-- ضع هنا كود أيقونات التواصل الاجتماعي --}}
                                             @endif
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <!-- Main Page Button -->
-                                <div class="main-page-btn">
-                                    <a href="{{ route('home') }}" class="flex items-center gap-2">
-                                        <i class="bi bi-house-door"></i>
-                                        الصفحة الرئيسية
-                                    </a>
+                                    </ul>
                                 </div>
                             </div>
+                            
+                            <!-- Main Page Button -->
+                            <div class="main-page-btn">
+                                <a href="{{ route('home') }}" class="flex items-center gap-2">
+                                    <i class="bi bi-house-door"></i>
+                                    الصفحة الرئيسية
+                                </a>
+                            </div>
                         </div>
-                    </nav>
+                    </div>
+                </nav>
                 </div>
             </div>
         </header>
