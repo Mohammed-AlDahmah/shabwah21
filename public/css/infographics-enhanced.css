@@ -1,0 +1,349 @@
+/* Enhanced Infographics Section Styles - Brand Identity Colors */
+
+/* Section Container */
+.infographics-section {
+    background: linear-gradient(135deg, #fff8e1 0%, #ffe4b5 50%, #ffd4a3 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.infographics-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(192, 139, 45, 0.05) 0%, transparent 70%);
+    animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(30px, -30px) rotate(120deg); }
+    66% { transform: translate(-20px, 20px) rotate(240deg); }
+}
+
+/* Header Styling */
+.infographics-section .section-header {
+    position: relative;
+    z-index: 1;
+}
+
+.infographics-section .icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%);
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 10px 30px rgba(192, 139, 45, 0.3);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.infographics-section h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+}
+
+/* Slider Container */
+.infographics-slider {
+    position: relative;
+    padding: 2rem 0;
+}
+
+/* Card Styling */
+.infographic-card {
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.infographic-card-inner {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(192, 139, 45, 0.1);
+}
+
+.infographic-card:hover .infographic-card-inner {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(192, 139, 45, 0.2);
+    border-color: rgba(192, 139, 45, 0.3);
+}
+
+/* Image Container */
+.infographic-image-container {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #fff8e1 0%, #ffe4b5 100%);
+}
+
+.infographic-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.infographic-card:hover .infographic-image-container img {
+    transform: scale(1.1);
+}
+
+/* Overlay Effects */
+.infographic-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(178, 43, 43, 0.7) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.infographic-card:hover .infographic-overlay {
+    opacity: 1;
+}
+
+/* Badge */
+.infographic-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(192, 139, 45, 0.3);
+    z-index: 2;
+}
+
+/* Icon Badge */
+.infographic-icon-badge {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.infographic-icon-badge i {
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Content */
+.infographic-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.infographic-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.infographic-card:hover .infographic-title {
+    color: #C08B2D;
+}
+
+.infographic-excerpt {
+    color: #64748b;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+/* Stats Grid */
+.infographic-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-box {
+    background: linear-gradient(135deg, #fff8e1 0%, #ffe4b5 100%);
+    border-radius: 12px;
+    padding: 0.75rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(192, 139, 45, 0.1);
+}
+
+.stat-box:hover {
+    background: linear-gradient(135deg, #ffe4b5 0%, #ffd4a3 100%);
+    transform: translateY(-2px);
+    border-color: rgba(192, 139, 45, 0.3);
+}
+
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #B22B2B;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #C08B2D;
+    font-weight: 500;
+}
+
+/* CTA Button */
+.infographic-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(192, 139, 45, 0.3);
+}
+
+.infographic-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(192, 139, 45, 0.4);
+    color: white;
+    background: linear-gradient(135deg, #B22B2B 0%, #C08B2D 100%);
+}
+
+/* Navigation Buttons */
+.infographic-swiper-button-next,
+.infographic-swiper-button-prev {
+    width: 50px !important;
+    height: 50px !important;
+    background: white !important;
+    border-radius: 50% !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+    border: 2px solid rgba(192, 139, 45, 0.2) !important;
+}
+
+.infographic-swiper-button-next:hover,
+.infographic-swiper-button-prev:hover {
+    background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%) !important;
+    transform: scale(1.1) !important;
+    border-color: transparent !important;
+}
+
+.infographic-swiper-button-next::after,
+.infographic-swiper-button-prev::after {
+    font-size: 1.25rem !important;
+    font-weight: bold !important;
+    color: #C08B2D !important;
+}
+
+.infographic-swiper-button-next:hover::after,
+.infographic-swiper-button-prev:hover::after {
+    color: white !important;
+}
+
+/* Pagination */
+.infographic-swiper-pagination {
+    bottom: -20px !important;
+}
+
+.infographic-swiper-pagination .swiper-pagination-bullet {
+    width: 12px !important;
+    height: 12px !important;
+    background: rgba(192, 139, 45, 0.3) !important;
+    opacity: 1 !important;
+    transition: all 0.3s ease !important;
+}
+
+.infographic-swiper-pagination .swiper-pagination-bullet-active {
+    width: 30px !important;
+    border-radius: 6px !important;
+    background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%) !important;
+}
+
+/* View All Button */
+.view-all-infographics {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 25px rgba(192, 139, 45, 0.3);
+}
+
+.view-all-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 35px rgba(192, 139, 45, 0.4);
+    color: white;
+    background: linear-gradient(135deg, #B22B2B 0%, #C08B2D 100%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .infographics-section h2 {
+        font-size: 2rem;
+    }
+    
+    .infographic-image-container {
+        height: 200px;
+    }
+    
+    .infographic-title {
+        font-size: 1.125rem;
+    }
+    
+    .infographic-stats {
+        gap: 0.5rem;
+    }
+    
+    .stat-value {
+        font-size: 1rem;
+    }
+} 

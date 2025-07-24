@@ -69,6 +69,12 @@ class SettingsManager extends Component
     public $stats = [];
     public $faq = [];
 
+    // Homepage Settings
+    public $homepage = [
+        'opinion_articles_per_page' => 4,
+        'videos_per_page' => 6,
+    ];
+
     protected $rules = [
         'general.site_name' => 'required|string|max:255',
         'general.site_description' => 'nullable|string|max:500',
@@ -91,6 +97,8 @@ class SettingsManager extends Component
         'about.about_description' => 'nullable|string',
         'general.footer_text' => 'nullable|string|max:500',
         'general.analytics_code' => 'nullable|string',
+        'homepage.opinion_articles_per_page' => 'required|integer|min:1|max:20',
+        'homepage.videos_per_page' => 'required|integer|min:1|max:20',
     ];
 
     protected $listeners = [
@@ -158,6 +166,10 @@ class SettingsManager extends Component
             $this->stats = SiteSettings::getValue('stats', []);
             $this->faq = SiteSettings::getValue('faq', []);
 
+            // Load Homepage Settings
+            $this->homepage['opinion_articles_per_page'] = (int) SiteSettings::getValue('opinion_articles_per_page', 4);
+            $this->homepage['videos_per_page'] = (int) SiteSettings::getValue('videos_per_page', 6);
+
         } catch (\Exception $e) {
             $this->dispatch('showToast', [
                 'type' => 'error',
@@ -205,6 +217,11 @@ class SettingsManager extends Component
             SiteSettings::setValue('services', $this->services);
             SiteSettings::setValue('stats', $this->stats);
             SiteSettings::setValue('faq', $this->faq);
+
+            // Save Homepage Settings
+            foreach ($this->homepage as $key => $value) {
+                SiteSettings::setValue($key, $value);
+            }
 
             $this->dispatch('showToast', [
                 'type' => 'success',

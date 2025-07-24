@@ -8,6 +8,7 @@
                         @if($news->image)
                             <img src="{{ \App\Helpers\ImageHelper::getImageUrl($news->image) }}" 
                                  alt="{{ $news->title }}" 
+                                 loading="lazy"
                                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                         @else
                             <div class="w-full h-full bg-gradient-to-br from-[#C08B2D] via-[#B22B2B] to-[#C08B2D] flex items-center justify-center">

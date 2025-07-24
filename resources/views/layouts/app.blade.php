@@ -31,10 +31,14 @@
     <link rel="stylesheet" href="{{ asset('css/breaking-news.css') }}">
     <link rel="stylesheet" href="{{ asset('css/featured-news.css') }}">
     <link rel="stylesheet" href="{{ asset('css/infographics.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/infographics-enhanced.css') }}">
     <link rel="stylesheet" href="{{ asset('css/special-sections.css') }}">
     <link rel="stylesheet" href="{{ asset('css/breaking-news.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('css/mobile-fixes.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mobile-performance-fix.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/header-fix.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mobile-menu-fix.css') }}">
     <link rel="stylesheet" href="{{ asset('css/notifications.css') }}">
   
     @yield('styles')
@@ -57,6 +61,14 @@
             
             <!-- Footer -->
             <livewire:footer />
+            
+            <!-- Scroll to Top Button -->
+            <button class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <i class="bi bi-arrow-up"></i>
+            </button>
+            
+            <!-- Scroll Progress Indicator -->
+            <div class="scroll-indicator"></div>
         </div>
     </div>
     
@@ -65,6 +77,18 @@
 
     <!-- نظام الإشعارات المخصص -->
     <script src="{{ asset('js/notifications.js') }}"></script>
+    
+    <!-- Lazy Loading Enhancement -->
+    <script src="{{ asset('js/lazy-loading.js') }}"></script>
+    
+    <!-- Mobile Performance Enhancement -->
+    <script src="{{ asset('js/mobile-performance.js') }}"></script>
+    
+    <!-- Header Fix Enhancement -->
+    <script src="{{ asset('js/header-fix.js') }}"></script>
+    
+    <!-- Mobile Menu Fix -->
+    <script src="{{ asset('js/mobile-menu-fix.js') }}"></script>
 
     <!-- Livewire Scripts -->
     @livewireScripts

@@ -1,0 +1,203 @@
+/* Mobile Menu Fix CSS */
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-menu-overlay.overlay-active {
+    opacity: 1;
+}
+
+/* Mobile Navigation Menu */
+.mobile-nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 320px;
+    max-width: 85vw;
+    height: 100vh;
+    background: white;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    overflow-y: auto;
+    transition: right 0.3s ease;
+    -webkit-overflow-scrolling: touch;
+    display: none;
+}
+
+.mobile-nav-menu.menu-active {
+    right: 0 !important;
+}
+
+/* Body when menu is open */
+body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    position: relative;
+    z-index: 10001;
+}
+
+.mobile-menu-btn.active {
+    color: #C08B2D;
+}
+
+/* Mobile Menu Header */
+.mobile-nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%);
+    color: white;
+}
+
+.mobile-nav-close-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav-close-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+/* Mobile Menu Links */
+.mobile-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.mobile-nav-item {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.mobile-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.mobile-nav-link:hover {
+    background: rgba(192, 139, 45, 0.05);
+    color: #C08B2D;
+}
+
+.mobile-nav-link-primary {
+    background: rgba(192, 139, 45, 0.1);
+    color: #C08B2D;
+    font-weight: 600;
+}
+
+.mobile-nav-link-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.mobile-nav-icon {
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+    color: #C08B2D;
+}
+
+.mobile-nav-text {
+    font-weight: 500;
+}
+
+.mobile-nav-arrow {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+    color: #C08B2D;
+}
+
+.mobile-nav-link:hover .mobile-nav-arrow {
+    transform: translateX(-5px);
+}
+
+/* Sub Navigation */
+.mobile-sub-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: rgba(192, 139, 45, 0.05);
+}
+
+.mobile-sub-nav-item {
+    border-bottom: 1px solid rgba(192, 139, 45, 0.1);
+}
+
+.mobile-sub-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.875rem 1.5rem 0.875rem 3rem;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.mobile-sub-nav-link:hover {
+    background: rgba(192, 139, 45, 0.1);
+    color: #C08B2D;
+}
+
+/* Ensure menu is above everything */
+@media (max-width: 768px) {
+    .mobile-header-container {
+        position: relative;
+        z-index: 10000;
+    }
+    
+    .mobile-menu-overlay {
+        z-index: 10001;
+    }
+    
+    .mobile-nav-menu {
+        z-index: 10002;
+    }
+    
+    /* Fix for Alpine.js conflicts */
+    .mobile-nav-menu[x-show="true"] {
+        display: block !important;
+        right: 0 !important;
+    }
+    
+    .mobile-menu-overlay[x-show="true"] {
+        display: block !important;
+        opacity: 1 !important;
+    }
+} 

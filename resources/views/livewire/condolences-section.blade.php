@@ -29,25 +29,25 @@
         <a href="{{ route('news.category', 'condolences') }}" class="bg-[#C08B2D] text-white px-4 py-1 rounded hover:bg-[#a06e22] text-xs">المزيد</a>
     </div>
 </div>
+@push('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    if (typeof Swiper !== 'undefined') {
-        new Swiper('.condolences-swiper', {
-            slidesPerView: 1,
-            spaceBetween: 10,
-            loop: true,
-            autoplay: { delay: 3500, disableOnInteraction: false },
-            pagination: {
-                el: '.condolences-swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.condolences-swiper-button-next',
-                prevEl: '.condolences-swiper-button-prev',
-            },
-        });
-    }
-});
+    document.addEventListener('livewire:load', function () {
+        const swiperEl = document.querySelector('.condolences-swiper');
+        if (swiperEl && typeof Swiper !== 'undefined') {
+            const slides = swiperEl.querySelectorAll('.swiper-slide');
+            const loopMode = slides.length > 1;
+
+            new Swiper(swiperEl, {
+                loop: loopMode,
+                effect: 'fade',
+                fadeEffect: { crossFade: true },
+                autoplay: { delay: 5000, disableOnInteraction: false },
+                pagination: { el: '.condolences-swiper-pagination', clickable: true },
+                navigation: { nextEl: '.condolences-swiper-button-next', prevEl: '.condolences-swiper-button-prev' },
+            });
+        }
+    });
 </script>
+@endpush
 @endif
 </div> 

@@ -1,0 +1,340 @@
+/* ===== Unified Sections Design ===== */
+/* توحيد تصميم جميع السيكشنات في الموقع الإخباري */
+
+:root {
+    /* الألوان الأساسية */
+    --primary-color: #C08B2D;
+    --secondary-color: #B22B2B;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --background-light: #f8fafc;
+    --background-white: #ffffff;
+    --border-color: #e5e7eb;
+    
+    /* البادينج الموحد */
+    --section-padding-desktop: 3rem;
+    --section-padding-tablet: 2rem;
+    --section-padding-mobile: 1rem;
+    
+    --container-padding-desktop: 2rem;
+    --container-padding-tablet: 1.5rem;
+    --container-padding-mobile: 1rem;
+    
+    /* الظلال */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+    --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+    
+    /* الحواف */
+    --border-radius-sm: 0.5rem;
+    --border-radius-md: 0.75rem;
+    --border-radius-lg: 1rem;
+    --border-radius-xl: 1.5rem;
+    
+    /* الانتقالات */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== توحيد البادينج لجميع السيكشنات ===== */
+.section-wrapper,
+.hero-section,
+.about-section,
+.contact-info-section,
+.additional-sections,
+.special-sections,
+.infographics-wrapper,
+section[class*="-section"],
+.section-card {
+    padding: var(--section-padding-desktop) 0;
+}
+
+/* توحيد الحاويات */
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-left: var(--container-padding-desktop);
+    padding-right: var(--container-padding-desktop);
+}
+
+/* ===== تصميم موحد لعناوين السيكشنات ===== */
+.section-header {
+    margin-bottom: 2.5rem;
+    position: relative;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.section-header::after {
+    display: none; /* إزالة الخط القديم */
+}
+
+/* العنوان الرئيسي الموحد */
+.section-header h2,
+.section-header h3 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+/* تصميم جديد أنيق للعناوين */
+.section-header .title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+}
+
+/* خط زخرفي جانبي */
+.section-header .title-decoration {
+    width: 4px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-header .title-decoration::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-100%);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateY(-100%); }
+    50% { transform: translateY(100%); }
+    100% { transform: translateY(100%); }
+}
+
+/* النص الفرعي */
+.section-header p {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    margin: 0;
+    font-weight: 400;
+}
+
+/* ===== كروت السيكشنات الموحدة ===== */
+.section-card {
+    background: var(--background-white);
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-md);
+    padding: 2rem;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.section-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--transition-normal);
+}
+
+.section-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+.section-card:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* ===== Lazy Loading للصور ===== */
+img[loading="lazy"] {
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    position: relative;
+}
+
+img[loading="lazy"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%);
+    animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* صور محملة */
+img.loaded {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ===== تحسينات الأداء والسكرولينج ===== */
+* {
+    -webkit-overflow-scrolling: touch;
+}
+
+body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* منع القفز أثناء التحميل */
+img, video, iframe {
+    aspect-ratio: attr(width) / attr(height);
+}
+
+/* تحسين أداء الانيميشن */
+.will-animate {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* ===== التصميم التجاوبي الموحد ===== */
+@media (max-width: 1024px) {
+    :root {
+        --section-padding-desktop: var(--section-padding-tablet);
+        --container-padding-desktop: var(--container-padding-tablet);
+    }
+    
+    .section-header h2,
+    .section-header h3 {
+        font-size: 2rem;
+    }
+    
+    .section-header .title-decoration {
+        height: 50px;
+    }
+    
+    .section-header p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-padding-desktop: var(--section-padding-mobile);
+        --container-padding-desktop: var(--container-padding-mobile);
+    }
+    
+    .section-wrapper,
+    .hero-section,
+    .about-section,
+    .contact-info-section,
+    .additional-sections,
+    .special-sections,
+    .infographics-wrapper,
+    section[class*="-section"],
+    .section-card {
+        padding: var(--section-padding-mobile) 0;
+    }
+    
+    .section-header {
+        margin-bottom: 1.5rem;
+    }
+    
+    .section-header h2,
+    .section-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .section-header .title-decoration {
+        width: 3px;
+        height: 40px;
+    }
+    
+    .section-header p {
+        font-size: 0.875rem;
+    }
+    
+    .section-card {
+        padding: 1.25rem;
+        border-radius: var(--border-radius-md);
+    }
+    
+    /* تحسين المسافات في الموبايل */
+    .grid {
+        gap: 1rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-header h2,
+    .section-header h3 {
+        font-size: 1.25rem;
+    }
+    
+    .section-card {
+        padding: 1rem;
+    }
+    
+    .container {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+}
+
+/* ===== تحسينات إضافية للأداء ===== */
+/* تقليل استخدام الذاكرة للعناصر خارج الشاشة */
+.section-card:not(:hover) {
+    will-change: auto;
+}
+
+/* تحسين الأداء للعناصر المتحركة */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* تحسين الأداء على الأجهزة الضعيفة */
+@media (max-width: 768px) and (hover: none) {
+    .section-card:hover {
+        transform: none;
+    }
+    
+    .section-card::before {
+        display: none;
+    }
+}
+
+/* ===== أنماط خاصة للطباعة ===== */
+@media print {
+    .section-card {
+        box-shadow: none;
+        border: 1px solid var(--border-color);
+    }
+    
+    .section-header .title-decoration {
+        display: none;
+    }
+} 

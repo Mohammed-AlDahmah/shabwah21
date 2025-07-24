@@ -14,6 +14,8 @@
 @import 'sports.css';
 @import 'responsive.css';
 @import 'sticky-fixes.css';
+@import 'unified-sections.css';
+@import 'scroll-performance.css';
 
 /* ===== Homepage Specific Styles ===== */
 

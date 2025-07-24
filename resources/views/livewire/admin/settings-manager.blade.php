@@ -78,6 +78,44 @@
                                 <textarea class="form-control w-full min-h-[120px]" wire:model.defer="general.analytics_code" rows="4" placeholder="ضع كود Google Analytics أو أي كود تحليلات آخر"></textarea>
                                 @error('general.analytics_code') <div class="input-error">{{ $message }}</div> @enderror
                             </div>
+                            <div class="md:col-span-2">
+                                <label class="form-label">عدد مقالات الرأي في الصفحة الرئيسية</label>
+                                <input type="number" min="1" max="20" class="form-control w-full" wire:model.defer="homepage.opinion_articles_per_page">
+                                @error('homepage.opinion_articles_per_page') <div class="input-error">{{ $message }}</div> @enderror
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="form-label">عدد الفيديوهات في الصفحة الرئيسية</label>
+                                <input type="number" min="1" max="20" class="form-control w-full" wire:model.defer="homepage.videos_per_page">
+                                @error('homepage.videos_per_page') <div class="input-error">{{ $message }}</div> @enderror
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="form-label">إظهار قسم البطل (Hero Section)</label>
+                                <input type="checkbox" class="form-checkbox" wire:model.defer="display.show_hero_section">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="form-label">إظهار الأخبار العاجلة</label>
+                                <input type="checkbox" class="form-checkbox" wire:model.defer="display.show_breaking_news">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="form-label">إظهار النشرة الإخبارية</label>
+                                <input type="checkbox" class="form-checkbox" wire:model.defer="display.show_newsletter">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="form-label">إظهار الفيديو في القائمة</label>
+                                <input type="checkbox" class="form-checkbox" wire:model.defer="display.show_video_in_nav">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="form-label">إظهار من نحن في القائمة</label>
+                                <input type="checkbox" class="form-checkbox" wire:model.defer="display.show_about_in_nav">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="form-label">إظهار اتصل بنا في القائمة</label>
+                                <input type="checkbox" class="form-checkbox" wire:model.defer="display.show_contact_in_nav">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="form-label">إظهار روابط التواصل في القائمة</label>
+                                <input type="checkbox" class="form-checkbox" wire:model.defer="display.show_social_links_in_nav">
+                            </div>
                         </div>
                     @elseif($activeTab === 'contact')
                         <div class="grid md:grid-cols-2 gap-8">

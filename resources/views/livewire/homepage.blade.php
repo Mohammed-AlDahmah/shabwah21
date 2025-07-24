@@ -28,11 +28,11 @@
                 <!-- Main Featured News (2 columns) -->
                 <div class="lg:col-span-2">
                     <div class="section-header mb-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-2 h-16 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full shadow-lg"></div>
+                        <div class="title-wrapper">
+                            <div class="title-decoration"></div>
                             <div>
-                                <h2 class="text-3xl font-bold text-slate-800 mb-2">أبرز الأخبار</h2>
-                                <p class="text-slate-600">أهم الأخبار والتقارير المميزة</p>
+                                <h2>أبرز الأخبار</h2>
+                                <p>أهم الأخبار والتقارير المميزة</p>
                             </div>
                         </div>
                     </div>
@@ -52,18 +52,22 @@
                         
                         <!-- Featured News Sidebar -->
                         <div class="sidebar-widget bg-white rounded-2xl p-6">
-                            <div class="section-header mb-6">
-                                <h3 class="text-lg font-bold text-slate-800 mb-2">أخبار مميزة</h3>
-                                <div class="w-12 h-1 bg-gradient-to-r from-[#C08B2D] to-[#B22B2B] rounded"></div>
+                            <div class="section-header mb-4">
+                                <div class="title-wrapper">
+                                    <div class="title-decoration" style="height: 40px;"></div>
+                                    <h3>أخبار مميزة</h3>
+                                </div>
                             </div>
                             <livewire:featured-news limit="4" />
                         </div>
                         
                         <!-- Popular Articles -->
                         <div class="sidebar-widget bg-white rounded-2xl p-6">
-                            <div class="section-header mb-6">
-                                <h3 class="text-lg font-bold text-slate-800 mb-2">الأكثر قراءة</h3>
-                                <div class="w-12 h-1 bg-gradient-to-r from-[#C08B2D] to-[#B22B2B] rounded"></div>
+                            <div class="section-header mb-4">
+                                <div class="title-wrapper">
+                                    <div class="title-decoration" style="height: 40px;"></div>
+                                    <h3>الأكثر قراءة</h3>
+                                </div>
                             </div>
                             <livewire:popular-articles />
                         </div>
@@ -248,14 +252,14 @@
         <div class="container mx-auto px-2 py-8">
             <!-- Latest News Section - Full Width with Margins -->
             <div class="w-full mb-8">
-                <section class="section-card bg-white rounded-2xl p-6">
-                    <div class="section-header mb-6">
+                <section class="section-card">
+                    <div class="section-header">
                         <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-4">
-                                <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
+                            <div class="title-wrapper">
+                                <div class="title-decoration"></div>
                                 <div>
-                                    <h2 class="text-2xl font-bold text-slate-800">آخر الأخبار</h2>
-                                    <p class="text-slate-600">أحدث الأخبار والتقارير</p>
+                                    <h2>آخر الأخبار</h2>
+                                    <p>أحدث الأخبار والتقارير</p>
                                 </div>
                             </div>
                             <a href="{{ route('news.index') }}" class="btn-primary">
@@ -271,13 +275,13 @@
             <!-- Other Sections in Grid Layout -->
             <div class="grid grid-cols-1 lg:grid-cols-1 gap-6">
                 <!-- Category Sections -->
-                <section class="section-card bg-white rounded-2xl p-6">
-                    <div class="section-header mb-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
+                <section class="section-card">
+                    <div class="section-header">
+                        <div class="title-wrapper">
+                            <div class="title-decoration"></div>
                             <div>
-                                <h2 class="text-2xl font-bold text-slate-800">الأقسام الإخبارية</h2>
-                                <p class="text-slate-600">تصفح الأخبار حسب التصنيف</p>
+                                <h2>الأقسام الإخبارية</h2>
+                                <p>تصفح الأخبار حسب التصنيف</p>
                             </div>
                         </div>
                     </div>
@@ -285,13 +289,13 @@
                 </section>
 
                 <!-- Sports Section -->
-                <section class="section-card bg-white rounded-2xl p-6">
-                    <div class="section-header mb-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
+                <section class="section-card">
+                    <div class="section-header">
+                        <div class="title-wrapper">
+                            <div class="title-decoration"></div>
                             <div>
-                                <h2 class="text-2xl font-bold text-slate-800">الرياضة</h2>
-                                <p class="text-slate-600">أخبار الرياضة المحلية والعالمية</p>
+                                <h2>الرياضة</h2>
+                                <p>أخبار الرياضة المحلية والعالمية</p>
                             </div>
                         </div>
                     </div>
@@ -306,27 +310,27 @@
         <div class="container mx-auto px-2">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <!-- Opinion Articles -->
-                <section class="section-card bg-white rounded-2xl p-6">
-                    <div class="section-header mb-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
+                <section class="section-card">
+                    <div class="section-header">
+                        <div class="title-wrapper">
+                            <div class="title-decoration"></div>
                             <div>
-                                <h2 class="text-2xl font-bold text-slate-800">الرأي والتحليل</h2>
-                                <p class="text-slate-600">مقالات الرأي والتحليلات السياسية</p>
+                                <h2>الرأي والتحليل</h2>
+                                <p>مقالات الرأي والتحليلات السياسية</p>
                             </div>
                         </div>
                     </div>
-                    <livewire:opinion-articles :limit="$opinionArticlesPerPage" />
+                    <livewire:opinion-articles :limit="\App\Models\SiteSettings::getValue('opinion_articles_per_page', 4)" />
                 </section>
 
                 <!-- Most Read Articles -->
-                <section class="section-card bg-white rounded-2xl p-6">
-                    <div class="section-header mb-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
+                <section class="section-card">
+                    <div class="section-header">
+                        <div class="title-wrapper">
+                            <div class="title-decoration"></div>
                             <div>
-                                <h2 class="text-2xl font-bold text-slate-800">الأكثر قراءة</h2>
-                                <p class="text-slate-600">الأخبار الأكثر تداولاً وقراءة</p>
+                                <h2>الأكثر قراءة</h2>
+                                <p>الأخبار الأكثر تداولاً وقراءة</p>
                             </div>
                         </div>
                     </div>
@@ -341,33 +345,39 @@
 
     <!-- Video Section -->
     @if(SiteSettings::getValue('show_video_in_nav', true))
-    <section class="section-card bg-white rounded-2xl p-6">
-        <div class="section-header mb-6">
-            <div class="flex items-center gap-4">
-                <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
-                <div>
-                    <h2 class="text-2xl font-bold text-slate-800">فيديو شبوة21</h2>
-                    <p class="text-slate-600">أحدث الفيديوهات والتقارير المصورة</p>
+    <section class="video-section">
+        <div class="container mx-auto px-2">
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="title-wrapper">
+                        <div class="title-decoration"></div>
+                        <div>
+                            <h2>فيديو شبوة21</h2>
+                            <p>أحدث الفيديوهات والتقارير المصورة</p>
+                        </div>
+                    </div>
                 </div>
+                <livewire:video-section :limit="\App\Models\SiteSettings::getValue('videos_per_page', 6)" />
             </div>
         </div>
-        <livewire:video-section :limit="$videosPerPage" />
     </section>
     @endif
 
     <!-- الانفوجرافيك -->
-    <section class="infographics-wrapper py-12">
+    <section class="infographics-wrapper">
         <div class="container mx-auto px-2">
-            <div class="section-header mb-8">
-                <div class="flex items-center gap-4">
-                    <div class="w-1 h-12 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
-                    <div>
-                        <h2 class="text-2xl font-bold text-slate-800">انفوجرافيك</h2>
-                        <p class="text-slate-600">رسوم بيانية ومعلومات مرئية تفاعلية</p>
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="title-wrapper">
+                        <div class="title-decoration"></div>
+                        <div>
+                            <h2>انفوجرافيك</h2>
+                            <p>رسوم بيانية ومعلومات مرئية تفاعلية</p>
+                        </div>
                     </div>
                 </div>
+                @livewire('infographics-section')
             </div>
-            @livewire('infographics-section')
         </div>
     </section>
 
@@ -380,15 +390,18 @@
         ['component' => 'condolences-section', 'icon' => 'bi-heart', 'title' => 'تعازي'],
     ];
     @endphp
-    <section class="special-sections py-1">
-        <div class="container mx-auto px-0">
-            <div class="section-header mb-2">
-                <div class="flex items-center gap-1">
-                    <div class="w-1 h-6 bg-gradient-to-b from-[#C08B2D] to-[#B22B2B] rounded-full"></div>
-                    <h2 class="text-base font-bold text-slate-800">الأقسام المميزة</h2>
+    <section class="special-sections">
+        <div class="container mx-auto px-2">
+            <div class="section-header">
+                <div class="title-wrapper">
+                    <div class="title-decoration"></div>
+                    <div>
+                        <h2>الأقسام المميزة</h2>
+                        <p>أقسام متخصصة لمحتوى متنوع</p>
+                    </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-[2px]">
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
                 @foreach($sections as $section)
                     <div class="special-card">
                         <div class="special-card-header">

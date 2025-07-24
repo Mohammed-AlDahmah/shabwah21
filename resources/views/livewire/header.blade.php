@@ -10,6 +10,7 @@
         day: 'numeric' 
     })
 }" 
+x-init="$watch('isSticky', value => window.adjustBodyPaddingForHeader(value))"
 @scroll.window="isSticky = window.pageYOffset > 100"
 class="theme-header"
 :class="{ 'sticky-header': isSticky }">
@@ -31,7 +32,7 @@ class="theme-header"
                 <div class="mobile-header-wrapper">
                     <div class="mobile-logo-section">
                         <a href="{{ route('home') }}" class="mobile-logo-link">
-                            <img src="{{ asset('images/logo.png') }}" alt="شبوة21" class="mobile-logo-img">
+                            <img src="{{ asset('images/logo.svg') }}" alt="شبوة21" class="mobile-logo-img">
                         </a>
                     </div>
                     <div class="mobile-controls-section">
