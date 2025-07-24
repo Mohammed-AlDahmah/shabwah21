@@ -11,6 +11,8 @@ use App\Livewire\Admin\ArticlesManager;
 use App\Livewire\Admin\SettingsManager;
 use App\Livewire\Admin\BackupManager;
 use App\Livewire\Admin\TestComponent;
+use App\Models\Article;
+use App\Observers\ArticleObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -49,5 +51,7 @@ class AppServiceProvider extends ServiceProvider
         Livewire::component('health-section', \App\Livewire\HealthSection::class);
         Livewire::component('greetings-section', \App\Livewire\GreetingsSection::class);
         Livewire::component('condolences-section', \App\Livewire\CondolencesSection::class);
+
+        Article::observe(ArticleObserver::class);
     }
 }

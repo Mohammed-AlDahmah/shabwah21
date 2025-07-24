@@ -153,58 +153,36 @@
             document.addEventListener('livewire:load', function () {
                 const swiperEl = document.querySelector('.infographics-swiper');
                 if (swiperEl && typeof Swiper !== 'undefined') {
+                    // Destroy any previous instance
+                    if (swiperEl.swiper) swiperEl.swiper.destroy(true, true);
+
                     const slides = swiperEl.querySelectorAll('.swiper-slide');
-                    const loopMode = slides.length > 3;
+                    const loopMode = slides.length > 1;
 
                     const swiperInstance = new Swiper(swiperEl, {
                         loop: loopMode,
                         slidesPerView: 1,
                         spaceBetween: 20,
                         centeredSlides: false,
-                        autoplay: { 
-                            delay: 5000, 
-                            disableOnInteraction: false,
-                            pauseOnMouseEnter: true
+                        autoplay: {
+                            delay: 4000,
+                            disableOnInteraction: false
                         },
-                        pagination: { 
-                            el: '.infographic-swiper-pagination', 
+                        pagination: {
+                            el: '.infographic-swiper-pagination',
                             clickable: true,
                             dynamicBullets: true
                         },
-                        navigation: { 
-                            nextEl: '.infographic-swiper-button-next', 
-                            prevEl: '.infographic-swiper-button-prev' 
+                        navigation: {
+                            nextEl: '.infographic-swiper-button-next',
+                            prevEl: '.infographic-swiper-button-prev'
                         },
                         breakpoints: {
-                            640: { 
-                                slidesPerView: 2, 
-                                spaceBetween: 20 
-                            },
-                            1024: { 
-                                slidesPerView: 3, 
-                                spaceBetween: 30 
-                            }
-                        },
-                        on: {
-                            init: function() {
-                                // Ensure all cards have equal height
-                                const cards = document.querySelectorAll('.infographic-card-inner');
-                                let maxHeight = 0;
-                                
-                                cards.forEach(card => {
-                                    card.style.height = 'auto';
-                                    maxHeight = Math.max(maxHeight, card.offsetHeight);
-                                });
-                                
-                                cards.forEach(card => {
-                                    card.style.minHeight = maxHeight + 'px';
-                                });
-                            }
+                            640: { slidesPerView: 2, spaceBetween: 20 },
+                            1024: { slidesPerView: 3, spaceBetween: 30 }
                         }
                     });
 
-                    // Pause on hover
-                    swiperEl.addEventListener('mouseenter', () => swiperInstance.autoplay.stop());
                     swiperEl.addEventListener('mouseleave', () => swiperInstance.autoplay.start());
                 }
             });

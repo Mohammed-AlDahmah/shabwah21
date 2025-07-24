@@ -31,22 +31,23 @@
 </div>
 @push('scripts')
 <script>
-    document.addEventListener('livewire:load', function () {
-        const swiperEl = document.querySelector('.greetings-swiper');
-        if (swiperEl && typeof Swiper !== 'undefined') {
-            const slides = swiperEl.querySelectorAll('.swiper-slide');
-            const loopMode = slides.length > 1;
-
-            new Swiper(swiperEl, {
-                loop: loopMode,
-                effect: 'fade',
-                fadeEffect: { crossFade: true },
-                autoplay: { delay: 5000, disableOnInteraction: false },
-                pagination: { el: '.greetings-swiper-pagination', clickable: true },
-                navigation: { nextEl: '.greetings-swiper-button-next', prevEl: '.greetings-swiper-button-prev' },
-            });
-        }
-    });
+document.addEventListener('livewire:load', function () {
+    const swiperEl = document.querySelector('.greetings-swiper');
+    if (swiperEl && typeof Swiper !== 'undefined') {
+        if (swiperEl.swiper) swiperEl.swiper.destroy(true, true);
+        const slides = swiperEl.querySelectorAll('.swiper-slide');
+        const loopMode = slides.length > 1;
+        const swiperInstance = new Swiper(swiperEl, {
+            loop: loopMode,
+            effect: 'fade',
+            fadeEffect: { crossFade: true },
+            autoplay: { delay: 4000, disableOnInteraction: false },
+            pagination: { el: '.greetings-swiper-pagination', clickable: true },
+            navigation: { nextEl: '.greetings-swiper-button-next', prevEl: '.greetings-swiper-button-prev' },
+        });
+        swiperEl.addEventListener('mouseleave', () => swiperInstance.autoplay.start());
+    }
+});
 </script>
 @endpush
 @endif
