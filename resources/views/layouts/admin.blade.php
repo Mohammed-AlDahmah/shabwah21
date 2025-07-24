@@ -417,18 +417,23 @@
             
             <div class="nav-section">
                 <div class="nav-section-title">إدارة النظام</div>
-             
-            <a href="{{ route('admin.about-manager') }}" class="nav-link text-white">
-                <i class="bi bi-info-circle me-2"></i> إدارة صفحة من نحن
+              
+            
+            <a href="{{ route('admin.about') }}" class="nav-item {{ request()->routeIs('admin.users') ? 'active' : '' }}">
+            <i class="bi bi-info-circle me-2"></i>  
        
-            <a href="{{ route('admin.contact-manager') }}" class="nav-link text-white">
-                <i class="bi bi-envelope-paper me-2"></i> إدارة صفحة اتصل بنا
-            </a>
-   
+                    <span>من نحن</span>
+                </a>
+                <a href="{{ route('admin.contact') }}" class="nav-item {{ request()->routeIs('admin.users') ? 'active' : '' }}">
+            <i class="bi bi-info-circle me-2"></i>  
+       
+                    <span>اتصل بنا</span>
+                </a>
                 <a href="{{ route('admin.users') }}" class="nav-item {{ request()->routeIs('admin.users') ? 'active' : '' }}">
                     <i class="bi bi-people"></i>
                     <span>المستخدمين</span>
                 </a>
+                 
                 <a href="{{ route('admin.roles') }}" class="nav-item {{ request()->routeIs('admin.roles') ? 'active' : '' }}">
                     <i class="bi bi-shield-check"></i>
                     <span>الصلاحيات</span>

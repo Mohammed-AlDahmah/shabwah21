@@ -4,7 +4,7 @@
 <div class="container mx-auto px-2 py-6">
     <!-- شريط البحث والتصفية -->
     <div class="bg-white rounded-lg shadow-md p-4 mb-6">
-        <form action="{{ route('search') }}" method="GET" class="flex flex-col md:flex-row gap-4">
+        <form action="{{ route('news.search') }}" method="GET" class="flex flex-col md:flex-row gap-4">
             <div class="flex-1">
                 <input type="text" 
                        name="q" 

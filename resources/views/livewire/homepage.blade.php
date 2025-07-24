@@ -90,6 +90,159 @@
     </section>
  
 
+    <!-- About Us Section -->
+    @if(!empty($aboutInfo['title']) || !empty($aboutInfo['description']))
+    <section class="about-section bg-gradient-to-br from-[#fff8e1] to-white py-12">
+        <div class="container mx-auto px-2">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-[#B22B2B] mb-4">{{ $aboutInfo['title'] ?? 'من نحن' }}</h2>
+                @if(!empty($aboutInfo['subtitle']))
+                    <p class="text-lg text-[#C08B2D]">{{ $aboutInfo['subtitle'] }}</p>
+                @endif
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                @if(!empty($aboutInfo['description']))
+                <div class="about-content">
+                    <p class="text-gray-700 leading-relaxed">{{ $aboutInfo['description'] }}</p>
+                </div>
+                @endif
+                
+                @if(!empty($aboutInfo['vision']) || !empty($aboutInfo['mission']))
+                <div class="vision-mission">
+                    @if(!empty($aboutInfo['vision']))
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-[#B22B2B] mb-3">رؤيتنا</h3>
+                        <p class="text-gray-600">{{ $aboutInfo['vision'] }}</p>
+                    </div>
+                    @endif
+                    
+                    @if(!empty($aboutInfo['mission']))
+                    <div>
+                        <h3 class="text-xl font-bold text-[#B22B2B] mb-3">رسالتنا</h3>
+                        <p class="text-gray-600">{{ $aboutInfo['mission'] }}</p>
+                    </div>
+                    @endif
+                </div>
+                @endif
+            </div>
+            
+            <!-- Values Section -->
+            @if(!empty($aboutInfo['values']))
+            <div class="values-section mb-8">
+                <h3 class="text-2xl font-bold text-[#B22B2B] text-center mb-6">قيمنا</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    @foreach($aboutInfo['values'] as $value)
+                    <div class="value-card bg-white rounded-lg p-6 text-center shadow-md">
+                        @if(!empty($value['icon']))
+                        <div class="text-3xl text-[#C08B2D] mb-3">
+                            <i class="{{ $value['icon'] }}"></i>
+                        </div>
+                        @endif
+                        <h4 class="text-lg font-bold text-[#B22B2B] mb-2">{{ $value['title'] ?? '' }}</h4>
+                        <p class="text-gray-600">{{ $value['description'] ?? '' }}</p>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            @endif
+            
+            <!-- Services Section -->
+            @if(!empty($aboutInfo['services']))
+            <div class="services-section mb-8">
+                <h3 class="text-2xl font-bold text-[#B22B2B] text-center mb-6">خدماتنا</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    @foreach($aboutInfo['services'] as $service)
+                    <div class="service-card bg-white rounded-lg p-6 text-center shadow-md">
+                        @if(!empty($service['icon']))
+                        <div class="text-3xl text-[#C08B2D] mb-3">
+                            <i class="{{ $service['icon'] }}"></i>
+                        </div>
+                        @endif
+                        <h4 class="text-lg font-bold text-[#B22B2B] mb-2">{{ $service['title'] ?? '' }}</h4>
+                        <p class="text-gray-600">{{ $service['description'] ?? '' }}</p>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            @endif
+            
+            <!-- Stats Section -->
+            @if(!empty($aboutInfo['stats']))
+            <div class="stats-section">
+                <h3 class="text-2xl font-bold text-[#B22B2B] text-center mb-6">إحصائياتنا</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    @foreach($aboutInfo['stats'] as $stat)
+                    <div class="stat-card bg-white rounded-lg p-6 text-center shadow-md">
+                        @if(!empty($stat['icon']))
+                        <div class="text-3xl text-[#C08B2D] mb-2">
+                            <i class="{{ $stat['icon'] }}"></i>
+                        </div>
+                        @endif
+                        <div class="text-2xl font-bold text-[#B22B2B] mb-1">{{ $stat['value'] ?? '' }}</div>
+                        <div class="text-gray-600">{{ $stat['title'] ?? '' }}</div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            @endif
+        </div>
+    </section>
+    @endif
+
+    <!-- Contact Info Section -->
+    @if(!empty($contactInfo['email']) || !empty($contactInfo['phone']) || !empty($contactInfo['address']))
+    <section class="contact-info-section bg-white py-12">
+        <div class="container mx-auto px-2">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-[#B22B2B] mb-4">معلومات التواصل</h2>
+                <p class="text-lg text-[#C08B2D]">تواصل معنا عبر الطرق التالية</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                @if(!empty($contactInfo['email']))
+                <div class="contact-card bg-gradient-to-br from-[#fff8e1] to-white rounded-lg p-6 text-center">
+                    <div class="text-3xl text-[#C08B2D] mb-3">
+                        <i class="bi bi-envelope"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-[#B22B2B] mb-2">البريد الإلكتروني</h4>
+                    <p class="text-gray-600">{{ $contactInfo['email'] }}</p>
+                </div>
+                @endif
+                
+                @if(!empty($contactInfo['phone']))
+                <div class="contact-card bg-gradient-to-br from-[#fff8e1] to-white rounded-lg p-6 text-center">
+                    <div class="text-3xl text-[#C08B2D] mb-3">
+                        <i class="bi bi-telephone"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-[#B22B2B] mb-2">رقم الهاتف</h4>
+                    <p class="text-gray-600">{{ $contactInfo['phone'] }}</p>
+                </div>
+                @endif
+                
+                @if(!empty($contactInfo['address']))
+                <div class="contact-card bg-gradient-to-br from-[#fff8e1] to-white rounded-lg p-6 text-center">
+                    <div class="text-3xl text-[#C08B2D] mb-3">
+                        <i class="bi bi-geo-alt"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-[#B22B2B] mb-2">العنوان</h4>
+                    <p class="text-gray-600">{{ $contactInfo['address'] }}</p>
+                </div>
+                @endif
+            </div>
+            
+            @if(!empty($contactInfo['work_hours']))
+            <div class="text-center mt-6">
+                <div class="inline-block bg-[#C08B2D] text-white px-6 py-3 rounded-lg">
+                    <i class="bi bi-clock ml-2"></i>
+                    <span>{{ $contactInfo['work_hours'] }}</span>
+                </div>
+            </div>
+            @endif
+        </div>
+    </section>
+    @endif
+
     <!-- Main Content Area -->
     <div class="bg-slate-50">
         <div class="container mx-auto px-2 py-8">

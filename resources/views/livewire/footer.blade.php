@@ -21,37 +21,32 @@
                     </div>
                 </div>
                 <p class="text-gray-300 leading-relaxed mb-6 text-sm">
-                    {{ $footerDescription ?? 'نحن نقدم آخر الأخبار والتقارير من شبوة واليمن، مع التركيز على الدقة والمصداقية في نقل المعلومات.' }}
+                    {{ SiteSettings::getValue('site_description', 'نحن نقدم آخر الأخبار والتقارير من شبوة واليمن، مع التركيز على الدقة والمصداقية في نقل المعلومات.') }}
                 </p>
                 <div class="social-links flex space-x-4 space-x-reverse">
-                    @if(isset($socialMediaLinks['facebook']))
-                        <a href="{{ $socialMediaLinks['facebook'] }}" target="_blank" class="social-link facebook hover-lift">
+                    @if(SiteSettings::getValue('social_facebook'))
+                        <a href="{{ SiteSettings::getValue('social_facebook') }}" target="_blank" class="social-link facebook hover-lift">
                             <i class="bi bi-facebook text-lg"></i>
                         </a>
                     @endif
-                    @if(isset($socialMediaLinks['twitter']))
-                        <a href="{{ $socialMediaLinks['twitter'] }}" target="_blank" class="social-link twitter hover-lift">
+                    @if(SiteSettings::getValue('social_twitter'))
+                        <a href="{{ SiteSettings::getValue('social_twitter') }}" target="_blank" class="social-link twitter hover-lift">
                             <i class="bi bi-twitter-x text-lg"></i>
                         </a>
                     @endif
-                    @if(isset($socialMediaLinks['instagram']))
-                        <a href="{{ $socialMediaLinks['instagram'] }}" target="_blank" class="social-link instagram hover-lift">
+                    @if(SiteSettings::getValue('social_instagram'))
+                        <a href="{{ SiteSettings::getValue('social_instagram') }}" target="_blank" class="social-link instagram hover-lift">
                             <i class="bi bi-instagram text-lg"></i>
                         </a>
                     @endif
-                    @if(isset($socialMediaLinks['youtube']))
-                        <a href="{{ $socialMediaLinks['youtube'] }}" target="_blank" class="social-link youtube hover-lift">
+                    @if(SiteSettings::getValue('social_youtube'))
+                        <a href="{{ SiteSettings::getValue('social_youtube') }}" target="_blank" class="social-link youtube hover-lift">
                             <i class="bi bi-youtube text-lg"></i>
                         </a>
                     @endif
-                    @if(isset($socialMediaLinks['telegram']))
-                        <a href="{{ $socialMediaLinks['telegram'] }}" target="_blank" class="social-link telegram hover-lift">
+                    @if(SiteSettings::getValue('social_telegram'))
+                        <a href="{{ SiteSettings::getValue('social_telegram') }}" target="_blank" class="social-link telegram hover-lift">
                             <i class="bi bi-telegram text-lg"></i>
-                        </a>
-                    @endif
-                    @if(isset($socialMediaLinks['linkedin']))
-                        <a href="{{ $socialMediaLinks['linkedin'] }}" target="_blank" class="social-link linkedin hover-lift">
-                            <i class="bi bi-linkedin text-lg"></i>
                         </a>
                     @endif
                 </div>
@@ -113,40 +108,40 @@
                     معلومات الاتصال
                 </h3>
                 <div class="contact-info space-y-4">
-                    @if(isset($contactInfo['email']))
+                    @if(SiteSettings::getValue('contact_email'))
                         <div class="contact-item flex items-center group">
                             <div class="contact-icon bg-[#C08B2D] p-2 rounded-full ml-3 group-hover:scale-110 transition-transform">
                                 <i class="bi bi-envelope text-white text-sm"></i>
                             </div>
-                            <a href="mailto:{{ $contactInfo['email'] }}" class="contact-link group-hover:text-[#C08B2D] transition-colors">
-                                {{ $contactInfo['email'] }}
+                            <a href="mailto:{{ SiteSettings::getValue('contact_email') }}" class="contact-link group-hover:text-[#C08B2D] transition-colors">
+                                {{ SiteSettings::getValue('contact_email') }}
                             </a>
                         </div>
                     @endif
-                    @if(isset($contactInfo['phone']))
+                    @if(SiteSettings::getValue('contact_phone'))
                         <div class="contact-item flex items-center group">
                             <div class="contact-icon bg-[#C08B2D] p-2 rounded-full ml-3 group-hover:scale-110 transition-transform">
                                 <i class="bi bi-telephone text-white text-sm"></i>
                             </div>
-                            <a href="tel:{{ $contactInfo['phone'] }}" class="contact-link group-hover:text-[#C08B2D] transition-colors">
-                                {{ $contactInfo['phone'] }}
+                            <a href="tel:{{ SiteSettings::getValue('contact_phone') }}" class="contact-link group-hover:text-[#C08B2D] transition-colors">
+                                {{ SiteSettings::getValue('contact_phone') }}
                             </a>
                         </div>
                     @endif
-                    @if(isset($contactInfo['address']))
+                    @if(SiteSettings::getValue('contact_address'))
                         <div class="contact-item flex items-center group">
                             <div class="contact-icon bg-[#C08B2D] p-2 rounded-full ml-3 group-hover:scale-110 transition-transform">
                                 <i class="bi bi-geo-alt text-white text-sm"></i>
                             </div>
-                            <span class="contact-text group-hover:text-[#C08B2D] transition-colors">{{ $contactInfo['address'] }}</span>
+                            <span class="contact-text group-hover:text-[#C08B2D] transition-colors">{{ SiteSettings::getValue('contact_address') }}</span>
                         </div>
                     @endif
-                    @if(isset($contactInfo['working_hours']))
+                    @if(SiteSettings::getValue('work_hours'))
                         <div class="contact-item flex items-center group">
                             <div class="contact-icon bg-[#C08B2D] p-2 rounded-full ml-3 group-hover:scale-110 transition-transform">
                                 <i class="bi bi-clock text-white text-sm"></i>
                             </div>
-                            <span class="contact-text group-hover:text-[#C08B2D] transition-colors">{{ $contactInfo['working_hours'] }}</span>
+                            <span class="contact-text group-hover:text-[#C08B2D] transition-colors">{{ SiteSettings::getValue('work_hours') }}</span>
                         </div>
                     @endif
                 </div>
@@ -183,7 +178,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="copyright text-gray-400 text-sm mb-4 md:mb-0 flex items-center">
                     <i class="bi bi-c-circle ml-2"></i>
-                    © {{ date('Y') }} شبوة 21. جميع الحقوق محفوظة.
+                    © {{ date('Y') }} {{ SiteSettings::getValue('site_name', 'شبوة 21') }}. {{ SiteSettings::getValue('footer_text', 'جميع الحقوق محفوظة.') }}
                 </div>
                 <div class="footer-legal flex space-x-6 space-x-reverse text-sm">
                     <a href="{{ route('privacy') }}" class="legal-link hover:text-[#C08B2D] transition-colors">

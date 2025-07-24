@@ -7,20 +7,20 @@
         <h1 class="text-3xl font-bold text-gray-800 mb-2">نتائج البحث</h1>
         <p class="text-gray-600">
             @if($articles->count() > 0)
-                تم العثور على {{ $articles->total() }} نتيجة لـ "{{ $query }}"
+                تم العثور على {{ $articles->total() ?? 0 }} نتيجة لـ "{{ $query ?? '' }}"
             @else
-                لم يتم العثور على نتائج لـ "{{ $query }}"
+                لم يتم العثور على نتائج لـ "{{ $query ?? '' }}"
             @endif
         </p>
     </div>
 
     <!-- شريط البحث -->
     <div class="bg-white rounded-lg shadow-md p-4 mb-6">
-        <form action="{{ route('search') }}" method="GET" class="flex flex-col md:flex-row gap-4">
+        <form action="{{ route('news.search') }}" method="GET" class="flex flex-col md:flex-row gap-4">
             <div class="flex-1">
                 <input type="text" 
                        name="q" 
-                       value="{{ $query }}" 
+                       value="{{ $query ?? '' }}" 
                        placeholder="ابحث في الأخبار..." 
                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
             </div>
@@ -40,7 +40,7 @@
                     <div class="relative h-48 bg-gray-200">
                         @if($article->featured_image)
                             <img src="{{ $article->featured_image }}" 
-                                 alt="{{ $article->title }}" 
+                                 alt="{{ $article->title ?? 'صورة الخبر' }}" 
                                  class="w-full h-full object-cover">
                         @else
                             <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-500 to-red-700">
@@ -49,7 +49,7 @@
                         @endif
                         
                         <!-- شارة الأخبار العاجلة -->
-                        @if($article->is_breaking)
+                        @if($article->is_breaking ?? false)
                             <div class="absolute top-2 right-2">
                                 <span class="bg-red-600 text-white px-2 py-1 rounded text-xs font-bold">عاجل</span>
                             </div>
@@ -58,7 +58,7 @@
                         <!-- التصنيف -->
                         <div class="absolute bottom-2 left-2">
                             <span class="bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
-                                {{ $article->category->name_ar ?? 'أخبار' }}
+                                {{ $article->category->name_ar ?? $article->category->name ?? 'أخبار' }}
                             </span>
                         </div>
                     </div>
@@ -66,25 +66,25 @@
                     <!-- محتوى الخبر -->
                     <div class="p-4">
                         <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
-                            <a href="{{ route('news.show', $article->slug) }}" 
+                            <a href="{{ route('news.show', $article->slug ?? '') }}" 
                                class="hover:text-red-600 transition-colors duration-200">
-                                {!! str_ireplace($query, '<mark class="bg-yellow-200">' . $query . '</mark>', $article->title) !!}
+                                {!! str_ireplace($query ?? '', '<mark class="bg-yellow-200">' . ($query ?? '') . '</mark>', $article->title ?? '') !!}
                             </a>
                         </h3>
                         
                         <p class="text-gray-600 text-sm mb-3 line-clamp-3">
-                            {!! str_ireplace($query, '<mark class="bg-yellow-200">' . $query . '</mark>', $article->excerpt) !!}
+                            {!! str_ireplace($query ?? '', '<mark class="bg-yellow-200">' . ($query ?? '') . '</mark>', $article->excerpt ?? '') !!}
                         </p>
                         
                         <!-- معلومات إضافية -->
                         <div class="flex items-center justify-between text-xs text-gray-500">
-                            <span>{{ $article->author }}</span>
+                            <span>{{ $article->author->name ?? $article->author }}</span>
                             <span>{{ $article->time_ago }}</span>
                         </div>
                         
                         <!-- عدد المشاهدات -->
                         <div class="mt-2 text-xs text-gray-400">
-                            <span>👁️ {{ $article->views_count }} مشاهدة</span>
+                            <span>👁️ {{ $article->views_count ?? 0 }} مشاهدة</span>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
         
         <!-- ترقيم الصفحات -->
         <div class="mt-8">
-            {{ $articles->appends(['q' => $query])->links() }}
+            {{ $articles->appends(['q' => $query ?? ''])->links() }}
         </div>
     @else
         <div class="text-center py-12">
@@ -105,19 +105,19 @@
             <div class="max-w-md mx-auto">
                 <h4 class="font-semibold text-gray-700 mb-3">اقتراحات للبحث:</h4>
                 <div class="flex flex-wrap gap-2">
-                    <a href="{{ route('search', ['q' => 'شبوة']) }}" 
+                    <a href="{{ route('news.search', ['q' => 'شبوة']) }}" 
                        class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors duration-200">
                         شبوة
                     </a>
-                    <a href="{{ route('search', ['q' => 'المجلس الانتقالي']) }}" 
+                    <a href="{{ route('news.search', ['q' => 'المجلس الانتقالي']) }}" 
                        class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors duration-200">
                         المجلس الانتقالي
                     </a>
-                    <a href="{{ route('search', ['q' => 'الزبيدي']) }}" 
+                    <a href="{{ route('news.search', ['q' => 'الزبيدي']) }}" 
                        class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors duration-200">
                         الزبيدي
                     </a>
-                    <a href="{{ route('search', ['q' => 'عدن']) }}" 
+                    <a href="{{ route('news.search', ['q' => 'عدن']) }}" 
                        class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors duration-200">
                         عدن
                     </a>
@@ -138,11 +138,11 @@
             @endphp
             
             @foreach($popularCategories as $category)
-                <a href="{{ route('news.category', $category->slug) }}" 
+                <a href="{{ route('news.category', $category->slug ?? '') }}" 
                    class="bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-shadow duration-200">
-                    <div class="w-8 h-8 rounded-full mx-auto mb-2" style="background-color: {{ $category->color }}"></div>
-                    <h3 class="text-sm font-semibold text-gray-800">{{ $category->name_ar }}</h3>
-                    <p class="text-xs text-gray-500 mt-1">{{ $category->articles()->count() }} خبر</p>
+                    <div class="w-8 h-8 rounded-full mx-auto mb-2" style="background-color: {{ $category->color ?? '#C08B2D' }}"></div>
+                    <h3 class="text-sm font-semibold text-gray-800">{{ $category->name_ar ?? $category->name ?? 'تصنيف' }}</h3>
+                    <p class="text-xs text-gray-500 mt-1">{{ $category->articles()->count() ?? 0 }} خبر</p>
                 </a>
             @endforeach
         </div>

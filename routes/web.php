@@ -114,8 +114,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/settings', function () {
         return view('admin.settings');
     })->name('admin.settings');
-    Route::get('/videos', VideosManager::class)->name('admin.videos');
-    
+    Route::get('/videos', function () {
+        return view('admin.videos');
+    })->name('admin.videos');
     Route::get('/users', function () {
         return view('admin.users');
     })->name('admin.users');
@@ -127,7 +128,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/roles', function () {
         return view('admin.roles');
     })->name('admin.roles');
-
-    Route::get('/about-manager', AboutManager::class)->name('admin.about-manager');
-    Route::get('/contact-manager', ContactManager::class)->name('admin.contact-manager');
-});
+    Route::get('/contact', function () {
+        return view('admin.contact');
+    })->name('admin.contact');
+    Route::get('/about', function () {
+        return view('admin.about');
+    })->name('admin.about');
+ });

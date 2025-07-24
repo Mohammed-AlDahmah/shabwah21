@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
 @section('content')
-    @livewire('admin.videos-manager')
+    @livewire('admin.contact-manager')
 @endsection 
