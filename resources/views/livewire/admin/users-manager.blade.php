@@ -340,45 +340,16 @@
     </style>
 
     <script>
-    // SweetAlert2 Toast Function
-    window.addEventListener('showToast', event => {
-        const { type, title, message } = event.detail;
-        
-        Swal.fire({
-            icon: type,
-            title: title,
-            text: message,
-            toast: true,
-             position: 'top-start',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            background: type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6',
-            color: '#ffffff',
-            customClass: {
-                popup: 'swal2-toast'
-            }
-        });
-    });
+    // نظام الإشعارات المخصص - تم الاستغناء عن SweetAlert2
+    // يتم التعامل مع showToast تلقائيًا من خلال notifications.js
 
-    // Delete Confirmation
+    // Delete Confirmation - نظام تأكيد مخصص
     window.addEventListener('confirmDelete', event => {
         const { id } = event.detail;
         
-        Swal.fire({
-            title: 'هل أنت متأكد؟',
-            text: "لا يمكن التراجع عن هذا الإجراء!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#ef4444',
-            cancelButtonColor: '#6b7280',
-            confirmButtonText: 'نعم، احذف!',
-            cancelButtonText: 'إلغاء'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                @this.deleteUserConfirmed(id);
-            }
-        });
+        if (confirm('هل أنت متأكد من حذف هذا المستخدم؟ لا يمكن التراجع عن هذا الإجراء!')) {
+            @this.deleteUserConfirmed(id);
+        }
     });
     </script>
 </div> 

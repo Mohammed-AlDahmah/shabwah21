@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
 @section('content')
-@livewire('admin.settings-manager')
+    @livewire('admin.settings-manager')
 @endsection 

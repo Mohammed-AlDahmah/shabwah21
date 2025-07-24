@@ -27,13 +27,8 @@
             </a>
         </li>
         <li class="nav-item mb-2">
-            <a href="{{ route('admin.about-manager') }}" class="nav-link text-white" wire:navigate>
-                <i class="bi bi-info-circle me-2"></i> إدارة صفحة من نحن
-            </a>
-        </li>
-        <li class="nav-item mb-2">
-            <a href="{{ route('admin.contact-manager') }}" class="nav-link text-white" wire:navigate>
-                <i class="bi bi-envelope-paper me-2"></i> إدارة صفحة اتصل بنا
+            <a href="{{ route('admin.settings') }}" class="nav-link text-white" wire:navigate>
+                <i class="bi bi-gear me-2"></i> إعدادات الموقع
             </a>
         </li>
     </ul>

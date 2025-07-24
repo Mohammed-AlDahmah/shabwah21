@@ -525,26 +525,7 @@
     </style>
 
     <script>
-    // SweetAlert2 Toast Function
-    window.addEventListener('showToast', event => {
-        const { type, title, message } = event.detail;
-        
-        Swal.fire({
-            icon: type,
-            title: title,
-            text: message,
-            toast: true,
-            position: 'top-start',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            background: type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6',
-            color: '#ffffff',
-            customClass: {
-                popup: 'swal2-toast'
-            }
-        });
-    });
+        // نظام الإشعارات المخصص - تم نقله إلى notifications.js
 
     // Delete Confirmation
     window.addEventListener('confirmDelete', event => {

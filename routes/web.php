@@ -11,8 +11,7 @@ use App\Livewire\Admin\UsersManager;
 use App\Livewire\Admin\SettingsManager;
 use App\Livewire\Admin\BackupManager;
 use App\Livewire\Admin\AdminHome;
-use App\Livewire\Admin\AboutManager;
-use App\Livewire\Admin\ContactManager;
+
 use App\Http\Middleware\LogVisitor;
 
 /*
@@ -128,10 +127,5 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/roles', function () {
         return view('admin.roles');
     })->name('admin.roles');
-    Route::get('/contact', function () {
-        return view('admin.contact');
-    })->name('admin.contact');
-    Route::get('/about', function () {
-        return view('admin.about');
-    })->name('admin.about');
+
  });

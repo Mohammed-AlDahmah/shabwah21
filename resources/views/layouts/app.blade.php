@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="{{ asset('css/breaking-news.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('css/mobile-fixes.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/notifications.css') }}">
   
     @yield('styles')
 </head>
@@ -61,10 +62,13 @@
     
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    
+
+    <!-- نظام الإشعارات المخصص -->
+    <script src="{{ asset('js/notifications.js') }}"></script>
+
     <!-- Livewire Scripts -->
     @livewireScripts
-    
+
     @stack('scripts')
-</body>
+  </body>
 </html>

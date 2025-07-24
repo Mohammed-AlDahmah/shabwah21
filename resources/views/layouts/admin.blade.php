@@ -11,8 +11,8 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     
-    <!-- SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- نظام الإشعارات المخصص -->
+    <link rel="stylesheet" href="{{ asset('css/notifications.css') }}">
     
     <!-- Livewire Styles -->
     @livewireStyles
@@ -419,12 +419,12 @@
                 <div class="nav-section-title">إدارة النظام</div>
               
             
-            <a href="{{ route('admin.about') }}" class="nav-item {{ request()->routeIs('admin.users') ? 'active' : '' }}">
+            <a href="{{ route('admin.settings') }}" class="nav-item {{ request()->routeIs('admin.users') ? 'active' : '' }}">
             <i class="bi bi-info-circle me-2"></i>  
        
                     <span>من نحن</span>
                 </a>
-                <a href="{{ route('admin.contact') }}" class="nav-item {{ request()->routeIs('admin.users') ? 'active' : '' }}">
+                <a href="{{ route('admin.settings') }}" class="nav-item {{ request()->routeIs('admin.users') ? 'active' : '' }}">
             <i class="bi bi-info-circle me-2"></i>  
        
                     <span>اتصل بنا</span>
@@ -524,6 +524,9 @@
             }
         });
     </script>
+    
+    <!-- نظام الإشعارات المخصص -->
+    <script src="{{ asset('js/notifications.js') }}"></script>
 
     <!-- Livewire Scripts -->
     @livewireScripts
@@ -534,75 +537,34 @@
         document.addEventListener('livewire:init', () => {
             console.log('Livewire initialized');
             
-            // SweetAlert2 Toast Function
-            Livewire.on('showToast', (event) => {
-                console.log('showToast event received:', event);
-                const { type, title, message } = event;
-                
-                Swal.fire({
-                    icon: type,
-                    title: title,
-                    text: message,
-                    toast: true,
-                     position: 'top-start',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    background: type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6',
-                    color: '#ffffff',
-                    customClass: {
-                        popup: 'swal2-toast'
-                    }
-                });
-            });
+            // نظام الإشعارات المخصص - يتم التعامل معه تلقائيًا من خلال notifications.js
+            // تم نقل هذا الكود إلى notifications.js لتجنب التكرار
 
-            // Delete Confirmation
+            // Delete Confirmation - نظام تأكيد مخصص
             Livewire.on('confirmDelete', (event) => {
                 console.log('confirmDelete event received:', event);
                 const { id, name } = event;
                 
-                Swal.fire({
-                    title: 'هل أنت متأكد؟',
-                    text: "لا يمكن التراجع عن هذا الإجراء!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#ef4444',
-                    cancelButtonColor: '#6b7280',
-                    confirmButtonText: 'نعم، احذف!',
-                    cancelButtonText: 'إلغاء'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        console.log('Delete confirmed, dispatching deleteConfirmed');
-                        // Dispatch the confirmed delete event
-                        if (id) {
-                            Livewire.dispatch('deleteConfirmed', { id: id });
-                        } else if (name) {
-                            Livewire.dispatch('deleteConfirmed', { name: name });
-                        }
+                if (confirm('هل أنت متأكد من الحذف؟ لا يمكن التراجع عن هذا الإجراء!')) {
+                    console.log('Delete confirmed, dispatching deleteConfirmed');
+                    // Dispatch the confirmed delete event
+                    if (id) {
+                        Livewire.dispatch('deleteConfirmed', { id: id });
+                    } else if (name) {
+                        Livewire.dispatch('deleteConfirmed', { name: name });
                     }
-                });
+                }
             });
 
-            // Restore Confirmation
+            // Restore Confirmation - نظام تأكيد مخصص
             Livewire.on('confirmRestore', (event) => {
                 console.log('confirmRestore event received:', event);
                 const { name } = event;
                 
-                Swal.fire({
-                    title: 'هل أنت متأكد؟',
-                    text: "سيتم استبدال البيانات الحالية بالنسخة الاحتياطية!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3b82f6',
-                    cancelButtonColor: '#6b7280',
-                    confirmButtonText: 'نعم، استعيد!',
-                    cancelButtonText: 'إلغاء'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        console.log('Restore confirmed, dispatching restoreConfirmed');
-                        Livewire.dispatch('restoreConfirmed', { name: name });
-                    }
-                });
+                if (confirm('هل أنت متأكد من استعادة النسخة الاحتياطية؟ سيتم استبدال البيانات الحالية!')) {
+                    console.log('Restore confirmed, dispatching restoreConfirmed');
+                    Livewire.dispatch('restoreConfirmed', { name: name });
+                }
             });
         });
 
