@@ -87,7 +87,7 @@ class ArticleSeeder extends Seeder
 
             Article::create([
                 'title' => $faker->randomElement($titles),
-                'slug' => $slug,
+                'slug' => $slug . '-' . $i,  // إصلاح: استخدم الوصل بدلاً من الجمع
                 'excerpt' => $faker->realText(80, 2),
                 'content' => $faker->realText(800, 2),
                 'featured_image' => $image,

@@ -524,27 +524,44 @@
     }
     </style>
 
-    <script>
-        // نظام الإشعارات المخصص - تم نقله إلى notifications.js
+@push('scripts')
+  <script>
+      document.addEventListener('livewire:update', function () {  // استخدام الحدث الجديد للإعادة التهيئة
+          const swiperEl = document.querySelector('.infographics-swiper');
+          if (swiperEl && typeof Swiper !== 'undefined') {
+              // Destroy any previous instance
+              if (swiperEl.swiper) swiperEl.swiper.destroy(true, true);
 
-    // Delete Confirmation
-    window.addEventListener('confirmDelete', event => {
-        const { id } = event.detail;
-        
-        Swal.fire({
-            title: 'هل أنت متأكد؟',
-            text: "لا يمكن التراجع عن هذا الإجراء!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#ef4444',
-            cancelButtonColor: '#6b7280',
-            confirmButtonText: 'نعم، احذف!',
-            cancelButtonText: 'إلغاء'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                @this.deleteArticleConfirmed({id: id});
-            }
-        });
-    });
-    </script>
+              const slides = swiperEl.querySelectorAll('.swiper-slide');
+              const loopMode = slides.length > 3;  // تفعيل loop إذا كان هناك أكثر من 3 عناصر
+
+              const swiperInstance = new Swiper(swiperEl, {
+                  loop: loopMode,
+                  slidesPerView: 1,  // افتراضي: 1 على الموبايل
+                  spaceBetween: 20,
+                  centeredSlides: false,
+                  autoplay: {
+                      delay: 4000,
+                      disableOnInteraction: false
+                  },
+                  pagination: {
+                      el: '.infographic-swiper-pagination',
+                      clickable: true,
+                      dynamicBullets: true
+                  },
+                  navigation: {
+                      nextEl: '.infographic-swiper-button-next',
+                      prevEl: '.infographic-swiper-button-prev'
+                  },
+                  breakpoints: {
+                      640: { slidesPerView: 2, spaceBetween: 20 },  // 2 على التابلت
+                      1024: { slidesPerView: 3, spaceBetween: 30 }  // 3 على الديسكتوب
+                  }
+              });
+
+              swiperEl.addEventListener('mouseleave', () => swiperInstance.autoplay.start());
+          }
+      });
+  </script>
+  @endpush
 </div> 

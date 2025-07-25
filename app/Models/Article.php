@@ -123,16 +123,21 @@ class Article extends Model
     }
 
     protected static function boot()
-    {
-        parent::boot();
+{
+    parent::boot();
 
-        static::creating(function ($article) {
-            if (empty($article->slug)) {
-                $article->slug = Str::slug($article->title);
-            }
-            if (empty($article->published_at)) {
-                $article->published_at = now();
-            }
-        });
-    }
+    static::creating(function ($article) {
+        $slug = Str::slug($article->title);
+        $originalSlug = $slug;
+        $counter = 1;
+
+        // التحقق والتعديل إذا كان موجودًا
+        while (static::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
+        }
+
+        $article->slug = $slug;
+    });
+}
 }
