@@ -2585,6 +2585,7 @@ input:focus, textarea:focus, select:focus {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
+    line-clamp: 1;
 }
 
 .line-clamp-2 {
@@ -2592,6 +2593,7 @@ input:focus, textarea:focus, select:focus {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
 }
 
 .line-clamp-3 {
@@ -2599,6 +2601,7 @@ input:focus, textarea:focus, select:focus {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
 }
 
 /* Backdrop Filter */
@@ -12041,8 +12044,11 @@ body.has-sticky-header {
     /* Disable all animations on mobile to prevent jank */
     * {
         -webkit-transform: translateZ(0);
+        transform: translateZ(0);
         -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
         -webkit-perspective: 1000;
+        perspective: 1000;
     }
     
     /* Prevent horizontal scroll */
