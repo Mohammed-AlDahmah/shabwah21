@@ -28,89 +28,134 @@ class="theme-header"
             </div>
             
             <!-- Mobile Header - يظهر فقط في الموبايل -->
-            <div class="mobile-header-container md:hidden">
-                <div class="mobile-header-wrapper">
-                    <div class="mobile-logo-section">
-                        <a href="{{ route('home') }}" class="mobile-logo-link">
-                            <img src="{{ asset('images/logo.svg') }}" alt="شبوة21" class="mobile-logo-img">
-                        </a>
+            <div class="md:hidden">
+                <header x-data="{ open: false, searchOpen: false }" class="bg-white shadow-md">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="flex justify-between h-14 items-center">
+                            <!-- Logo -->
+                            <div class="flex-shrink-0">
+                                <a href="{{ route('home') }}" class="flex items-center">
+                                    <img src="{{ asset('images/logo.svg') }}" alt="شبوة21" class="h-8 w-auto">
+                                </a>
+                            </div>
+
+                            <!-- أزرار التحكم في الجوال -->
+                            <div class="flex items-center gap-3">
+                                <!-- زر البحث -->
+                                <button @click="searchOpen = !searchOpen" 
+                                        class="text-gray-700 hover:text-primary focus:outline-none p-2 rounded-md transition-colors duration-200"
+                                        :class="{ 'text-primary bg-primary/10': searchOpen }">
+                                    <i class="bi bi-search text-lg"></i>
+                                </button>
+                                
+                                <!-- زر القائمة في الجوال -->
+                                <button @click="open = !open" 
+                                        class="text-gray-700 hover:text-primary focus:outline-none p-2 rounded-md transition-colors duration-200"
+                                        :class="{ 'text-primary bg-primary/10': open }">
+                                    <i class="bi bi-list text-lg" x-show="!open"></i>
+                                    <i class="bi bi-x-lg text-lg" x-show="open"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mobile-controls-section">
-                        <button @click="searchOpen = !searchOpen" 
-                                class="mobile-control-btn mobile-search-btn"
-                                :class="{ 'active': searchOpen }"
-                                title="بحث">
-                            <i class="bi bi-search"></i>
-                        </button>
-                        <button @click="open = !open" 
-                                class="mobile-control-btn mobile-menu-btn"
-                                :class="{ 'active': open }"
-                                title="القائمة">
-                            <i class="bi bi-list"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Mobile Search Bar -->
-                <div x-show="searchOpen" 
-                     x-transition:enter="transition ease-out duration-200"
-                     x-transition:enter-start="opacity-0 transform -translate-y-2"
-                     x-transition:enter-end="opacity-100 transform translate-y-0"
-                     x-transition:leave="transition ease-in duration-150"
-                     x-transition:leave-start="opacity-100 transform translate-y-0"
-                     x-transition:leave-end="opacity-0 transform -translate-y-2"
-                     class="mobile-search-container">
-                    <form method="get" action="{{ route('news.search') }}" class="mobile-search-form">
-                        <div class="mobile-search-input-wrapper">
-                            <i class="bi bi-search mobile-search-icon"></i>
+
+                    <!-- شريط البحث في الموبايل -->
+                    <div x-show="searchOpen" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-2"
+                         class="bg-white border-t border-gray-200 px-4 py-3">
+                        <form method="get" action="{{ route('news.search') }}" class="flex">
                             <input type="text" name="q" placeholder="ابحث في الأخبار والمقالات..." 
-                                   class="mobile-search-input"
-                                   x-model="searchQuery"
+                                   class="flex-1 px-3 py-2 border border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-primary text-sm"
                                    @keyup.enter="$el.form.submit()">
-                        </div>
-                        <button type="submit" class="mobile-search-submit-btn">
-                            <span>بحث</span>
-                        </button>
-                    </form>
-                </div>
-                
-                <!-- Mobile Navigation Menu -->
-                <div class="mobile-nav-menu">
-                    <div style="font-size: 30px; color: yellow; text-align: center;">TEST MENU</div>
-                    <ul>
-                        <li style="color: white;">عن الموقع</li>
-                        <li style="color: white;">اتصل بنا</li>
-                        <li style="color: white;">فيديو</li>
-                    </ul>
-                </div>
-                
-                <!-- Mobile Menu Footer -->
-                <div class="mobile-nav-footer">
-                    <div class="mobile-social-section">
-                        <h4 class="mobile-social-title">تابعنا على</h4>
-                        <div class="mobile-social-links">
-                            <a href="#" class="mobile-social-link" title="فيسبوك">
-                                <i class="bi bi-facebook"></i>
-                            </a>
-                            <a href="#" class="mobile-social-link" title="تويتر">
-                                <i class="bi bi-twitter-x"></i>
-                            </a>
-                            <a href="#" class="mobile-social-link" title="إنستغرام">
-                                <i class="bi bi-instagram"></i>
-                            </a>
-                            <a href="#" class="mobile-social-link" title="يوتيوب">
-                                <i class="bi bi-youtube"></i>
-                            </a>
-                            <a href="#" class="mobile-social-link" title="تليجرام">
-                                <i class="bi bi-telegram"></i>
-                            </a>
-                        </div>
+                            <button type="submit" class="px-4 py-2 bg-primary text-white rounded-l-md hover:bg-primary/90 text-sm transition-colors duration-200">
+                                بحث
+                            </button>
+                        </form>
                     </div>
-                    
-                    <div class="mobile-footer-info">
-                        <p class="mobile-footer-text">© 2025 شبوة21 - جميع الحقوق محفوظة</p>
+
+                    <!-- روابط القائمة في الشاشات الصغيرة -->
+                    <div x-show="open" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-2"
+                         class="bg-white shadow-md border-t border-gray-200" >
+                        <nav class="px-4 py-3 space-y-1">
+                            <!-- الرئيسية -->
+                            <a href="{{ route('home') }}" 
+                               class="flex items-center text-gray-700 hover:text-primary py-2 px-3 rounded-md text-sm font-medium transition-colors duration-200"
+                               @click="open = false">
+                                <i class="bi bi-house-door ml-3 text-lg !block !inline-block" style="display: inline-block !important;"></i>
+                                الرئيسية
+                            </a>
+                            
+                            <!-- الفئات الرئيسية مع الفئات الفرعية -->
+                            @foreach($mainCategories as $category)
+                                <div class="mobile-category-group">
+                                    <a href="{{ route('news.category', $category->slug) }}" 
+                                       class="flex items-center text-gray-700 hover:text-primary py-2 px-3 rounded-md text-sm font-medium transition-colors duration-200"
+                                       @click="open = false">
+                                        <i class="bi bi-folder ml-3 text-lg !block !inline-block" style="display: inline-block !important;"></i>
+                                        {{ $category->name }}
+                                    </a>
+                                    
+                                    <!-- الفئات الفرعية -->
+                                    @if($category->children && $category->children->count() > 0)
+                                        <div class="mobile-subcategories ml-4 mt-1 space-y-1">
+                                            @foreach($category->children as $subCategory)
+                                                <a href="{{ route('news.category', $subCategory->slug) }}" 
+                                                   class="flex items-center text-gray-600 hover:text-primary py-1 px-3 rounded-md text-xs transition-colors duration-200"
+                                                   @click="open = false">
+                                                    <i class="bi bi-chevron-right ml-2 text-sm !block !inline-block" style="display: inline-block !important;"></i>
+                                                    {{ $subCategory->name }}
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                </div>
+                            @endforeach
+                            
+                            <!-- فيديو -->
+                            <a href="{{ route('videos.index') }}" 
+                               class="flex items-center text-gray-700 hover:text-primary py-2 px-3 rounded-md text-sm font-medium transition-colors duration-200"
+                               @click="open = false">
+                                <i class="bi bi-play-circle ml-3 text-lg !block !inline-block" style="display: inline-block !important;"></i>
+                                فيديو
+                            </a>
+                            
+                            <!-- عن الموقع -->
+                            <a href="{{ route('about') }}" 
+                               class="flex items-center text-gray-700 hover:text-primary py-2 px-3 rounded-md text-sm font-medium transition-colors duration-200"
+                               @click="open = false">
+                                <i class="bi bi-info-circle ml-3 text-lg !block !inline-block" style="display: inline-block !important;"></i>
+                                عن الموقع
+                            </a>
+                            
+                            <!-- اتصل بنا -->
+                            <a href="{{ route('contact') }}" 
+                               class="flex items-center text-gray-700 hover:text-primary py-2 px-3 rounded-md text-sm font-medium transition-colors duration-200"
+                               @click="open = false">
+                                <i class="bi bi-envelope ml-3 text-lg !block !inline-block" style="display: inline-block !important;"></i>
+                                اتصل بنا
+                            </a>
+                            
+                            <!-- البحث -->
+                            <a href="{{ route('news.search') }}" 
+                               class="flex items-center text-gray-700 hover:text-primary py-2 px-3 rounded-md text-sm font-medium transition-colors duration-200"
+                               @click="open = false">
+                                <i class="bi bi-search ml-3 text-lg !block !inline-block" style="display: inline-block !important;"></i>
+                                البحث
+                            </a>
+                        </nav>
                     </div>
-                </div>
+                </header>
             </div>
             
             <!-- Desktop Header - يظهر فقط في الديسكتوب -->
