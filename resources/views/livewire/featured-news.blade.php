@@ -1,13 +1,13 @@
 <div class="featured-news-section">
-    @if($featuredNews->count() > 0)
+    @if($featuredArticles->count() > 0)
         <div class="space-y-4">
-            @foreach($featuredNews->take($limit ?? 4) as $index => $news)
+            @foreach($featuredArticles->take($limit ?? 4) as $index => $news)
                 <article class="news-grid-card group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:transform hover:scale-105">
                     <div class="flex gap-4 p-4">
                         <!-- Image -->
                         <div class="flex-shrink-0 w-24 h-20 bg-gradient-to-br from-slate-200 to-slate-300 rounded-xl overflow-hidden relative">
-                            @if($news->image)
-                                <img src="{{ \App\Helpers\ImageHelper::getImageUrl($news->image) }}" 
+                            @if($news->featured_image)
+                                <img src="{{ \App\Helpers\ImageHelper::getImageUrl($news->featured_image) }}" 
                                      alt="{{ $news->title }}" 
                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                             @else

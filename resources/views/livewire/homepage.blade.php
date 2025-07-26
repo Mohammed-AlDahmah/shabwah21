@@ -1,10 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'شبوة21 - موقع إخباري احترافي')
-@section('description', 'موقع شبوة21 الإخباري - آخر الأخبار والتقارير من حضرموت واليمن')
-@section('keywords', 'أخبار, حضرموت, اليمن, إخبارية')
-
-@section('content')
+<div>
     @php
         use App\Models\SiteSettings;
     @endphp
@@ -94,108 +88,10 @@
     </section>
  
 
-    <!-- About Us Section -->
-    @if(!empty($aboutInfo['title']) || !empty($aboutInfo['description']))
-    <section class="about-section bg-gradient-to-br from-[#fff8e1] to-white py-12">
-        <div class="container mx-auto px-2">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-[#B22B2B] mb-4">{{ $aboutInfo['title'] ?? 'من نحن' }}</h2>
-                @if(!empty($aboutInfo['subtitle']))
-                    <p class="text-lg text-[#C08B2D]">{{ $aboutInfo['subtitle'] }}</p>
-                @endif
-            </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                @if(!empty($aboutInfo['description']))
-                <div class="about-content">
-                    <p class="text-gray-700 leading-relaxed">{{ $aboutInfo['description'] }}</p>
-                </div>
-                @endif
-                
-                @if(!empty($aboutInfo['vision']) || !empty($aboutInfo['mission']))
-                <div class="vision-mission">
-                    @if(!empty($aboutInfo['vision']))
-                    <div class="mb-6">
-                        <h3 class="text-xl font-bold text-[#B22B2B] mb-3">رؤيتنا</h3>
-                        <p class="text-gray-600">{{ $aboutInfo['vision'] }}</p>
-                    </div>
-                    @endif
-                    
-                    @if(!empty($aboutInfo['mission']))
-                    <div>
-                        <h3 class="text-xl font-bold text-[#B22B2B] mb-3">رسالتنا</h3>
-                        <p class="text-gray-600">{{ $aboutInfo['mission'] }}</p>
-                    </div>
-                    @endif
-                </div>
-                @endif
-            </div>
-            
-            <!-- Values Section -->
-            @if(!empty($aboutInfo['values']))
-            <div class="values-section mb-8">
-                <h3 class="text-2xl font-bold text-[#B22B2B] text-center mb-6">قيمنا</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    @foreach($aboutInfo['values'] as $value)
-                    <div class="value-card bg-white rounded-lg p-6 text-center shadow-md">
-                        @if(!empty($value['icon']))
-                        <div class="text-3xl text-[#C08B2D] mb-3">
-                            <i class="{{ $value['icon'] }}"></i>
-                        </div>
-                        @endif
-                        <h4 class="text-lg font-bold text-[#B22B2B] mb-2">{{ $value['title'] ?? '' }}</h4>
-                        <p class="text-gray-600">{{ $value['description'] ?? '' }}</p>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-            @endif
-            
-            <!-- Services Section -->
-            @if(!empty($aboutInfo['services']))
-            <div class="services-section mb-8">
-                <h3 class="text-2xl font-bold text-[#B22B2B] text-center mb-6">خدماتنا</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    @foreach($aboutInfo['services'] as $service)
-                    <div class="service-card bg-white rounded-lg p-6 text-center shadow-md">
-                        @if(!empty($service['icon']))
-                        <div class="text-3xl text-[#C08B2D] mb-3">
-                            <i class="{{ $service['icon'] }}"></i>
-                        </div>
-                        @endif
-                        <h4 class="text-lg font-bold text-[#B22B2B] mb-2">{{ $service['title'] ?? '' }}</h4>
-                        <p class="text-gray-600">{{ $service['description'] ?? '' }}</p>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-            @endif
-            
-            <!-- Stats Section -->
-            @if(!empty($aboutInfo['stats']))
-            <div class="stats-section">
-                <h3 class="text-2xl font-bold text-[#B22B2B] text-center mb-6">إحصائياتنا</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    @foreach($aboutInfo['stats'] as $stat)
-                    <div class="stat-card bg-white rounded-lg p-6 text-center shadow-md">
-                        @if(!empty($stat['icon']))
-                        <div class="text-3xl text-[#C08B2D] mb-2">
-                            <i class="{{ $stat['icon'] }}"></i>
-                        </div>
-                        @endif
-                        <div class="text-2xl font-bold text-[#B22B2B] mb-1">{{ $stat['value'] ?? '' }}</div>
-                        <div class="text-gray-600">{{ $stat['title'] ?? '' }}</div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-            @endif
-        </div>
-    </section>
-    @endif
+     
 
     <!-- Contact Info Section -->
-    @if(!empty($contactInfo['email']) || !empty($contactInfo['phone']) || !empty($contactInfo['address']))
+    <!-- @if(!empty($contactInfo['email']) || !empty($contactInfo['phone']) || !empty($contactInfo['address']))
     <section class="contact-info-section bg-white py-12">
         <div class="container mx-auto px-2">
             <div class="text-center mb-8">
@@ -245,7 +141,7 @@
             @endif
         </div>
     </section>
-    @endif
+    @endif -->
 
     <!-- Main Content Area -->
     <div class="bg-slate-50">
@@ -286,6 +182,24 @@
                         </div>
                     </div>
                     <livewire:category-section />
+                </section>
+
+                <!-- Sports Section -->
+               
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-1 gap-6">
+                <!-- Category Sections -->
+                <section class="section-card">
+                    <div class="section-header">
+                        <div class="title-wrapper">
+                            <div class="title-decoration"></div>
+                            <div>
+                                <h2>المقالات</h2>
+                                <p>أخبار المقالات المحلية والعالمية</p>
+                            </div>
+                        </div>
+                    </div>
+                    <livewire:articles-section />
                 </section>
 
                 <!-- Sports Section -->
@@ -416,65 +330,4 @@
             </div>
         </div>
     </section>
-@endsection
-
-@push('styles')
-<style>
-    /* Custom styles for homepage */
-    .btn-primary {
-        display: inline-flex;
-        align-items: center;
-        background: linear-gradient(135deg, #C08B2D 0%, #B22B2B 100%);
-        color: white;
-        font-weight: 600;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.75rem;
-        text-decoration: none;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 15px rgba(192, 139, 45, 0.3);
-    }
-
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(192, 139, 45, 0.4);
-        color: white;
-    }
-
-    .section-header {
-        position: relative;
-    }
-
-    .section-header::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 0;
-        width: 60px;
-        height: 3px;
-        background: linear-gradient(90deg, #C08B2D, #B22B2B);
-        border-radius: 2px;
-    }
-
-    /* Hover effects for news cards */
-    .news-card-small a:hover h4 {
-        color: #C08B2D;
-        transition: color 0.3s ease;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .hero-section {
-            padding: 2rem 0;
-        }
-        
-        .section-header {
-            text-align: center;
-        }
-        
-        .section-header::after {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-    }
-</style>
-@endpush
+</div>

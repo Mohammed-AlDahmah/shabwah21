@@ -10,11 +10,8 @@ class CategorySection extends Component
 {
     public function render()
     {
-        $categories = Category::active()
-            ->withCount(['articles' => function($query) {
-                $query->published();
-            }])
-            ->having('articles_count', '>', 0)
+        $categories = Category::select('id', 'name_ar', 'slug', 'icon')
+            ->where('is_active', true)
             ->take(6)
             ->get();
 

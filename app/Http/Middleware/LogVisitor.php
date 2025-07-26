@@ -6,7 +6,9 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\VisitorLog;
-// use Torann\GeoIP\Facades\GeoIP; // إذا كنت ستستخدم مكتبة geoip
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Queue;
+use App\Jobs\LogVisitorJob;
 
 class LogVisitor
 {
@@ -17,29 +19,34 @@ class LogVisitor
             return $next($request);
         }
 
-        // بيانات الزيارة
+        // Rate limiting لتجنب تسجيل نفس IP بشكل متكرر
         $ip = $request->ip();
+        $cacheKey = "visitor_log_{$ip}";
+        
+        // إذا تم تسجيل هذا IP في آخر 5 دقائق، تجاهل
+        if (Cache::has($cacheKey)) {
+            return $next($request);
+        }
+
+        // بيانات الزيارة
         $userAgent = $request->userAgent();
         $page = $request->path();
         $visitedAt = now();
         $country = null;
         $city = null;
 
-        // إذا كانت مكتبة geoip متوفرة
-        // try {
-        //     $geo = geoip($ip);
-        //     $country = $geo->country ?? null;
-        //     $city = $geo->city ?? null;
-        // } catch (\Exception $e) {}
-
-        VisitorLog::create([
+        // استخدام Queue لتسجيل الزيارة في الخلفية
+        Queue::push(new LogVisitorJob([
             'ip' => $ip,
             'country' => $country,
             'city' => $city,
             'user_agent' => $userAgent,
             'page' => $page,
             'visited_at' => $visitedAt,
-        ]);
+        ]));
+
+        // Cache لمدة 5 دقائق لتجنب التسجيل المتكرر
+        Cache::put($cacheKey, true, 300);
 
         return $next($request);
     }

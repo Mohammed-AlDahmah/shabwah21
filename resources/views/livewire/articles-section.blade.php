@@ -1,4 +1,5 @@
 <div>
+   
     @forelse($articles as $article)
         <div class="flex gap-6 p-6 border border-slate-200 rounded-2xl hover:shadow-lg transition-all duration-300 group">
             <div class="flex-shrink-0 w-32 h-24 bg-slate-200 rounded-xl overflow-hidden">
@@ -34,7 +35,7 @@
                     <div class="flex items-center gap-4">
                         <div class="flex items-center gap-2">
                             <i class="bi bi-clock text-blue-500"></i>
-                            <span>{{ $article->created_at->diffForHumans() }}</span>
+                            <span>{{ $article->created_at ? $article->created_at->diffForHumans() : '-' }}</span>
                         </div>
                         
                         <div class="flex items-center gap-2">

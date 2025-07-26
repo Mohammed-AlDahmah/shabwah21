@@ -16,7 +16,8 @@ class VideoSection extends Component
 
     public function render()
     {
-        $videos = Video::where('is_published', true)
+        $videos = Video::select('id', 'title', 'slug', 'video_url', 'thumbnail', 'duration', 'published_at')
+            ->where('is_published', true)
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
             ->latest('published_at')

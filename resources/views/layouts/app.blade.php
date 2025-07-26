@@ -26,20 +26,7 @@
     
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/core.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/components.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/breaking-news.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/featured-news.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/infographics.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/infographics-enhanced.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/special-sections.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/breaking-news.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/mobile-fixes.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/mobile-performance-fix.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/header-fix.css') }}">
     <link rel="stylesheet" href="{{ asset('css/mobile-menu-fix.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/notifications.css') }}">
   
     @yield('styles')
 </head>
@@ -75,24 +62,27 @@
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    <!-- نظام الإشعارات المخصص -->
-    <script src="{{ asset('js/notifications.js') }}"></script>
-    
-    <!-- Lazy Loading Enhancement -->
-    <script src="{{ asset('js/lazy-loading.js') }}"></script>
-    
-    <!-- Mobile Performance Enhancement -->
-    <script src="{{ asset('js/mobile-performance.js') }}"></script>
-    
-    <!-- Header Fix Enhancement -->
-    <script src="{{ asset('js/header-fix.js') }}"></script>
-    
-    <!-- Mobile Menu Fix -->
+    <!-- Main JavaScript File -->
+    <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/mobile-menu-fix.js') }}"></script>
+    <script src="{{ asset('js/livewire-compat.js') }}"></script>
 
     <!-- Livewire Scripts -->
     @livewireScripts
 
     @stack('scripts')
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButton = document.querySelector('[data-collapse-toggle]');
+        const navMenu = document.getElementById('navbar-default');
+
+        if (toggleButton && navMenu) {
+            toggleButton.addEventListener('click', function () {
+                navMenu.classList.toggle('hidden');
+            });
+        }
+    });
+</script>
+
   </body>
 </html>

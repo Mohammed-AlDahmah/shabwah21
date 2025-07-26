@@ -31,6 +31,14 @@ return new class extends Migration
             $table->json('meta_data')->nullable();
             $table->string('type')->default('news')->index();
             $table->timestamps();
+
+            // إضافة indexes مهمة لتحسين الأداء
+            $table->index(['is_published', 'published_at'], 'idx_published_at');
+            $table->index(['is_featured'], 'idx_is_featured');
+            $table->index(['is_breaking'], 'idx_is_breaking');
+            $table->index(['views_count'], 'idx_views_count');
+            $table->index(['category_id', 'is_published'], 'idx_category_published');
+            $table->index(['type', 'is_published', 'published_at'], 'idx_type_published');
         });
     }
 

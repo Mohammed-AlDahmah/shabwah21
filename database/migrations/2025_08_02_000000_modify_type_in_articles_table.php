@@ -13,8 +13,10 @@ return new class extends Migration
             $table->enum('type', ['news', 'report', 'opinion', 'infographic', 'video'])
                 ->change(); // تغيير نوع الحقل إذا كان موجوداً
 
-            // إضافة فهرس على type لتسريع الاستعلامات
-            $table->index('type');
+            // إضافة فهرس على type لتسريع الاستعلامات (فقط إذا لم يكن موجوداً)
+            if (!Schema::hasIndex('articles', 'articles_type_index')) {
+                $table->index('type');
+            }
         });
     }
 
@@ -23,7 +25,11 @@ return new class extends Migration
         Schema::table('articles', function (Blueprint $table) {
             // إعادة type إلى string إذا لزم (للتراجع)
             $table->string('type')->change();
-            $table->dropIndex(['type']);
+            
+            // حذف index إذا كان موجوداً
+            if (Schema::hasIndex('articles', 'articles_type_index')) {
+                $table->dropIndex(['type']);
+            }
         });
     }
 };

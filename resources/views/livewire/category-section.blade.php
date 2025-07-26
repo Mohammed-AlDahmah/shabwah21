@@ -7,7 +7,7 @@
                     <div class="bg-gradient-to-r from-[#C08B2D] to-[#B22B2B] text-white p-4">
                         <h3 class="text-lg font-bold flex items-center">
                             <i class="bi bi-folder ml-2 text-xl"></i>
-                            {{ $category->name }}
+                            {{ $category->name_ar }}
                         </h3>
                         <p class="text-white/80 text-sm mt-1">{{ $category->articles_count ?? 0 }} مقال</p>
                     </div>

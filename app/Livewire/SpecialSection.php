@@ -5,21 +5,21 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Article;
 
-class InfographicsSection extends Component
+class SpecialSection extends Component
 {
-    public $infographics = [];
+    public $specials = [];
 
     public function mount()
     {
-        $this->infographics = Article::where('type', 'infographic')
+        $this->specials = Article::where('type', 'special')
             ->where('is_published', true)
             ->latest('published_at')
-            ->take(10)
+            ->take(6)
             ->get();
     }
 
     public function render()
     {
-        return view('livewire.infographics-section');
+        return view('livewire.special-section');
     }
 } 

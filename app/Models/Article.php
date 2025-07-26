@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Article extends Model
 {
@@ -75,6 +76,57 @@ class Article extends Model
         return $query->where('is_breaking', true);
     }
 
+    public function scopeWithIndex($query, $indexName)
+    {
+        return $query->from(DB::raw("`{$this->getTable()}` USE INDEX ({$indexName})"));
+    }
+
+    public function scopeOptimized($query)
+    {
+        // استخدام index محدد للاستعلامات المهمة
+        return $query->from(DB::raw("`{$this->getTable()}` USE INDEX (idx_published_at)"));
+    }
+
+    public function scopeForHomePage($query)
+    {
+        return $query->select([
+            'id', 'title', 'slug', 'excerpt', 'featured_image', 
+            'published_at', 'views_count', 'category_id', 'author_id'
+        ])
+        ->with(['category:id,name_ar,slug', 'author:id,name'])
+        ->optimized()
+        ->published()
+        ->orderBy('published_at', 'desc');
+    }
+
+    public function scopeForCategory($query)
+    {
+        return $query->select([
+            'id', 'title', 'slug', 'excerpt', 'featured_image', 
+            'published_at', 'views_count', 'category_id'
+        ])
+        ->with('category:id,name_ar,slug')
+        ->optimized()
+        ->published()
+        ->orderBy('published_at', 'desc');
+    }
+
+    public function scopeForSearch($query, $searchTerm)
+    {
+        return $query->select([
+            'id', 'title', 'slug', 'excerpt', 'featured_image', 
+            'published_at', 'views_count', 'category_id'
+        ])
+        ->with('category:id,name_ar,slug')
+        ->where(function($q) use ($searchTerm) {
+            $q->where('title', 'LIKE', "%{$searchTerm}%")
+              ->orWhere('excerpt', 'LIKE', "%{$searchTerm}%")
+              ->orWhere('content', 'LIKE', "%{$searchTerm}%");
+        })
+        ->published()
+        ->orderBy('published_at', 'desc');
+    }
+
     public function scopeRecent($query)
     {
         return $query->orderBy('published_at', 'desc');
@@ -98,7 +150,8 @@ class Article extends Model
 
     public function incrementViews()
     {
-        $this->increment('views_count');
+        // استخدام update بدلاً من increment لتجنب race conditions
+        $this->update(['views_count' => $this->views_count + 1]);
     }
 
     public function getImageAttribute()

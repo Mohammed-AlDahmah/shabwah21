@@ -75,167 +75,40 @@ class="theme-header"
                 </div>
                 
                 <!-- Mobile Navigation Menu -->
-                <div x-show="open" 
-                     x-transition:enter="transition ease-out duration-300"
-                     x-transition:enter-start="opacity-0 transform translate-x-full"
-                     x-transition:enter-end="opacity-100 transform translate-x-0"
-                     x-transition:leave="transition ease-in duration-200"
-                     x-transition:leave-start="opacity-100 transform translate-x-0"
-                     x-transition:leave-end="opacity-0 transform translate-x-full"
-                     class="mobile-nav-menu"
-                     @click.away="open = false">
-                    
-                    <!-- Mobile Menu Header -->
-                    <div class="mobile-nav-header">
-                        <div class="mobile-nav-title-section">
-                            <h3 class="mobile-nav-title">القائمة الرئيسية</h3>
-                            <p class="mobile-nav-subtitle">شبوة21 - موقع إخباري احترافي</p>
+                <div class="mobile-nav-menu">
+                    <div style="font-size: 30px; color: yellow; text-align: center;">TEST MENU</div>
+                    <ul>
+                        <li style="color: white;">عن الموقع</li>
+                        <li style="color: white;">اتصل بنا</li>
+                        <li style="color: white;">فيديو</li>
+                    </ul>
+                </div>
+                
+                <!-- Mobile Menu Footer -->
+                <div class="mobile-nav-footer">
+                    <div class="mobile-social-section">
+                        <h4 class="mobile-social-title">تابعنا على</h4>
+                        <div class="mobile-social-links">
+                            <a href="#" class="mobile-social-link" title="فيسبوك">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                            <a href="#" class="mobile-social-link" title="تويتر">
+                                <i class="bi bi-twitter-x"></i>
+                            </a>
+                            <a href="#" class="mobile-social-link" title="إنستغرام">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            <a href="#" class="mobile-social-link" title="يوتيوب">
+                                <i class="bi bi-youtube"></i>
+                            </a>
+                            <a href="#" class="mobile-social-link" title="تليجرام">
+                                <i class="bi bi-telegram"></i>
+                            </a>
                         </div>
-                        <button @click="open = false" class="mobile-nav-close-btn" title="إغلاق">
-                            <i class="bi bi-x-lg"></i>
-                        </button>
                     </div>
                     
-                    <!-- Mobile Menu Content -->
-                    <div class="mobile-nav-content">
-                        <ul class="mobile-nav-list">
-                            <!-- الصفحة الرئيسية -->
-                            <li class="mobile-nav-item">
-                                <a href="{{ route('home') }}" 
-                                   class="mobile-nav-link mobile-nav-link-primary"
-                                   @click="open = false">
-                                    <div class="mobile-nav-link-content">
-                                        <i class="bi bi-house-door mobile-nav-icon"></i>
-                                        <span class="mobile-nav-text">الصفحة الرئيسية</span>
-                                    </div>
-                                    <i class="bi bi-arrow-left mobile-nav-arrow"></i>
-                                </a>
-                            </li>
-                            
-                            <!-- الفئات الرئيسية -->
-                            @foreach($mainCategories as $category)
-                                <li class="mobile-nav-item">
-                                    <a href="{{ route('news.category', $category->slug) }}" 
-                                       class="mobile-nav-link"
-                                       @click="open = false">
-                                        <div class="mobile-nav-link-content">
-                                            @if($category->icon)
-                                                <i class="{{ $category->icon }} mobile-nav-icon"></i>
-                                            @else
-                                                <i class="bi bi-folder mobile-nav-icon"></i>
-                                            @endif
-                                            <span class="mobile-nav-text">{{ $category->name }}</span>
-                                        </div>
-                                        @if($category->children->count() > 0)
-                                            <i class="bi bi-chevron-down mobile-nav-arrow"></i>
-                                        @else
-                                            <i class="bi bi-arrow-left mobile-nav-arrow"></i>
-                                        @endif
-                                    </a>
-                                    
-                                    <!-- الفئات الفرعية -->
-                                    @if($category->children->count() > 0)
-                                        <ul class="mobile-sub-nav-list">
-                                            @foreach($category->children as $child)
-                                                <li class="mobile-sub-nav-item">
-                                                    <a href="{{ route('news.category', $child->slug) }}" 
-                                                       class="mobile-sub-nav-link"
-                                                       @click="open = false">
-                                                        <div class="mobile-sub-nav-content">
-                                                            @if($child->icon)
-                                                                <i class="{{ $child->icon }} mobile-sub-nav-icon"></i>
-                                                            @else
-                                                                <i class="bi bi-dot mobile-sub-nav-icon"></i>
-                                                            @endif
-                                                            <span class="mobile-sub-nav-text">{{ $child->name }}</span>
-                                                        </div>
-                                                        <i class="bi bi-arrow-left mobile-sub-nav-arrow"></i>
-                                                    </a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                </li>
-                            @endforeach
-                            
-                            {{-- فيديو --}}
-                            @if($showVideo)
-                            <li class="mobile-nav-item">
-                                <a href="{{ route('videos.index') }}" 
-                                   class="mobile-nav-link"
-                                   @click="open = false">
-                                    <div class="mobile-nav-link-content">
-                                        <i class="bi bi-play-circle mobile-nav-icon"></i>
-                                        <span class="mobile-nav-text">فيديو</span>
-                                    </div>
-                                    <i class="bi bi-arrow-left mobile-nav-arrow"></i>
-                                </a>
-                            </li>
-                            @endif
-                            
-                            {{-- عن الموقع --}}
-                            @if($showAbout)
-                            <li class="mobile-nav-item">
-                                <a href="{{ route('about') }}" 
-                                   class="mobile-nav-link"
-                                   @click="open = false">
-                                    <div class="mobile-nav-link-content">
-                                        <i class="bi bi-info-circle mobile-nav-icon"></i>
-                                        <span class="mobile-nav-text">عن الموقع</span>
-                                    </div>
-                                    <i class="bi bi-arrow-left mobile-nav-arrow"></i>
-                                </a>
-                            </li>
-                            @endif
-                            
-                            {{-- اتصل بنا --}}
-                            @if($showContact)
-                            <li class="mobile-nav-item">
-                                <a href="{{ route('contact') }}" 
-                                   class="mobile-nav-link"
-                                   @click="open = false">
-                                    <div class="mobile-nav-link-content">
-                                        <i class="bi bi-envelope mobile-nav-icon"></i>
-                                        <span class="mobile-nav-text">اتصل بنا</span>
-                                    </div>
-                                    <i class="bi bi-arrow-left mobile-nav-arrow"></i>
-                                </a>
-                            </li>
-                            @endif
-
-                            {{-- أيقونات التواصل الاجتماعي --}}
-                            @if($showSocial)
-                                {{-- ضع هنا كود أيقونات التواصل الاجتماعي --}}
-                            @endif
-                        </ul>
-                    </div>
-                    
-                    <!-- Mobile Menu Footer -->
-                    <div class="mobile-nav-footer">
-                        <div class="mobile-social-section">
-                            <h4 class="mobile-social-title">تابعنا على</h4>
-                            <div class="mobile-social-links">
-                                <a href="#" class="mobile-social-link" title="فيسبوك">
-                                    <i class="bi bi-facebook"></i>
-                                </a>
-                                <a href="#" class="mobile-social-link" title="تويتر">
-                                    <i class="bi bi-twitter-x"></i>
-                                </a>
-                                <a href="#" class="mobile-social-link" title="إنستغرام">
-                                    <i class="bi bi-instagram"></i>
-                                </a>
-                                <a href="#" class="mobile-social-link" title="يوتيوب">
-                                    <i class="bi bi-youtube"></i>
-                                </a>
-                                <a href="#" class="mobile-social-link" title="تليجرام">
-                                    <i class="bi bi-telegram"></i>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="mobile-footer-info">
-                            <p class="mobile-footer-text">© 2025 شبوة21 - جميع الحقوق محفوظة</p>
-                        </div>
+                    <div class="mobile-footer-info">
+                        <p class="mobile-footer-text">© 2025 شبوة21 - جميع الحقوق محفوظة</p>
                     </div>
                 </div>
             </div>
