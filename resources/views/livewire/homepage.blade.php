@@ -89,59 +89,7 @@
  
 
      
-
-    <!-- Contact Info Section -->
-    <!-- @if(!empty($contactInfo['email']) || !empty($contactInfo['phone']) || !empty($contactInfo['address']))
-    <section class="contact-info-section bg-white py-12">
-        <div class="container mx-auto px-2">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-[#B22B2B] mb-4">معلومات التواصل</h2>
-                <p class="text-lg text-[#C08B2D]">تواصل معنا عبر الطرق التالية</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                @if(!empty($contactInfo['email']))
-                <div class="contact-card bg-gradient-to-br from-[#fff8e1] to-white rounded-lg p-6 text-center">
-                    <div class="text-3xl text-[#C08B2D] mb-3">
-                        <i class="bi bi-envelope"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-[#B22B2B] mb-2">البريد الإلكتروني</h4>
-                    <p class="text-gray-600">{{ $contactInfo['email'] }}</p>
-                </div>
-                @endif
-                
-                @if(!empty($contactInfo['phone']))
-                <div class="contact-card bg-gradient-to-br from-[#fff8e1] to-white rounded-lg p-6 text-center">
-                    <div class="text-3xl text-[#C08B2D] mb-3">
-                        <i class="bi bi-telephone"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-[#B22B2B] mb-2">رقم الهاتف</h4>
-                    <p class="text-gray-600">{{ $contactInfo['phone'] }}</p>
-                </div>
-                @endif
-                
-                @if(!empty($contactInfo['address']))
-                <div class="contact-card bg-gradient-to-br from-[#fff8e1] to-white rounded-lg p-6 text-center">
-                    <div class="text-3xl text-[#C08B2D] mb-3">
-                        <i class="bi bi-geo-alt"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-[#B22B2B] mb-2">العنوان</h4>
-                    <p class="text-gray-600">{{ $contactInfo['address'] }}</p>
-                </div>
-                @endif
-            </div>
-            
-            @if(!empty($contactInfo['work_hours']))
-            <div class="text-center mt-6">
-                <div class="inline-block bg-[#C08B2D] text-white px-6 py-3 rounded-lg">
-                    <i class="bi bi-clock ml-2"></i>
-                    <span>{{ $contactInfo['work_hours'] }}</span>
-                </div>
-            </div>
-            @endif
-        </div>
-    </section>
-    @endif -->
+ 
 
     <!-- Main Content Area -->
     <div class="bg-slate-50">
