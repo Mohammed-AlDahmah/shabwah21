@@ -57,32 +57,67 @@
             <!-- Scroll Progress Indicator -->
             <div class="scroll-indicator"></div>
         </div>
-    </div>
-    
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        
+        <!-- Swiper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    <!-- Main JavaScript File -->
-    <script src="{{ asset('js/main.js') }}"></script>
-    <script src="{{ asset('js/mobile-menu-fix.js') }}"></script>
-    <script src="{{ asset('js/livewire-compat.js') }}"></script>
+        <!-- Main JavaScript File -->
+        <script src="{{ asset('js/main.js') }}"></script>
+        <script src="{{ asset('js/mobile-menu-fix.js') }}"></script>
+        <script src="{{ asset('js/livewire-compat.js') }}"></script>
 
-    <!-- Livewire Scripts -->
-    @livewireScripts
+        <!-- Livewire Scripts -->
+        @livewireScripts
 
-    @stack('scripts')
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const toggleButton = document.querySelector('[data-collapse-toggle]');
-        const navMenu = document.getElementById('navbar-default');
+        @stack('scripts')
+        
+        <!-- Breaking News Ticker JavaScript -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // تأكد من عمل شريط البريكينج نيوز
+                const breakingNewsScroll = document.querySelector('.breaking-news-scroll');
+                if (breakingNewsScroll) {
+                    // إعادة تشغيل الحركة إذا توقفت
+                    breakingNewsScroll.style.animation = 'none';
+                    breakingNewsScroll.offsetHeight; // trigger reflow
+                    breakingNewsScroll.style.animation = null;
+                    
+                    // إضافة event listener للتأكد من استمرار الحركة
+                    breakingNewsScroll.addEventListener('animationend', function() {
+                        this.style.animation = 'none';
+                        this.offsetHeight;
+                        this.style.animation = null;
+                    });
+                }
+                
+                // تحسين الأداء للشريط المتحرك
+                const breakingNewsContainer = document.querySelector('.breaking-news');
+                if (breakingNewsContainer) {
+                    breakingNewsContainer.addEventListener('mouseenter', function() {
+                        const scroll = this.querySelector('.breaking-news-scroll');
+                        if (scroll) {
+                            scroll.style.animationPlayState = 'paused';
+                        }
+                    });
+                    
+                    breakingNewsContainer.addEventListener('mouseleave', function() {
+                        const scroll = this.querySelector('.breaking-news-scroll');
+                        if (scroll) {
+                            scroll.style.animationPlayState = 'running';
+                        }
+                    });
+                }
+                
+                // Mobile menu toggle
+                const toggleButton = document.querySelector('[data-collapse-toggle]');
+                const navMenu = document.getElementById('navbar-default');
 
-        if (toggleButton && navMenu) {
-            toggleButton.addEventListener('click', function () {
-                navMenu.classList.toggle('hidden');
+                if (toggleButton && navMenu) {
+                    toggleButton.addEventListener('click', function () {
+                        navMenu.classList.toggle('hidden');
+                    });
+                }
             });
-        }
-    });
-</script>
-
-  </body>
+        </script>
+    </body>
 </html>

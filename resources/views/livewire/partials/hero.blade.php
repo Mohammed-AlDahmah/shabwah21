@@ -28,7 +28,7 @@
                     
                     <!-- Logo with Hover Effect -->
                     <div class="logo-text relative z-10 transform md:hover:scale-110 transition-all duration-500 md:hover:rotate-3">
-                        <img src="{{ asset('images/logo.svg') }}" alt="شبوة 21" class="h-20 md:h-24 lg:h-28 drop-shadow-2xl filter brightness-110">
+                        <img src="{{ asset('images/logo.png') }}" alt="شبوة 21" class="h-20 md:h-24 lg:h-28 drop-shadow-2xl filter brightness-110">
                     </div>
                     
                     <!-- Decorative Elements -->

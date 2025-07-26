@@ -14,39 +14,85 @@
                 
                 <!-- الأخبار المتحركة -->
                 <div class="flex-1 overflow-hidden relative">
-                    <div class="breaking-news-scroll-simple" style="
+                    <div class="breaking-news-scroll" style="
                         display: inline-block;
                         white-space: nowrap;
                         color: #ffffff;
                         font-weight: 600;
                         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-                        animation: scroll-rtl 90s linear infinite;
-                        padding-left: 100%;
+                        animation: scroll-ltr 120s linear infinite;
                         will-change: transform;
                         backface-visibility: hidden;
                     ">
+                        <!-- المجموعة الأولى -->
                         @foreach($breakingNews as $index => $news)
-                            @if($index > 0)
-                                <span style="color: #fef3c7; margin: 0 1.5rem;">•</span>
-                            @endif
                             <a href="{{ route('news.show', $news->slug) }}" 
-                               style="color: #ffffff; text-decoration: none; margin-right: 2rem;">
+                               style="color: #ffffff; text-decoration: none; margin-left: 2rem; display: inline-block;"
+                               class="hover:text-yellow-200 transition-colors duration-200">
                                 <span style="color: inherit;">{{ $news->title }}</span>
                                 <span style="color: inherit; opacity: 0.8; font-size: 0.75rem; background: rgba(255, 255, 255, 0.25); padding: 0.25rem 0.5rem; border-radius: 50px; margin-right: 0.5rem;">{{ $news->time_ago }}</span>
                             </a>
-                        @endforeach
-                        <!-- تكرار المحتوى للحركة المستمرة -->
-                        @foreach($breakingNews as $index => $news)
                             <span style="color: #fef3c7; margin: 0 1.5rem;">•</span>
+                        @endforeach
+                        
+                        <!-- المجموعة الثانية (تكرار) -->
+                        @foreach($breakingNews as $index => $news)
                             <a href="{{ route('news.show', $news->slug) }}" 
-                               style="color: #ffffff; text-decoration: none; margin-right: 2rem;">
+                               style="color: #ffffff; text-decoration: none; margin-left: 2rem; display: inline-block;"
+                               class="hover:text-yellow-200 transition-colors duration-200">
                                 <span style="color: inherit;">{{ $news->title }}</span>
                                 <span style="color: inherit; opacity: 0.8; font-size: 0.75rem; background: rgba(255, 255, 255, 0.25); padding: 0.25rem 0.5rem; border-radius: 50px; margin-right: 0.5rem;">{{ $news->time_ago }}</span>
                             </a>
+                            <span style="color: #fef3c7; margin: 0 1.5rem;">•</span>
+                        @endforeach
+                        
+                        <!-- المجموعة الثالثة (تكرار إضافي) -->
+                        @foreach($breakingNews as $index => $news)
+                            <a href="{{ route('news.show', $news->slug) }}" 
+                               style="color: #ffffff; text-decoration: none; margin-left: 2rem; display: inline-block;"
+                               class="hover:text-yellow-200 transition-colors duration-200">
+                                <span style="color: inherit;">{{ $news->title }}</span>
+                                <span style="color: inherit; opacity: 0.8; font-size: 0.75rem; background: rgba(255, 255, 255, 0.25); padding: 0.25rem 0.5rem; border-radius: 50px; margin-right: 0.5rem;">{{ $news->time_ago }}</span>
+                            </a>
+                            <span style="color: #fef3c7; margin: 0 1.5rem;">•</span>
                         @endforeach
                     </div>
                 </div>
             </div>
+            
+            <!-- CSS للحركة المستمرة -->
+            <style>
+                @keyframes scroll-ltr {
+                    0% {
+                        transform: translateX(-100%);
+                    }
+                    100% {
+                        transform: translateX(0%);
+                    }
+                }
+                
+                .breaking-news:hover .breaking-news-scroll {
+                    animation-play-state: paused;
+                }
+                
+                @media (max-width: 768px) {
+                    .breaking-news-scroll {
+                        animation-duration: 150s !important;
+                    }
+                }
+                
+                @media (max-width: 480px) {
+                    .breaking-news-scroll {
+                        animation-duration: 120s !important;
+                    }
+                }
+                
+                @media (max-width: 360px) {
+                    .breaking-news-scroll {
+                        animation-duration: 100s !important;
+                    }
+                }
+            </style>
         </div>
     @else
         <!-- Placeholder when no breaking news -->

@@ -9,7 +9,7 @@
             
     <!-- Breaking News Ticker -->
     @if(SiteSettings::getValue('show_breaking_news', true))
-    <section class="breaking-news-section">
+    <section class="breaking-news-section" style="position: relative; z-index: 10;">
         <livewire:breaking-news-ticker />
     </section>
     @endif

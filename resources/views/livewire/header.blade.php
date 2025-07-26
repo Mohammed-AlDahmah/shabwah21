@@ -35,7 +35,7 @@ class="theme-header"
                             <!-- Logo -->
                             <div class="flex-shrink-0">
                                 <a href="{{ route('home') }}" class="flex items-center">
-                                    <img src="{{ asset('images/logo.svg') }}" alt="شبوة21" class="h-8 w-auto">
+                                    <img src="{{ asset('images/logo.png') }}" alt="شبوة21" class="h-8 w-auto">
                                 </a>
                             </div>
 
