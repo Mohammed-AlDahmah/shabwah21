@@ -592,6 +592,65 @@ input, textarea, select {
     }
 } 
 
+/* Weather Widget */
+.weather-widget {
+    position: relative;
+}
+
+.weather-widget .bg-gradient-to-br {
+    background-size: 200% 200%;
+    animation: gradient-shift 10s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.weather-widget button {
+    transition: all 0.3s ease;
+}
+
+.weather-widget button:hover {
+    transform: scale(1.05);
+}
+
+.weather-widget .animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Weather Icons Animation */
+.weather-widget .bi {
+    transition: transform 0.3s ease;
+}
+
+.weather-widget:hover .bi {
+    transform: scale(1.1);
+}
+
+/* Responsive Weather Widget */
+@media (max-width: 768px) {
+    .weather-widget .text-5xl {
+        font-size: 2.5rem;
+    }
+    
+    .weather-widget .text-6xl {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .weather-widget .grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* Breaking News Ticker */
 .breaking-news-ticker-wrapper {
     position: relative;
